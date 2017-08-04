@@ -58,7 +58,7 @@
 .activity .lists .list .title {
   width: 100%;
   color: #333333;
-  font-size: 1.6rem;
+  font-size: 0.32rem;
   line-height: 6vw;
   margin-bottom:2.1vw;
 }
@@ -66,7 +66,7 @@
   display: block;
   width: 100%;
   color: #333333;
-  font-size: 1.5rem;
+  font-size: 0.3rem;
   line-height: 7vw;
   font-weight: normal;
 }
@@ -79,16 +79,18 @@
 .activity .lists .list .note span {
   display: inline-block;
   width: 49%;
+  font-size: 0.28rem;
 }
 .activity .lists .list .note .true i {
   color: #fc4f42;
+  font-size: 0.28rem;
 }
 .activity .lists .list .number {
   width: 100%;
   margin: 0 auto;
   text-align: right;
   color: #999999;
-  font-size: 1.2rem;
+  font-size: 0.24rem;
   line-height: 3.7vw;
 }
 .activity .submit {
@@ -98,7 +100,7 @@
   background: #fc4f42;
   text-align: center;
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 0.3rem;
   line-height: 9vw;
   -webkit-border-radius: 6px;
   border-radius: 6px;
@@ -111,6 +113,7 @@
 }
 #modal .modal-content .modal-body {
   text-align: center;
+  font-size: 0.28rem;
 }
 #modal .modal-content .modal-body .score {
   color: #fc4f42;
@@ -120,6 +123,6 @@
 }
 #modal .modal-content .modal-footer a {
   color: #fc4f42;
-  font-size: 1.6rem;
+  font-size:0.32rem;
   line-height: 8vw;
 }

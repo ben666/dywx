@@ -2,10 +2,8 @@
 
 {block name="style"}
 <title>中控遥感</title>
-<link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/index/index.css">
 <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
-<link rel="stylesheet" href="/home/css/common/tip.css">
 {/block}
 
 {block name="body"}
@@ -15,13 +13,6 @@
     <a  class="exit">
         <img src="/home/images/index/exit.png" alt="">
     </a>
-    {eq name="visit" value="0"}
-    <a href="{:Url('User/usercenter')}" class="rank">
-        <img src="/home/images/index/usercenter.png" alt="">
-
-        <img src="{$user|get_header}" alt="">
-    </a>
-    {/eq}
 </div>
 <!--图标轮播-->
 <div class="swiper-container">
@@ -56,6 +47,18 @@
                     <a href="{:Url('Activity/index?c=1')}">
                         <img src="/home/images/index/active.png" alt="活动发起">
                         <span>活动发起</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Feedback/index')}">
+                        <img src="/home/images/index/news.png" alt="红色足迹">
+                        <span>红色足迹</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Feedback/index')}">
+                        <img src="/home/images/index/news.png" alt="红色足迹">
+                        <span>红色足迹</span>
                     </a>
                 </li>
                 <li>
@@ -117,11 +120,6 @@
             {/volist}
         </div>
     </div>
-</div>
-<!--加载更多-->
-<div class="tip"></div>
-<div class="loading hidden">
-    <div class="typing_loader"></div>
 </div>
 {/block}
 
@@ -258,6 +256,5 @@
         }
         $('.notice').append(html);
     }
-
 </script>
 {/block}

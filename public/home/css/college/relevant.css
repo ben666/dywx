@@ -4,7 +4,7 @@
 }
 .note {
   color: #999999;
-  font-size: 1.2rem;
+  font-size: 0.24rem;
   line-height: 8vw;
   text-align: right;
 }
@@ -41,7 +41,7 @@
   font-weight: 600;
   margin-top: 4vw;
   margin-bottom: 3vw;
-  font-size: 1.8rem;
+  font-size: 0.36rem;
 }
 /*.content .top .note span {*/
   /*height: 40px;*/
@@ -250,7 +250,7 @@
 
 .article  .note {
   color: #999999;
-  font-size: 14px;
+  font-size: 0.24rem;
   height: 40px;
 }
 .article  .note span {
