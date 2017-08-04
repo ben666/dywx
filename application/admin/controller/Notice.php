@@ -7,7 +7,6 @@
  */
 
 namespace app\admin\controller;
-
 use app\admin\model\Notice as NoticeModel;
 use app\admin\model\Picture;
 
@@ -25,9 +24,9 @@ class Notice extends Admin {
         );
         $list = $this->lists('Notice',$map);
         int_to_string($list,array(
-            'recommend' => array(0=>"否",1=>"是")
+            'recommend' => array(0=>"否",1=>"是"),
+            'push' => array(0=>"否",1=>"是")
         ));
-
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -40,25 +39,25 @@ class Notice extends Admin {
             $result = $this->validate($data,'Notice');  // 验证  数据
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if (true !== $result) {
-                return $this->error($result);
+                $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
                 $data['start_time'] = strtotime($data['start_time']);
                 $data['end_time'] = strtotime($data['end_time']);
                 if (!empty($data['start_time']) && empty($data['end_time'])){
-                    return $this->error('请添加结束时间');
+                    $this->error('请添加结束时间');
                 }
                 if (empty($data['start_time']) && !empty($data['end_time'])){
-                    return $this->error('请添加开始时间');
+                    $this->error('请添加开始时间');
                 }
                 if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
-                    return $this->error('结束时间有错误');
+                    $this->error('结束时间有错误');
                 }
                 $res = $noticeModel->save($data);
                 if ($res){
-                    return $this->success("新增通知成功",Url('Notice/index'));
+                    $this->success("新增通知成功",Url('Notice/index'));
                 }else{
-                    return $this->error($noticeModel->getError());
+                    $this->error($noticeModel->getError());
                 }
             }
         }else {
