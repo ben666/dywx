@@ -15,7 +15,12 @@ class Constitution extends Admin {
      * 题目列表
      */
     public function question(){
-        $question=$this->lists('Question',array(),'id desc');
+        $search = input('search');
+        $map = [];
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
+        $question=$this->lists('Question',$map,'id desc');
         $this->assign('question',$question);
         return $this->fetch();
     }

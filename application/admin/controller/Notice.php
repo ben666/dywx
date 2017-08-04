@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 use app\admin\model\Notice as NoticeModel;
 use app\admin\model\Picture;
+use think\Url;
 
 /**
  * Class Notice
@@ -20,8 +21,13 @@ class Notice extends Admin {
      */
     public function index(){
         $map = array(
+            'type' => 2,
             'status' => array('egt',0),
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Notice',$map);
         int_to_string($list,array(
             'recommend' => array(0=>"否",1=>"是"),
@@ -31,19 +37,88 @@ class Notice extends Admin {
         return $this->fetch();
     }
     /**
+     * 学习资料
+     */
+    public function learn(){
+        $map = array(
+            'type' => 1,
+            'status' => array('egt',0),
+        );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
+        $list = $this->lists('Notice',$map);
+        int_to_string($list,array(
+            'recommend' => array(0=>"否",1=>"是"),
+            'push' => array(0=>"否",1=>"是")
+        ));
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    /**
+     * 学习资料 添加修改
+     */
+    public function add(){
+        $id = input('id/d');
+        if ($id){
+            // 修改
+            if (IS_POST){
+                $data = input('post.');
+                $noticeModel = new NoticeModel();
+                $result = $this->validate($data,'Notice');  // 验证  数据
+                if (true !== $result) {
+                    $this->error($result);
+                }else{
+                    $res = $noticeModel->save($data,['id' => $data['id']]);
+                    if ($res){
+                        return $this->success('修改成功',Url('learn'));
+                    }else{
+                        $this->error('修改失败');
+                    }
+                }
+            }else{
+                $id = input('id');
+                $msg = NoticeModel::get($id);
+                $this->assign('msg',$msg);
+                return $this->fetch();
+            }
+        }else{
+            //添加
+            if (IS_POST){
+                $data = input('post.');
+                if (empty($data['id'])){
+                    unset($data['id']);
+                }
+                $noticeModel = new NoticeModel();
+                $result = $this->validate($data,'Notice');  // 验证  数据
+                if (true !== $result) {
+                    $this->error($result);
+                }else{
+                    $res = $noticeModel->save($data);
+                    if ($res){
+                        return $this->success('添加成功',Url('learn'));
+                    }else{
+                        $this->error('添加失败');
+                    }
+                }
+            }else{
+                $this->assign('msg','');
+                return $this->fetch();
+            }
+        }
+    }
+    /**
      * 相关通知 添加
      */
     public function indexadd(){
         if(IS_POST) {
             $data = input('post.');
             $result = $this->validate($data,'Notice');  // 验证  数据
-            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if (true !== $result) {
                 $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
-                $data['start_time'] = strtotime($data['start_time']);
-                $data['end_time'] = strtotime($data['end_time']);
                 if (!empty($data['start_time']) && empty($data['end_time'])){
                     $this->error('请添加结束时间');
                 }
@@ -53,9 +128,11 @@ class Notice extends Admin {
                 if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
                     $this->error('结束时间有错误');
                 }
+                $data['start_time'] = strtotime($data['start_time']);
+                $data['end_time'] = strtotime($data['end_time']);
                 $res = $noticeModel->save($data);
                 if ($res){
-                    $this->success("新增通知成功",Url('Notice/index'));
+                    return $this->success("新增通知成功",Url('Notice/index'));
                 }else{
                     $this->error($noticeModel->getError());
                 }
@@ -71,19 +148,18 @@ class Notice extends Admin {
         if(IS_POST) {
             $data = input('post.');
             $result = $this->validate($data,'Notice');  // 验证  数据
-            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if (true !== $result) {
-                return $this->error($result);
+                $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
                 if (!empty($data['start_time']) && empty($data['end_time'])){
-                    return $this->error('请添加结束时间');
+                    $this->error('请添加结束时间');
                 }
                 if (empty($data['start_time']) && !empty($data['end_time'])){
-                    return $this->error('请添加开始时间');
+                    $this->error('请添加开始时间');
                 }
                 if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
-                    return $this->error('结束时间有错误');
+                    $this->error('结束时间有错误');
                 }
                 $data['start_time'] = strtotime($data['start_time']);
                 $data['end_time'] = strtotime($data['end_time']);
