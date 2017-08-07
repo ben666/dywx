@@ -3,13 +3,13 @@
     padding-bottom: 13vw;
 }
 .comment .sum {
-    height: 8vw;
+    height: 0.6rem;
     padding-left: 3.4vw;
     background: #fcfcfc;
     border-top: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
-    font-size: 1.2rem;
-    line-height: 8vw;
+    font-size: 0.24rem;
+    line-height: 0.6rem;
 }
 .comment .lists .list {
     width: 100%;

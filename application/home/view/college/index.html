@@ -245,5 +245,10 @@ window.onload = function(){
         type = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
     })
+
+    mui('.mui-slider-group').on('tap', 'a', function() {
+        var id = this.getAttribute('href');
+        window.location.href=id;
+    });
 </script>
 {/block}
