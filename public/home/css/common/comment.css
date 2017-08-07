@@ -1,6 +1,6 @@
 /*评论*/
 .comment {
-    padding-bottom: 13vw;
+    padding-bottom: 1rem;
 }
 .comment .sum {
     height: 0.6rem;
@@ -19,8 +19,8 @@
     border-bottom: 1px solid #f1f1f1;
 }
 .comment .lists .list .fl img {
-    width: 8vw;
-    height: 8vw;
+    width: 0.6rem;
+    height: 0.6rem;
     margin-top: 3.4vw;
     margin-right: 3vw;
     overflow: hidden;
@@ -32,26 +32,26 @@
 }
 .comment .lists .list .mid .name {
     width: 100%;
-    height: 14.9vw;
-    line-height: 14.9vw;
+    height: 1.1rem;
+    line-height: 1.1rem;
     color: #999999;
-    font-size: 1.4rem;
+    font-size: 0.28rem;
 }
 .comment .lists .list .mid .content {
     width: 100%;
     word-break: break-all;
-    font-size: 1.4rem;
+    font-size: 0.28rem;
 }
 .comment .lists .list .mid .time {
-    font-size: 1.2rem;
-    line-height: 5.3vw;
-    color: #999999;
+    font-size: 0.24rem;
+    line-height: 0.8rem;
+    color: #999;
 }
 .comment .lists .list .fr {
-    margin-top: 4vw;
-    color: #999999;
-    line-height: 6vw;
-    font-size: 1.2rem;
+    margin-top: 0.12rem;
+    color: #999;
+    line-height:0.44rem;
+    font-size: 0.24rem;
 }
 .comment .lists .list .good {
     background: url('/home/images/detail/good.png') 0 center no-repeat;
@@ -62,8 +62,8 @@
     background: url('/home/images/detail/good_.png') 0 center no-repeat;
 }
 .comment .lists .list .isgood {
-    background-size: 1.3rem 1.3rem;
-    padding-left: 1.8rem;
+    background-size: 0.26rem 0.26rem;
+    padding-left: 0.36rem;
 }
 .comment .tip {
     height: 10.6vw;

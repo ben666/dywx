@@ -1,24 +1,14 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>鸡毛传贴</title>
+<title>信息驿站</title>
 <link rel="stylesheet" href="/home/css/college/relevant.css">
 <link rel="stylesheet" href="/home/css/common/comment.css">
-<style>
-	.scrollDiy{
-		position: absolute;
-		top:0;
-		bottom:0;
-		overflow-y: scroll;
-		/* 增加该属性，可以增加弹性 */
-		-webkit-overflow-scrolling: touch;
-		width:100%;
-	}
-</style>
 {/block}
 
 {block name="body"}
-<div class="scrollDiy">
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+	<div class="mui-scroll">
 	<div class="banner">
 		<img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
 	</div>
@@ -46,9 +36,9 @@
 			<div class="note">
 				{eq name="visit" value="0"}
 				{eq name="info.is_like" value="1"}
-				<span class="isgood good_" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+				<span class="isgood good_" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
 				{else/}
-				<span class="isgood good" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+				<span class="isgood good" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$info.likes}</span>
@@ -71,9 +61,9 @@
 					</div>
 					{eq name="visit" value="0"}
 					{eq name="co.is_like" value="1"}
-					<div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+					<div class="fr isgood good_" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
 					{else/}
-					<div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+					<div class="fr isgood good" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
 					{/eq}
 					{else/}
 					<div class="fr isgood good">{$co.likes}</div>
@@ -81,12 +71,10 @@
 				</div>
 				{/volist}
 			</div>
-			<div class="tip"></div>
-			<div class="loading hidden">
-				<div class="typing_loader"></div>
-			</div>
 		</div>
 	</div>
+	</div>
+</div>
 	{eq name="visit" value="0"}
 	<div class="bottom clear">
 		<div class="myword fl">
@@ -95,27 +83,35 @@
 		<div class="send fr" onclick="send(this,4,{$info['id']})">发送</div>
 	</div>
 	{/eq}
-</div>
+
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
-	var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
-	$(function(){
-	    if($(".message").children().length==0){
-	        $(".message").css("border-top","none");
+	window.onload=function(){
+		if($(".message").children().length==0){
+			$(".message").css("border-top","none");
 		}
 		//reset
 		var len = $(".list" ).length;
-		if(len >= 7){
-			$('.tip' ).text('上拉加载更多');
-			//上拉加载评论
-			loadScroll();
+		if($(".lists .list").length<7){
+			mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+		}else{
+			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
 		}
-		//ios fix兼容
-//		tofixed();
+	}
+
+
+	//初始化下拉加载
+	mui.init({
+		pullRefresh: {
+			container: '#refreshContainer',
+			up: {
+				callback: loadScroll
+			}
+		}
 	});
 	/**
 	 * 点赞
@@ -176,9 +172,9 @@
 							'<div class="content" >'+it.val()+'</div>'+
 							'<div class="time">'+data.time+'</div>'+
 							'</div>'+
-							'<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')">'+data.likes+'</div>'+
+							'<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')" data-type="0" data-id='+data.id+'>'+data.likes+'</div>'+
 							'</div>';
-					$('.lists' ).append(html);
+					$('.lists' ).prepend(html);
 					it.val('');
 					var sum = $('.sum span' );
 					sum.text(parseInt(sum.text())+1);
@@ -187,12 +183,17 @@
 						text: '评论成功',
 						type: 'success',
 						confirmButtonText:'确定',
-						timer:3000
+//						timer:3000
 					});
 				}
 			});
 		}else{
-			wAlert('您的评论少于5个字');
+			swal({
+				title: ' ',
+				text: '您的评论少于5个字',
+				type: 'error',
+				confirmButtonText:'确定',
+			});
 		}
 	};
 
@@ -228,15 +229,8 @@
 		}
 	};
 	function loadScroll(){
-		$('.scrollDiy').off("scroll" ).on("scroll",function(){
-			var dh = $('.scrollDiy>.content').height() +$('.scrollDiy>.banner').height() ;
-			var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
 			var len = $(".list" ).length;
-			var tip = $(".tip");
-			var loading = $('.loading');
 			var id = {$info['id']};
-			if(dh <= end && scrollNow){
-				scrollNow = false;//请求执行中
 				$.ajax({
 					type:"post",
 					url:"{:Url('Base/morecomment')}",
@@ -246,30 +240,22 @@
 						length:len
 					},
 					beforeSend: function(XMLHttpRequest){
-						tip.hide();
-						loading.toggleClass('hidden');
+
 					},
 					success:function(data){
-						console.log(data);
-						loading.toggleClass('hidden');
-						tip.show();
 						if(data.code == 1){
 							addComment(data);
 							var dataLen =data.data.length;
 							if(data.data.length == 5){
-								tip.text('上拉加载更多');
+								mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
 							}else{
-								tip.text('没有更多了');
+								mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 							}
 						}else{
-							tip.text('没有更多了');
-							$('.scrollDiy').off("scroll");
+							mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 						}
-						scrollNow = true;//请求结束
 					}
 				})
-			}
-		})
 	}
 	function addComment(data){
 		//is_like : 1为已点赞 0为未点赞
@@ -290,9 +276,9 @@
 					'</div>';
 			if ({$visit} == 0){
 				if(list.is_like == 0){
-					html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+					html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
 				}else{
-					html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+					html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
 				}
 			}else {
 				html+='<div class="fr isgood good">'+list.likes+'</div>'
@@ -301,7 +287,23 @@
 					'</div>';
 		}
 		$(".lists" ).append(html);
+		mui('.lists .list').on('tap', '.isgood', function() {
+			var type = this.getAttribute('data-type');
+			var id = this.getAttribute('data-id');
+			isGood(this,type,id)
+		});
 	}
+
+	mui('.lists .list').on('tap', '.isgood', function() {
+		var type = this.getAttribute('data-type');
+		var id = this.getAttribute('data-id');
+		isGood(this,type,id)
+	});
+	mui('.note').on('tap', '.isgood', function() {
+		var type = this.getAttribute('data-type');
+		var id = this.getAttribute('data-id');
+		isGood(this,type,id)
+	});
 </script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
