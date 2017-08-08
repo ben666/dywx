@@ -23,24 +23,7 @@
             display: none;
         }
         .mui-fullscreen{
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-        .mui-preview-header{
-            background: #000;
-            height:0.9rem;
-        }
-        .mui-preview-header:after{
-            content: '关闭';
-            display: block;
-            color: #fff;
-            float: right;
-            font-size: 0.32rem;
-            margin-right: 0.3rem;
-            margin-top: 0.3rem;
+            opacity: 0.95;
         }
     </style>
 {/block}
@@ -265,6 +248,11 @@ window.onload = function(){
         var id = this.getAttribute("data-id");
         tosend(this,id);
         e.stopPropagation();
+    });
+
+    mui('body').on('tap', '.mui-slider-item.mui-zoom-wrapper.mui-active',  function(e) {
+        mui.previewImage().close();
+        $(".mui-fullscreen").css({"z-index":0,"background-color":"none"});
     });
 
     mui('body').on('tap', '#tab',  function(e) {
