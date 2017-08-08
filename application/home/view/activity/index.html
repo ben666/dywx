@@ -222,7 +222,7 @@ window.onload = function(){
             }
         }else if(type==2){
             $(".bottom").show();
-            if($(".votes ul li").length<8){
+            if($(".votes>ul>li").length<5){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -292,10 +292,14 @@ window.onload = function(){
                     },
                     success:function(data){
                         if(data.code == 1){
+
                             addCourse(data,type);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                                loadScroll();
+                            }else{
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                             }
                         }else{
                             mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);

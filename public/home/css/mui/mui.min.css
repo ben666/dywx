@@ -8,6 +8,6 @@
 .mui-spinner{width:0.48rem;height: 0.48rem}
 .mui-icon{font-size: 0.48rem;}
 .mui-pull-caption {  font-size: 0.3rem;  line-height: 0.48rem;  position: relative;  display: inline-block;  overflow: visible;  margin-top:vertical-align: middle;  color: #999;  font-weight: 100;  }
-.mui-pull-bottom-pocket{height: 0.8rem;bottom: 0.8rem;}
+.mui-pull-bottom-pocket{height: 0.8rem;bottom: 0.5rem;}
 .mui-control-item.mui-active{color: #fd6743!important;}
 .mui-slider .mui-slider-group .mui-slider-item img{ width: 60%;  margin-left: 20%;  margin-top: 30%;}

@@ -8,14 +8,11 @@
 }
 .content #content {
   width: 100%;
-  padding-left: 3.4vw;
-  padding-right: 3.4vw;
-  padding-top: 3vw;
-  padding-bottom: 3vw;
+  padding:0.24rem 0.3rem;
   min-height: 200px;
   margin-top: 3vw;
   color: #999999;
-  font-size: 1.3rem;
+  font-size: 0.26rem;
   border-bottom: 1px solid #f1f1f1;
 }
 .content .contentnum {
@@ -23,7 +20,7 @@
   padding-right: 4vw;
   color: #d9d9d9;
   text-align: right;
-  font-size: 1.3rem;
+  font-size:0.26rem;
 }
 .content .img {
   position: relative;
@@ -49,7 +46,7 @@
   border: 2px solid #d9d9d9;
   text-align: center;
   line-height: 20vw;
-  font-size: 6rem;
+  font-size: 2rem;
   color: #d9d9d9;
   box-sizing: content-box;
 }
@@ -67,10 +64,10 @@
   color: #b4b4b4;
 }
 .bottom .sure {
-  height: 12vw;
+  height: 0.9rem;
   background: #4dbf50;
-  font-size: 1.6rem;
-  line-height: 12vw;
+  font-size: 0.32rem;
+  line-height: 0.9rem;
   color: #ffffff;
 }
 .tips {

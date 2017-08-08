@@ -2,7 +2,6 @@
 
 {block name="style"}
 <title>发起投票</title>
-<link rel="stylesheet" href="/static/sweetalert/sweetalert2.min.css">
 <link rel="stylesheet" href="/home/css/feedback/advice.css">
 {/block}
 
@@ -30,7 +29,6 @@
 </div>
 {/block}
 {block name="script"}
-<script src="/static/sweetalert/sweetalert2.min.js"></script>
 <script src="/home/js/reset.js"></script>
 <script>
 $(function(){
@@ -70,7 +68,7 @@ $(function(){
 				confirmButtonColor: "#f99300",
 				confirmButtonText: "确定",
 				cancelButtonText: "取消",
-			} ).then(function(isConfirm){
+			},function(isConfirm){
 				if (isConfirm) {
 					$.ajax({
 						type:"post",
@@ -128,8 +126,8 @@ $(function(){
 						processData : false,
 						contentType : false,
 						beforeSend: function(XMLHttpRequest){
-							swal('');
-							swal.showLoading();
+//							swal('');
+//							swal.showLoading();
 							$('.swal2-confirm' ).css({'background-color':'#c1c1c1','border-left-color':'#c1c1c1','border-right-color':'#c1c1c1'})
 						},
 						success:function(data){
