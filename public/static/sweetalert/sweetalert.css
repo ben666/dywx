@@ -1042,3 +1042,7 @@ body.stop-scrolling {
 .sweet-alert .sa-icon.sa-success .sa-line{
   height:0.1rem;
 }
+.sweet-alert h2{
+  font-size: 0.6rem;
+  margin: 0.5rem 0;
+}

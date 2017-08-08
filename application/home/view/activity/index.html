@@ -1,15 +1,9 @@
 {extend name="public/common"}
 {block name="style"}
     <title>活动发起</title>
-    <link rel="stylesheet" href="/static/viewer/viewer.min.css">
-    <link rel="stylesheet" href="/home/css/common/rem.css">
     <link rel="stylesheet" href="/home/css/activity/index.css">
-    <link rel="stylesheet" href="/home/css/common/tip.css">
     <style>
-        .tabs{
-            background: url(/home/images/activity/tab.png) no-repeat;
-            background-size: cover;
-        }
+        a:active{background: none;}
         .notice>.title{
             width: 100vw;
             font-size: 1.6rem;
@@ -20,202 +14,273 @@
         #publish {
             position: fixed;
             right: 5.3vw;
-            bottom: 10.6vw;
-            width: 16vw;
-            height: 16vw;
+            bottom: 40.6vw;
+            width: 1.2rem;
+            height: 1.2rem;
             background: url(/home/images/feedback/note.png) no-repeat;
             background-size: 100% 100%;
+        }
+        .mui-fullscreen{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .mui-preview-header{
+            background: #000;
+            height:0.9rem;
+        }
+        .mui-preview-header:after{
+            content: '关闭';
+            display: block;
+            color: #fff;
+            float: right;
+            font-size: 0.32rem;
+            margin-right: 0.3rem;
+            margin-top: 0.3rem;
         }
     </style>
 {/block}
 {block name="body"}
     <!--tab-->
-<div class="scrollDiy">
-    <div class="tabs clear">
-        <div class="tab"><span>活动列表</span></div>
-        <div class="tab"><span>发起投票</span></div>
-        <span class="triangle-up"></span>
-    </div>
-    <!--切换列表-->
-    <div class="content" style="overflow-x: hidden">
-        <!--活动列表-->
-        <div class="notices hidden">
-            <div class="notice regularmore">
-                <div class="lists">
-                        <ul>
-                            {volist name="list" id="lo"}
-                            <a class="clear"  href="{:Url('Activity/activitydetails?id='.$lo['id'])}">
-                                <p>{$lo.title}</p>
-                                <span>{$lo.description}</span>
-                                <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
-                                <i>进入认领<img src="/home/images/activity/arrow.png"></i>
-                            </a>
-                            {/volist}
-                        </ul>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div>
+            <img src="/home/images/banner/1.jpg" class="banner">
+        </div>
+        <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
+                活动列表
+            </a>
+            <a class="mui-control-item" href="#item2mobile" data-index="1">
+                活动报道
+            </a>
+            <a class="mui-control-item" href="#item3mobile" data-index="2">
+                发起投票
+            </a>
+        </div>
+
+
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                <!--活动列表-->
+                <div class="notices">
+                    <div class="notice regularmore">
+                        <div class="lists">
+                            <ul>
+                                {volist name="list" id="lo"}
+                                <a class="clear"  href="{:Url('Activity/activitydetails?id='.$lo['id'])}">
+                                    <p>{$lo.title}</p>
+                                    <span>{$lo.description}</span>
+                                    <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
+                                    <i>进入认领<img src="/home/images/activity/arrow.png"></i>
+                                </a>
+                                {/volist}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--发起投票-->
-        <div class="notices hidden">
-            <div class="lists votes">
-                <ul>
-                    {volist name="lists" id="los"}
-                    <li>
-                        <img src="{$los.head}">
-                        <p>{$los.publisher}</p>
-                        <span>{$los.content}</span>
-                        <div class="imgs">
-                            {volist name="los.images" id="img"}
-                            <div class="img">
-                                <img src="{$img|get_cover='path'}" alt="评论图" data-original="">
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <!--活动报道-->
+                <div class="notice reported">
+                    <!--<div class="default"><img src="/home/images/notice/nomessage.png" alt="暂无消息"> </div>-->
+                    <div class="lists">
+                        <a class="list clear" href="">
+                            <div class="fl">
+                                <img src="" alt="">
                             </div>
-                            {/volist}
-                        </div>
-                        <span class="votes-time">{$los.department}/{$los.create_time|time_format='Y-m-d'}发布</span>
-                        <div class="opinion">
-                            {switch name="los.is_like"}{case value="0"}
-                                    <i class="agree" onclick="agree(this,{$los.id},1)"></i>
+                            <div class="fr lr">
+                                <div class="title limit_">{oooooooooooo</div>
+                                <div class="clear">
+                                    <span class="fl">发布人</span>
+                                    <span class="fr">2017-8-8</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </div>
+
+            <div id="item3mobile" class="mui-slider-item mui-control-content">
+
+                <!--发起投票-->
+                <div class="notices" style="padding-bottom: 1rem">
+                    <div class="lists votes">
+                        <ul>
+                            {volist name="lists" id="los"}
+                            <li>
+                                <img src="{$los.head}">
+                                <p>{$los.publisher}</p>
+                                <div class="opinion">
+                                    {switch name="los.is_like"}{case value="0"}
+                                    <i class="agree agreeclick" onclick="agree(this,{$los.id},1)" data-id="{$los.id}" data-type="1"></i>
                                     <span>{$los.likes_yes}</span>
-                                    <i class="disagree" onclick="disagree(this,{$los.id},2)"></i>
+                                    <i class="disagree disagreeclick" onclick="disagree(this,{$los.id},2)" data-id="{$los.id}" data-type="2"></i>
                                     <span>{$los.likes_no}</span>{/case}{case value="1"}
                                     <i class="agree_" ></i>
                                     <span>{$los.likes_yes}</span>
                                     <i class="disagree"></i>
                                     <span>{$los.likes_no}</span>
-                                {/case}{case value="2"}
+                                    {/case}{case value="2"}
                                     <i class="agree" ></i>
                                     <span>{$los.likes_yes}</span>
                                     <i class="disagree_"></i>
                                     <span>{$los.likes_no}</span>
-                                {/case}
-                                {default /}default
-                            {/switch}
-                            <i class="comment-icon" onclick="tosend(this,{$los.id})"></i>
-                        </div>
+                                    {/case}
+                                    {default /}default
+                                    {/switch}
 
-                        <ul class="comments">
-                            {volist name="los.comment" id="co"}
-                            <li>
-                                <span class="name">{$co.nickname}：</span>
-                                <span class="comment">{$co.content}</span>
+                                </div>
+                                <span>{$los.content}</span>
+                                <div class="imgs">
+                                    {volist name="los.images" id="img"}
+                                    <div class="img">
+                                        <img src="{$img|get_cover='path'}" alt="评论图"  data-preview-src="" data-preview-group="1">
+                                    </div>
+                                    {/volist}
+                                </div>
+                                <span class="votes-time">{$los.department}/{$los.create_time|time_format='Y-m-d'}发布</span>
+                                <i class="comment-icon" onclick="tosend(this,{$los.id})" data-id='{$los.id}'></i>
+
+                                <ul class="comments">
+                                    {volist name="los.comment" id="co"}
+                                    <li>
+                                        <span class="name">{$co.nickname}：</span>
+                                        <span class="comment">{$co.content}</span>
+                                    </li>
+                                    {/volist}
+                                </ul>
                             </li>
                             {/volist}
                         </ul>
-                    </li>
-                    {/volist}
-                </ul>
 
+                    </div>
+                </div>
+                <!--线上活动发布-->
+                <a id="publish" href="{:Url('Activity/publish')}"></a>
             </div>
         </div>
-        <div class="tip"></div>
-        <div class="loading hidden">
-            <div class="typing_loader"></div>
-        </div>
+</div>
     </div>
-    <!--线上活动发布-->
-    <a id="publish" href="{:Url('Activity/publish')}"></a>
-    <!--加载更多-->
 <div class="bottom clear">
     <div class="myword fl">
         <input type="text" placeholder="说说你的感想！">
     </div>
     <div class="send fr" onclick="send(this)">发送</div>
 </div>
-</div>
 {/block}
 {block name="script"}
 <script src="/home/js/reset.js"></script>
-<script src="/static/viewer/viewer-jquery.min.js"></script>
+<script type="text/javascript" src="/home/js/mui.zoom.js"></script>
+<script type="text/javascript" src="/home/js/mui.previewimage.js"></script>
 <script>
-    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    var type=0;
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
-        //tab初始化和数据存储
-        var ntc = $('.notices');
-        var co = getCookie("type");
-        if(co == 11 || co == 12 || co == 13){
-            c = co - 10;
-        }
-        ntc.eq(c-1).removeClass('hidden');
-       //活动列表上拉加载
-        if(c == 1){
-            $(".triangle-up").css("left","21.06vw");
-            var len = ntc.eq(c-1 ).find('.regularmore>.lists>ul>a').length;
-            console.log(len);
-            if(len >= 7){
-                $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
-            }else{
-                $('.tip' ).hide();
-            }
-        }
-        //投票列表上拉加载
-        if(c == 2){
-            $(".triangle-up").css("left","72vw");
-            var len = ntc.eq(c-1 ).find('.votes>ul>li').length;
-            if(len >= 5){
-                $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
-            }else{
-                $('.tip' ).hide();
-            }
-        }
-        //tab切换
-        $('.tabs>.tab ').on('click',function(){
-            var ntc = $('.notices' );
-            var eq = $(this ).index();
-            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
-            ntc.eq(eq).removeClass('hidden');
-            if(eq == 0){
-                $(".triangle-up").css("left","21.06vw");
-                var len = ntc.eq(eq ).find('.regularmore>.lists>ul>a').length;
-                if(len >= 6){
-                    $('.tip' ).text('上拉加载更多');
-                    loadScroll(eq+1);
-                }else{
-                    $('.tip' ).hide();
-                    $(window ).off("scroll" );
-                }
-            }
-            if(eq == 1){
-                $(".triangle-up").css("left","72vw");
-                var len = ntc.eq(eq ).find('.lists>ul>li').length;
-                if(len >= 5){
-                    $('.tip' ).text('上拉加载更多');
-                    loadScroll(eq+1);
-                }else{
-                    $('.tip' ).hide();
-                    $(window ).off("scroll" );
-                }
-            }
-
-            //使用示例
-            setCookie("type",eq+11);
-        });
         //悬浮框移动
         moveanyway();
-        viewer = $('.imgs').viewer({
-            url: 'data-original',
-            toolbar:false,
-            title:false
-        });
+        mui('#__MUI_PREVIEWIMAGE').on('tap', '.mui-slider-group', function(e) {
+            mui.previewImage().dispose();
+        })
+    });
+window.onload = function(){
+    var previewImage = mui.previewImage();
+    if($(".regularmore .lists a").length<8){
+        mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+    }else{
+        mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+    }
+}
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
     });
 
-    function loadScroll(type){
-        $(window).off("scroll" ).on("scroll",function(){
-            var ntc = $('.notices');
-            var dh = $(document).height();
-            var end = $(window).height() + $(window).scrollTop();
-            var tip = $(".tip");
-            var loading = $('.loading');
+    mui('#tab').on('tap', 'a', function(e) {
+        type = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        if(type==0){
+            $(".bottom").hide();
+            if($(".regularmore .lists a").length<8){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(type==1){
+            $(".bottom").hide();
+            if($(".reported .lists a").length<8){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(type==2){
+            $(".bottom").show();
+            if($(".votes ul li").length<8){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    });
+
+    mui('#item1mobile').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+
+    mui('#item3mobile').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+
+    mui('#item3mobile').on('tap', '.imgs img', function(e) {
+       $(".mui-fullscreen").css({"z-index":999,"background-color":"#444"});
+    })
+
+    mui('#item3mobile').on('tap', '.agreeclick',  function(e) {
+        var id = this.getAttribute("data-id");
+        var type = this.getAttribute("data-type");
+        agree(this,id,type)
+    })
+
+    mui('#item3mobile').on('tap', '.disagreeclick',  function(e) {
+        var id = this.getAttribute("data-id");
+        var type = this.getAttribute("data-type");
+        disagree(this,id,type)
+    })
+
+    mui('#item3mobile').on('tap', '.comment-icon',  function(e) {
+        var id = this.getAttribute("data-id");
+        tosend(this,id);
+        e.stopPropagation();
+    });
+
+    mui('body').on('tap', '#tab',  function(e) {
+        $('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
+        $('.myword input' ).val('');
+    });
+    mui('body').on('tap', '.lists',  function(e) {
+        $('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
+        $('.myword input' ).val('');
+    });
+
+    function loadScroll(){
+            if(type==0){
+                var len =$(".regularmore .lists a").length;
+            }
             if(type == 1){
-                var len = ntc.eq(type-1).find('.regularmore>.lists>ul>a').length;
+                var len = $(".reported .lists a").length;
             }
             if(type== 2 ){
-                var len = ntc.eq(type-1).find('.lists>ul>li').length;
+                var len = $(".votes ul li").length;
             }
-            if(dh == end && scrollNow){
-                scrollNow = false;//请求执行中
                 $.ajax({
                     type:"post",
                     url: "{:Url('Activity/morelist')}",
@@ -224,27 +289,19 @@
                         type:type
                     },
                     beforeSend: function(XMLHttpRequest){
-                        tip.hide();
-                        loading.toggleClass('hidden');
                     },
                     success:function(data){
-                        loading.toggleClass('hidden');
-                        tip.show();
                         if(data.code == 1){
                             addCourse(data,type);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
-                                tip.text('上拉加载更多');
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                             }
                         }else{
-                            tip.text('没有更多了');
-                            $(window ).off("scroll");
+                            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                         }
-                        scrollNow = true;//请求结束
                     }
                 })
-            }
-        })
     }
     function addCourse(data,type){
         var html = '';
@@ -265,21 +322,12 @@
                     '<li>' +
                     '<img src="'+list.head+'">' +
                     '<p>'+list.publisher+'</p>' +
-                    '<span>'+list.content+'</span>' +
-                    '<div class="imgs">'
-                var imglen = list.images.length;
-                for(var j = 0 ;j<imglen ;j++){
-                    html+='	<div class="img">' +
-                            '		<img src="'+list.images[j]+'" alt="评论图" data-original="">' +
-                            '	</div>' ;
-                }
-                   html+= '</div>' +
-                    '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span><div class="opinion">'
+                    '<div class="opinion">'
                 switch (list.is_like){
                     case 0:
-                        html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
+                        html+='	<i class="agree agreeclick" onclick="agree(this,'+list.id+',1)" data-id='+list.id+'data-type="1"></i>' +
                                 '	<span>'+list.likes_yes+'</span>' +
-                                '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
+                                '	<i class="disagree disagreeclick" onclick="disagree(this,'+list.id+',2)" data-id='+list.id+'data-type="2"></i><span>'+list.likes_no+'</span>'
                         break;
                     case 1:
                         html+='	<i class="agree_"></i>' +
@@ -292,8 +340,19 @@
                                 '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
                         break;
                 }
-                    html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
-                    '</div>'
+                     html+= '</div>'+
+                    '<span>'+list.content+'</span>' +
+                    '<div class="imgs">'
+                var imglen = list.images.length;
+                for(var j = 0 ;j<imglen ;j++){
+                    html+='	<div class="img">' +
+                            '		<img src="'+list.images[j]+'" alt="评论图" data-preview-src="" data-preview-group="1">' +
+                            '	</div>' ;
+                }
+                   html+= '</div>' +
+                    '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span>' +
+                    '<i class="comment-icon" onclick="tosend(this,'+list.id+')" data-id='+list.id+'></i>'
+
                 var commentlen = list.comment.length;
                 if(commentlen)
                 {
@@ -314,13 +373,6 @@
             $(".regularmore .lists ul").append(html);
         }else{
             $(".votes>ul").append(html);
-            if(viewer) {
-                viewer = $('.imgs').viewer({
-                    url: 'data-original',
-                    toolbar:false,
-                    title:false
-                });
-            }
         }
         //图片裁剪
         imgresize();
