@@ -11,9 +11,8 @@ use think\Model;
 
 class News extends Base {
     public $insert = [
-        'views' => 0,
-        'comments' => 0,
         'create_time' => NOW_TIME,
+        'create_user' => UID
     ];
 
     //获取后台用户名称
@@ -28,5 +27,22 @@ class News extends Base {
         $info = $this->get($id);
         return $info;
     }
-
+    // 添加 修改 数据
+    public function get_save($data){
+        if (empty($data['id'])){
+            // 添加
+            unset($data['id']);
+            $res = $this->validate(true)->save($data);
+            return  $res;
+        }else{
+            // 修改
+            $res = $this->validate(true)->save($data,['id' => $data['id']]);
+            return  $res;
+        }
+    }
+    // 删除
+    public function get_status($id){
+        $res = $this->where('id',$id)->update(['status' => -1]);
+        return $res;
+    }
 }

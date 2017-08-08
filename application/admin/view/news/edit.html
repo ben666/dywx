@@ -62,6 +62,26 @@
                     <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
+                                <label>类型:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="type" disabled>
+                                    {neq name="msg" value=""}
+                                    {if condition="$msg['type'] eq 1"}
+                                    <option value="1" >新闻发布</option>
+                                    {elseif condition="$msg['type'] eq 2"}
+                                    <option value="2" >活动情况</option>
+                                    {else /}
+                                    {/if}
+                                    {else/}
+                                    <option value="1" {eq name="$type" value="1"} selected {/eq}>新闻发布</option>
+                                    <option value="2" {eq name="$type" value="2"} selected {/eq} >活动情况</option>
+                                    {/neq}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
                                 <label>封面图片:</label>
                             </div>
                             <div class="col-lg-5">
@@ -159,8 +179,11 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green'
         });
-
-        highlight_subnav("{:Url('News/index')}");
+        if({$type} == 1){
+            highlight_subnav("{:Url('News/index')}");
+        }else{
+            highlight_subnav("{:Url('News/activity')}");
+        }
         //上传图片
         var plus = $('.plus');
         var imgnum = 1;
@@ -221,11 +244,11 @@
                 publisher:$("input[name='publisher']").val(),
                 recommend:$("input[name='recommend']:checked").val(),
                 push:$("input[name='push']:checked").val(),
-                type:3
+                type:$("select[name='type']").val(),
             };
             $.ajax({
                 type:"post",
-                url: "{:Url('Activity/add')}",
+                url: "{:Url('News/edit')}",
                 data:data,
                 success:function(data){
                     if(data.code == 1){

@@ -25,7 +25,16 @@ class News extends Admin {
             'type' => 1 , // 新闻发布
             'status' => array('egt',0),
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('News',$map);
+        int_to_string($list,[
+            'status' => array(0=>"已发布",1=>"已发布"),
+            'recommend' => [0 => "否" , 1 => "是"],
+            'push' => [0 => '否' , 1 => '是']
+        ]);
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -37,7 +46,16 @@ class News extends Admin {
             'type' => 2 , // 活动情况
             'status' => array('egt',0),
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('News',$map);
+        int_to_string($list,[
+            'status' => array(0=>"已发布",1=>"已发布"),
+            'recommend' => [0 => "否" , 1 => "是"],
+            'push' => [0 => '否' , 1 => '是']
+        ]);
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -50,7 +68,11 @@ class News extends Admin {
             $data = input('post.');
             $result = $News->get_save($data);
             if($result) {
-                return $this->success('操作成功', Url('News/report'));
+                if ($data['type'] == 1){
+                    return $this->success('操作成功', Url('News/index'));
+                }else{
+                    return $this->success('操作成功', Url('News/activity'));
+                }
             }else{
                 $this->error($News->getError());
             }
@@ -66,12 +88,15 @@ class News extends Admin {
      */
     public function del(){
         $id = input('id');
-        $data['status'] = '-1';
-        $info = OpinionModel::where('id',$id)->update($data);
+        if (empty($id)){
+            $this->error('系统参数错误');
+        }
+        $News = new NewsModel();
+        $info = $News->get_status($id);
         if($info) {
             return $this->success("删除成功");
         }else{
-            return $this->error("删除失败");
+            $this->error("删除失败");
         }
 
     }
