@@ -42,7 +42,43 @@ use app\admin\model\WishReceive;
          return $this->fetch();
      }
      /**
-      * 活动  添加  修改
+      * 活动报道  主页
+      */
+     public function report(){
+         $map = array(
+             'type' => 3, // 报道
+             'status' => array('egt',0),
+         );
+         $list = $this->lists('Wish',$map);
+         int_to_string($list,array(
+             'status' => array(0=>"已发布",1=>"已发布"),
+             'recommend' => [0 => "否" , 1 => "是"],
+             'push' => [0 => '否' , 1 => '是']
+         ));
+         $this->assign('list',$list);
+         return $this->fetch();
+     }
+     /**
+      * 活动报道  添加  修改
+      */
+     public function add(){
+         $wish = new Wish();
+         if (IS_POST){
+             $data = input('post.');
+             $result = $wish->get_save($data);
+             if($result) {
+                 return $this->success('操作成功', Url('Activity/report'));
+             }else{
+                 $this->error($wish->getError());
+             }
+         }else{
+             // 添加页面
+             $this->assign('msg', $wish->get_content(input('get.id')));
+             return $this->fetch();
+         }
+     }
+     /**
+      * 活动列表 添加  修改
       */
      public function edit() {
          $id = input('id/d');
@@ -53,7 +89,7 @@ use app\admin\model\WishReceive;
                  $data['update_time'] = time();
                  $data['update_user'] = $_SESSION['think']['user_auth']['id'];
                  $wishModel = new Wish();
-                 $info = $wishModel->validate('wish')->save($data,['id'=>$data['id']]);
+                 $info = $wishModel->validate('wish.other')->save($data,['id'=>$data['id']]);
                  if($info) {
                      return $this->success("修改成功",Url('Activity/index'));
                  }else{
@@ -72,11 +108,11 @@ use app\admin\model\WishReceive;
                  unset($data['id']);
                  $data['create_user'] = $_SESSION['think']['user_auth']['id'];
                  $wishModel = new Wish();
-                 $model = $wishModel->validate('wish')->save($data);
+                 $model = $wishModel->validate('wish.other')->save($data);
                  if($model) {
                      return $this->success("新增成功",Url('Activity/index'));
                  }else{
-                     return $this->get_update_error_msg($wishModel->getError());
+                     $this->error($wishModel->getError());
                  }
              }else {
                  $this->assign('msg',null);
@@ -106,7 +142,7 @@ use app\admin\model\WishReceive;
              'status' => -1,
          );
          $wishModel = new Wish();
-         $model = $wishModel->where(['id' => $id,'type' => 1])->update($map);
+         $model = $wishModel->where(['id' => $id])->update($map);
          if($model) {
              $result = WishReceive::where('rid',$id)->count();
              if ($result != 0){
@@ -114,13 +150,13 @@ use app\admin\model\WishReceive;
                  if ($res){
                      return $this->success("删除成功");
                  }else{
-                     return $this->error("删除失败");
+                     $this->error("删除失败");
                  }
              }else{
                  return $this->success("删除成功");
              }
          }else{
-             return $this->error("删除失败");
+             $this->error("删除失败");
          }
      }
      /*
@@ -133,8 +169,12 @@ use app\admin\model\WishReceive;
          );
          $list = $this->lists('Wish',$map);
          foreach($list as $value){
-             $User = WechatUser::where('userid',$value['publisher'])->field('name,department')->find();
-             $value['name'] = $User['name'];  // 获取发布人 姓名
+             $User = WechatUser::where('userid',$value['create_user'])->field('name,department')->find();
+             if (empty($value['publisher'])){
+                 $value['name'] = $User['name'];
+             }else{
+                 $value['name'] = $value['publisher'];  // 获取发布人 姓名
+             }
              $Department = WechatDepartment::where('id',$User['department'])->field('name')->find();
              $value['department'] = $Department['name'];  // 获取发布人 组别
              $value['images'] = json_decode($value['images']);
@@ -152,7 +192,7 @@ use app\admin\model\WishReceive;
          if ($res){
              return $this->success('删除成功');
          }else{
-             return $this->error('删除失败');
+             $this->error('删除失败');
          }
      }
  }
