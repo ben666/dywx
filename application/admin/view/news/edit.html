@@ -21,36 +21,19 @@
         top:0;
         opacity: 0;
     }
-    .plus{
-        height: 100px;
-        width: 200px;
-        font-size: 100px;
-        line-height: 100px;
-        text-align: center;
-        color: rgba(204, 204, 204, 0.51);
-    }
-    .plus:hover{
-        font-size: 150px;
-    }
-    .plus2{
-        display: none;
-    }
-    .plusimg{
-        display: none;
-    }
 </style>
 {/block}
 
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>新闻动态</h2>
+        <h2>活动发起</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('News/index')}">新闻列表</a>
+                <a href="{:Url('Activity/report')}">活动报道</a>
             </li>
             <li class="active">
-                <strong>新增</strong>
+                <strong>{eq name="msg||default=''" value=""}新增{else/}修改{/eq}</strong>
             </li>
         </ol>
     </div>
@@ -66,7 +49,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5></h5>
+                    <h5>{eq name="msg||default=''" value=""}新增{else/}修改{/eq}</h5>
                     <div class="ibox-tools">
                         <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
                     </div>
@@ -75,28 +58,25 @@
                     <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>图片:</label>
+                                <label>封面图片:</label>
                             </div>
-                            {eq name="msg" value=""}
                             <div class="col-lg-5">
                                 <div class="imggroup">
-                                    <img src="" alt='图片' class='thumbnail imgbox'>
-                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="front_cover" class="img"  value="" required="">
+                                    <img src="{$msg.front_cover||default=''|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    <input type="file" class="imgfile" accept="image/jpg, image/png,image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover || default = ''}" required="">
                                 </div>
-                                <b>推荐尺寸：750*400px</b>
+                                <b>推荐尺寸：750*375px</b>
                             </div>
-                            {else/}
-                            <div class="col-lg-5">
-                                <div class="imggroup">
-                                    <img src="{$msg.images|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.images}" required="">
-                                </div>
-                                <b>推荐尺寸：750*400px</b>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>标题:</label>
                             </div>
-                            {/eq}
-                       </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入标题" class="form-control form_title" name="title" value="{$msg.title || default=''}">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-1 control-label">
                                 <label>内容:</label>
@@ -104,7 +84,7 @@
                             <div class="col-lg-11">
                                 <div class=" float-e-margins">
                                     <div class="ibox-content no-padding borders">
-                                        <textarea name="content" cols="30" placeholder="请输入新闻内容最多400字" rows="10" class="form-control form_title"  maxlength="400">{$msg.content || default=""}</textarea>
+                                        <script id="container" name="content" type="text/plain">{$msg.content || default=''}</script>
                                     </div>
                                 </div>
                             </div>
@@ -114,21 +94,38 @@
                                 <label>发布人:</label>
                             </div>
                             <div class="col-lg-11">
-                                {eq name="$msg.create_user|default=''" value=""}
-                                <input type="text" placeholder="" class="form-control form_title" name="createUser" value="官方发布" disabled>
-                                {else/}
-                                <input type="text" placeholder="" class="form-control form_title" name="createUser" value="{$msg.create_user|get_name}" disabled>
-                                {/eq}
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher || default=''}">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>发布部门:</label>
+                                <label>是否推荐:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="" class="form-control form_title" name="departmentName" value="{$msg.department_name || default='梦想小镇'}" disabled>
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="recommend" {$msg.recommend|default="0"?'checked':''}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio"  value="0" name="recommend" {$msg.recommend|default="0"?'':'checked'}>否
+                                </label>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push" {$msg.push|default="0"?'checked':''}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="push" {$msg.push|default="0"?'':'checked'}>否
+                                </label>
+                            </div>
+                        </div>
+
                         <input type="hidden" name="id" value="{$msg.id || default=''}">
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">
@@ -136,6 +133,7 @@
                                 <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -147,8 +145,8 @@
 {block name="script"}
 <script src="/static/uploadify/jquery.uploadify.min.js"></script>
 <script src="/static/iCheck/icheck.min.js"></script>
-<!--<script src="/static/ueditor/ueditor.config.js"></script>-->
-<!--<script src="/static/ueditor/ueditor.all.min.js"></script>-->
+<script src="/static/ueditor/ueditor.config.js"></script>
+<script src="/static/ueditor/ueditor.all.min.js"></script>
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
     $(function(){
@@ -204,22 +202,26 @@
             }
         });
 
+        var ue = UE.getEditor('container',{
+            initialFrameHeight:400
+        });
 
         //发布
         $(".post-put").off('click').on("click",function(){
             var it=$(this);
             var data = {
-                id: $("input[name='id']").val(),
-                images: [$("input[name='front_cover']").val()],
-                content: $("textarea[name='content']").val(),
-                create_user: "{$msg.create_user|default=''}",
-                department_name: "{$msg.department_name|default=''}",
-                status: 0,
+                id:$("input[name='id']").val(),
+                front_cover:$("input[name='front_cover']").val(),
+                title:$("input[name='title']").val(),
+                content:ue.getContent(),
+                publisher:$("input[name='publisher']").val(),
+                recommend:$("input[name='recommend']:checked").val(),
+                push:$("input[name='push']:checked").val(),
+                type:3
             };
-            console.log(data);
             $.ajax({
                 type:"post",
-                url:$("#form").attr("action"),
+                url: "{:Url('Activity/add')}",
                 data:data,
                 success:function(data){
                     if(data.code == 1){

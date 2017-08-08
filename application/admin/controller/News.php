@@ -21,17 +21,23 @@ use app\admin\model\Opinion as OpinionModel;
 class News extends Admin {
 
     /**
-     * 主页列表
+     * 新闻发布 主页列表
      */
     public function index(){
         $map = array(
+            'type' => 1 , // 新闻发布
             'status' => array('egt',0),
         );
         $list = $this->lists('Opinion',$map);
         $this->assign('list',$list);
         return $this->fetch();
     }
+    /**
+     * 活动情况  主页
+     */
+    public function activity(){
 
+    }
     /**
      * 新闻添加
      */
