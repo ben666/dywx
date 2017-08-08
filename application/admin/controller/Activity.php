@@ -22,6 +22,10 @@ use app\admin\model\WishReceive;
              'type' => 1, // 活动
              'status' => array('egt',0),
          );
+         $search = input('search');
+         if ($search != '') {
+             $map['title'] = ['like','%'.$search.'%'];
+         }
          $list = $this->lists('Wish',$map);
          int_to_string($list,array(
              'status' => array(0=>"已发布",1=>"已发布"),
@@ -49,6 +53,10 @@ use app\admin\model\WishReceive;
              'type' => 3, // 报道
              'status' => array('egt',0),
          );
+         $search = input('search');
+         if ($search != '') {
+             $map['title'] = ['like','%'.$search.'%'];
+         }
          $list = $this->lists('Wish',$map);
          int_to_string($list,array(
              'status' => array(0=>"已发布",1=>"已发布"),
@@ -167,6 +175,10 @@ use app\admin\model\WishReceive;
              'type' => 2 ,  // 投票
              'status' => array('egt',0),
          );
+         $search = input('search');
+         if ($search != '') {
+             $map['content'] = ['like','%'.$search.'%'];
+         }
          $list = $this->lists('Wish',$map);
          foreach($list as $value){
              $User = WechatUser::where('userid',$value['create_user'])->field('name,department')->find();

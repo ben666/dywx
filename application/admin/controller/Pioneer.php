@@ -19,6 +19,10 @@ class Pioneer extends Admin{
             'status' => ['egt',0],
             'type' => 1,
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['name'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Pioneer',$map);
         int_to_string($list,[
             'class' => ['1' => '个人',2=>"集体" ,3=>"单位"]
@@ -35,6 +39,10 @@ class Pioneer extends Admin{
             'status' => ['egt',0],
             'type' => 2,
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['name'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Pioneer',$map);
         int_to_string($list,[
             'class' => ['1' => '个人',2=>"集体" ,3=>"单位"]
@@ -51,6 +59,10 @@ class Pioneer extends Admin{
             'status' => ['egt',0],
             'type' => 3,
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['name'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Pioneer',$map);
         int_to_string($list,[
             'class' => ['1' => '个人',2=>"集体" ,3=>"单位"]
@@ -67,6 +79,10 @@ class Pioneer extends Admin{
             'status' => ['egt',0],
             'type' => 4,
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['name'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Pioneer',$map);
         int_to_string($list,[
             'class' => ['1' => '个人',2=>"集体" ,3=>"单位"]
@@ -83,6 +99,10 @@ class Pioneer extends Admin{
             'status' => array('egt',0),
             'pid' => $pid
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('PioneerStory',$map);
         int_to_string($list,array(
             'status' => array(0 =>"已发布",1=>"已发布"),

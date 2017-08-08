@@ -27,10 +27,14 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>活动发起</h2>
+        <h2>红色足迹</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Activity/report')}">活动报道</a>
+                {eq name="type" value="1"}
+                <a href="{:Url('News/index')}">新闻发布</a>
+                {else/}
+                <a href="{:Url('News/activity')}">活动情况</a>
+                {/eq}
             </li>
             <li class="active">
                 <strong>{eq name="msg||default=''" value=""}新增{else/}修改{/eq}</strong>

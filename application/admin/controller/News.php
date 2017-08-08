@@ -9,11 +9,8 @@ namespace app\admin\controller;
 
 use think\Controller;
 use app\admin\model\Picture;
-use app\admin\model\Push;
-use com\wechat\TPWechat;
 use app\admin\model\News as NewsModel;
 use think\Config;
-use app\admin\model\Opinion as OpinionModel;
 /**
  * Class News
  * @package 新闻动态 控制器
@@ -28,7 +25,7 @@ class News extends Admin {
             'type' => 1 , // 新闻发布
             'status' => array('egt',0),
         );
-        $list = $this->lists('Opinion',$map);
+        $list = $this->lists('News',$map);
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -36,65 +33,34 @@ class News extends Admin {
      * 活动情况  主页
      */
     public function activity(){
-
+        $map = array(
+            'type' => 2 , // 活动情况
+            'status' => array('egt',0),
+        );
+        $list = $this->lists('News',$map);
+        $this->assign('list',$list);
+        return $this->fetch();
     }
     /**
-     * 新闻添加
-     */
-    public function add(){
-        if(IS_POST) {
-            $data = input('post.');
-            if(empty($data['id']))
-            {
-                unset($data['id']);
-            }
-            $data['images'] = json_encode($data['images']);
-            $data['create_time'] = time();
-            $data['comments'] = 0;
-            $data['likes'] = 0;
-            $newModel = new OpinionModel();
-            $info = $newModel->validate('opinion')->save($data);
-            if($info) {
-                return $this->success("新增成功",Url('News/index'));
-            }else{
-                return $this->error($newModel->getError());
-            }
-        }else{
-            $this->default_pic();
-            $this->assign('msg','');
-
-            return $this->fetch('edit');
-        }
-    }
-
-    /**
-     * 修改
+     * 新闻发布  活动情况   添加  修改
      */
     public function edit(){
-        if(IS_POST) {
+        $News = new NewsModel();
+        if (IS_POST){
             $data = input('post.');
-            $newModel = new OpinionModel();
-            $info = $newModel->validate('opinion')->save($data,['id'=>input('id')]);
-            if($info){
-                return $this->success("修改成功",Url("News/index"));
+            $result = $News->get_save($data);
+            if($result) {
+                return $this->success('操作成功', Url('News/report'));
             }else{
-                return $this->get_update_error_msg($newModel->getError());
+                $this->error($News->getError());
             }
         }else{
-            $this->default_pic();
-            $id = input('id');
-            $msg = OpinionModel::get($id);
-            dump($msg['images']);
-            if(empty($msg['images']))
-            {
-                $msg['images'] = json_decode($msg['images'])[0];
-            }
-            $this->assign('msg',$msg);
-            
+            // 添加页面
+            $this->assign('msg', $News->get_content(input('get.id')));
+            $this->assign('type',input('type'));
             return $this->fetch();
         }
     }
-
     /**
      * 删除功能
      */

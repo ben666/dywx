@@ -20,5 +20,13 @@ class News extends Base {
     public function user(){
         return $this->hasOne('Member','id','create_user');
     }
+    //  获取该条数据 详情
+    public function get_content($id){
+        if (empty($id)){
+            return false;
+        }
+        $info = $this->get($id);
+        return $info;
+    }
 
 }

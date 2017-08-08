@@ -26,6 +26,10 @@ class Learn extends Admin {
             'status' => array('egt',0),
             'type'=> array('in',[1,2])
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Learn',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),

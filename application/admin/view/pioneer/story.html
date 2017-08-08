@@ -36,7 +36,14 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>事迹列表</h5>
+                    <form method="get" action="{:Url('Pioneer/story?type='.$type.'&pid='.$pid)}" class="pull-left mail-search" >
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" name="search" placeholder="搜索标题">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-sm btn-primary">搜索</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="ibox-tools">
                         {switch name="$type" }
                         {case value="1"}<a href="{:Url('Pioneer/country')}" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>{/case}
