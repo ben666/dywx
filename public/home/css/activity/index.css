@@ -108,19 +108,24 @@ p{
 .votes>ul>li>span{
     font-size: 0.28rem;
     color: #333;
-    width: 81vw;
+    width: 80vw;
     display: inline-block;
     padding-left:0.2rem;
     margin-top: 0.2rem;
 }
 .lists ul > li .imgs .img {
     position: relative;
-    width: 78px;
-    height: 78px;
+    width: 0.78rem;
+    height: 0.78rem;
     display: inline-block;
     margin: 5px 5px 5px 0;
     overflow: hidden;
     background: #d9d9d9;
+}
+.lists ul > li .imgs .img img{
+    width:0.78rem!important;
+    height:0.78rem!important;
+
 }
 .votes ul > li .imgs{
     margin-left: 1rem;

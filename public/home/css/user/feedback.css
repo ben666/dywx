@@ -23,6 +23,7 @@
   width: 81.2vw;
   height: 35vh;
   padding: 3vw 0;
+  font-size: 0.28rem;
 }
 .content .box textarea::-webkit-input-placeholder {
   font-size: 15px;
@@ -33,18 +34,21 @@
   display: inline-block;
 }
 .content .box label {
-  width: 73%;
   color: #cecece;
-  font-size: 14px;
-  line-height: 50px;
+  font-size: 0.28rem;
+  line-height: 0.5rem;
+}
+textarea::-webkit-input-placeholder{
+  font-size: 0.28rem!important;
 }
 .content .box .submit {
-  width: 25%;
-  height: 36px;
+  width: 1.6rem;
+  height: 0.4rem;
   color: #ffffff;
-  font-size: 1.4rem;
-  line-height: 36px;
-  border-radius: 18px;
+  font-size: 0.28rem;
+  line-height: 0.4rem;
+  border-radius: 0.36rem;
+  float: right;
   text-align: center;
   background: -webkit-linear-gradient(left, #feba57, #f99300);
   background: linear-gradient(left, #feba57, #f99300);
