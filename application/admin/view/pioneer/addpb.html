@@ -27,10 +27,16 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-12">
-        <h2>创业导师团</h2>
+        <h2>先锋引领</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Pioneer/partybuild')}">主页</a>
+                {switch name="$type" }
+                {case value="1"}<a href="{:Url('Pioneer/country')}">主页</a>{/case}
+                {case value="2"}<a href="{:Url('Pioneer/defence')}">主页</a>{/case}
+                {case value="3"}<a href="{:Url('Pioneer/remote')}">主页</a>{/case}
+                {case value="4"}<a href="{:Url('Pioneer/association')}">主页</a>{/case}
+                {default /}默认情况
+                {/switch}
             </li>
             <li class="active">
                 <strong>{eq name="msg||default=''" value=""}新增{else/}修改{/eq}</strong>
@@ -53,6 +59,29 @@
                 </div>
                 <div class="ibox-content all">
                     <form id="form" class="form-horizontal" method="post">
+                        <!--类型-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>类型:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="class" id="selected" value="" {neq name="msg||default=''" value=""} disabled {/neq}>
+                                    {eq name="msg||default=''" value=""}
+                                        <option value="1" >个人</option>
+                                        <option value="2" >集体</option>
+                                        <option value="3" >单位</option>
+                                    {else/}
+                                    {if condition="$msg['class'] eq 1"}
+                                    <option value="1" >个人</option>
+                                    {elseif condition="$msg['class'] eq 2"}
+                                    <option value="2">集体</option>
+                                    {else /}
+                                    <option value="3" >单位</option>
+                                    {/if}
+                                    {/eq}
+                                </select>
+                            </div>
+                        </div>
                         <!--头像-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
@@ -77,13 +106,28 @@
                                 <input type="text" placeholder="请输入名称" class="form-control form_title" name="name" value="{$msg.name || default=''}" maxlength="10">
                             </div>
                         </div>
+
                         <!--职位-->
-                        <div class="form-group">
+                        <div class="form-group position">
                             <div class="col-lg-1 text-right control-label">
                                 <label>职位:</label>
                             </div>
                             <div class="col-lg-11">
                                 <input type="text" placeholder="请输入职位" class="form-control form_title" name="position" value="{$msg.position || default=''}" maxlength="20">
+                            </div>
+                        </div>
+
+                        <!--专家简介-->
+                        <div class="form-group">
+                            <div class="col-lg-1 control-label">
+                                <label>简介:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class=" float-e-margins">
+                                    <div class="ibox-content no-padding borders">
+                                        <script id="container" name="content" type="text/plain">{$msg.content || default=''}</script>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--id-->
@@ -106,16 +150,40 @@
 <script src="/static/uploadify/jquery.uploadify.min.js"></script>
 <script src="/static/iCheck/icheck.min.js"></script>
 <script src="/admin/js/chosen.jquery.js"></script>
+<script src="/static/ueditor/ueditor.config.js"></script>
+<script src="/static/ueditor/ueditor.all.min.js"></script>
 <script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
 <script>
     $(function(){
+        var value = $("#selected").val();
+        if(value==1){
+            $(".position").show();
+        }else{
+            $(".position").hide();
+        }
         //    单选按钮
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green'
         });
-        //导航高亮
-        highlight_subnav("{:Url('Pioneer/partybuild')}");
+        switch ({$type}){
+            case 1:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/country')}");
+                break;
+            case 2:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/defence')}");
+                break;
+            case 3:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/remote')}");
+                break;
+            case 4:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/association')}");
+                break;
+        }
         //上传图片
         $(".imgfile").on("change",function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
@@ -150,21 +218,27 @@
                 return;
             }
         });
+        var ue = UE.getEditor('container',{
+            initialFrameHeight:400
+        });
         //发布
         $(".post-put").off('click').on("click",function(){
             var it=$(this);
             var data = {
                 id: $("input[name='id']").val(),
+                class:$("select[name='class']").val(),
                 name: $("input[name='name']").val(),
+                content:ue.getContent(),
                 position: $("input[name='position']").val(),
                 front_cover: $("input[name='front_cover']").val(),
-                type:1
+                type:{$type}
             };
             $.ajax({
                 type:"post",
                 url: "{:Url('Pioneer/addpb')}",
                 data:data,
                 success:function(data){
+                    console.log(data)
                     if(data.code == 1){
                         if (data.url) {
                             updateAlert(data.msg + ' 页面即将自动跳转~','success');
@@ -197,5 +271,13 @@
         });
     })
 
+   $("#selected").change(function(){
+       var value = $(this).val();
+       if(value==1){
+            $(".position").show();
+       }else{
+           $(".position").hide();
+       }
+   })
 </script>
 {/block}

@@ -12,12 +12,18 @@ class Pioneer extends Validate{
     protected $rule = [
         'front_cover' => 'require',
         'name' => 'require',
-        'position' => 'require'
+        'position' => 'require',
+        'content' => 'require'
     ];
 
     protected $message = [
-        'front_cover.require'  =>  '请上传导师头像！',
-        'name.require' =>  '请输入导师姓名！',
-        'position.require'  =>  '请填写导师职位！',
+        'front_cover.require'  =>  '请上传头像！',
+        'name.require' =>  '请输入名称！',
+        'position.require'  =>  '请填写职位！',
+        'content.require'  =>  '请填写简介！',
+    ];
+    protected $scene = [
+        'other' => ['front_cover','name','position','content'],
+        'another' => ['front_cover','name','content']
     ];
 }

@@ -6,18 +6,18 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-12">
-        <h2>创客先锋队</h2>
-        <!--<ol class="breadcrumb">-->
-        <!--<li>-->
-        <!--活动列表-->
-        <!--</li>-->
-        <!--<li class="active">-->
-        <!--<strong><a href="{:Url('Activity/index')}">列表页</a></strong>-->
-        <!--</li>-->
-        <!--</ol>-->
+        <h2>先锋引领</h2>
+        <ol class="breadcrumb">
+            <li>
+                国防科技先锋
+            </li>
+            <li class="active">
+                <strong><a href="{:Url('Pioneer/defence')}">列表页</a></strong>
+            </li>
+        </ol>
     </div>
-    <!--<div class="col-lg-2">-->
-    <!--</div>-->
+    <div class="col-lg-2">
+    </div>
 </div>
 {/block}
 
@@ -29,7 +29,7 @@
                 <div class="ibox-title">
                     <h5>列表</h5>
                     <div class="ibox-tools">
-                        <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Pioneer/addbs')}">添加</a>
+                        <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Pioneer/addpb?type=2')}">添加</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -39,27 +39,32 @@
                             <tr>
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <th>头像</th>
+                                <th>类型</th>
                                 <th>名称</th>
                                 <th>职位</th>
                                 <th>点赞数</th>
+                                <th>创建者</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {volist name="list" id="vo"}
-                            <tr>
-                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
-                                <td><img src="{$vo.front_cover|get_cover='path'}" alt="" width="20px" height="20px"></td>
-                                <td>{$vo.name}</td>
-                                <td>{$vo.position}</td>
-                                <td>{$vo.likes}</td>
-                                <td>{$vo.create_time|date="Y-m-d",###}</td>
-                                <td>
-                                    <a href="{:Url('Pioneer/addbs?id='.$vo['id'])}">修改</a>
-                                    &emsp;<a href="{:Url('Pioneer/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
-                                </td>
-                            <tr>
+                                {volist name="list" id="vo"}
+                                <tr>
+                                    <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                    <td><img src="{$vo.front_cover|get_cover='path'}" alt="" width="20px" height="20px"></td>
+                                    <td>{$vo.class_text}</td>
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.position}</td>
+                                    <td>{$vo.likes}</td>
+                                    <td>{$vo->user->nickname}</td>
+                                    <td>{$vo.create_time|date="Y-m-d",###}</td>
+                                    <td>
+                                        <a href="{:Url('Pioneer/addpb?type=2&id='.$vo['id'])}">修改</a>
+                                        &emsp;<a href="{:Url('Pioneer/story?type=2&pid='.$vo['id'])}">查看事迹（{$vo->get_num()}）</a>
+                                        &emsp;<a href="{:Url('Pioneer/dele?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
+                                    </td>
+                                <tr>
                                 {/volist}
                             </tbody>
                             <tfoot>
@@ -82,7 +87,7 @@
 <script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
 <script>
     $(document).ready(function(){
-        highlight_subnav("{:Url('Pioneer/business')}");
+        highlight_subnav("{:Url('Pioneer/defence')}");
 
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',

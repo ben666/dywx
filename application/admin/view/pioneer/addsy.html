@@ -27,10 +27,10 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>先锋事迹</h2>
+        <h2>先锋引领</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('News/index')}">事迹列表</a>
+                事迹列表
             </li>
             <li class="active">
                 <strong>{eq name="msg||default=''" value=""}新增{else/}修改{/eq}</strong>
@@ -127,6 +127,12 @@
                         </div>
 
                         <input type="hidden" name="id" value="{$msg.id || default=''}">
+                        {eq name="msg||default=''" value=""}
+                        <input type="hidden" name="pid" value="{$pid}">
+                        {else/}
+                        <input type="hidden" name="pid" value="{$msg.pid}">
+                        {/eq}
+                        <input type="hidden" name="type" value="{$type}">
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">
                                 <button class="btn btn-primary submit-btn post-put" type="button" target-form="form-horizontal" >发布</button>
@@ -156,7 +162,24 @@
             radioClass: 'iradio_square-green'
         });
 
-        highlight_subnav("{:Url('Pioneer/story')}");
+        switch ({$type}){
+            case 1:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/country')}");
+                break;
+            case 2:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/defence')}");
+                break;
+            case 3:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/remote')}");
+                break;
+            case 4:
+                //导航高亮
+                highlight_subnav("{:Url('Pioneer/association')}");
+                break;
+        }
         //上传图片
         var plus = $('.plus');
         var imgnum = 1;
@@ -210,6 +233,8 @@
         $(".post-put").off('click').on("click",function(){
             var it=$(this);
             var data = {
+                pid:$("input[name='pid']").val(),
+                type:$("input[name='type']").val(),
                 id:$("input[name='id']").val(),
                 front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
@@ -217,7 +242,6 @@
                 publisher:$("input[name='publisher']").val(),
                 recommend:$("input[name='recommend']:checked").val(),
                 push:$("input[name='push']:checked").val(),
-                type:3
             };
             $.ajax({
                 type:"post",
