@@ -14,11 +14,13 @@
         #publish {
             position: fixed;
             right: 5.3vw;
-            bottom: 40.6vw;
+            bottom: 20.6vw;
             width: 1.2rem;
             height: 1.2rem;
             background: url(/home/images/feedback/note.png) no-repeat;
             background-size: 100% 100%;
+            z-index: 99;
+            display: none;
         }
         .mui-fullscreen{
             position: absolute;
@@ -158,12 +160,12 @@
 
                     </div>
                 </div>
-                <!--线上活动发布-->
-                <a id="publish" href="{:Url('Activity/publish')}"></a>
             </div>
         </div>
 </div>
     </div>
+<!--线上活动发布-->
+<a id="publish" href="{:Url('Activity/publish')}"></a>
 <div class="bottom clear">
     <div class="myword fl">
         <input type="text" placeholder="说说你的感想！">
@@ -207,6 +209,7 @@ window.onload = function(){
         type = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(type==0){
+            $("#publish").hide();
             $(".bottom").hide();
             if($(".regularmore .lists a").length<8){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -214,6 +217,7 @@ window.onload = function(){
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(type==1){
+            $("#publish").hide();
             $(".bottom").hide();
             if($(".reported .lists a").length<8){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -221,6 +225,7 @@ window.onload = function(){
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(type==2){
+            $("#publish").show();
             $(".bottom").show();
             if($(".votes>ul>li").length<5){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -235,7 +240,7 @@ window.onload = function(){
         window.location.href = url;
     })
 
-    mui('#item3mobile').on('tap', '#publish', function(e) {
+    mui('body').on('tap', '#publish', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
     })
