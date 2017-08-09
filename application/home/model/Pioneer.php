@@ -7,6 +7,7 @@
  */
 namespace app\home\model;
 use think\Model;
+use app\home\model\PioneerStory;
 class Pioneer extends Model{
     /**
      * 首页获取推荐的数据
@@ -17,12 +18,12 @@ class Pioneer extends Model{
         $map = array(
             'status' => ['egt',0],
             'recommend' => 1,
-            'type' => 3,
             'push' => ['egt',$push]
         );
         $order = 'create_time desc';
         $limit = "$length,1";
-        $list = $this ->where($map) ->order($order) ->limit($limit) ->select();
+        $Story = new  PioneerStory();
+        $list = $Story ->where($map) ->order($order) ->limit($limit) ->select();
         if(!empty($list))
         {
             return $list[0] ->data;
