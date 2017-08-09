@@ -17,6 +17,8 @@
     </style>
 {/block}
 {block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
     <!--banner-->
     <div class="banners">
         <div class="swiper-container">
@@ -32,8 +34,22 @@
             </div>
         </div>
     </div>
-    <!--列表-->
-    <div class="content">
+
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
+        新闻发布
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+       活动情况
+    </a>
+    <a class="mui-control-item" href="#item3mobile" data-index=2">
+        发展历程
+    </a>
+</div>
+
+<div class="mui-slider-group">
+    <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+        <!--新闻发布-->
         <div class="notices">
             <div class="notice party">
                 {volist name="list2" id="loo"}
@@ -57,6 +73,48 @@
             </div>
         </div>
     </div>
+    <div id="item2mobile" class="mui-slider-item mui-control-content">
+        <!--活动情况-->
+        <div class="notices">
+            <div class="notice activity">
+                {volist name="list2" id="loo"}
+                <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
+                    <div class="fl">
+                        {eq name="$loo.front_cover" value=""}
+                        <img src="/home/images/banner/2.jpg" alt="图片">
+                        {else/}
+                        <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
+                        {/eq}
+                    </div>
+                    <div class="fr right">
+                        <div class="title limit_">{$loo.title}</div>
+                        <div class="clear time">
+                            <span class="fl">{$loo.publisher}</span>
+                            <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
+                        </div>
+                    </div>
+                </a>
+                {/volist}
+            </div>
+        </div>
+        </div>
+        <div id="item3mobile" class="mui-slider-item mui-control-content">
+            <div class="notices">
+                <div class="lists">
+                    <a href="" class="list">
+                        <div class="title limit_">ffffffggggggggggggggggggggggggg</div>
+                        <div class="note clear">
+                            <span class="fl depart">工委宣传部</span>
+                            <span class="time fr">2017-8-8</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+    </div>
     <!--线上发布-->
     {eq name="visit" value="0"}
     <a id="publish" href="/home/news/publish.html"></a>
@@ -65,7 +123,7 @@
 {block name="script"}
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
-    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    var type = 0;
   $(function(){
       //轮播
       var mySwiper = new Swiper('.swiper-container', {
@@ -73,28 +131,36 @@
           loop:true,
           autoplayDisableOnInteraction:false
       });
-      //
-      var len = $('.notice .list').length;
-      if(len >= 6){
-          $('.tip' ).text('上拉加载更多');
-      }
-      loadScroll();
       //悬浮框移动
       {eq name="visit" value="0"}
       moveanyway();
       {/eq}
   });
+
+  window.onload = function(){
+      if($(".party a").length<7){
+          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+      }else{
+          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+      }
+  }
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
    //上拉加载更多
   function loadScroll(){
-      $(window).off("scroll" ).on("scroll",function(){
-          var ntc = $('.notices');
-          var dh = $(document).height();
-          var end = $(window).height() + $(window).scrollTop();
-          var len = $('.notice .list').length;
-          var tip = $(".tip");
-          var loading = $('.loading');
-          if(dh == end && scrollNow){
-              scrollNow = false;//请求执行中
+      if(type==0){
+          var len = $(".party a").length;
+      }else if(type==1){
+          var len = $(".activity a").length;
+      }
               $.ajax({
                   type:"post",
                   url: "{:Url('News/listmore')}",
@@ -102,30 +168,25 @@
                       length:len
                   },
                   beforeSend: function(XMLHttpRequest){
-                      tip.hide();
-                      loading.toggleClass('hidden');
+
                   },
                   success:function(data){
-                      loading.toggleClass('hidden');
-                      tip.show();
                       if(data.code == 1){
-                          addLists(data);
+                          addLists(data,type);
                           var dataLen =data.data.length;
                           if(data.data.length == 5){
-                              tip.text('上拉加载更多');
+                              mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                          }else{
+                              mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                           }
                       }else{
-                          tip.text('没有更多了');
-                          $(window ).off("scroll");
+                          mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                       }
-                      scrollNow = true;//请求结束
                   }
               })
-          }
-      })
   }
    //数据循环
-  function addLists(data){
+  function addLists(data,type){
       var type;
       var html = '';
       var lists = data.data;
@@ -149,7 +210,11 @@
                   '</div>'+
                   '</a>'
       }
-      $('.notice').append(html);
+      if(type==0){
+          $('.party').append(html);
+      }else if(type==1){
+          $('.activity').append(html);
+      }
   }
    //悬浮框移动
   function moveanyway(){
@@ -198,6 +263,35 @@
             e.preventDefault();
         }
     }
+
+  //tab点击事件
+  mui('#tab').on('tap', 'a', function(e) {
+      type = this.getAttribute("data-index");
+      mui('#refreshContainer').pullRefresh().refresh(true);
+      if(type==0){
+          if($(".party a").length<7){
+              mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+          }else{
+              mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+          }
+      }else if(type==2){
+          if($(".activity a").length<7){
+              mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+          }else{
+              mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+          }
+      }
+  });
+
+  mui('.banner').on('tap', 'a', function(e) {
+      var url = this.getAttribute("href");
+      window.location.href = url;
+  });
+
+  mui('#item1mobile').on('tap', 'a', function(e) {
+      var url = this.getAttribute("href");
+      window.location.href = url;
+  });
 
 </script>
 {/block}

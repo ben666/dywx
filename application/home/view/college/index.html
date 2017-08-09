@@ -184,10 +184,12 @@ window.onload = function(){
                             addMeets(data,type);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
-
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                            }else{
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                             }
                         }else{
-                            mui('#refreshContainer').endPullupToRefresh(true);
+                            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                         }
                     }
                 })
@@ -245,7 +247,7 @@ window.onload = function(){
     mui('#tab').on('tap', 'a', function(e) {
         type = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
-    })
+    });
 
     mui('.mui-slider-group').on('tap', 'a', function() {
         var id = this.getAttribute('href');
