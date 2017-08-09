@@ -4,9 +4,17 @@
 <title>中国遥感协会</title>
 <link rel="stylesheet" href="/home/css/index/index.css">
 <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<style>
+    html,body{
+        height:100%;
+    }
+
+</style>
 {/block}
 
 {block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
 <!--banner-->
 <div class="banner">
     <img src="/home/images/index/banner.png" alt="首页banner图">
@@ -20,51 +28,51 @@
         <div class="swiper-slide">
             <ul class="model clearfix">
                 <li>
-                    <a href="{:Url('structure/index')}">
-                        <img src="/home/images/index/structure.png" alt="云上组织">
-                        <span>云上组织</span>
+                    <a href="{:Url('College/index')}">
+                        <img src="/home/images/index/1.jpg" alt="信息驿站">
+                        <span>信息驿站</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('Pioneer/index?c=1')}">
-                        <img src="/home/images/index/star.png" alt="先锋引领">
-                        <span>先锋引领</span>
+                        <img src="/home/images/index/3.jpg" alt="云上组织">
+                        <span>云上组织</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('Learn/index?c=1')}">
-                        <img src="/home/images/index/learn.png" alt="每日一课">
+                        <img src="/home/images/index/8.jpg" alt="两学一做">
                         <span>两学一做</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{:Url('College/index')}">
-                        <img src="/home/images/index/announcement.png" alt="鸡毛传帖">
-                        <span>鸡毛传帖</span>
+                    <a href="{:Url('Pioneer/index?c=1')}">
+                        <img src="/home/images/index/2.jpg" alt="先锋引领">
+                        <span>先锋引领</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('Activity/index?c=1')}">
-                        <img src="/home/images/index/active.png" alt="活动发起">
+                        <img src="/home/images/index/4.jpg" alt="活动发起">
                         <span>活动发起</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{:Url('Feedback/index')}">
-                        <img src="/home/images/index/news.png" alt="红色足迹">
+                    <a href="{:Url('news/index')}">
+                        <img src="/home/images/index/7.jpg" alt="红色足迹">
                         <span>红色足迹</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{:Url('Feedback/index')}">
-                        <img src="/home/images/index/news.png" alt="红色足迹">
-                        <span>红色足迹</span>
+                    <a href="{:Url('structure/index')}">
+                        <img src="/home/images/index/5.jpg" alt="支部建设">
+                        <span>支部建设</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{:Url('Feedback/index')}">
-                        <img src="/home/images/index/news.png" alt="红色足迹">
-                        <span>红色足迹</span>
+                    <a href="{:Url('user/index')}">
+                        <img src="/home/images/index/6.jpg" alt="个人中心">
+                        <span>个人中心</span>
                     </a>
                 </li>
             </ul>
@@ -121,25 +129,28 @@
         </div>
     </div>
 </div>
+        </div>
+    </div>
 {/block}
 
 {block name="script"}
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
-    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var mySwiper = new Swiper('.swiper-container', {
 //        loop: true,
         autoplayDisableOnInteraction: false,
 //        pagination : '.swiper-pagination',
 //        paginationClickable :true
     });
-    $(function(){
-        var len = $('.notice .list').length;
-        if(len >= 6){
-            $('.tip' ).text('上拉加载更多');
+    window.onload = function(){
+        if( $('.notice .list').length<7){
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        }else{
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
         }
-        loadScroll();
-        $(".banner>.exit").on("click",function(){
+    }
+
+        $(".banner").on("tap",".exit",function(){
             swal({
                         title:"",
                         text: "是否确认退出",
@@ -161,21 +172,32 @@
                         },1000)
                     });
         })
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
     });
+
+    mui('.clearfix').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+    mui('.party').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
     //上拉加载更多
     function loadScroll(){
-        $(window).off("scroll" ).on("scroll",function(){
-            var ntc = $('.notices');
-            var dh = $(document).height();
-            var end = $(window).height() + $(window).scrollTop();
             var news_len = $('.notice .list[data-type=1]').length;
             var learn_len = $('.notice .list[data-type=2]').length;
             var notice_len = $('.notice .list[data-type=3]').length;
             var pioneer_len = $('.notice .list[data-type=4]').length;
-            var tip = $(".tip");
-            var loading = $('.loading');
-            if(dh == end && scrollNow){
-                scrollNow = false;//请求执行中
                 $.ajax({
                     type:"get",
                     url: "{:Url('Index/moreDataList')}",
@@ -186,27 +208,21 @@
                         pioneer: pioneer_len
                     },
                     beforeSend: function(XMLHttpRequest){
-                        tip.hide();
-                        loading.toggleClass('hidden');
                     },
                     success:function(data){
-                        loading.toggleClass('hidden');
-                        tip.show();
                         if(data.code == 1){
                             addLists(data);
                             var dataLen =data.data.length;
                             if(data.data.length == 6){
-                                tip.text('上拉加载更多');
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                            }else{
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                             }
                         }else{
-                            tip.text('没有更多了');
-                            $(window ).off("scroll");
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                         }
-                        scrollNow = true;//请求结束
                     }
                 })
-            }
-        })
     }
     //数据循环
     function addLists(data){

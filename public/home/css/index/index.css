@@ -5,12 +5,10 @@ html,body{
 /*banner*/
 .banner {
     width: 100vw;
-    height: 50vw;
     position: relative;
 }
 .banner img {
     width: 100%;
-    height: 50vw;
     display: block;
 }
 /*个人中心按钮*/
@@ -47,7 +45,9 @@ html,body{
 }
 /*model*/
 .model{
-    padding: 5vw 0;
+    padding:0 0.24rem;
+    padding-bottom: 0.4rem;
+    padding-top: 0.2rem;
 }
 .model>li{
     float: left;
@@ -72,9 +72,9 @@ html,body{
 .model>li>a>span{
     display: block;
     text-align: center;
-    margin-top: 1vw;
+    margin-top: 0.1rem;
     color: #333;
-    margin-bottom: 1vw;
+    margin-bottom:0.1rem;
     font-size: 0.24rem;
 }
 .fl {
@@ -98,10 +98,7 @@ html,body{
 }
 /*列表修改*/
 .content{
-    margin-top:2vw;
-}
-.content .notices .notice .list {
-    height: 22vw;
+    margin-top:0.2rem;
 }
 .content .notices .notice .list {
     display: block;
@@ -111,25 +108,28 @@ html,body{
     border-bottom: 1px solid #f1f1f1;
     color: #666666;
     position: relative;
+    overflow: hidden;
 }
 .content .notices .notice .list .fl img {
-    width: 21.3vw;
-    height: 16vw;
-    margin-top: 3vw;
+    width: 1.6rem;
+    height: 1.2rem;
+    margin-top: 0.24rem;
+    margin-bottom: 0.24rem;
+    border-radius: 0.1rem;
 }
 .content .notices .notice .list .fl .type {
     position: absolute;
-    bottom: 4vw;
+    bottom: 0.4rem;
     left: 3.2vw;
-    width: 21.3vw;
+    width: 1.6rem;
     text-align: center;
     color: #fff;
 }
 .content .notices .notice .list .right {
-    width: 69vw;
-    height: 16vw;
-    margin-top: 3vw;
-    margin-left: 3vw;
+    width: calc(100% - 2rem);
+    height:1.2rem;
+    margin-top: 0.24rem;
+    margin-left: 0.24rem;
     position: relative;
 }
 .content .notices .notice .list .right .title {
@@ -150,7 +150,7 @@ html,body{
 }
 .content .notices .notice .list .time {
     display: block;
-    width: 65vw;
+    width: 100%;
     color: #999;
     position: absolute;
     font-size: 0.24rem;

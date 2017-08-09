@@ -80,7 +80,7 @@ a:active{
 }
 .mui-slider-item .notices .notice .list .time {
     display: block;
-    width: 65vw;
+    width: 100%;
     font-size: 0.24rem;
     color: #999;
     position: absolute;

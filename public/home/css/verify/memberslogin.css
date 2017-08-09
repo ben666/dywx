@@ -1,6 +1,8 @@
-body{
+body,html{
     position: relative;
     min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
 }
 .banner{
     width:100vw;
@@ -10,13 +12,13 @@ body{
     width: 100%;
 }
 .banner p{
-    font-size:2.3rem;
+    font-size:0.46rem;
     color: #f2531f;
     text-align: center;
     margin-top: -36%;
 }
 .login-box{
-    width:80vw;
+    width:4.6rem;
     z-index:999;
     margin: 0 auto;
     height: 50vw;
@@ -28,77 +30,79 @@ body{
 .login-box>.form input{
     border:none;
     border-bottom:1px solid #f1f1f1;
-    height:8vw;
-    width:61.6vw;
+    height:0.6rem;
+    width:3.8rem;
     outline: none;
     padding:0;
-    line-height: 8vw;
+    line-height: 0.6rem;
     border-radius: 0;
-    font-size: 1.5rem;
-    padding-left: 5.66vw;
+    font-size: 0.3rem;
+    padding-left: 0.24rem;
+    letter-spacing:0.03rem;
 }
 .login-box>.form input::-webkit-input-placeholder{
     color: #ccc;
-    font-size: 1.5rem;
+    font-size: 0.3rem;
 }
 .login-box>.form input:-moz-placeholder{
     color: #ccc;
-    font-size: 1.5rem;
+    font-size: 0.3rem;
 }
 .login-box>.form input:-ms-input-placeholder{
     color: #ccc;
-    font-size: 1.5rem;
+    font-size: 0.3rem;
 }
 .login-box>.form>.uid>span{
     float: left;
     background:url('/home/images/verify/user.png') no-repeat;
-    background-size: 3.46vw 4vw;
+    background-size: 0.26rem 0.3rem;
     position: relative;
-    top: 1.5vw;
-    left:10vw;
+    top: 0.15rem;
+    width: 0.26rem;
+    height: 0.3rem;
 }
 .login-box>.form>div>span{
     display: inline-block;
-    width:7.1vw;
-    height:8vw;
-    margin-right: 2.85vw;
+    height:0.6rem;
+    margin-right: 0.2rem;
 }
 .btn{
-    width:61.6vw;
-    height:10.67vw;
+    width: 4.6rem;
+    height: 0.8rem;
     background: url("/home/images/verify/loginbtn.png") no-repeat;
     background-size: 100% 100%;
     margin:0 auto;
     text-align: center;
-    line-height: 10.67vw;
-    font-size: 2rem;
+    line-height: 0.8rem;
+    font-size: 0.4rem;
     text-align: center;
-    color: #ffffff;
+    color: #fff;
 
 }
 .login{
     display: block;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 0.28rem;
     color: #ccc;
-    padding-top: 4vw;
+    height: 0.8rem;
+    line-height: 0.5rem;
+    padding-top: 0.3rem;
 }
 .login img{
-    height: 3.3vw;
-    margin-left: 2.66vw;
+    height: 0.25rem;
+    margin-left: 0.3rem;
     vertical-align: middle;
     position: relative;
-    top:-0.5vw;
+    width: 0.4rem;
+    margin-top: -0.1rem;
 }
 footer{
-    width:100%;
-    height:26.5vw;
     position: absolute;
     bottom: 0;
-    overflow-y: hidden;
-    max-height: 120px;
+    width: 100%;
 }
 footer img{
     width:100%;
     height:100%;
+    display: block;
 }
