@@ -58,10 +58,11 @@
                             <thead>
                             <tr>
                                 <th><input class="i-checks check-all" type="checkbox"></th>
-                                <th>UserID</th>
+                                <th>ID</th>
                                 <td>名称</td>
                                 <th>性别 </th>
                                 <th>手机号码</th>
+                                <th>是否党员</th>
                                 <th>所属部门</th>
                                 <th>权限</th>
                                 <th>状态</th>
@@ -76,10 +77,11 @@
                                 <td>{$vo.name}</td>
                                 <td>{$vo.gender_text}</td>
                                 <td>{$vo.mobile}</td>
+                                <td>{$vo.party}</td>
                                 <td>{$vo.department}</td>
                                 <td>
                                     {eq name="vo.review" value="0"}
-                                    <span class="label label-info">普通党员</span>
+                                    <span class="label label-info">普通用户</span>
                                     {else/}
                                     <span class="label label-danger">管理员</span>
                                     {/eq}

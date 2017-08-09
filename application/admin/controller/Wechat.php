@@ -7,20 +7,13 @@
  */
 
 namespace app\admin\controller;
-
-
 use app\admin\model\WechatDepartment;
-use app\admin\model\WechatDepartmentUser;
-use app\admin\model\WechatTag;
 use app\admin\model\WechatUser;
-use app\admin\model\WechatUserTag;
-use com\wechat\QYWechat;
-use com\wechat\TPWechat;
-use think\Config;
-use think\Input;
-use think\Loader;
-use \think\cache\driver\File as FileModel;
 
+/**
+ * Class Wechat 通讯录
+ * @package app\admin\controller
+ */
 class Wechat extends Admin{
     //用户页面
     public function user() {
@@ -37,6 +30,11 @@ class Wechat extends Admin{
                 $list[$key]['department'] = $record['name'];
             }else{
                 $list[$key]['department'] = "暂无";
+            }
+            if ($value['party'] == 1){
+                $value['party'] = '是';
+            }else{
+                $value['party'] = '否';
             }
         }
        // 状态转化
@@ -145,12 +143,6 @@ class Wechat extends Admin{
             return $this ->error('参数错误');
         }
     }
-    public function tag(){
-        $list = $this->lists("WechatTag");
-        $this->assign('list', $list);
-        return $this->fetch();
-    }
-
     /**
      * 通讯录excel导入
      */
@@ -203,9 +195,13 @@ class Wechat extends Admin{
             if ($v[5]) {
                 $v[5] = strtotime($v[5]);
             }
+            // 是否 党员
+            if($v[9] == '是' || $v[9] == '党员' || $v[9] == '1'){
+                $v[9] = 1;
+            }
             //入党时间
-            if ($v[8]) {
-                $v[8] = strtotime($v[8]);
+            if ($v[10]) {
+                $v[10] = strtotime($v[10]);
             }
             //整理数据
             $info = array(
@@ -217,8 +213,9 @@ class Wechat extends Admin{
                 'birthday' => $v[5],   //出生年月
                 'education' => $v[6],  //学历
                 'nation' => $v[7], //民族
-                'partytime' => $v[8],  //入党时间
-                'address' => $v[9] //籍贯
+                'address' => $v[8] , //籍贯
+                'party' => $v[9], // 是否党员
+                'partytime' => $v[10],  //入党时间
             );
             array_push($all, $info);
         }

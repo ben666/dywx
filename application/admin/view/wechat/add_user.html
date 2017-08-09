@@ -125,6 +125,20 @@
                                 <input type="text" placeholder="民族" class="form-control form_title" name="nation" value="{$info.nation|default=''}">
                             </div>
                         </div>
+                        <!--党员-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>党员:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="party" {eq name="$info.party|default='0'" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio"  value="0" name="party" {eq name="$info.party|default='0'" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
                         <!--入党时间-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
@@ -153,7 +167,7 @@
                                     <input type="radio" value="1" name="review" {eq name="$info.review|default='0'" value="1"}checked{/eq}>管理员
                                 </label>
                                 <label class="i-checks">
-                                    <input type="radio"  value="0" name="review" {eq name="$info.review|default='0'" value="0"}checked{/eq}>普通党员
+                                    <input type="radio"  value="0" name="review" {eq name="$info.review|default='0'" value="0"}checked{/eq}>普通用户
                                 </label>
                             </div>
                         </div>
@@ -204,6 +218,7 @@
         data.address = $("input[name='address']").val().trim(); //籍贯
         data.check = "{$info.id|default=''}"; //判断是否新增还是修改
         data.review = $("input[name='review']:checked").val();
+        data.party = $("input[name='party']:checked").val();
         //验证判断
         var patrn=/0?(13|14|15|17|18)[0-9]{9}/;
         if(!data.name){
