@@ -1,7 +1,18 @@
 {extend name="public/common"}
 
 {block name="style"}
+<title>个人中心</title>
 <link rel="stylesheet" href="/home/css/user/personal.css">
+<style>
+	.lists .list img {
+		width: 40px;
+		height: 40px;
+		 /*border: 2px solid #ffffff;*/
+		/*box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);*/
+		 overflow: hidden;
+		margin-top: 32px;
+	}
+</style>
 {/block}
 
 {block name="body"}
@@ -30,33 +41,23 @@
 		<span class="fr">{$user.mobile}</span>
 	</div>
 	<div class="list clear">
+		<span class="fl">职位</span>
+		<span class="fr">{$user.position}</span>
+	</div>
+	<div class="list clear">
 		<span class="fl">学历</span>
 		<span class="fr">{$user.education}</span>
 	</div>
+	{eq name="$user.party" value="1"}
 	<div class="list clear">
 		<span class="fl">入党时间</span>
 		<span class="fr">{$user.partytime|time_format="Y-m-d"}</span>
 	</div>
+	{/eq}
 	<div class="list clear">
 		<span class="fl">所在分组</span>
 		<span class="fr">{$user.department}</span>
 	</div>
-</div>
-<div class="lists">
-	<div class="list clear tag">
-		<span class="fl">党员缴费</span>
-	</div>
-	<div class="list clear">
-		<span class="fl">暂无</span>
-		<!--<span class="fr">10</span>-->
-	</div>
-	<!--<div class="list clear">-->
-		<!--<span class="fl">2016年10月</span>-->
-		<!--<span class="fr">10</span>-->
-	<!--</div>-->
-	<!--<div class="list clear">-->
-	<!--<span class="fl">2016年10月</span>-->
-	<!--<span class="fr">10</span>-->
 </div>
 <!-- 二维码 -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

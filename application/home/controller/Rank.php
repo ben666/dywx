@@ -39,35 +39,11 @@ class Rank extends Base{
 
         //获取周榜信息
         date_default_timezone_set("PRC");        //初始化时区
-        $y = date("Y");        //获取当天的年份
-        $m = date("m");        //获取当天的月份
-        $d = date("d");        //获取当天的号数
-        $todayTime= mktime(0,0,0,$m,$d,$y);        //将今天开始的年月日时分秒，转换成unix时间戳
-        $time = date("N",$todayTime);        //获取星期数进行判断，当前时间做对比取本周一和上周一时间。
-        //$t为本周周一，$s为上周周一
-        switch($time){
-            case 1: $t = $todayTime;
-                break;
-            case 2: $t = $todayTime - 86400*1;
-                break;
-            case 3: $t = $todayTime - 86400*2;
-                break;
-            case 4: $t = $todayTime - 86400*3;
-                break;
-            case 5: $t = $todayTime - 86400*4;
-                break;
-            case 6: $t = $todayTime - 86400*5;
-                break;
-            case 7: $t = $todayTime - 86400*6;
-                break;
-            default:
-        }
         $map = array(
-            'create_time' => array('egt',$t),
             'score' =>  array('egt',1)
         );
         //本周浏览
-        $browse = Browse::where($map)->select();
+        $browse = Browse::where($map)->whereTime('create_time','w')->select();
         $list1 = array();
         foreach ($browse as $value){
             $k = $value['user_id'];
@@ -81,7 +57,7 @@ class Rank extends Base{
             $new1[] = $cen;
         }
         //本周评论
-        $comment = Comment::where($map)->select();
+        $comment = Comment::where($map)->whereTime('create_time','w')->select();
         $list2 = array();
         foreach ($comment as $value){
             $k = $value['uid'];
@@ -95,7 +71,7 @@ class Rank extends Base{
             $new2[] = $cen;
         }
         //本周点赞
-        $like = Like::where($map)->select();
+        $like = Like::where($map)->whereTime('create_time','w')->select();
         $list3 = array();
         foreach ($like as $value){
             $k = $value['uid'];
@@ -109,7 +85,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         //本周答题
-        $answers = Answers::where($map)->select();
+        $answers = Answers::where($map)->whereTime('create_time','w')->select();
         $list4 = array();
         foreach ($answers as $value){
             $k = $value['userid'];
@@ -225,7 +201,6 @@ class Rank extends Base{
             $cen['score'] = $count;
             $new1_m[] = $cen;
         }
-
         //本月评论
         $comment_m = Comment::where($map)->select();
         $list2_m = array();
@@ -255,6 +230,7 @@ class Rank extends Base{
             $cen['score'] = $count;
             $new3_m[] = $cen;
         }
+
         //本月答题
         $answers_m = Answers::where($map)->select();
         $list4_m = array();
@@ -433,35 +409,11 @@ class Rank extends Base{
 
         //获取周榜信息
         date_default_timezone_set("PRC");        //初始化时区
-        $y = date("Y");        //获取当天的年份
-        $m = date("m");        //获取当天的月份
-        $d = date("d");        //获取当天的号数
-        $todayTime= mktime(0,0,0,$m,$d,$y);        //将今天开始的年月日时分秒，转换成unix时间戳
-        $time = date("N",$todayTime);        //获取星期数进行判断，当前时间做对比取本周一和上周一时间。
-        //$t为本周周一，$s为上周周一
-        switch($time){
-            case 1: $t = $todayTime;
-                break;
-            case 2: $t = $todayTime - 86400*1;
-                break;
-            case 3: $t = $todayTime - 86400*2;
-                break;
-            case 4: $t = $todayTime - 86400*3;
-                break;
-            case 5: $t = $todayTime - 86400*4;
-                break;
-            case 6: $t = $todayTime - 86400*5;
-                break;
-            case 7: $t = $todayTime - 86400*6;
-                break;
-            default:
-        }
         $map = array(
-            'create_time' => array('egt',$t),
             'score' => array('egt',1)
         );
         //本周浏览
-        $browse = Browse::where($map)->select();
+        $browse = Browse::where($map)->whereTime('create_time','w')->select();
         $list1 = array();
         foreach ($browse as $value){
             $k = $value['user_id'];
@@ -475,7 +427,7 @@ class Rank extends Base{
             $new1[] = $cen;
         }
         //本周评论
-        $comment = Comment::where($map)->select();
+        $comment = Comment::where($map)->whereTime('create_time','w')->select();
         $list2 = array();
         foreach ($comment as $value){
             $k = $value['uid'];
@@ -489,7 +441,7 @@ class Rank extends Base{
             $new2[] = $cen;
         }
         //本周点赞
-        $like = Like::where($map)->select();
+        $like = Like::where($map)->whereTime('create_time','w')->select();
         $list3 = array();
         foreach ($like as $value){
             $k = $value['uid'];
@@ -503,7 +455,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         // 本周答题
-        $answer = Answers::where($map)->select();
+        $answer = Answers::where($map)->whereTime('create_time','w')->select();
         $list4 = array();
         foreach($answer as $value){
             $k = $value['userid'];
