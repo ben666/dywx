@@ -13,16 +13,25 @@ class News extends Base {
     //党建之家首页
     public function index()
     {
-        //检查游客权限
-        $this ->anonymous();
-        $news = new NewsModel();
-        $order = 'create_time desc';
+        $News = new NewsModel();
         //轮播推荐
-        $lists = $news ->where(['status' => ['egt',0],'recommend' => 1]) ->order($order) ->limit(6) ->select();
+        $map = array(
+            'type' => 1,  // 新闻发布
+            'recommend' => 1,
+            'status' => ['egt',0]
+        );
+        $map1 = array(
+            'type' => 1,  // 新闻发布
+            'status' => ['egt',0]
+        );
+        $maps = array(
+            'type' => 2,  // 活动情况
+            'status' => ['egt',0]
+        );
         //数据列表
-        $list2 = $news ->where(['status' => ['egt',0]]) ->order($order) ->limit(6)->select();
-        $this ->assign('lists',$lists);
-        $this ->assign('list2',$list2);
+        $this ->assign('list1',$News->get_list($map)); // 新闻发布 轮播
+        $this ->assign('list',$News->get_list($map1)); //  新闻发布  列表
+        $this ->assign('lists',$News->get_list($maps));
         return $this ->fetch();
     }
     /**
@@ -56,33 +65,59 @@ class News extends Base {
         }
     }
     /**
-     * 发布新闻
+     * 新闻详情页
+     * @return mixed
      */
-    public function publish()
-    {
-        //检查游客权限
-        $this ->checkAnonymous();
-        $uid = session('userId');
-        $data = input('post.');
-        if(empty($data) ||
-           !isset($data)){
-            return $this ->fetch();
-        }else{
-            //保存数据
-            $news = new NewsModel();
-            $data['images'] = json_encode($data['images']);
-            $data['publisher'] = get_name($uid);
-            $data['create_time'] = time();
-            $data['create_user'] = $uid;
-            $news ->data($data) ->save();
-            $res = $news ->id;
-            if(empty($res))
-            {
-                return $this ->error('发布失败,请刷新页面后重试!');
-            }else{
-                return $this ->success('发布成功!');
+    public function detail(){
+        //判断是否是游客
+        $this ->anonymous();
+        //获取jssdk
+        $this ->jssdk();
+        $userId = session('userId');
+        $id = input('id');
+        $newsModel = new News();
+        //浏览加一
+        $info['views'] = array('exp','`views`+1');
+        $newsModel::where('id',$id)->update($info);
+        if($userId != "visitor"){
+            //浏览不存在则存入pb_browse表
+            $con = array(
+                'user_id' => $userId,
+                'news_id' => $id,
+            );
+            $history = Browse::get($con);
+            if(!$history && $id != 0){
+                $s['score'] = array('exp','`score`+1');
+                if ($this->score_up()){
+                    // 未满 15 分
+                    Browse::create($con);
+                    WechatUser::where('userid',$userId)->update($s);
+                }
             }
         }
+
+        //新闻基本信息
+        $list = $newsModel::get($id);
+        //党员发布的图片转化
+        $list['images'] = json_decode($list['images']);
+        $list['user'] = session('userId');
+        //分享图片及链接及描述
+        $image = Picture::where('id',$list['front_cover'])->find();
+        $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
+        $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
+        $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
+
+        //获取 文章点赞
+        $likeModel = new Like;
+        $like = $likeModel->getLike(1,$id,$userId);
+        $list['is_like'] = $like;
+        $this->assign('new',$list);
+
+        //获取 评论
+        $commentModel = new Comment();
+        $comment = $commentModel->getComment(1,$id,$userId);
+        $this->assign('comment',$comment);
+        return $this->fetch();
     }
 
 }

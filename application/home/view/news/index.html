@@ -3,18 +3,6 @@
     <title>红色足迹</title>
     <link rel="stylesheet" href="/home/css/news/index.css">
     <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
-    <style>
-        /*发布悬浮框*/
-        #publish {
-            position: fixed;
-            right: 20px;
-            bottom: 40px;
-            width: 60px;
-            height: 60px;
-            background: url(/home/images/feedback/note.png) no-repeat;
-            background-size: 100% 100%;
-        }
-    </style>
 {/block}
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
@@ -52,7 +40,7 @@
         <!--新闻发布-->
         <div class="notices">
             <div class="notice party">
-                {volist name="list2" id="loo"}
+                {volist name="list" id="loo"}
                 <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
                     <div class="fl">
                         {eq name="$loo.front_cover" value=""}
@@ -77,7 +65,7 @@
         <!--活动情况-->
         <div class="notices">
             <div class="notice activity">
-                {volist name="list2" id="loo"}
+                {volist name="lists" id="loo"}
                 <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
                     <div class="fl">
                         {eq name="$loo.front_cover" value=""}
