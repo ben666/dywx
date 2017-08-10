@@ -43,9 +43,9 @@
 			<div class="note">
 				{eq name="visit" value="0"}
 				{eq name="info.is_like" value="1"}
-				<span class="isgood good_" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
+				<span class="isgood good_ notvisitor" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
 				{else/}
-				<span class="isgood good" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
+				<span class="isgood good notvisitor" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$info.likes}</span>
@@ -68,9 +68,9 @@
 					</div>
 					{eq name="visit" value="0"}
 					{eq name="co.is_like" value="1"}
-					<div class="fr isgood good_" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
+					<div class="fr isgood good_ notvisitor" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
 					{else/}
-					<div class="fr isgood good" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
+					<div class="fr isgood good notvisitor" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
 					{/eq}
 					{else/}
 					<div class="fr isgood good">{$co.likes}</div>
@@ -300,12 +300,12 @@
 		});
 	}
 
-	mui('.lists .list').on('tap', '.isgood', function() {
+	mui('.lists .list').on('tap', '.notvisitor', function() {
 		var type = this.getAttribute('data-type');
 		var id = this.getAttribute('data-id');
 		isGood(this,type,id)
 	});
-	mui('.note').on('tap', '.isgood', function() {
+	mui('.note').on('tap', '.notvisitor', function() {
 		var type = this.getAttribute('data-type');
 		var id = this.getAttribute('data-id');
 		isGood(this,type,id)
