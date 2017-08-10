@@ -47,8 +47,6 @@ class Base extends Controller {
             $Wechat = new TPWechat(Config::get('party'));
             // 1用户认证是否登陆
             if(empty($userId)) {
-//                $redirect_uri = Config::get("party.login");
-//                $url = $Wechat->getOauthRedirect($redirect_uri);
                 $this->redirect('Verify/memberslogin');//跳转登录页
             }
 

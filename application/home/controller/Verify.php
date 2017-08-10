@@ -52,7 +52,6 @@ class Verify extends Controller{
     public function login(){
         //判断是否味微信打开
 //        $this ->oauth();
-        $pass = '123456';//默认密码123456
         $vali = input('post.');
         if($vali){
             $user = new WechatUser();
@@ -81,7 +80,7 @@ class Verify extends Controller{
                 }
                 return $this ->success('登录成功!',$url);
             }else{
-                return $this ->error('账号错误!');
+                $this ->error('账号错误!');
             }
         }else{
             return $this ->fetch();
@@ -95,7 +94,7 @@ class Verify extends Controller{
         if (strpos($user_agent, 'MicroMessenger') === false) 
         {
             // 非微信浏览器禁止浏览
-            return $this ->error('请在微信打开!');
+            $this ->error('请在微信打开!');
         } else {
             // 微信浏览器，允许访问
             // 获取版本号
