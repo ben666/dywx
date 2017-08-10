@@ -282,9 +282,9 @@
 					'</div>';
 			if ({$visit} == 0){
 				if(list.is_like == 0){
-					html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
+					html+='<div class="fr isgood good notvisitor" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
 				}else{
-					html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
+					html+='<div class="fr isgood good_ notvisitor" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
 				}
 			}else {
 				html+='<div class="fr isgood good">'+list.likes+'</div>'
@@ -293,7 +293,7 @@
 					'</div>';
 		}
 		$(".lists" ).append(html);
-		mui('.lists .list').on('tap', '.isgood', function() {
+		mui('.lists .list').on('tap', '.notvisitor', function() {
 			var type = this.getAttribute('data-type');
 			var id = this.getAttribute('data-id');
 			isGood(this,type,id)
