@@ -19,7 +19,7 @@ use think\Db;
 
 /**
  * Class Notice
- * @package  鸡毛传帖
+ * @package 信息驿站
  */
 class College extends Base {
     /**
@@ -27,18 +27,18 @@ class College extends Base {
      */
     public function index(){
         $this->anonymous(); //判断是否是游客
-        //相关通知
+        //学习资料
         $map = array(
+            'type' => 1,
             'status' => array('egt',0)
         );
-        $list = NoticeModel::where($map)->order('id desc')->limit(10)->select();
-        foreach($list as $value){
-            $value['is_over'] = 0;  // 未结束
-            if (!empty($value['end_time']) && $value['end_time'] < time()){
-                $value['is_over'] = 1;  // 已结束
-            }
-        }
-        $this->assign('fnotice',$list);
+        $maps = array(
+            'type' => 2,  // 通知
+            'status' => array('egt',0)
+        );
+        $Notice = new NoticeModel();
+        $this->assign('list',$Notice->get_list($map));
+        $this->assign('fnotice',$Notice->get_list($maps));
         return $this->fetch();
     }
 
@@ -47,21 +47,17 @@ class College extends Base {
      */
     public function leadlistmore(){
         $len = input('length');
+        $type = input('type');  // 0 学习资料 1 通知
         $map = array(
+            'type' => $type+1,
             'status' => array('egt',0),
         );
-        $list = NoticeModel::where($map)->order('id desc')->limit($len,5)->field('id,title,create_time,end_time')->select();
-        foreach($list as $value){
-            $value['create_time'] = date("Y-m-d",$value['create_time']);
-            $value['is_over'] = 0;  // 未结束
-            if (!empty($value['end_time']) && $value['end_time'] < time()){
-                $value['is_over'] = 1;  // 已结束
-            }
-        }
+        $Notice = new NoticeModel();
+        $list = $Notice->get_list($map,$len);
         if($list){
             return $this->success("加载成功",'',$list);
         }else{
-            return $this->error("加载失败");
+            $this->error("加载失败");
         }
     }
     /**
@@ -71,47 +67,8 @@ class College extends Base {
         //判断是否是游客
         $this->anonymous();
         $this->jssdk();
-        $userId = session('userId');
         $id = input('id');
-        $noticeModel = new NoticeModel();
-        //浏览加一
-        $info['views'] = array('exp','`views`+1');
-        $noticeModel::where('id',$id)->update($info);
-        if($userId != "visitor"){
-            //浏览不存在则存入pb_browse表
-            $con = array(
-                'user_id' => $userId,
-                'notice_id' => $id,
-            );
-            $history = Browse::get($con);
-            if(!$history && $id != 0){
-                $s['score'] = array('exp','`score`+1');
-                if ($this->score_up()){
-                    // 未满 15 分
-                    Browse::create($con);
-                    WechatUser::where('userid',$userId)->update($s);
-                }
-            }
-        }
-        //活动基本信息
-        $list = $noticeModel::get($id);
-        $list['user'] = session('userId');
-        //分享图片及链接及描述
-        $image = Picture::where('id',$list['front_cover'])->find();
-        $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
-        $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
-        $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
-
-        //获取 文章点赞
-        $likeModel = new Like;
-        $like = $likeModel->getLike(4,$id,$userId);
-        $list['is_like'] = $like;
-        $this->assign('info',$list);
-
-        //获取 评论
-        $commentModel = new Comment();
-        $comment = $commentModel->getComment(4,$id,$userId);
-        $this->assign('comment',$comment);
+        $this->assign('info',$this->content(4,$id));
         return $this->fetch();
     }
 

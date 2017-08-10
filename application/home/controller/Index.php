@@ -26,7 +26,7 @@ class Index extends Base {
     public function index(){
         $this ->anonymous();
         $uid = session('userId');
-        $len = array('news' => 0,'learn' => 0,'notice' => 0,'pioneer' => 0);
+        $len = array('news' => 0,'learn' => 0,'notice' => 0,'pioneer' => 0,'wish' => 0,'branch' => 0);
         $list2 = $this ->getDataList($len);
         $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
@@ -34,7 +34,7 @@ class Index extends Base {
     }
 
     /**
-     * 获取数据列表 红色足记 两学一做 鸡毛传贴
+     * 获取数据列表 信息驿站 notice  两学一做 learn 先锋引领 pioneer 红色足迹 news 活动发起 wish 支部建设 branch
      * @param $len
      */
     public function getDataList($len)
@@ -43,6 +43,8 @@ class Index extends Base {
         $count2 = $len['learn'];
         $count3 = $len['notice'];
         $count4 = $len['pioneer'];
+        $count5 = $len['wish'];
+        $count6 = $len['branch'];
         $news = new NewsModel();
         $learn = new LearnModel();
         $notice = new NoticeModel();

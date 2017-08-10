@@ -7,15 +7,11 @@
  */
 
 namespace app\home\controller;
-
-use app\home\model\WechatTest;
-use app\user\controller\Index;
 use app\user\model\WechatUser;
 use think\Config;
 use think\Controller;
 use com\wechat\TPWechat;
-use think\Cache;
-use think\Log;
+use app\home\model\Picture;
 use app\home\model\Browse;
 use app\home\model\Answers;
 use app\home\model\Comment;
@@ -140,7 +136,7 @@ class Base extends Controller {
      * 1 news
      * 2 feedback
      * 3 learn
-     * 4 notice
+     * 4 notice  信息驿站
      * 5 pioneer
      */
     public function like(){
@@ -269,7 +265,7 @@ class Base extends Controller {
      * 1 news
      * 2 feedback
      * 3 learn
-     * 4 notice
+     * 4 notice  信息驿站
      * 5 pioneer
      * 6 wish
      */
@@ -451,5 +447,90 @@ class Base extends Controller {
         }else{
             return false;
         }
+    }
+    /**
+     * 获取数据详情 ，$type,$id
+     * type值：
+     * 1 news
+     * 2 feedback
+     * 3 learn
+     * 4 notice  信息驿站
+     * 5 pioneer
+     * 6 wish
+     */
+    public function content($type,$id){
+        $userId = session('userId');
+        switch ($type) {    //根据类别获取表明
+            case 1:
+                $table = "news";
+                break;
+            case 2:
+                $table = "opinion";
+                break;
+            case 3:
+                $table = "learn";
+                break;
+            case 4:
+                $table = "notice";
+                break;
+            case 5:
+                $table = "pioneer";
+                break;
+            default:
+                return $this->error("无该数据表");
+                break;
+        }
+        //浏览加一
+        $info['views'] = array('exp','`views`+1');
+        Db::name($table)->where('id',$id)->update($info);
+        if($userId != "visitor"){
+            //浏览不存在则存入pb_browse表
+            $con = array(
+                'user_id' => $userId,
+                $table.'_id' => $id,
+            );
+            $history = Browse::get($con);
+            if(!$history && $id != 0){
+                $s['score'] = array('exp','`score`+1');
+                if ($this->score_up()){
+                    // 未满 15 分
+                    Browse::create($con);
+                    WechatUser::where('userid',$userId)->update($s);
+                }
+            }
+        }
+        //活动基本信息
+        $list = Db::name($table)->find(['id' => $id]);
+        $list['user'] = $userId;
+        //分享图片及链接及描述
+        if (isset($list['front_cover'])){ // 封面图
+            if (empty($list['front_cover'])){
+                $list['share_image'] = '/home/images/test/test1.jpg';  // 默认
+            }else{
+                $image = Picture::where('id',$list['front_cover'])->find();
+                $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
+            }
+        }else{
+            $list['share_image'] = '/home/images/test/test1.jpg';  // 默认
+        }
+        if (isset($list['description'])){
+            if (empty($list['description'])){
+                $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
+            }else{
+                $list['desc'] = $list['description'];
+            }
+        }else{
+            $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
+        }
+        $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
+        //获取 文章点赞
+        $likeModel = new Like;
+        $like = $likeModel->getLike($type,$id,$userId);
+        $list['is_like'] = $like;
+        //获取 评论
+        $commentModel = new Comment();
+        $comment = $commentModel->getComment($type,$id,$userId);
+        $list['comment'] = $comment;
+        return $list;
     }
 }

@@ -3,6 +3,9 @@
 {block name="style"}
 <title>信息驿站</title>
 <style>
+    html,body{
+        height:100%;
+    }
     /*tab*/
     #tab {
         width: 100vw;
@@ -34,6 +37,10 @@
     .mui-slider-item.mui-control-content.mui-active{
         display: block;
     }
+    .notice{
+        padding-bottom: 0.5rem;
+        overflow-y: scroll;
+    }
 
     /*学习资料*/
     .notice .list{
@@ -43,6 +50,8 @@
         padding-left: 0.26rem;
         padding-right: 0.26rem;
         border-bottom: 1px solid #dddddd;
+        clear: both;
+
     }
     .list img{
         width: 1.8rem;
@@ -110,39 +119,45 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
                 <!--学习资料-->
                 <div class="notice">
-
-                    <!--<div class="default"><img src="/home/images/notice/nomessage.png" alt="暂无消息"> </div>-->
-
+                    {empty name="list"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists">
-                        {volist name="fnotice" id="fno"}
+                        {volist name="list" id="fno"}
                         <a class="list clear" href="{:Url('College/forumnotice?id='.$fno['id'])}">
                             <div class="fl">
-                                <img src="" alt="">
+                                <img src="{$fno['front_cover']}" alt="">
                             </div>
                             <div class="fr lr">
                                 <div class="title limit_">{$fno['title']}</div>
                                 <div class="clear">
-                                    <span class="fl">{$fno['create_time']|time_format='Y-m-d'}</span>
+                                    <span class="fl">{$fno['create_time']}</span>
                                     <span class="fr">详情</span>
                                 </div>
                             </div>
                         </a>
                         {/volist}
                     </div>
+                    {/empty}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <div class="notices dynamic">
+                    {empty name="fnotice"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists">
-                        <a href="" class="list">
-                            <div class="title limit_">的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多</div>
+                        {volist name="fnotice" id="ff"}
+                        <a href="{:Url('College/forumnotice?id='.$ff['id'])}" class="list">
+                            <div class="title limit_">{$ff.title}</div>
                             <div class="note clear">
-                                <span class="fl depart">工委宣传部</span>
-                                <span class="time fr">2017-8-8</span>
+                                <span class="fl depart">{$ff.publisher}</span>
+                                <span class="time fr">{$ff.create_time}</span>
                             </div>
                         </a>
-
+                        {/volist}
                     </div>
+                    {/empty}
                 </div>
             </div>
         </div>
@@ -156,7 +171,7 @@
     var type=0;
     $('title').text('信息驿站');
 window.onload = function(){
-    if($(".notice .lists .list").length<12){
+    if($(".notice .lists .list").length<10){
         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
     }else{
         mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -167,14 +182,15 @@ window.onload = function(){
     function loadScroll(){
         if(type==0){
             var len = $(".notice .lists .list").length;
-        }else if(type==2){
+        }else if(type==1){
             var len = $(".dynamic .lists .list").length;
         }
                 $.ajax({
                     type:"post",
                     url:"{:Url('College/leadlistmore')}",
                     data:{
-                        length:len
+                        length:len,
+                        type:type
                     },
                     beforeSend: function(XMLHttpRequest){
 
@@ -183,7 +199,7 @@ window.onload = function(){
                         if(data.code == 1){
                             addMeets(data,type);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
+                            if(data.data.length == 10){
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                             }else{
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -204,12 +220,12 @@ window.onload = function(){
               html+=
                       '<a class="list clear" href="/home/college/forumnotice/id/'+ list.id+'.html">'+
                       '  <div class="fl">'+
-                      '      <img src="" alt="">'+
+                      '      <img src="'+list.front_cover+'" alt="">'+
                       '  </div>'+
                       '   <div class="fr lr">'+
                       '      <div class="title limit_">'+list.title+'</div>'+
                       '         <div class="clear">'+
-                      '             <span class="fl">'+list.time+'</span>'+
+                      '             <span class="fl">'+list.create_time+'</span>'+
                       '             <span class="fr">详情</span>'+
                       '          </div>'+
                       '    </div>'+
@@ -217,19 +233,19 @@ window.onload = function(){
             }
             if(type==1){
                 html+=
-                        ' <a href="" class="list">'+
-                        '  <div class="title limit_">的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多</div>'+
+                        ' <a href="/home/college/forumnotice/id/'+ list.id+'.html" class="list">'+
+                        '  <div class="title limit_">'+list.title+'</div>'+
                         '     <div class="note clear">'+
-                        '         <span class="fl depart">工委宣传部</span>'+
-                        '         <span class="time fr">2017-8-8</span>'+
+                        '         <span class="fl depart">'+list.publisher+'</span>'+
+                        '         <span class="time fr">'+list.create_time+'</span>'+
                         '     </div>'+
                         '</a>';
             }
         }
         if(type==0){
-            $(".notice a" ).append(html);
+            $(".notice .lists" ).append(html);
         }else if(type==1){
-            $(".dynamic li" ).append(html);
+            $(".dynamic .lists" ).append(html);
         }
     }
 
@@ -247,6 +263,19 @@ window.onload = function(){
     mui('#tab').on('tap', 'a', function(e) {
         type = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
+        if(type==0){
+            if($(".notice .lists .list").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(type==1){
+            if($(".dynamic .lists a").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
     });
 
     mui('.mui-slider-group').on('tap', 'a', function() {

@@ -4,14 +4,21 @@
 <title>信息驿站</title>
 <link rel="stylesheet" href="/home/css/college/relevant.css">
 <link rel="stylesheet" href="/home/css/common/comment.css">
+<style>
+	.mui-pull-caption {
+		margin-bottom: 32px;
+	}
+</style>
 {/block}
 
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 	<div class="mui-scroll">
-	<div class="banner">
-		<img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
-	</div>
+		{eq name="$info.type" value="2"}
+		<div class="banner">
+			<img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
+		</div>
+		{/eq}
 	<div class="content">
 		<div class="top">
 			<div class="title limit_" style="text-align: center">{$info.title}</div>
@@ -49,7 +56,7 @@
 		<div class="comment">
 			<div class="sum">共<span>{$info.comments}</span>条评论</div>
 			<div class="lists">
-				{volist name="comment" id="co"}
+				{volist name="info.comment" id="co"}
 				<div class="list clear">
 					<div class="fl">
 						<img src="{$co.header}" alt="用户" class="user">
@@ -161,7 +168,6 @@
 				},
 				success:function(data){
 					var data = data.data;
-					var userid = "'"+data.create_user+"'";
 					var html = '';
 					html += '<div class="list clear">'+
 							'<div class="fl">'+

@@ -7,10 +7,8 @@
  */
 
 namespace app\home\model;
-
-
 use think\Model;
-
+use app\home\model\Picture;
 class Notice extends Model {
     //首页获取推荐的数据
     public function getDataList($length){
@@ -28,5 +26,22 @@ class Notice extends Model {
         }else{
             return $list;
         }
+    }
+    // 获取列表数据
+    public function get_list($where,$len=0){
+        $list = $this->where($where)->order('id desc')->limit($len,10)->field('id,front_cover,title,publisher,create_time,end_time')->select();
+        foreach($list as $value){
+            $value['create_time'] = date("Y-m-d",$value['create_time']);
+            $Pic = Picture::where('id',$value['front_cover'])->field('path')->find();
+            $value['front_cover'] = $Pic['path'];
+            if ($value['type'] == 2){
+                // 通知
+                $value['is_over'] = 0;  // 未结束
+                if (!empty($value['end_time']) && $value['end_time'] < time()){
+                    $value['is_over'] = 1;  // 已结束
+                }
+            }
+        }
+        return $list;
     }
 }
