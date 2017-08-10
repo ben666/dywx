@@ -22,7 +22,7 @@
         position: absolute;
         margin-left: 0.6rem;
         z-index: 99;
-        margin-top: 0.3rem;
+        top: 0.6rem;
         right: 2.7rem;
     }
     .title:nth-child(odd):after{
@@ -34,7 +34,7 @@
         position: absolute;
         margin-left: 2.75rem;
         z-index: 99;
-        margin-top: 0.3rem;
+        top: 0.6rem;
     }
     .title:nth-child(odd) img{
         clear: both;
@@ -43,6 +43,7 @@
         height:calc((100vh - 100px) / 4);
         position: relative;
         width:100%;
+        display: block;
     }
     .title img{
         width:3.44rem;
@@ -64,12 +65,12 @@
     }
     .title:nth-child(even) span{
         right: 1rem;
-        top:0.5rem;
+        top:0.8rem;
     }
 
     /*文字背景*/
     .title .writing{
-        width: calc(100% - 3.2rem);
+        width: calc(100% - 3.1rem);
         height: 1.6rem;
         background: #fff;
         position: absolute;
@@ -95,7 +96,7 @@
     }
     .title:nth-child(even) p{
         margin-top: 0.7rem;
-        left: 1rem;
+        right: 3.5rem;
     }
     .title:nth-child(odd) p{
         margin-left: 3.5rem;
@@ -125,34 +126,46 @@
     .content p{
         width:auto;
     }
+    .title_box{
+        height: 100%;
+        padding-top: 0.3rem;
+    }
 </style>
 {/block}
 {block name="body"}
 <div class="content">
-    <div class="title">
+    <a class="title" href="{:Url('pioneer/index')}">
+        <div class="title_box">
     <img src="/home/images/pioneer/1.png">
         <span>01</span>
         <div class="writing"></div>
         <p>国家先锋</p>
-    </div>
-    <div class="title">
+        </div>
+    </a>
+    <a class="title" href="{:Url('pioneer/index')}">
+        <div class="title_box">
         <img src="/home/images/pioneer/2.png">
         <span>02</span>
         <div class="writing"></div>
         <p>国防科技先锋</p>
-    </div>
-    <div class="title">
+            </div>
+    </a>
+    <a class="title" href="{:Url('pioneer/index')}">
+        <div class="title_box">
         <img src="/home/images/pioneer/3.png">
         <span>03</span>
         <div class="writing"></div>
         <p>中国遥感先锋</p>
-    </div>
-    <div class="title">
+            </div>
+    </a>
+    <a class="title" href="{:Url('pioneer/index')}">
+        <div class="title_box">
         <img src="/home/images/pioneer/4.png">
         <span>04</span>
         <div class="writing"></div>
         <p>协会先锋</p>
     </div>
+        </a>
 </div>
 {/block}
 {block name="script"}
