@@ -1,0 +1,79 @@
+{extend name="public/common"}
+{block name="style"}
+<title>先锋引领</title>
+<style>
+    html,body{
+        background: #fcfcfc;
+    }
+    .content{
+        height: 100vh;
+        padding: 0.5rem 0;
+    }
+    .title:nth-child(even){
+        float: right;
+    }
+    .title:nth-child(odd){
+        clear: both;
+    }
+    .title{
+        height:calc((100vh - 100px) / 4);
+    }
+    .title img{
+        width:3.44rem;
+        height:2.34rem;
+    }
+    .title span{
+        font-size: 0.8rem;
+        position: absolute;
+        color: #fff;
+    }
+    .title:nth-child(odd) span{
+        margin-left: -2.4rem;
+        margin-top: 0.5rem;
+    }
+    .title:nth-child(even) span{
+        margin-left: 1.4rem;
+        margin-top: -1.85rem;
+    }
+    .title .writing{
+        width:3.44rem;
+        height:2rem;
+        background: #f00;
+        position: absolute;
+    }
+    .title:nth-child(even) .writing{
+        margin-left: -3.7rem;
+        margin-top: -2.1rem;
+    }
+</style>
+{/block}
+{block name="body"}
+<div class="content">
+    <div class="title">
+    <img src="/home/images/pioneer/1.png">
+        <span>01</span>
+        <div class="writing"></div>
+    </div>
+    <div class="title">
+        <img src="/home/images/pioneer/2.png">
+        <span>02</span>
+        <div class="writing"></div>
+    </div>
+    <div class="title">
+        <img src="/home/images/pioneer/3.png">
+        <span>03</span>]
+        <div class="writing"></div>
+    </div>
+    <div class="title">
+        <img src="/home/images/pioneer/4.png">
+        <span>04</span>
+        <div class="writing"></div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+
+</script>
+{/block}

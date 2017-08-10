@@ -12,6 +12,7 @@
         height: 0.88rem;
         padding: 0.16rem 0;
         background: #f1f1f1;
+        z-index:99;
     }
     #tab a{
         display: inline-block;
@@ -37,8 +38,9 @@
     .mui-slider-item.mui-control-content.mui-active{
         display: block;
     }
-    .notice{
+    .notice,.dynamic{
         padding-bottom: 0.5rem;
+        padding-top: 0.9rem;
         overflow-y: scroll;
     }
 
@@ -102,21 +104,18 @@
 
 {block name="body"}
 <!--tab-->
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
         <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-            <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
+            <a class="mui-control-item" href="#item1mobile" data-index="0">
                 学习资料
             </a>
             <a class="mui-control-item" href="#item2mobile" data-index="1">
                 通知公告
             </a>
         </div>
-
-
-
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
         <div class="mui-slider-group">
-            <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--学习资料-->
                 <div class="notice">
                     {empty name="list"}
@@ -166,9 +165,11 @@
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
 <script>
     //模块标题
     var type=0;
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
     $('title').text('信息驿站');
 window.onload = function(){
     if($(".notice .lists .list").length<10){
@@ -177,7 +178,15 @@ window.onload = function(){
         mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
     }
 }
-
+$(function(){
+    //tab初始化和数据存储
+    var co = getCookie("type");
+    if(co == 0 || co == 1 || co == 2){
+        c = co;
+    }
+    $("#tab a").eq(c).addClass('mui-active');
+    $(".mui-slider-group>div").eq(c).addClass('mui-active');
+})
 
     function loadScroll(){
         if(type==0){
@@ -276,6 +285,7 @@ window.onload = function(){
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }
+        setCookie('type',type);
     });
 
     mui('.mui-slider-group').on('tap', 'a', function() {

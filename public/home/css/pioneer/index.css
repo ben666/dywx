@@ -1,51 +1,50 @@
 em{
    font-style: inherit;
 }
+
 /*tab*/
-.tabs {
+#tab {
     width: 100vw;
-    height: 14.7vw;
-    background: #f1f1f1;
+    height: 0.88rem;
+    padding: 0.16rem 0;
+    background:#f2771d;
 }
-.tabs .tab {
+#tab a{
     display: inline-block;
-    width: 32vw;
+    width: 33vw;
     height: 100%;
     color: #fff;
-    font-size: 1.6rem;
-    line-height: 14.7vw;
+    font-size:0.3rem;
+    line-height: 0.56rem;
     text-align: center;
+    border-right: 1px solid #fff;
 }
-/*.tabs .tab:nth-child(2) {*/
-/*border-right: 1px solid #e5e5e5;*/
-/*}*/
-.tabs .active {
-    color: #fd6743;
+#tab a:last-child{
+    border-right: none;
 }
-.triangle-up {
-    border-left: 2.66vw solid transparent;
-    border-right: 2.66vw solid transparent;
-    border-bottom: 3.46vw solid #fff;
-    position: absolute;
-    top: 11.5vw;
-    left: 13.06vw;
+.mui-control-item.mui-active {
+    color: #000!important;
+}
+a:active{
+    background: none;
 }
 
-.lists>ul>li{
-    padding:6vw 4vw;
-    height:28vw;
+.lists>ul>a{
+    padding: 0.3rem 0.24rem;
     border-bottom: 1px solid #f7f7f7;
-}
-.lists>ul>li img{
-    float: left;
-    width: 16vw;
-    height: 16vw;
-    border-radius: 50%;
-    margin-right: 1.2vw;
-}
-.lists>ul>li span{
+    overflow: hidden;
     display: block;
-    font-size: 1.2rem;
+}
+.lists>ul>a img{
+    float: left;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    margin-right: 0.2rem;
+}
+.lists>ul>a span{
+    display: block;
+    font-size: 0.24rem;
     color: #999;
 
 }
@@ -58,38 +57,31 @@ em{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     position: absolute;
-    margin-top: 9vw;
-    left: 22vw;
+    margin-top: 0.4rem;
+    left: 1.6rem;
 }
-.lists>ul>li span:nth-child(2){
-    display:block;
-    font-size: 1.4rem;
+.lists>ul>a span:nth-child(2){
+    display: block;
+    font-size: 0.28rem;
     color: #333;
-    width: 43%;
-    position: absolute;
-    margin-top: 2vw;
-    left: 22vw;
+    width: 55%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.lists>ul>li span:last-child{
-    width: 24vw;
-    height:8vw;
+.lists>ul>a span:last-child{
     float: right;
-    text-align: right;
-    margin-top: 4vw;
-    color:#ccc;
+    color: #ccc;
 }
-.lists>ul>li span:last-child.like i{
+.lists>ul>a span:last-child.like i{
     position: relative;
     margin-right: 1.2vw;
-    top:3px;
+    top:0.06rem;
     display: inline-block;
     background: url("/home/images/pioneer/vote.png");
-    background-size: 20px 20px;
-    width: 20px;
-    height: 20px;
+    background-size: 0.4rem 0.4rem;
+    width: 0.4rem;
+    height: 0.4rem;
 
 }
 .deeds .content .notices .notice .list {
@@ -127,17 +119,17 @@ em{
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 1.5rem;
+    font-size: 0.3rem;
     width: 100%;
 }
 .deeds .content .notices .notice .list .title {
     color: #333333;
-    font-size: 1.4rem;
+    font-size: 0.28rem;
 }
 .deeds .content .notices .notice .list .time {
     display: block;
     width: 65vw;
-    font-size: 1.2rem;
+    font-size: 0.24rem;
     color: #999;
     position: absolute;
     bottom: 0;
@@ -181,13 +173,13 @@ em{
 .liked{
     color:#ffa52f!important;
 }
-.lists>ul>li span:last-child.liked i{
+.lists>ul>a span:last-child.liked i{
     position: relative;
     margin-right: 1.2vw;
-    top:3px;
+    top:0.06rem;
     display: inline-block;
     background: url("/home/images/pioneer/voted.png");
-    background-size: 20px 20px;
-    width: 20px;
-    height: 20px;
+    background-size: 0.4rem 0.4rem;
+    width: 0.4rem;
+    height: 0.4rem;
 }

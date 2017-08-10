@@ -37,7 +37,7 @@
     line-height: 0.56rem;
     text-align: center;
 }
-a:active{
+#tab a:active{
     background: none;
 }
 /*列表修改*/

@@ -186,4 +186,8 @@ class Pioneer extends Base {
                 return $this->error("加载失败");
             }
         }
+    public function home()
+    {
+        return $this ->fetch();
+    }
 }
