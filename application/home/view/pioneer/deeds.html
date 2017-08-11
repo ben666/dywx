@@ -123,26 +123,20 @@
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--先进事迹-->
                 <div class="notice reported">
-                    {empty name="report"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
                     <div class="lists">
-                        {volist name="report" id="ro"}
-                        <a class="list clear" href="{:Url('Activity/detail?id='.$ro['id'])}">
+                        <a class="list clear" href="">
                             <div class="fl">
-                                <img src="{$ro.front_cover|get_cover='path'}" alt="">
+                                <img src="" alt="">
                             </div>
                             <div class="fr lr">
-                                <div class="title limit_">{$ro.title}</div>
+                                <div class="title limit_">的点点滴滴多多多多多多多多多多多多多多多多多多多</div>
                                 <div class="clear">
-                                    <span class="fl">{$ro.publisher}</span>
-                                    <span class="fr">{$ro.create_time|time_format='Y-m-d'}</span>
+                                    <span class="fl">发布人</span>
+                                    <span class="fr">时间</span>
                                 </div>
                             </div>
                         </a>
-                        {/volist}
                     </div>
-                    {/empty}
                 </div>
 
             </div>
@@ -153,7 +147,9 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-
+$(function(){
+   $("#refreshContainer").css("top",)
+})
     mui('#tab').on('tap', 'a', function(e) {
         var type = this.getAttribute("data-index");
         if(type==0){
