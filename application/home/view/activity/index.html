@@ -172,7 +172,6 @@
 <script type="text/javascript" src="/home/js/mui.zoom.js"></script>
 <script type="text/javascript" src="/home/js/mui.previewimage.js"></script>
 <script>
-    var type=0;
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
         var height1 = $(".banners").height();
@@ -198,11 +197,25 @@
     });
 window.onload = function(){
     var previewImage = mui.previewImage();
-    if($(".regularmore .lists a").length<7){
-        mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-    }else{
-        mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-    }
+ if(c==0){
+     if($(".regularmore .lists a").length<7){
+         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+     }else{
+         mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+     }
+ }else if(c==1){
+     if($(".reported .lists a").length<7){
+         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+     }else{
+         mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+     }
+ }else if(c==2){
+     if($(".votes>ul>li").length<5){
+         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+     }else{
+         mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+     }
+ }
 }
     //初始化下拉加载
     mui.init({
@@ -216,9 +229,9 @@ window.onload = function(){
 
     mui('#tab').on('tap', 'a', function(e) {
         $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
-        type = this.getAttribute("data-index");
+        c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
-        if(type==0){
+        if(c==0){
             $("#publish").hide();
             $(".bottom").hide();
             if($(".regularmore .lists a").length<7){
@@ -226,7 +239,7 @@ window.onload = function(){
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
-        }else if(type==1){
+        }else if(c==1){
             $("#publish").hide();
             $(".bottom").hide();
             if($(".reported .lists a").length<7){
@@ -234,7 +247,7 @@ window.onload = function(){
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
-        }else if(type==2){
+        }else if(c==2){
             $("#publish").show();
             $(".bottom").show();
             if($(".votes>ul>li").length<5){
@@ -243,7 +256,7 @@ window.onload = function(){
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }
-        setCookie('type',type);
+        setCookie('type',c);
     });
 
     mui('#item1mobile').on('tap', 'a', function(e) {
@@ -296,13 +309,13 @@ window.onload = function(){
         $('.myword input' ).val('');
     });
     function loadScroll(){
-            if(type==0){
+            if(c==0){
                 var len =$(".regularmore .lists a").length;
             }
-            if(type == 1){
+            if(c == 1){
                 var len = $(".reported .lists a").length;
             }
-            if(type== 2 ){
+            if(c== 2 ){
                 var len = $(".votes ul li").length;
             }
                 $.ajax({
@@ -310,13 +323,13 @@ window.onload = function(){
                     url: "{:Url('Activity/morelist')}",
                     data:{
                         length:len,
-                        type:type
+                        type:c
                     },
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
                         if(data.code == 1){
-                            addCourse(data,type);
+                            addCourse(data,c);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);

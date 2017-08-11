@@ -132,11 +132,20 @@
   });
 
   window.onload = function(){
-      if($(".party a").length<7){
-          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-      }else{
-          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+      if(c==0){
+          if($(".party a").length<7){
+              mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+          }else{
+              mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+          }
+      }else if(c==1){
+          if($(".activity a").length<7){
+              mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+          }else{
+              mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+          }
       }
+
   }
     //初始化下拉加载
     mui.init({
@@ -150,9 +159,9 @@
 
    //上拉加载更多
   function loadScroll(){
-      if(type==0){
+      if(c==0){
           var len = $(".party a").length;
-      }else if(type==1){
+      }else if(c==1){
           var len = $(".activity a").length;
       }
       $.ajax({
@@ -160,14 +169,14 @@
           url: "{:Url('News/listmore')}",
           data:{
               length:len,
-              type:type
+              type:c
           },
           beforeSend: function(XMLHttpRequest){
 
           },
           success:function(data){
               if(data.code == 1){
-                  addLists(data,type);
+                  addLists(data,c);
                   var dataLen =data.data.length;
                   if(data.data.length == 5){
                       mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
@@ -214,22 +223,22 @@
   //tab点击事件
   mui('#tab').on('tap', 'a', function(e) {
       $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
-      type = this.getAttribute("data-index");
+      c = this.getAttribute("data-index");
       mui('#refreshContainer').pullRefresh().refresh(true);
-      if(type==0){
+      if(c==0){
           if($(".party a").length<7){
               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
           }else{
               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
-      }else if(type==1){
+      }else if(c==1){
           if($(".activity a").length<7){
               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
           }else{
               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
       }
-      setCookie('type',type);
+      setCookie('type',c);
   });
 
   mui('.banner').on('tap', 'a', function(e) {
