@@ -67,6 +67,8 @@ class Activity extends Base{
             // 活动  列表
             $list = $Wish->where(['type' => $con,'status' => ['egt',0]])->order('id desc')->limit($len,5)->select();  // 活动列表
             foreach($list as $value){
+                $Pic = Picture::where('id',$value['front_cover'])->find();
+                $value['front_cover'] = $Pic['path'];
                 $value['time'] = date('Y-m-d',$value['create_time']);
             }
         }else{
@@ -106,7 +108,14 @@ class Activity extends Base{
     }
     // 活动报道  详情
     public function detail(){
-
+        //判断是否是游客
+        $this ->anonymous();
+        $this->checkAnonymous();
+        //获取jssdk
+        $this ->jssdk();
+        $id = input('id');
+        $this->assign('new',$this->content(6,$id));
+        return $this->fetch();
     }
     /* 活动发起   详情 */
     public function activitydetails(){

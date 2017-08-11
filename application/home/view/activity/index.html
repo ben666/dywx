@@ -78,7 +78,7 @@
                     {else/}
                     <div class="lists">
                         {volist name="report" id="ro"}
-                        <a class="list clear" href="">
+                        <a class="list clear" href="{:Url('Activity/detail?id='.$ro['id'])}">
                             <div class="fl">
                                 <img src="{$ro.front_cover|get_cover='path'}" alt="">
                             </div>
@@ -359,9 +359,9 @@ window.onload = function(){
                     '</a>';
             } else if(type==1) {
                 html +=
-                        '<a class="list clear" href="/home/activity/activitydetails/id/'+list.id+'">' +
+                        '<a class="list clear" href="/home/activity/detail/id/'+list.id+'">' +
                         '<div class="fl">' +
-                        '<img src="'+list.images+'" alt="图片">' +
+                        '<img src="'+list.front_cover+'" alt="图片">' +
                         '</div>' +
                         '<div class="fr lr">' +
                         '<div class="title limit_">'+list.title+'</div>' +
