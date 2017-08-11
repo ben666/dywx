@@ -28,9 +28,9 @@
 				<span class="read">{$new.views}</span>
 				{eq name="visit" value="0"}
 				{eq name="new.is_like" value="1"}
-				<span class="isgood good_" onclick="isGood(this,1,{$new.id})">{$new.likes}</span>
+				<span class="isgood good_"  data-type="1" data-id="{$new.id}">{$new.likes}</span>
 				{else/}
-				<span class="isgood good" onclick="isGood(this,1,{$new.id})">{$new.likes}</span>
+				<span class="isgood good"  data-type="1" data-id="{$new.id}">{$new.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$new.likes}</span>
@@ -41,7 +41,7 @@
 	<div class="comment">
 		<div class="sum">共<span>{$new.comments}</span>条评论</div>
 		<div class="lists">
-			{volist name="comment" id="co"}
+			{volist name="new.comment" id="co"}
 			<div class="list clear">
 				<div class="fl">
 					<img src="{$co.header}" alt="用户" class="user">
@@ -53,9 +53,9 @@
 				</div>
 				{eq name="visit" value="0"}
 				{eq name="co.is_like" value="1"}
-				<div class="fr isgood good_" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
+				<div class="fr isgood good_"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
 				{else/}
-				<div class="fr isgood good" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
+				<div class="fr isgood good"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
 				{/eq}
 				{else/}
 				<div class="fr isgood good">{$co.likes}</div>
@@ -112,7 +112,6 @@ var isGood = function(e,type,id){
 			aid:id,
 		},
 		success:function(data){
-
 		}
 	})
 };
@@ -148,7 +147,7 @@ var send = function(e,type,id){
 						'<div class="content" >'+it.val()+'</div>'+
 						'<div class="time">'+data.time+'</div>'+
 						'</div>'+
-						'<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')" data-type="0" data-id='+data.id+'>'+data.likes+'</div>'+
+						'<div class="fr isgood good" data-type="0" data-id='+data.id+'>'+data.likes+'</div>'+
 						'</div>';
 				$('.lists' ).prepend(html);
 				it.val('');
@@ -233,9 +232,9 @@ function addComment(data){
 				'</div>';
 		if ({$visit} == 0){
 			if(list.is_like == 0){
-				html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+				html+='<div class="fr isgood good"  data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
 			}else{
-				html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+				html+='<div class="fr isgood good_"  data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
 			}
 		}else {
 			html+='<div class="fr isgood good">'+list.likes+'</div>'

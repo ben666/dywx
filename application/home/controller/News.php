@@ -9,8 +9,12 @@ namespace app\home\controller;
 use app\home\model\News as NewsModel;
 use app\home\model\Picture;
 
+/**
+ * Class News
+ * @package 红色足迹
+ */
 class News extends Base {
-    //党建之家首页
+    //首页
     public function index()
     {
         $News = new NewsModel();
@@ -65,7 +69,7 @@ class News extends Base {
         //获取jssdk
         $this ->jssdk();
         $id = input('id');
-        $this->assign('info',$this->content(1,$id));
+        $this->assign('new',$this->content(1,$id));
         return $this->fetch();
     }
 
