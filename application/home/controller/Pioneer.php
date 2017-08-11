@@ -190,4 +190,8 @@ class Pioneer extends Base {
     {
         return $this ->fetch();
     }
+    public function deeds()
+    {
+        return $this ->fetch();
+    }
 }
