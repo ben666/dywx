@@ -166,9 +166,14 @@ var send = function(e,type,id){
 						'<div class="content" >'+it.val()+'</div>'+
 						'<div class="time">'+data.time+'</div>'+
 						'</div>'+
-						'<div class="fr isgood good notvisitor" data-type="0" data-id="'+data.id+'">'+data.likes+'</div>'+
+						'<div class="fr isgood good news" data-type="0" data-id="'+data.id+'">'+data.likes+'</div>'+
 						'</div>';
 				$('.lists' ).prepend(html);
+				mui('.lists .list').on('tap', '.news', function() {
+					var type = this.getAttribute('data-type');
+					var id = this.getAttribute('data-id');
+					isGood(this,type,id)
+				});
 				it.val('');
 				var sum = $('.sum span' );
 				sum.text(parseInt(sum.text())+1);
@@ -235,9 +240,9 @@ function addComment(data){
 				'</div>';
 		if ({$visit} == 0){
 			if(list.is_like == 0){
-				html+='<div class="fr isgood good notvisitor" data-type="0" data-id="'+list.id+'">'+list.likes+'</div>'
+				html+='<div class="fr isgood good notvisit" data-type="0" data-id="'+list.id+'">'+list.likes+'</div>'
 			}else{
-				html+='<div class="fr isgood good_ notvisitor" data-type="0" data-id="'+list.id+'">'+list.likes+'</div>'
+				html+='<div class="fr isgood good_ notvisit" data-type="0" data-id="'+list.id+'">'+list.likes+'</div>'
 			}
 		}else {
 			html+='<div class="fr isgood good">'+list.likes+'</div>'
@@ -246,6 +251,11 @@ function addComment(data){
 				'</div>';
 	}
 	$(".lists" ).append(html);
+	mui('.lists .list').on('tap', '.notvisit', function() {
+		var type = this.getAttribute('data-type');
+		var id = this.getAttribute('data-id');
+		isGood(this,type,id)
+	});
 }
 </script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>

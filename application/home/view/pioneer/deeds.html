@@ -89,6 +89,55 @@
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
     border-bottom: 0.03rem solid #ffab37;
 }
+/*列表修改*/
+.notices{
+    padding-bottom: 0.5rem;
+}
+.mui-slider-item .notices .notice .list {
+    display: block;
+    width: 100%;
+    padding-left:0.2rem;
+    padding-right: 0.2rem;
+    border-bottom: 1px solid #f1f1f1;
+    color: #666;
+}
+.mui-slider-item .notices .notice .list .fl img {
+    width: 1.6rem;
+    height:1.2rem;
+    margin-top:0.3rem;
+}
+.mui-slider-item .notices .notice .list .right {
+    width: calc(100% - 2rem);
+    height: 1.2rem;
+    margin-top: 0.3rem;
+    margin-left:0.3rem;
+    margin-bottom: 0.3rem;
+    position: relative;
+}
+.mui-slider-item .notices .notice .list .right .title {
+    float: left;
+    color: #111;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 0.3rem;
+    width: 100%;
+}
+.mui-slider-item .notices .notice .list .title {
+    color: #333333;
+    font-size:0.28rem;
+}
+.mui-slider-item .notices .notice .list .time {
+    display: block;
+    width: 100%;
+    font-size: 0.24rem;
+    color: #999;
+    position: absolute;
+    bottom: 0;
+}
 </style>
 {/block}
 {block name="body"}
@@ -148,7 +197,8 @@
 <script src="/home/js/reset.js"></script>
 <script>
 $(function(){
-   $("#refreshContainer").css("top",)
+    var height = ($("#tab").height()*3)+$(".banners").height();
+   $("#refreshContainer").css("top",height);
 })
     mui('#tab').on('tap', 'a', function(e) {
         var type = this.getAttribute("data-index");
