@@ -270,7 +270,7 @@ $(function(){
 
     //tab点击事件
     mui('#tab').on('tap', 'a', function(e) {
-        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)")
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
         type = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(type==0){

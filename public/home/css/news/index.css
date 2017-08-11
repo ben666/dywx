@@ -1,4 +1,7 @@
 /*banner*/
+.banners{
+    z-index: 99;
+}
 .banner{
     position: relative;
     width: 100%;
@@ -27,6 +30,7 @@
     height: 0.88rem;
     padding: 0.16rem 0;
     background: #f1f1f1;
+    z-index: 99;
 }
 #tab a{
     display: inline-block;
@@ -41,6 +45,9 @@
     background: none;
 }
 /*列表修改*/
+.notices{
+    padding-bottom: 0.5rem;
+}
 .mui-slider-item .notices .notice .list {
     display: block;
     width: 100%;

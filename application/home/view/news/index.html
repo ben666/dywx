@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
 {/block}
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
         {notempty name="list1"}
         <!--banner-->
         <div class="banners">
@@ -25,7 +23,7 @@
         </div>
         {/notempty}
 <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-    <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
         新闻发布
     </a>
     <a class="mui-control-item" href="#item2mobile" data-index="1">
@@ -35,9 +33,10 @@
         发展历程
     </a>
 </div>
-
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
 <div class="mui-slider-group">
-    <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+    <div id="item1mobile" class="mui-slider-item mui-control-content">
         <!--新闻发布-->
         <div class="notices">
             {empty name="list"}
@@ -107,9 +106,23 @@
 {/block}
 {block name="script"}
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="/home/js/reset.js"></script>
 <script>
     var type = 0;
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
   $(function(){
+      var height1 = $(".banners").height();
+      var height2 = $("#tab").height();
+      $("#refreshContainer").css("top",height1+height2+20);
+      //tab初始化和数据存储
+      var co = getCookie("type");
+      if(co == 0 || co == 1 || co == 2){
+          c = co;
+      }else{
+          c =  parseInt(window.location.href.split("index/c/")[1]);
+      }
+      $("#tab a").eq(c).addClass('mui-active');
+      $(".mui-slider-group>div").eq(c).addClass('mui-active');
       //轮播
       var mySwiper = new Swiper('.swiper-container', {
           autoplay: 3000,
@@ -200,6 +213,7 @@
 
   //tab点击事件
   mui('#tab').on('tap', 'a', function(e) {
+      $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
       type = this.getAttribute("data-index");
       mui('#refreshContainer').pullRefresh().refresh(true);
       if(type==0){
@@ -215,6 +229,7 @@
               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
       }
+      setCookie('type',type);
   });
 
   mui('.banner').on('tap', 'a', function(e) {
@@ -226,6 +241,10 @@
       var url = this.getAttribute("href");
       window.location.href = url;
   });
+    mui('#item2mobile').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
 
 </script>
 {/block}
