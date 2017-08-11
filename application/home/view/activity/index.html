@@ -29,13 +29,11 @@
 {/block}
 {block name="body"}
     <!--tab-->
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div>
+        <div class="banners">
             <img src="/home/images/banner/1.jpg" class="banner">
         </div>
         <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-            <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
+            <a class="mui-control-item" href="#item1mobile" data-index="0">
                 活动列表
             </a>
             <a class="mui-control-item" href="#item2mobile" data-index="1">
@@ -46,9 +44,10 @@
             </a>
         </div>
 
-
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
         <div class="mui-slider-group">
-            <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--活动列表-->
                 <div class="notices">
                     <div class="notice regularmore">
@@ -176,6 +175,21 @@
     var type=0;
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
+        var height1 = $(".banners").height();
+        var height2 = $("#tab").height();
+        $("#tab").css("top",height1);
+        $("#refreshContainer").css("top",height1+height2+20);
+
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 || co == 2){
+            c = co;
+        }else{
+            c =  parseInt(window.location.href.split("index/c/")[1]);
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+
         //悬浮框移动
         moveanyway();
         mui('#__MUI_PREVIEWIMAGE').on('tap', '.mui-slider-group', function(e) {
@@ -201,6 +215,7 @@ window.onload = function(){
     });
 
     mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
         type = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(type==0){
@@ -228,9 +243,14 @@ window.onload = function(){
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }
+        setCookie('type',type);
     });
 
     mui('#item1mobile').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+    mui('#item2mobile').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
     })
@@ -296,7 +316,6 @@ window.onload = function(){
                     },
                     success:function(data){
                         if(data.code == 1){
-
                             addCourse(data,type);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
@@ -317,7 +336,7 @@ window.onload = function(){
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            if (type == 1) {
+            if (type == 0) {
                 html +=
                     '<a class="clear" href="/home/activity/activitydetails/id/'+list.id+'">'+
                     '<p>'+list.title+'</p>'+
@@ -325,7 +344,21 @@ window.onload = function(){
                     '<span class="lists time">'+list.time+'</span>'+
                     '<i >进入认领<img src="/home/images/activity/arrow.png"></i>'+
                     '</a>';
-            } else {
+            } else if(type==1) {
+                html +=
+                        '<a class="list clear" href="/home/activity/activitydetails/id/'+list.id+'">' +
+                        '<div class="fl">' +
+                        '<img src="'+list.images+'" alt="图片">' +
+                        '</div>' +
+                        '<div class="fr lr">' +
+                        '<div class="title limit_">'+list.title+'</div>' +
+                        '<div class="clear">' +
+                        '<span class="fl">'+list.publisher+'</span>' +
+                        '<span class="fr">'+list.time+'</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</a>';
+            } else if(type==2){
                 html +=
                     '<li>' +
                     '<img src="'+list.head+'">' +
@@ -377,9 +410,11 @@ window.onload = function(){
                 html+= '</li>';
             }
         }
-        if(type==1){
+        if(type==0){
             $(".regularmore .lists ul").append(html);
-        }else{
+        } else if(type==1){
+            $(".reported .lists").append(html);
+        }else if(type==2){
             $(".votes>ul").append(html);
         }
         //图片裁剪
@@ -500,5 +535,11 @@ window.onload = function(){
     layout();
     //图片裁剪
     imgresize();
+
+    window.onpageshow = function (e) {
+            if (e.persisted) {
+                window.location.reload(true);
+            }
+    }
 </script>
 {/block}
