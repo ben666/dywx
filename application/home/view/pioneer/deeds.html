@@ -64,7 +64,6 @@
 #tab {
     width: 100vw;
     height: 1rem;
-    padding: 0.06rem 0;
     z-index: 99;
     border-bottom: 0.03rem solid #f9f9f9;
 }
@@ -74,7 +73,7 @@
     height: 100%;
     color: #333333;
     font-size:0.32rem;
-    line-height: 0.88rem;
+    line-height: 1rem;
     text-align: center;
 }
 .mui-control-item.mui-active {
@@ -83,14 +82,13 @@
     #tab a:active{
         background: none;
     }
-    span.line{
-        display: block;
-        height: 0.03rem;
-        width:1.5rem;
-        background-color:#ffab37 ;
-        position: absolute;
-        left: 1.1rem;
+    #tab a span{
+        height: 1rem;
+        display: inline-block;
     }
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
+    border-bottom: 0.03rem solid #ffab37;
+}
 </style>
 {/block}
 {block name="body"}
@@ -109,12 +107,11 @@
 <p class="position">德清县委党校副校长</p>
 <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
     <a class="mui-control-item" href="#item1mobile" data-index="0">
-        专家简介
+        <span>专家简介</span>
     </a>
     <a class="mui-control-item" href="#item2mobile" data-index="1">
-       先进事迹
+       <span>先进事迹</span>
     </a>
-    <span class="line"></span>
 </div>
 
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
@@ -124,7 +121,29 @@
                 <!--新闻发布-->
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
-                <!--活动情况-->
+                <!--先进事迹-->
+                <div class="notice reported">
+                    {empty name="report"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
+                    <div class="lists">
+                        {volist name="report" id="ro"}
+                        <a class="list clear" href="{:Url('Activity/detail?id='.$ro['id'])}">
+                            <div class="fl">
+                                <img src="{$ro.front_cover|get_cover='path'}" alt="">
+                            </div>
+                            <div class="fr lr">
+                                <div class="title limit_">{$ro.title}</div>
+                                <div class="clear">
+                                    <span class="fl">{$ro.publisher}</span>
+                                    <span class="fr">{$ro.create_time|time_format='Y-m-d'}</span>
+                                </div>
+                            </div>
+                        </a>
+                        {/volist}
+                    </div>
+                    {/empty}
+                </div>
 
             </div>
         </div>
@@ -135,14 +154,23 @@
 <script src="/home/js/reset.js"></script>
 <script>
 
-
-    mui('tab').on('tap', 'a', function(e) {
+    mui('#tab').on('tap', 'a', function(e) {
         var type = this.getAttribute("data-index");
         if(type==0){
-            $(".line").css("left","1.1rem")
+
         }
         if(type==1){
-            $(".line").css("left","3rem")
+
+        }
+    });
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
         }
     });
 </script>

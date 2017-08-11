@@ -82,6 +82,9 @@
 .note_{
   padding: 0;
 }
+.comment{
+  padding-bottom: 0.5rem;
+}
 /*文章*/
 .article {
   width: 100%;
