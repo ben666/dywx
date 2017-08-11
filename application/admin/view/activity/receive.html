@@ -9,10 +9,10 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>领取名单</h2>
+        <h2>活动发起</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Wish/index')}">心愿认领</a>
+                <a href="{:Url('Activity/index')}">活动列表</a>
             </li>
             <li class="active">
                 <strong>领取列表</strong>
@@ -32,6 +32,7 @@
                 <div class="ibox-title">
                     <h5>列表</h5>
                     <div class="ibox-tools">
+                        <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -77,7 +78,7 @@
 <script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
 <script>
     $(document).ready(function(){
-        highlight_subnav("{:Url('wish/index')}");
+        highlight_subnav("{:Url('Activity/index')}");
 
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
