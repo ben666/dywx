@@ -27,6 +27,7 @@ class Activity extends Base{
         $Wish = new wishModel();
         $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit(7)->select();  // 活动列表
         $lists = $Wish->where(['type' => 2 ,'status' => 0])->order('id desc')->limit(5)->select(); // 投票
+        $report = $Wish->where(['type' => 3 ,'status' => ['egt',0]])->order('id desc')->limit(7)->select(); // 投票
         foreach($lists as $value){
             $User = WechatUser::where('userid',$value['create_user'])->field('department,headimgurl')->find();
             $Depart = WechatDepartment::where('id',$User['department'])->field('name')->find();
@@ -45,6 +46,7 @@ class Activity extends Base{
         }
         $this->assign('list',$list);
         $this->assign('lists',$lists);
+        $this->assign('report',$report);
         return $this ->fetch();
     }
     /*
@@ -54,11 +56,16 @@ class Activity extends Base{
         $this->checkAnonymous();
         $userId = session('userId');
         $Wish = new wishModel();
-        $type = input('post.type');
+        $type = input('post.type');  // 0 活动列表 1 活动报道  2 投票
         $len = input('post.length');
-        if ($type == 1){
+        if ($type == 0 || $type == 1){
+            if ($type == 0){
+                $con = 1;
+            }else{
+                $con = 3;
+            }
             // 活动  列表
-            $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit($len,5)->select();  // 活动列表
+            $list = $Wish->where(['type' => $con,'status' => ['egt',0]])->order('id desc')->limit($len,5)->select();  // 活动列表
             foreach($list as $value){
                 $value['time'] = date('Y-m-d',$value['create_time']);
             }
@@ -94,8 +101,12 @@ class Activity extends Base{
         if ($list){
             return $this->success('加载成功','',$list);
         }else{
-            return $this->error('加载失败');
+            $this->error('加载失败');
         }
+    }
+    // 活动报道  详情
+    public function detail(){
+
     }
     /* 活动发起   详情 */
     public function activitydetails(){
@@ -163,7 +174,7 @@ class Activity extends Base{
             $User['time'] = date('Y-m-d',db('wish_receive')->where(['rid' => $id,'userid' => $userId])->value('create_time'));
             return $this->success('认领成功','',$User);
         }else{
-            return $this->error('认领失败');
+            $this->error('认领失败');
         }
     }
     /*
@@ -186,7 +197,7 @@ class Activity extends Base{
             }
             return $this->success('成功');
         }else{
-            return $this->error('失败');
+            $this->error('失败');
         }
     }
     /*
@@ -212,7 +223,7 @@ class Activity extends Base{
             {
                 return $this ->success('发布成功!');
             }else{
-                return $this ->error('发布失败!');
+                $this ->error('发布失败!');
             }
         }
     }

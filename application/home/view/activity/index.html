@@ -52,6 +52,9 @@
                 <!--活动列表-->
                 <div class="notices">
                     <div class="notice regularmore">
+                        {empty name="list"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                        {else/}
                         <div class="lists">
                             <ul>
                                 {volist name="list" id="lo"}
@@ -64,27 +67,33 @@
                                 {/volist}
                             </ul>
                         </div>
+                        {/empty}
                     </div>
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--活动报道-->
                 <div class="notice reported">
-                    <!--<div class="default"><img src="/home/images/notice/nomessage.png" alt="暂无消息"> </div>-->
+                    {empty name="report"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists">
+                        {volist name="report" id="ro"}
                         <a class="list clear" href="">
                             <div class="fl">
-                                <img src="" alt="">
+                                <img src="{$ro.front_cover|get_cover='path'}" alt="">
                             </div>
                             <div class="fr lr">
-                                <div class="title limit_">{oooooooooooo</div>
+                                <div class="title limit_">{$ro.title}</div>
                                 <div class="clear">
-                                    <span class="fl">发布人</span>
-                                    <span class="fr">2017-8-8</span>
+                                    <span class="fl">{$ro.publisher}</span>
+                                    <span class="fr">{$ro.create_time|time_format='Y-m-d'}</span>
                                 </div>
                             </div>
                         </a>
+                        {/volist}
                     </div>
+                    {/empty}
                 </div>
         </div>
 
@@ -92,6 +101,9 @@
 
                 <!--发起投票-->
                 <div class="notices" style="padding-bottom: 1rem">
+                    {empty name="lists"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists votes">
                         <ul>
                             {volist name="lists" id="los"}
@@ -140,8 +152,8 @@
                             </li>
                             {/volist}
                         </ul>
-
                     </div>
+                    {/empty}
                 </div>
             </div>
         </div>
@@ -172,7 +184,7 @@
     });
 window.onload = function(){
     var previewImage = mui.previewImage();
-    if($(".regularmore .lists a").length<8){
+    if($(".regularmore .lists a").length<7){
         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
     }else{
         mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -194,7 +206,7 @@ window.onload = function(){
         if(type==0){
             $("#publish").hide();
             $(".bottom").hide();
-            if($(".regularmore .lists a").length<8){
+            if($(".regularmore .lists a").length<7){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -202,7 +214,7 @@ window.onload = function(){
         }else if(type==1){
             $("#publish").hide();
             $(".bottom").hide();
-            if($(".reported .lists a").length<8){
+            if($(".reported .lists a").length<7){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -263,7 +275,6 @@ window.onload = function(){
         $('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
         $('.myword input' ).val('');
     });
-
     function loadScroll(){
             if(type==0){
                 var len =$(".regularmore .lists a").length;
