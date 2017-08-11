@@ -55,6 +55,9 @@
             <!--个人-->
             <div class="notices">
                 <div class="notice regularmore">
+                    {empty name="list1"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists tutor">
                         <ul>
                             {volist name="list1" id="vo"}
@@ -64,17 +67,18 @@
                                 <span class="position">{$vo.position}</span>
                                 {eq name="visit" value="0"}
                                 {eq name="$vo.is_like" value="0"}
-                                <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {else/}
-                                <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span class="liked"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
                                 {else/}
-                                <span class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
                             </a>
                             {/volist}
                         </ul>
                     </div>
+                    {/empty}
                 </div>
             </div>
         </div>
@@ -82,25 +86,29 @@
             <!--集体-->
             <div class="notices">
                 <div class="notice regularmore">
+                    {empty name="list2"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists tutor">
                         <ul>
-                            {volist name="list1" id="vo"}
+                            {volist name="list2" id="vo"}
                             <a>
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 {eq name="visit" value="0"}
                                 {eq name="$vo.is_like" value="0"}
-                                <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {else/}
-                                <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span class="liked"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
                                 {else/}
-                                <span class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
                             </a>
                             {/volist}
                         </ul>
                     </div>
+                    {/empty}
                 </div>
             </div>
         </div>
@@ -108,25 +116,29 @@
             <!--单位-->
             <div class="notices">
                 <div class="notice regularmore">
+                    {empty name="list3"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists tutor">
                         <ul>
-                            {volist name="list1" id="vo"}
+                            {volist name="list3" id="vo"}
                             <a href="">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 {eq name="visit" value="0"}
                                 {eq name="$vo.is_like" value="0"}
-                                <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {else/}
-                                <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span class="liked"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
                                 {else/}
-                                <span class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                <span class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
                             </a>
                             {/volist}
                         </ul>
                     </div>
+                    {/empty}
                 </div>
             </div>
         </div>

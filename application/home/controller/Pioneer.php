@@ -15,6 +15,37 @@ use app\home\model\WechatUser;
 //先锋引领
 class Pioneer extends Base {
     /**
+     * 主页
+     */
+    public function home()
+    {
+        return $this ->fetch();
+    }
+    /**
+     * 先锋引领首页
+     * @return mixed
+     */
+    public function index(){
+        $this ->anonymous();
+        $userId = session('userId');
+        $type = input('type');
+        $pioneer = new PioneerModel();
+        // 所有数据
+        $list1 = $pioneer ->where(['type' => $type,'class' => 1,'status' => ['egt',0]]) ->order('id desc') ->select();  // 个人
+        $list2 = $pioneer ->where(['type' => $type,'class' => 2,'status' => ['egt',0]]) ->order('id desc') ->select();  // 集体.
+        $list3 = $pioneer ->where(['type' => $type,'class' => 3,'status' => ['egt',0]]) ->order('id desc') ->select();  // 单位
+        //非游客判断是否点赞
+        if($userId != 'visitor'){
+            $list1 = $this ->checkLIke($list1);
+            $list2 = $this ->checkLIke($list2);
+            $list3 = $this ->checkLIke($list3);
+        }
+        $this ->assign('list1',$list1);
+        $this ->assign('list2',$list2);
+        $this ->assign('list3',$list3);
+        return $this ->fetch();
+    }
+    /**
      * 先锋事迹详情页
      */
     public function detail()
@@ -78,33 +109,6 @@ class Pioneer extends Base {
             return $this ->error('参数错误!');
         }
     }
-
-    /**
-     * 先锋引领首页
-     * @return mixed
-     */
-    public function index(){
-        $this ->anonymous();
-        $userId = session('userId');
-        $pioneer = new PioneerModel();
-        $order = 'likes desc';
-        //创业导师团
-        $list1 = $pioneer ->where(['type' => 1,'status' => ['egt',0]]) ->order($order) ->select();
-        //创客先锋队
-        $list2 = $pioneer ->where(['type' => 2,'status' => ['egt',0]]) ->order($order) ->select();
-        //先进事迹展
-        $list3 = $pioneer ->where(['type' => 3,'status' => ['egt',0]]) ->limit(0,8) ->select();
-        //非游客判断是否点赞
-        if($userId != 'visitor'){
-            $list1 = $this ->checkLIke($list1);
-            $list2 = $this ->checkLIke($list2);
-        }
-        $this ->assign('list1',$list1);
-        $this ->assign('list2',$list2);
-        $this ->assign('list3',$list3);
-        return $this ->fetch();
-    }
-
     /**
      * 判断今日导师点赞
      * @param $data
@@ -186,10 +190,6 @@ class Pioneer extends Base {
                 return $this->error("加载失败");
             }
         }
-    public function home()
-    {
-        return $this ->fetch();
-    }
     public function deeds()
     {
         return $this ->fetch();
