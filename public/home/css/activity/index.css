@@ -16,6 +16,7 @@
     border-top: 0.2rem solid #f1f1f1;
     border-bottom: 0.2rem solid #f1f1f1;
     z-index: 99;
+    background: #fff!important;
 }
 .mui-segmented-control .mui-control-item{
     line-height: 0.9rem;
@@ -29,6 +30,9 @@ p{
     color: #333;
 }
 .notices{
+    padding-bottom: 0.5rem;
+}
+.reported{
     padding-bottom: 0.5rem;
 }
 /*活动报道*/

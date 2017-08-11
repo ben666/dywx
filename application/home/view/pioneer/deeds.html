@@ -4,20 +4,25 @@
 <style>
 .banners img{
     width:100%;
+    position: relative;
+    z-index: 9;
 }
-.round div,.round img{
+.round{
+    position: relative;
+    z-index: 99;
+}
+.round div{
     border: 0.022rem solid #fff;
     border-radius: 50%;
     position: absolute;
     left: 50%;
 }
 .round .round-first{
-    border:none;
-    display: block;
+    border: none;
     width: 1.9rem;
     height: 1.9rem;
     margin-left: -0.95rem;
-    margin-top: -1.2rem;
+    margin-top: -1.3rem;
 }
 .round .round-second{
     width: 2.1rem;
@@ -42,7 +47,50 @@
     width: 1.9rem;
     height: 1.9rem;
 }
+    p{
+        text-align: center;
+        font-size: 0.24rem;
+        color: #333;
+        position: relative;
+        z-index: 999;
+        margin-top: 0.2rem;
+    }
+    p.name{
+        margin-top: 0.8rem;
+        font-size: 0.28rem;
+    }
 
+/*tab*/
+#tab {
+    width: 100vw;
+    height: 1rem;
+    padding: 0.06rem 0;
+    z-index: 99;
+    border-bottom: 0.03rem solid #f9f9f9;
+}
+#tab a{
+    display: inline-block;
+    width: 49vw;
+    height: 100%;
+    color: #333333;
+    font-size:0.32rem;
+    line-height: 0.88rem;
+    text-align: center;
+}
+.mui-control-item.mui-active {
+    color: #ffab37!important;
+}
+    #tab a:active{
+        background: none;
+    }
+    span.line{
+        display: block;
+        height: 0.03rem;
+        width:1.5rem;
+        background-color:#ffab37 ;
+        position: absolute;
+        left: 1.1rem;
+    }
 </style>
 {/block}
 {block name="body"}
@@ -50,17 +98,52 @@
     <img src="/home/images/pioneer/banner.png">
 </div>
 <div class="round">
-<img class="round-first" src="/home/images/user/message.png">
+<div class="round-first">
+    <img src="/home/images/user/message.png">
+</div>
 <div class="round-second"></div>
 <div class="round-third"></div>
 <div class="round-fourth"></div>
 </div>
+<p class="name">姚文荣</p>
+<p class="position">德清县委党校副校长</p>
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        专家简介
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+       先进事迹
+    </a>
+    <span class="line"></span>
+</div>
 
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <!--新闻发布-->
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <!--活动情况-->
 
+            </div>
+        </div>
+    </div>
+</div>
 {/block}
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
 
+
+    mui('tab').on('tap', 'a', function(e) {
+        var type = this.getAttribute("data-index");
+        if(type==0){
+            $(".line").css("left","1.1rem")
+        }
+        if(type==1){
+            $(".line").css("left","3rem")
+        }
+    });
 </script>
 {/block}

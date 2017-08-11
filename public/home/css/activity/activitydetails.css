@@ -44,12 +44,12 @@ p{
 }
 .content .get {
     width: 87.2vw;
-    height: 9.4vw;
+    height: 0.7rem;
     margin: 5.33vw auto;
     text-align: center;
     color: #ffffff;
-    font-size: 1.6rem;
-    line-height: 9.4vw;
+    font-size: 0.32rem;
+    line-height: 0.7rem;
     -webkit-border-radius: 6px;
     border-radius: 30px;
 }
@@ -95,7 +95,7 @@ p{
 .enroll .lists .list .name {
     width: 18vw;
     padding-left: 3.73vw;
-    font-size: 1.4rem;
+    font-size: 0.28rem;
     color: #333;
 }
 .enroll .lists .list .publish {
