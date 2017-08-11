@@ -1,6 +1,6 @@
 @charset "utf-8";
 .t_b {
-  font-size: 1.8rem;
+  font-size: 0.36rem;
   font-weight: 600;
 }
 @-webkit-keyframes typing {
@@ -32,6 +32,9 @@
   }
 }
 
+.notices{
+  margin-top: 0.5rem;
+}
 /*课程列表*/
 .regularmore  .lists {
   background: #eeeeee;
@@ -51,14 +54,14 @@
   position: absolute;
   top: 5.53vw;
   left: 1.13vw;
-  width: 12vw;
-  height: 8vw;
+  width: 0.9rem;
+  height: 0.6rem;
   background: url("/home/images/learn/bg_blue.png") no-repeat;
-  background-size: 12vw 8vw;
+  background-size: 0.9rem 0.6rem;
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 0.24rem;
   text-align: center;
-  line-height:5.33vw;
+  line-height:0.6rem;
 }
 .regularmore .lists .list .img {
   width: 100%;
@@ -68,16 +71,16 @@
 }
 .regularmore .lists .list .title {
   color: #333333;
-  font-size: 1.4rem;
-  line-height: 9.6vw
+  font-size: 0.28rem;
+  line-height: 0.7rem;
 }
 .regularmore .lists .list .study {
   display: inline-block;
   background: url("/home/images/learn/people.png") 0 0 no-repeat;
-  background-size: 15px 15px;
-  padding-left: 18px;
-  color: #999999;
-  font-size: 1.2rem;
+  background-size: 0.3rem 0.3rem;
+  padding-left: 0.36rem;
+  color: #999;
+  font-size: 0.24rem;
   text-align: center;
 }
 /*提示*/
