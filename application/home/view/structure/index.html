@@ -1,6 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
+<title>云上组织</title>
 <link rel="stylesheet" href="/home/css/structure/structure.css">
 {/block}
 
@@ -106,7 +107,6 @@
 <script src="/home/js/reset.js"></script>
 <script src="/home/js/jquery.lazyload.min.js"></script>
 <script>
-$('title' ).text('组织架构');
 $(function(){
 	//组织架构切换
 	slide();
@@ -116,8 +116,6 @@ $(function(){
 		$(this ).attr('href', href);
 	})
 	$(function(){
-		//标题
-		$('title' ).text('服务团队');
 		//tab值记录
 		tabRecord('.tab' ,'.box');
 		//tab切换
