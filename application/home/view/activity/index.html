@@ -174,11 +174,12 @@
 <script>
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
-        var height1 = $(".banners").height();
-        var height2 = $("#tab").height();
-        $("#tab").css("top",height1);
-        $("#refreshContainer").css("top",height1+height2+20);
-
+        setTimeout(function(){
+            var height1 = $(".banners").height();
+            var height2 = $("#tab").height();
+            $("#tab").css("top",height1);
+            $("#refreshContainer").css("top",height1+height2+20);
+        },0)
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 || co == 2){

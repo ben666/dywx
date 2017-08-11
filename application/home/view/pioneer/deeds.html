@@ -12,7 +12,7 @@
     z-index: 99;
 }
 .round div{
-    border: 0.022rem solid #fff;
+    border: 0.025rem solid #fff;
     border-radius: 50%;
     position: absolute;
     left: 50%;
@@ -35,17 +35,23 @@
     height: 2.3rem;
     margin-left: -1.15rem;
     margin-top: -1.4rem;
+    opacity: 0.8;
 }
 .round .round-fourth{
     width: 2.5rem;
     height: 2.5rem;
     margin-left: -1.25rem;
     margin-top: -1.5rem;
+    opacity: 0.4;
 }
 .round .round-first img{
     position: absolute;
-    width: 1.9rem;
-    height: 1.9rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.person{
+    height:1.8rem;
 }
     p{
         text-align: center;
@@ -53,11 +59,11 @@
         color: #333;
         position: relative;
         z-index: 999;
-        margin-top: 0.2rem;
+        padding: 0.1rem;
     }
     p.name{
-        margin-top: 0.8rem;
         font-size: 0.28rem;
+        padding-top: 0.8rem;
     }
 
 /*tab*/
@@ -131,14 +137,16 @@
 </div>
 <div class="round">
 <div class="round-first">
-    <img src="/home/images/user/message.png">
+    <img src="/home/images/user/code.png">
 </div>
 <div class="round-second"></div>
 <div class="round-third"></div>
 <div class="round-fourth"></div>
 </div>
+<div class="person">
 <p class="name">姚文荣</p>
 <p class="position">德清县委党校副校长</p>
+</div>
 <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
     <a class="mui-control-item" href="#item1mobile" data-index="0">
         <span>专家简介</span>
@@ -166,7 +174,7 @@
                                 <div class="title limit_">的点点滴滴多多多多多多多多多多多多多多多多多多多</div>
                                 <div class="clear">
                                     <span class="fl">发布人</span>
-                                    <span class="fr"> > </span>
+                                    <span class="fr fa fa-angle-right"></span>
                                 </div>
                             </div>
                         </a>
@@ -182,19 +190,39 @@
 <script src="/home/js/reset.js"></script>
 <script>
 $(function(){
-    var height = ($("#tab").height()*3)+$(".banners").height();
-   $("#refreshContainer").css("top",height);
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    //tab初始化和数据存储
+    var co = getCookie("type");
+    if(co == 0 || co == 1 || co == 2){
+        c = co;
+    }else{
+        c =  parseInt(window.location.href.split("index/c/")[1]);
+    }
+    $("#tab a").eq(c).addClass('mui-active');
+    $(".mui-slider-group>div").eq(c).addClass('mui-active');
 })
     mui('#tab').on('tap', 'a', function(e) {
-        var type = this.getAttribute("data-index");
-        if(type==0){
-
-        }
-        if(type==1){
-
+        c = this.getAttribute("data-index");
+        if(c==1){
+            if($(".reported .lists .list").length<7){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
         }
     });
 
+window.onload = function(){
+    setTimeout(function(){
+        var height = $("#tab").height()+$(".banners").height()+$(".person").height();;
+        $("#refreshContainer").css("top",height);
+    },0)
+    if( $(".reported .lists .list").length<7){
+        mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+    }else{
+        mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+    }
+}
     //初始化下拉加载
     mui.init({
         pullRefresh: {
@@ -217,7 +245,7 @@ function loadScroll(){
         },
         success:function(data){
             if(data.code == 1){
-                addCourse(data,c);
+                addCourse(data);
                 var dataLen =data.data.length;
                 if(data.data.length == 5){
                     mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
@@ -230,6 +258,29 @@ function loadScroll(){
             }
         }
     })
+}
+
+function addCourse(data){
+    var html = '';
+    var lists = data.data;
+    var len = lists.length;
+    for(var i = 0; i< len;i++){
+        var list = lists[i];
+            html +=
+                    '<a class="list clear" href="/home/activity/detail/id/'+list.id+'">' +
+                    '<div class="fl">' +
+                    '<img src="'+list.front_cover+'" alt="图片">' +
+                    '</div>' +
+                    '<div class="fr lr">' +
+                    '<div class="title limit_">'+list.title+'</div>' +
+                    '<div class="clear">' +
+                    '<span class="fl">'+list.publisher+'</span>' +
+                    ' <span class="fr fa fa-angle-right"></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</a>';
+    }
+    $(".reported .lists").append(html);
 }
 </script>
 {/block}

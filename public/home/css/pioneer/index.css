@@ -26,6 +26,9 @@ em{
     color: #000!important;
 }
 a:active{
+    background: argb(0,0,0,0.1);
+}
+#tab a:active{
     background: none;
 }
 
