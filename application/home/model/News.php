@@ -32,7 +32,7 @@ class News extends Model{
     }
     // 获取列表数据
     public function get_list($where,$len=0){
-        $list = $this->where($where)->order('id desc')->limit($len,10)->field('id,front_cover,title,publisher,create_time')->select();
+        $list = $this->where($where)->order('id desc')->limit($len,7)->field('id,front_cover,title,publisher,create_time')->select();
         foreach($list as $value){
             $value['create_time'] = date("Y-m-d",$value['create_time']);
             $Pic = Picture::where('id',$value['front_cover'])->field('path')->find();

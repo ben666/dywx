@@ -7,22 +7,23 @@
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
-    <!--banner-->
-    <div class="banners">
-        <div class="swiper-container">
-            <div class="imgs swiper-wrapper">
-                {volist name="lists" id="ls"}
-                <div class="banner swiper-slide">
-                    <a href="{:Url('Details/index?id='.$ls['id'])}">
-                        <img src="{$ls.front_cover|get_cover='path'}" alt="">
-                        <div class="title_ limit">{$ls.title}</div>
-                    </a>
+        {notempty name="list1"}
+        <!--banner-->
+        <div class="banners">
+            <div class="swiper-container">
+                <div class="imgs swiper-wrapper">
+                    {volist name="list1" id="ls"}
+                    <div class="banner swiper-slide">
+                        <a href="{:Url('News/detail?id='.$ls['id'])}">
+                            <img src="{$ls.front_cover}" alt="">
+                            <div class="title_ limit">{$ls.title}</div>
+                        </a>
+                    </div>
+                    {/volist}
                 </div>
-                {/volist}
             </div>
         </div>
-    </div>
-
+        {/notempty}
 <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
     <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
         新闻发布
@@ -39,51 +40,51 @@
     <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
         <!--新闻发布-->
         <div class="notices">
+            {empty name="list"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
             <div class="notice party">
                 {volist name="list" id="loo"}
-                <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
+                <a href="{:Url('News/detail?id='.$loo['id'])}" class="list clear">
                     <div class="fl">
-                        {eq name="$loo.front_cover" value=""}
-                        <img src="/home/images/banner/2.jpg" alt="图片">
-                        {else/}
-                        <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
-                        {/eq}
+                        <img src="{$loo.front_cover}" alt="图片">
                     </div>
                     <div class="fr right">
                         <div class="title limit_">{$loo.title}</div>
                         <div class="clear time">
                             <span class="fl">{$loo.publisher}</span>
-                            <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
+                            <span class="fr">{$loo.create_time}</span>
                         </div>
                     </div>
                 </a>
                 {/volist}
             </div>
+            {/empty}
         </div>
     </div>
     <div id="item2mobile" class="mui-slider-item mui-control-content">
         <!--活动情况-->
         <div class="notices">
+            {empty name="lists"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
             <div class="notice activity">
                 {volist name="lists" id="loo"}
-                <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
+                <a href="{:Url('News/detail?id='.$loo['id'])}" class="list clear">
                     <div class="fl">
-                        {eq name="$loo.front_cover" value=""}
-                        <img src="/home/images/banner/2.jpg" alt="图片">
-                        {else/}
-                        <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
-                        {/eq}
+                        <img src="{$loo.front_cover}" alt="图片">
                     </div>
                     <div class="fr right">
                         <div class="title limit_">{$loo.title}</div>
                         <div class="clear time">
                             <span class="fl">{$loo.publisher}</span>
-                            <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
+                            <span class="fr">{$loo.create_time}</span>
                         </div>
                     </div>
                 </a>
                 {/volist}
             </div>
+            {/empty}
         </div>
         </div>
         <div id="item3mobile" class="mui-slider-item mui-control-content">
@@ -103,10 +104,6 @@
 </div>
 </div>
     </div>
-    <!--线上发布-->
-    {eq name="visit" value="0"}
-    <a id="publish" href="/home/news/publish.html"></a>
-    {/eq}
 {/block}
 {block name="script"}
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
@@ -119,10 +116,6 @@
           loop:true,
           autoplayDisableOnInteraction:false
       });
-      //悬浮框移动
-      {eq name="visit" value="0"}
-      moveanyway();
-      {/eq}
   });
 
   window.onload = function(){
@@ -149,33 +142,33 @@
       }else if(type==1){
           var len = $(".activity a").length;
       }
-              $.ajax({
-                  type:"post",
-                  url: "{:Url('News/listmore')}",
-                  data:{
-                      length:len
-                  },
-                  beforeSend: function(XMLHttpRequest){
+      $.ajax({
+          type:"post",
+          url: "{:Url('News/listmore')}",
+          data:{
+              length:len,
+              type:type
+          },
+          beforeSend: function(XMLHttpRequest){
 
-                  },
-                  success:function(data){
-                      if(data.code == 1){
-                          addLists(data,type);
-                          var dataLen =data.data.length;
-                          if(data.data.length == 5){
-                              mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                          }else{
-                              mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                          }
-                      }else{
-                          mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                      }
+          },
+          success:function(data){
+              if(data.code == 1){
+                  addLists(data,type);
+                  var dataLen =data.data.length;
+                  if(data.data.length == 5){
+                      mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                  }else{
+                      mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                   }
-              })
+              }else{
+                  mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+              }
+          }
+      })
   }
    //数据循环
   function addLists(data,type){
-      var type;
       var html = '';
       var lists = data.data;
       var len = lists.length;
@@ -185,15 +178,15 @@
               list.path = '/home/images/banner/2.jpg';
           };
           html +=
-                  '<a href="/home/details/index/id/'+ list.id+'.html" class="list clear">'+
+                  '<a href="/home/News/detail/id/'+ list.id+'.html" class="list clear">'+
                   '<div class="fl">'+
-                  '<img src="'+list.path+'" alt="图片">'+
+                  '<img src="'+list.front_cover+'" alt="图片">'+
                   '</div>'+
                   '<div class="fr right">'+
                   '<div class="title limit_">'+list.title+'</div>'+
                   '<div class="clear time">'+
                   '<span class="fl">'+list.publisher+'</span>'+
-                  '<span class="fr">'+list.time+'</span>'+
+                  '<span class="fr">'+list.create_time+'</span>'+
                   '</div>'+
                   '</div>'+
                   '</a>'
@@ -204,53 +197,6 @@
           $('.activity').append(html);
       }
   }
-   //悬浮框移动
-  function moveanyway(){
-        var oW,oH,touch_start,touch_end;
-        var block = document.getElementById("publish");
-        block.addEventListener("touchstart", function(e) {
-            var touches = e.touches[0];
-            touch_start = touches.clientX;
-            oW = touches.clientX - block.offsetLeft;
-            oH = touches.clientY - block.offsetTop;
-            //阻止页面的滑动默认事件
-            document.addEventListener("touchmove",defaultEvent,false);
-        },false);
-        block.addEventListener("touchmove", function(e) {
-            var touches = e.touches[0];
-            var oLeft = touches.clientX - oW;
-            var oTop = touches.clientY - oH;
-            touch_end = touches.clientX;
-            if(oLeft < 0) {
-                oLeft = 0;
-            }else if(oLeft > document.documentElement.clientWidth - block.offsetWidth) {
-                oLeft = (document.documentElement.clientWidth - block.offsetWidth);
-            }
-            if(oTop < 0) {
-                oTop = 0;
-            }else if(oTop > document.documentElement.clientHeight - block.offsetHeight) {
-                oTop = (document.documentElement.clientHeight - block.offsetHeight);
-            }
-            block.style.left = oLeft+ "px";
-            block.style.top = oTop + "px";
-            e.preventDefault();
-        },false);
-        block.addEventListener("touchend",function() {
-            document.removeEventListener("touchmove",defaultEvent,false);
-            if(touch_start != touch_end && touch_end){
-                var d = document.documentElement.clientWidth - block.offsetWidth;
-                if(block.offsetLeft<(document.documentElement.clientWidth - block.offsetWidth)/2) {
-                    d = 0 ;
-                }
-                $(block).animate({
-                    left:d+'px'
-                },300)
-            }
-        },false);
-        function defaultEvent(e) {
-            e.preventDefault();
-        }
-    }
 
   //tab点击事件
   mui('#tab').on('tap', 'a', function(e) {
@@ -262,7 +208,7 @@
           }else{
               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
-      }else if(type==2){
+      }else if(type==1){
           if($(".activity a").length<7){
               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
           }else{
