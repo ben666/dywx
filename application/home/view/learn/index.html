@@ -127,6 +127,10 @@
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
+        setTimeout(function(){
+            var height = $(".banner").height();
+            $(".content").css("margin-top",height);
+        },0)
         //tab初始化和数据存储
         var ntc = $('.notices');
         var co = getCookie("type");
