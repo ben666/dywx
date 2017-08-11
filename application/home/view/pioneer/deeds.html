@@ -137,19 +137,25 @@
 </div>
 <div class="round">
 <div class="round-first">
-    <img src="/home/images/user/code.png">
+    <img src="{$list.front_cover|get_cover='path'}">
 </div>
 <div class="round-second"></div>
 <div class="round-third"></div>
 <div class="round-fourth"></div>
 </div>
 <div class="person">
-<p class="name">姚文荣</p>
-<p class="position">德清县委党校副校长</p>
+<p class="name">{$list.name}</p>
+{eq name="list.class" value="1"}
+<p class="position">{$list.position}</p>
+{/eq}
 </div>
 <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
     <a class="mui-control-item" href="#item1mobile" data-index="0">
-        <span>专家简介</span>
+        {switch name="list.class"}
+        {case value="1"}<span>专家简介</span>{/case}
+        {case value='2'}<span>集体简介</span>{/case}
+        {default / } <span>单位简介</span>
+        {/switch}
     </a>
     <a class="mui-control-item" href="#item2mobile" data-index="1">
        <span>先进事迹</span>
@@ -161,6 +167,7 @@
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--新闻发布-->
+                {$list.content}
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--先进事迹-->

@@ -31,4 +31,13 @@ class Pioneer extends Model{
             return $list;
         }
     }
+    // 获取内容
+    public function get_content($id){
+        $list = $this->where(['id' => $id,'status' => ['egt',0]])->find();
+        if (empty($list)){
+            return false;
+        }else{
+            return $list;
+        }
+    }
 }

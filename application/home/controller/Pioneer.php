@@ -7,6 +7,7 @@
  */
 namespace app\home\controller;
 use app\home\model\Pioneer as PioneerModel;
+use app\home\model\PioneerStory;
 use app\home\model\Browse;
 use app\home\model\Comment;
 use app\home\model\Like;
@@ -45,6 +46,22 @@ class Pioneer extends Base {
         $this ->assign('list3',$list3);
         return $this ->fetch();
     }
+
+    /**
+     * 个人 集体 单位  详情
+     * @return mixed
+     */
+    public function deeds()
+    {
+        $id = input('id');
+        $Pioneer = new PioneerModel();
+        $Story = new PioneerStory();
+        if (!$Pioneer->get_content($id)){
+            $this->error('系统参数错误');
+        }
+        $this->assign('list',$Pioneer->get_content($id));
+        return $this ->fetch();
+    }
     /**
      * 先锋事迹详情页
      */
@@ -61,7 +78,7 @@ class Pioneer extends Base {
             $res = PioneerModel::where($map) ->find();
             if(empty($res))
             {
-                return $this ->error('该文章不存在或已删除!');
+                $this ->error('该文章不存在或已删除!');
             }else{
                 $Pioneer = new PioneerModel();
                 //浏览加一
@@ -104,9 +121,8 @@ class Pioneer extends Base {
                 $this->assign('comment',$comment);
                 return $this->fetch();
             }
-            return $this ->fetch();
         }else{
-            return $this ->error('参数错误!');
+            $this ->error('参数错误!');
         }
     }
     /**
@@ -147,7 +163,7 @@ class Pioneer extends Base {
         $res = $like->where($map)->find();
         //今日已点赞
         if (!empty($res)) {
-            return $this->error('今日已点赞!');
+            $this->error('今日已点赞!');
         } else {
             $data['table'] = 'pioneer';
             $data['uid'] = $uid;
@@ -162,7 +178,7 @@ class Pioneer extends Base {
                 PioneerModel::where('id', $data['aid'])->setInc('likes', 1);
                 return $this->success("点赞成功");
             } else {
-                return $this->error("点赞失败!");
+                $this->error("点赞失败!");
             }
         }
     }
@@ -187,11 +203,7 @@ class Pioneer extends Base {
             {
                 return $this->success("加载成功",Null,$list);
             }else {
-                return $this->error("加载失败");
+                $this->error("加载失败");
             }
         }
-    public function deeds()
-    {
-        return $this ->fetch();
-    }
 }
