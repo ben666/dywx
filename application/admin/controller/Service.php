@@ -29,15 +29,16 @@ class Service extends Controller
                 $event = $Wechat->getRev()->getRevEvent();
                 switch ($event['event']) {
                     case 'subscribe':
-                        $newsData = array(
-                            '0'=> array(
-                                'Title' => "欢迎您关注“梦想小镇红色驿站”",
-                                'Description' => "梦想，源自对未来的向往；小镇，是历史浓缩的印记。",
-                                'PicUrl' => "http://mxxz.0571ztnet.com/home/images/birth/pic.jpg",
-                                'Url' => "http://v.xiumi.us/board/v5/2FAmS/49855733",
-                            ),
-                        );
-                        $Wechat->news($newsData)->reply();
+//                        $newsData = array(
+//                            '0'=> array(
+//                                'Title' => "欢迎您关注“中国遥感应用协会党建”",
+//                                'Description' => "",
+//                                'PicUrl' => "",
+//                                'Url' => "",
+//                            ),
+//                        );
+//                        $Wechat->news($newsData)->reply();
+                        $Wechat->text("您好！感谢关注【中国遥感应用协会党建】！")->reply();
                         break;
                 }
                 break;
@@ -49,18 +50,12 @@ class Service extends Controller
 
     }
 
-    // 企业号验证
+    // 微信 验证
     public function oauth() {
         $weObj = new TPWechat(Config::get('party'));
         $weObj->valid();
     }
-
-    //订阅号验证
-    public function oauth2(){
-        $Wechat = new TPWechat(Config::get('party'));
-        $Wechat->valid();
-    }
-
+    
     // 创建订阅号菜单
     public function menu() {
         $menu["button"] = array(
@@ -81,7 +76,7 @@ class Service extends Controller
         if($result) {
             return $this->success('提交成功');
         } else {
-            return $this->error('错误代码：'.$Wechat->errCode.'，消息：'.$Wechat->errMsg);
+            $this->error('错误代码：'.$Wechat->errCode.'，消息：'.$Wechat->errMsg);
         }
     }
 

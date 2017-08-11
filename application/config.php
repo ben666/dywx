@@ -30,11 +30,11 @@ return [
     
     /* 公众号配置 */
     'party' => array(
-        'login' =>'http://zthm.0571ztnet.com/home/verify/index',
-        'token' =>'mxxzdj',
-        'encodingaeskey' =>'8Bzq5oDfWQJSWAgvOsHbOmmUOP54lcCGokJ2tXsaGrN',
-        'appid' =>'wxd4e86a2f4f1e299b',
-        'appsecret' =>'f76e392e80496e81f8244115f823143e',
+        'login' =>'http://zgyg.0571ztnet.com/home/verify/index',
+        'token' =>'zgygdj',
+        'encodingaeskey' =>'',
+        'appid' =>'',
+        'appsecret' =>'',
     ),
     
 
