@@ -16,7 +16,7 @@ class Branch extends Base
      * 主页
      */
     public function index(){
-        
+        return $this->fetch();
     }
     
 }
