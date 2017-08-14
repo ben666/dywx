@@ -129,6 +129,9 @@
     color:#999;
     margin-top: 0.25rem;
 }
+.default img {
+    top: 30%;
+}
 </style>
 {/block}
 {block name="body"}
@@ -172,20 +175,26 @@
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--先进事迹-->
                 <div class="notice reported">
+                    {empty name="info"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <div class="lists">
-                        <a class="list clear" href="">
+                        {volist name="info" id="if"}
+                        <a class="list clear" href="{:Url('Pioneer/detail?id='.$if['id'])}">
                             <div class="fl">
-                                <img src="" alt="">
+                                <img src="{$if.front_cover|get_cover='path'}" alt="">
                             </div>
                             <div class="fr lr">
-                                <div class="title limit_">的点点滴滴多多多多多多多多多多多多多多多多多多多</div>
+                                <div class="title limit_">{$if.title}</div>
                                 <div class="clear">
-                                    <span class="fl">发布人</span>
-                                    <span class="fr fa fa-angle-right"></span>
+                                    <span class="fl">{$if.publisher}</span>
+                                    <span class="fr fa fa-angle-right">{$if.create_time|time_format='Y-m-d'}</span>
                                 </div>
                             </div>
                         </a>
+                        {/volist}
                     </div>
+                    {/empty}
                 </div>
 
             </div>

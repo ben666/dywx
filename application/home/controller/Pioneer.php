@@ -59,6 +59,7 @@ class Pioneer extends Base {
         if (!$Pioneer->get_content($id)){
             $this->error('系统参数错误');
         }
+        $this->assign('info',$Story->get_content($id));
         $this->assign('list',$Pioneer->get_content($id));
         return $this ->fetch();
     }
