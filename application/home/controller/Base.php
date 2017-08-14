@@ -495,8 +495,7 @@ class Base extends Controller {
             $this ->error('该内容不存在或已删除!');
         }
         //浏览加一
-        $info['views'] = array('exp','`views`+1');
-        Db::name($table)->where('id',$id)->update($info);
+        Db::name($table)->where('id',$id)->setInc('views');
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
             $con = array(

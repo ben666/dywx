@@ -20,9 +20,9 @@
 				<span class="read">{$new.views}</span>
 				{eq name="visit" value="0"}
 				{eq name="new.is_like" value="1"}
-				<span class="isgood good_ notvisitor" data-type="0" data-id='{$new.id}'>{$new.likes}</span>
+				<span class="isgood good_ notvisitor" data-type="5" data-id='{$new.id}'>{$new.likes}</span>
 				{else/}
-				<span class="isgood good notvisitor" data-type="0" data-id='{$new.id}'>{$new.likes}</span>
+				<span class="isgood good notvisitor" data-type="5" data-id='{$new.id}'>{$new.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$new.likes}</span>
@@ -45,7 +45,7 @@
 				</div>
 				{eq name="visit" value="0"}
 				{eq name="co.is_like" value="1"}
-				<div class="fr isgood good_ notsivitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
+				<div class="fr isgood good_ notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
 				{else/}
 				<div class="fr isgood good notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
 				{/eq}
@@ -97,7 +97,6 @@ var isGood = function(e,type,id){
 			aid:id,
 		},
 		success:function(data){
-
 		}
 	})
 };
