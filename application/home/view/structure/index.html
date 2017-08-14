@@ -9,18 +9,8 @@
 <div class="banner">
 	<img src="/home/images/banner/1.jpg" alt="组织架构banner" class="banner-img">
 </div>
-<div class="tabs">
-	<span class="tab active"><span>组织简介</span></span>
-	<span class="tab"><span>组织架构</span></span>
-</div>
 <div class="listbox">
-	<div class="box summary active">
-		<div class="box_ ">
-			<p>中国遥感应用协会（CHINA ASSOCIATION OF SENSING APPLICATION），英文缩写为“CARSA”。中国遥感协会应用协会原名全国地方遥感应用协会，由山西、湖南、陕西省遥感中心和江苏省遥感中心学会发起，在国家计委、国防科工委、航空航天部和各省（区、市）计委、遥感中心支持下，于1992年8月26日在山西省五台山成立。2002年12月28日，民政部根据国防科工委的报告批准全国地方应用遥感协会更名为中国遥感应用协会。</p>
-			<p>	2014年9月28日，协会第五届理事会成立，理事单位来自全国29个省市、自治区，涵盖国务院部委、航天科技、航天科工、中电科技三大中央大型企业协会集团，我国陆地、气象、海洋三大遥感卫星数据中心，各科研院所，地方遥感应用主管部门和应用机构，尤其是一批较活跃的民营企业也在其中。覆盖国防、农业、林业、水利、国土、测绘、城市规划、交通、环保、减灾、气象、海洋、科研等遥感应用重要领域部门，代表了遥感应用行业的主要力量。新一届理事会的目标是要把协会办成凝聚人才的会员之家，交流技术、促进应用的平台、服务政府与用户的桥梁，办成创新型、服务型、研究型的国内知名、国际有影响力的社会团体。</p>
-		</div>
-	</div>
-	<div class="town box hidden">
+	<div class="town box">
 		<!--小镇党委-->
 		<div class="box_ or">
 			<div class="lists">
@@ -33,7 +23,7 @@
 					</div>
 					<!--第二层-->
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会<span class="rt sj"></span></a>
 					</div>
 					<!--/第二层-->
 				</div>
@@ -47,15 +37,15 @@
 					</div>
 					<!--第二层-->
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会环境遥感分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会专家委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会光学遥感专业委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会灾害遥感分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会国土资源遥感分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会标准化分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会商业遥感卫星应用专业委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会国际合作委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">中国遥感应用协会科学普及分会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会环境遥感分会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会专家委员会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会光学遥感专业委员会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会灾害遥感分会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会国土资源遥感分会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会标准化分会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会商业遥感卫星应用专业委员会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会国际合作委员会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会科学普及分会<span class="rt sj"></span></a>
 					</div>
 					<!--/第二层-->
 				</div>
@@ -71,40 +61,7 @@
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
-<script src="/home/js/jquery.lazyload.min.js"></script>
+<!--<script src="/home/js/jquery.lazyload.min.js"></script>-->
 <script>
-$(function(){
-	//组织架构切换
-	slide();
-	$('.name2' ).each(function(){
-		var t = $(this ).text();
-		var href = '/home/structure/detail?party='+t+'';
-		$(this ).attr('href', href);
-	})
-	$(function(){
-		//tab值记录
-		tabRecord('.tab' ,'.box');
-		//tab切换
-		tabSwitch('.tab' ,'.box');
-		//上拉加载
-	});
-	$(function() {
-		$("img.lazy").lazyload({effect: "fadeIn"});
-	});
-});
-function slide(){
-	$('.lists .party1' ).on('click',function(){
-		var it = $(this);
-		var detail = it.next('.detail1' );
-		if(detail.hasClass('down')){
-			detail.slideUp();
-			it.find('.tri').removeClass('toup').addClass('todown');
-		}else{
-			detail.slideDown();
-			it.find('.tri').removeClass('todown').addClass('toup');
-		}
-		detail.toggleClass('down');
-	});
-}
 </script>
 {/block}
