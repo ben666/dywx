@@ -19,7 +19,7 @@
     width: 70vw;
     left: 50%;
     margin-left: -35vw;
-    margin-top: -0.44rem;
+    margin-top: calc(-0.44rem - 40px);
     background: #fff;
     box-shadow: 0px 1px 4px;
     z-index: 999999;

@@ -129,6 +129,11 @@
     color:#999;
     margin-top: 0.25rem;
 }
+#item1mobile p{
+    text-align: left;
+    text-indent: 0.5rem;
+    padding: 0.4rem;
+}
 .default img {
     top: 30%;
 }
@@ -206,13 +211,13 @@
 <script src="/home/js/reset.js"></script>
 <script>
 $(function(){
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    var c =  parseInt(window.location.href.split("/c/")[1]);
     //tab初始化和数据存储
     var co = getCookie("type");
     if(co == 0 || co == 1 || co == 2){
         c = co;
     }else{
-        c =  parseInt(window.location.href.split("index/c/")[1]);
+        c =  parseInt(window.location.href.split("/c/")[1]);
     }
     $("#tab a").eq(c).addClass('mui-active');
     $(".mui-slider-group>div").eq(c).addClass('mui-active');
@@ -226,6 +231,7 @@ $(function(){
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }
+        setCookie("type",c);
     });
 
 window.onload = function(){

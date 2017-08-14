@@ -38,20 +38,20 @@
 <!--tab-->
 <div class="scrollDiy">
     <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-        <a class="mui-control-item mui-active" href="#item1mobile" data-index="0">
+        <a class="mui-control-item" href="#item1mobile" data-index="0">
             个人
         </a>
         <a class="mui-control-item" href="#item2mobile" data-index="1">
             集体
         </a>
-        <a class="mui-control-item" href="#item3mobile" data-index=2">
+        <a class="mui-control-item" href="#item3mobile" data-index="2">
             单位
         </a>
     </div>
 
 
     <div class="mui-slider-group">
-        <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+        <div id="item1mobile" class="mui-slider-item mui-control-content">
             <!--个人-->
             <div class="notices">
                 <div class="notice regularmore">
@@ -122,7 +122,7 @@
                     <div class="lists tutor">
                         <ul>
                             {volist name="list3" id="vo"}
-                            <a href="{:Url('pioneer/deeds?c=0&id='.$vo.id)}">
+                            <a href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 {eq name="visit" value="0"}
@@ -147,10 +147,26 @@
 {block name="script"}
     <script src="/home/js/reset.js"></script>
 <script>
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    var c =  parseInt(window.location.href.split("index/type/")[1])-1;
+    //tab初始化和数据存储
+    var co = getCookie("type");
+    if(co == 0 || co == 1 || co == 2){
+        c = co;
+    }else{
+         c =  parseInt(window.location.href.split("index/type/")[1])-1;
+    }
+    $("#tab a").eq(c).addClass('mui-active');
+    $(".mui-slider-group>div").eq(c).addClass('mui-active');
+
+    mui('#tab').on('tap', 'a', function(e) {
+        c = this.getAttribute("data-index");
+        setCookie("type",c);
+    });
 
     //点赞
    var like = function(e,id,type){
+       event.preventDefault()
+       event.stopPropagation();
        var n = parseInt($(e).children("em").text());
        if($(e).hasClass('liked')){
            return false;
