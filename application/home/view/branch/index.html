@@ -20,41 +20,19 @@
 					<div class="party1">
 						<div class="tri-left structure1"></div>
 						<!--<div class="tri down"></div>-->
-						<div class="name1">联建式支部</div>
+						<div class="name1">中国遥感应用协会支部</div>
 					</div>
 					<!--第二层-->
+                    {volist name="depart" id="de"}
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('Branch/branch?c=0&dep='.$de['id'])}">{$de.name}<span class="rt sj"></span></a>
 					</div>
-					<!--/第二层-->
-				</div>
-				<!--/第一层-->
-
-				<!--第一层-->
-				<div class="list clear">
-					<div class="party1">
-						<div class="tri-left structure2"></div>
-						<!--<div class="tri down"></div>-->
-						<div class="name1">苗圃式支部</div>
-					</div>
-					<!--第二层-->
-					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会环境遥感分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会专家委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会光学遥感专业委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会灾害遥感分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会国土资源遥感分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会标准化分会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会商业遥感卫星应用专业委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会国际合作委员会<span class="rt sj"></span></a>
-						<a class="name2 limit" href="{:Url('activity/index?c=0')}">中国遥感应用协会科学普及分会<span class="rt sj"></span></a>
-					</div>
+                    {/volist}
 					<!--/第二层-->
 				</div>
 				<!--/第一层-->
 			</div>
 		</div>
-
 		<!--/小镇党委-->
 	</div>
 </div>
