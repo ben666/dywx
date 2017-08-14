@@ -80,6 +80,12 @@ html,body{
 .fl {
     float: left;
 }
+.clear.time .fl{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    width:60%;
+}
 .fr {
     float: right;
 }
@@ -103,8 +109,8 @@ html,body{
 .content .notices .notice .list {
     display: block;
     width: 100%;
-    padding-left: 3vw;
-    padding-right:  3vw;
+    padding-left: 0.24rem;
+    padding-right: 0.24rem;
     border-bottom: 1px solid #f1f1f1;
     color: #666666;
     position: relative;
@@ -120,10 +126,11 @@ html,body{
 .content .notices .notice .list .fl .type {
     position: absolute;
     bottom: 0.4rem;
-    left: 3.2vw;
+    font-size: 0.24rem;
     width: 1.6rem;
     text-align: center;
     color: #fff;
+    left: 0.24rem;
 }
 .content .notices .notice .list .right {
     width: calc(100% - 2rem);
@@ -155,6 +162,7 @@ html,body{
     position: absolute;
     font-size: 0.24rem;
     bottom: 0;
+    line-height: 0.5rem;
 }
 .content .notices .notice.activity .list .right {
     width: 100%;

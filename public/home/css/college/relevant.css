@@ -8,6 +8,13 @@
   line-height: 0.6rem;
   text-align: right;
 }
+.note .fl{
+  width:70%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align: left;
+}
 .article p {
   width: 100%;
   word-break: break-all;

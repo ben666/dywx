@@ -85,6 +85,12 @@
     color: #333333;
     font-size:0.28rem;
 }
+.clear.time .fl{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    width:60%;
+}
 .mui-slider-item .notices .notice .list .time {
     display: block;
     width: 100%;

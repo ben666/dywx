@@ -107,6 +107,13 @@
   font-size: 0.24rem;
   line-height: 8vw;
 }
+.note .fl{
+  width:70%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align: left;
+}
 .article .note span {
   /*margin-right: 10px;*/
 }

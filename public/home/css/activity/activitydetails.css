@@ -93,7 +93,7 @@ p{
     border-radius: 4px;
 }
 .enroll .lists .list .name {
-    width: 18vw;
+    width: 60vw;
     padding-left: 3.73vw;
     font-size: 0.28rem;
     color: #333;
@@ -106,9 +106,8 @@ p{
     color: #999;
 }
 .enroll .lists .list .time {
-    width: 22vw;
+    right: 0.2rem;
    position: absolute;
     padding-top: 7vw;
-    right: 0;
     color: #999;
 }
