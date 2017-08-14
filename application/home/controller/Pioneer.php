@@ -75,7 +75,7 @@ class Pioneer extends Base {
         if (empty($id)){
             $this ->error('参数错误!');
         }
-        $this->assign('list',$this->content(5,$id));
+        $this->assign('new',$this->content(5,$id));
         return $this->fetch();
     }
     /**
@@ -142,16 +142,9 @@ class Pioneer extends Base {
         public function moreList()
         {
             $len = input("length");
-            $news = new PioneerModel();
-            $map = array('status' => ['egt',0],'type' => 3);
-            $order = 'create_time desc';
-            $list = $news ->where($map) ->order($order) ->limit($len,5) ->select();
-            //图片跟时间戳转化
-            foreach($list as $value){
-                $img = Picture::get($value['front_cover']);
-                $value['path'] = $img['path'];
-                $value['time'] = date("Y-m-d",$value['create_time']);
-            }
+            $pid = input('pid');
+            $Story = new PioneerStory();
+            $list = $Story->get_content($pid,$len);
             if(!empty($list))
             {
                 return $this->success("加载成功",Null,$list);

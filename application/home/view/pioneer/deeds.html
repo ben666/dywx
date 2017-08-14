@@ -187,12 +187,12 @@
                         {volist name="info" id="if"}
                         <a class="list clear" href="{:Url('Pioneer/detail?id='.$if['id'])}">
                             <div class="fl">
-                                <img src="{$if.front_cover|get_cover='path'}" alt="">
+                                <img src="{$if.front_cover}" alt="">
                             </div>
                             <div class="fr lr">
                                 <div class="title limit_">{$if.title}</div>
                                 <div class="clear">
-                                    <span class="fl">{$if.create_time|time_format='Y-m-d'}</span>
+                                    <span class="fl">{$if.create_time}</span>
                                     <span class="fr fa fa-angle-right"></span>
                                 </div>
                             </div>
@@ -269,11 +269,13 @@ window.onload = function(){
 
 function loadScroll(){
    var len = $(".reported .lists .list").length;
+    var pid = {$list.id};
     $.ajax({
         type:"post",
-        url: "{:Url('Activity/morelist')}",
+        url: "{:Url('Pioneer/moreList')}",
         data:{
-            length:len
+            length:len,
+            pid:pid
         },
         beforeSend: function(XMLHttpRequest){
         },
@@ -281,7 +283,7 @@ function loadScroll(){
             if(data.code == 1){
                 addCourse(data);
                 var dataLen =data.data.length;
-                if(data.data.length == 5){
+                if(data.data.length == 7){
                     mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     loadScroll();
                 }else{
@@ -301,14 +303,14 @@ function addCourse(data){
     for(var i = 0; i< len;i++){
         var list = lists[i];
             html +=
-                    '<a class="list clear" href="/home/activity/detail/id/'+list.id+'">' +
+                    '<a class="list clear" href="/home/Pioneer/detail/id/'+list.id+'">' +
                     '<div class="fl">' +
                     '<img src="'+list.front_cover+'" alt="图片">' +
                     '</div>' +
                     '<div class="fr lr">' +
                     '<div class="title limit_">'+list.title+'</div>' +
                     '<div class="clear">' +
-                    '<span class="fl">'+list.time+'</span>' +
+                    '<span class="fl">'+list.create_time+'</span>' +
                     ' <span class="fr fa fa-angle-right"></span>' +
                     '</div>' +
                     '</div>' +
