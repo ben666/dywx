@@ -43,6 +43,10 @@ html,body{
     width: 0.8rem;
     height: 0.8rem;
 }
+
+.party{
+    padding-bottom: 0.5rem;
+}
 /*model*/
 .model{
     padding:0 0.24rem;
