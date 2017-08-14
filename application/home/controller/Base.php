@@ -132,11 +132,12 @@ class Base extends Controller {
      * type值：
      * 0 评论点赞
      * 1 news  红色足迹
-     * 2 feedback
+     * 2 branch 支部建设
      * 3 learn 两学一做
      * 4 notice  信息驿站
-     * 5 pioneer 先锋引领
+     * 5 pioneer_story 先锋引领 事迹
      * 6 wish 活动发起
+     * 7 pioneer 先锋引领
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -150,7 +151,7 @@ class Base extends Controller {
                 $table = "news";
                 break;
             case 2:
-                $table = "opinion";
+                $table = "branch";
                 break;
             case 3:
                 $table = "learn";
@@ -159,10 +160,13 @@ class Base extends Controller {
                 $table = "notice";
                 break;
             case 5:
-                $table = "pioneer";
+                $table = "pioneer_story";
                 break;
             case 6:
                 $table = "wish";
+                break;
+            case 7:
+                $table = "pioneer";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -265,10 +269,10 @@ class Base extends Controller {
      * 评论，$type,$aid,$content
      * type值：
      * 1 news 红色足迹
-     * 2 feedback
+     * 2 branch  支部建设
      * 3 learn  两学一做
      * 4 notice  信息驿站
-     * 5 pioneer 先锋引领
+     * 5 pioneer_story 先锋引领 事迹
      * 6 wish 活动发起
      */
     public function comment(){
@@ -281,7 +285,7 @@ class Base extends Controller {
                     $table = "news";
                     break;
                 case 2:
-                    $table = "opinion";
+                    $table = "branch";
                     break;
                 case 3:
                     $table = "learn";
@@ -290,7 +294,7 @@ class Base extends Controller {
                     $table = "notice";
                     break;
                 case 5:
-                    $table = "pioneer";
+                    $table = "pioneer_story";
                     break;
                 case 6:
                     $table = "wish";
@@ -454,10 +458,10 @@ class Base extends Controller {
      * 获取数据详情 ，$type,$id
      * type值：
      * 1 news 红色足迹
-     * 2 feedback
+     * 2 branch 支部建设
      * 3 learn  两学一做
      * 4 notice  信息驿站
-     * 5 pioneer  先锋引领
+     * 5 pioneer_story  先锋引领 事迹
      * 6 wish  活动发起
      */
     public function content($type,$id){
@@ -467,7 +471,7 @@ class Base extends Controller {
                 $table = "news";
                 break;
             case 2:
-                $table = "opinion";
+                $table = "branch";
                 break;
             case 3:
                 $table = "learn";
@@ -476,7 +480,7 @@ class Base extends Controller {
                 $table = "notice";
                 break;
             case 5:
-                $table = "pioneer";
+                $table = "pioneer_story";
                 break;
             case 6:
                 $table = "wish";
@@ -484,6 +488,11 @@ class Base extends Controller {
             default:
                 return $this->error("无该数据表");
                 break;
+        }
+        //活动基本信息
+        $list = Db::name($table)->find(['id' => $id]);
+        if (empty($list)){
+            $this ->error('该内容不存在或已删除!');
         }
         //浏览加一
         $info['views'] = array('exp','`views`+1');
@@ -504,8 +513,6 @@ class Base extends Controller {
                 }
             }
         }
-        //活动基本信息
-        $list = Db::name($table)->find(['id' => $id]);
         $list['user'] = $userId;
         //分享图片及链接及描述
         if (isset($list['front_cover'])){ // 封面图

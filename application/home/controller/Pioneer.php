@@ -71,60 +71,12 @@ class Pioneer extends Base {
         //游客模式
         $this ->anonymous();
         $this ->jssdk();
-        $userId = session('userId');
         $id = input('get.id');
-        if(!empty($id))
-        {
-            $map = array('id' => $id,'status' => ['egt',0]);
-            $res = PioneerModel::where($map) ->find();
-            if(empty($res))
-            {
-                $this ->error('该文章不存在或已删除!');
-            }else{
-                $Pioneer = new PioneerModel();
-                //浏览加一
-                $info['views'] = array('exp','`views`+1');
-                $Pioneer::where('id',$id)->update($info);
-                if($userId != "visitor"){
-                    //浏览不存在则存入pb_browse表
-                    $con = array(
-                        'user_id' => $userId,
-                        'pioneer_id' => $id,
-                    );
-                    $history = Browse::get($con);
-                    if(!$history && $id != 0){
-                        $s['score'] = array('exp','`score`+1');
-                        if ($this->score_up()){
-                            // 未满 15 分
-                            Browse::create($con);
-                            WechatUser::where('userid',$userId)->update($s);
-                        }
-                    }
-                }
-
-                //新闻基本信息
-                $list = $Pioneer::get($id);
-                //分享图片及链接及描述
-                $image = Picture::where('id',$list['front_cover'])->find();
-                $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
-                $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
-                $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
-
-                //获取 文章点赞
-                $likeModel = new Like;
-                $like = $likeModel->getLike(5,$id,$userId);
-                $list['is_like'] = $like;
-                $this->assign('new',$list);
-
-                //获取 评论
-                $commentModel = new Comment();
-                $comment = $commentModel->getComment(5,$id,$userId);
-                $this->assign('comment',$comment);
-                return $this->fetch();
-            }
-        }else{
+        if (empty($id)){
             $this ->error('参数错误!');
         }
+        $this->assign('list',$this->content(5,$id));
+        return $this->fetch();
     }
     /**
      * 判断今日导师点赞
@@ -137,7 +89,7 @@ class Pioneer extends Base {
         $likeModel = new Like;
         foreach($data as $v)
         {
-            $like = $likeModel ->checkLike(5,$v['id'],$userId);
+            $like = $likeModel ->checkLike(7,$v['id'],$userId);
             $v['is_like'] = $like;
         }
         return $data;
@@ -157,7 +109,7 @@ class Pioneer extends Base {
         $timestamp0 = strtotime($dateStr);
         $map = array(
             'create_time' => ['egt', $timestamp0],
-            'type' => 5,
+            'type' => 7,
             'aid' => $data['aid'],
             'uid' => $uid
         );
