@@ -17,7 +17,7 @@ class Learn extends Model {
      * @param $length
      * @param string $push 推送数据获取
      */
-    public function getDataList($length,$push="0"){
+    public function getDataList($length,$push=0){
         $map = array(
             'status' => ['egt',0],
             'recommend' => 1,

@@ -88,7 +88,7 @@
             {volist name="list2" id="loo"}
             <a href="
             {switch name='$loo.class'}
-            {case value='1'}{:Url('Details/index?id='.$loo['id'])}{/case}
+            {case value='1'}{:Url('News/index?id='.$loo['id'])}{/case}
             {case value='2'}
                 {eq name='$loo.type' value='1'}
                 {:Url('Learn/video?id='.$loo['id'])}
@@ -102,6 +102,12 @@
              {case value='4'}
                 {:Url('Pioneer/detail?id='.$loo['id'])}
             {/case}
+            {case value='5'}
+                {:Url('Activity/detail?id='.$loo['id'])}
+            {/case}
+            {case value='6'}
+                {:Url('Branch/detail?id='.$loo['id'])}
+            {/case}
             {default/}
             {/switch}"
                class="list clear" data-type="{$loo.class}">
@@ -111,8 +117,10 @@
                     {switch name='$loo.class'}
                     {case value='1'}红色足迹{/case}
                     {case value='2'}两学一做{/case}
-                    {case value='3'}鸡毛传贴{/case}
-                    {case value='4'}先锋事迹{/case}
+                    {case value='3'}信息驿站{/case}
+                    {case value='4'}先锋引领{/case}
+                    {case value='5'}活动发起{/case}
+                    {case value='6'}支部建设{/case}
                     {default/}
                     {/switch}
                    </span>
@@ -143,7 +151,7 @@
 //        paginationClickable :true
     });
     window.onload = function(){
-        if( $('.notice .list').length<7){
+        if( $('.notice .list').length<6){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -198,6 +206,8 @@
             var learn_len = $('.notice .list[data-type=2]').length;
             var notice_len = $('.notice .list[data-type=3]').length;
             var pioneer_len = $('.notice .list[data-type=4]').length;
+            var wish_len = $('.notice .list[data-type=5]').length;
+            var branch_len = $('.notice .list[data-type=6]').length;
                 $.ajax({
                     type:"get",
                     url: "{:Url('Index/moreDataList')}",
@@ -205,11 +215,14 @@
                         news: news_len,
                         learn: learn_len,
                         notice: notice_len,
-                        pioneer: pioneer_len
+                        pioneer_story: pioneer_len,
+                        wish:wish_len,
+                        branch:branch_len
                     },
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
+                        console.log(data);
                         if(data.code == 1){
                             addLists(data);
                             var dataLen =data.data.length;
@@ -236,7 +249,7 @@
             var type_name ='';
             if(list.class == 1){
                 class_name = '红色足迹';
-                link = '/home/details/index/id/'+list.id;
+                link = '/home/news/index/id/'+list.id;
             }else if(list.class == 2){
                 class_name = '两学一做';
                 //1视频 2文字
@@ -246,11 +259,17 @@
                     link = '/home/learn/video/id/'+list.id;
                 }
             }else if(list.class == 3){
-                class_name = '鸡毛传贴';
+                class_name = '心息驿站';
                 link = '/home/college/forumnotice/id/'+list.id;
             }else if(list.class == 4){
-                class_name = '先锋事迹';
+                class_name = '先锋引领';
                 link = '/home/pioneer/detail/id/'+list.id;
+            }else if(list.class == 5){
+                class_name = '活动发起';
+                link = '/home/activity/detail/id/'+list.id;
+            }else if(list.class == 6){
+                class_name = '支部建设';
+                link = '/home/branch/detail/id/'+list.id;
             }
             if(list.publisher.length >9){
                 list.publisher = list.publisher.substring(0,9)+'...';

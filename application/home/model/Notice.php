@@ -11,11 +11,12 @@ use think\Model;
 use app\home\model\Picture;
 class Notice extends Model {
     //首页获取推荐的数据
-    public function getDataList($length){
+    public function getDataList($length,$push=0){
         $map = array(
             'status' => ['egt',0],
 //            'end_time' => ['gt',time()],
-            'recommend' => 1
+            'recommend' => 1,
+            'push' => ['egt',$push]
         );
         $order = 'create_time desc';
         $limit = "$length,1";
