@@ -32,6 +32,14 @@
         -webkit-overflow-scrolling: touch;
         width:100%;
     }
+    .triangle-up {
+        border-left: 2.66vw solid transparent;
+        border-right: 2.66vw solid transparent;
+        border-bottom: 3.46vw solid #fff;
+        position: absolute;
+        top: 0.73rem;;
+        left: 14%;
+    }
 </style>
 {/block}
 {block name="body"}
@@ -47,6 +55,7 @@
         <a class="mui-control-item" href="#item3mobile" data-index="2">
             单位
         </a>
+        <span class="triangle-up"></span>
     </div>
 
 
@@ -61,7 +70,7 @@
                     <div class="lists tutor">
                         <ul>
                             {volist name="list1" id="vo"}
-                            <a href="{:Url('pioneer/deeds?c=0&id='.$vo.id)}">
+                            <a href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 <span class="position">{$vo.position}</span>
@@ -92,7 +101,7 @@
                     <div class="lists tutor">
                         <ul>
                             {volist name="list2" id="vo"}
-                            <a href="{:Url('pioneer/deeds?c=0&id='.$vo.id)}">
+                            <a href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 {eq name="visit" value="0"}
@@ -155,12 +164,26 @@
     }else{
          c =  parseInt(window.location.href.split("index/type/")[1])-1;
     }
+    if(c==0){
+        $(".triangle-up").css("left","14%");
+    }else if(c==1){
+        $(".triangle-up").css("left","47%");
+    }else if(c==2){
+        $(".triangle-up").css("left","80%");
+    }
     $("#tab a").eq(c).addClass('mui-active');
     $(".mui-slider-group>div").eq(c).addClass('mui-active');
 
     mui('#tab').on('tap', 'a', function(e) {
         c = this.getAttribute("data-index");
         setCookie("type",c);
+        if(c==0){
+            $(".triangle-up").css("left","14%");
+        }else if(c==1){
+            $(".triangle-up").css("left","47%");
+        }else if(c==2){
+            $(".triangle-up").css("left","80%");
+        }
     });
 
     //点赞

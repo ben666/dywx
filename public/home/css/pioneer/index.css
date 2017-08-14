@@ -7,7 +7,11 @@ em{
     width: 100vw;
     height: 0.88rem;
     padding: 0.16rem 0;
-    background:#f2771d;
+    background:#f1f1f1;
+}
+#tab{
+    background: url(/home/images/activity/tab.png) no-repeat;
+    background-size: cover;
 }
 #tab a{
     display: inline-block;
@@ -17,13 +21,12 @@ em{
     font-size:0.3rem;
     line-height: 0.56rem;
     text-align: center;
-    border-right: 1px solid #fff;
 }
 #tab a:last-child{
     border-right: none;
 }
 .mui-control-item.mui-active {
-    color: #000!important;
+    color: #fd6743!important;
 }
 a:active{
     background: argb(0,0,0,0.1);

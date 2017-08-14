@@ -192,8 +192,8 @@
                             <div class="fr lr">
                                 <div class="title limit_">{$if.title}</div>
                                 <div class="clear">
-                                    <span class="fl">{$if.publisher}</span>
-                                    <span class="fr fa fa-angle-right">{$if.create_time|time_format='Y-m-d'}</span>
+                                    <span class="fl">{$if.create_time|time_format='Y-m-d'}</span>
+                                    <span class="fr fa fa-angle-right"></span>
                                 </div>
                             </div>
                         </a>
@@ -210,8 +210,8 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-$(function(){
     var c =  parseInt(window.location.href.split("/c/")[1]);
+$(function(){
     //tab初始化和数据存储
     var co = getCookie("type");
     if(co == 0 || co == 1 || co == 2){
@@ -223,8 +223,11 @@ $(function(){
     $(".mui-slider-group>div").eq(c).addClass('mui-active');
 })
     mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
         c = this.getAttribute("data-index");
-        if(c==1){
+        if(c==0){
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        }else if(c==1){
             if($(".reported .lists .list").length<7){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
@@ -239,10 +242,14 @@ window.onload = function(){
         var height = $("#tab").height()+$(".banners").height()+$(".person").height();;
         $("#refreshContainer").css("top",height);
     },0)
-    if( $(".reported .lists .list").length<7){
+    if(c==0){
         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-    }else{
-        mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+    }else if(c==1){
+        if($(".reported .lists .list").length<7){
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        }else{
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        }
     }
 }
     //初始化下拉加载
@@ -253,6 +260,11 @@ window.onload = function(){
                 callback: loadScroll
             }
         }
+    });
+
+    mui('.lists').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
     });
 
 function loadScroll(){
@@ -296,7 +308,7 @@ function addCourse(data){
                     '<div class="fr lr">' +
                     '<div class="title limit_">'+list.title+'</div>' +
                     '<div class="clear">' +
-                    '<span class="fl">'+list.publisher+'</span>' +
+                    '<span class="fl">'+list.time+'</span>' +
                     ' <span class="fr fa fa-angle-right"></span>' +
                     '</div>' +
                     '</div>' +
