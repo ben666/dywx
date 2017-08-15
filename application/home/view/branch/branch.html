@@ -1,6 +1,6 @@
 {extend name="public/common"}
 {block name="style"}
-    <title>活动发起</title>
+    <title>支部建设</title>
     <link rel="stylesheet" href="/home/css/activity/index.css">
     <style>
         a:active{background: none;}
@@ -57,7 +57,7 @@
                         <div class="lists">
                             <ul>
                                 {volist name="list" id="lo"}
-                                <a class="clear"  href="{:Url('Activity/activitydetails?id='.$lo['id'])}">
+                                <a class="clear"  href="{:Url('Branch/activitydetails?id='.$lo['id'])}">
                                     <p>{$lo.title}</p>
                                     <span>{$lo.description}</span>
                                     <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
@@ -78,7 +78,7 @@
                     {else/}
                     <div class="lists">
                         {volist name="report" id="ro"}
-                        <a class="list clear" href="{:Url('Activity/detail?id='.$ro['id'])}">
+                        <a class="list clear" href="{:Url('Branch/detail?id='.$ro['id'])}">
                             <div class="fl">
                                 <img src="{$ro.front_cover|get_cover='path'}" alt="">
                             </div>
@@ -159,7 +159,7 @@
 </div>
     </div>
 <!--线上活动发布-->
-<a id="publish" href="{:Url('Activity/publish')}"></a>
+<a id="publish" href="{:Url('Branch/publish?dep='.$depart)}"></a>
 <div class="bottom clear">
     <div class="myword fl">
         <input type="text" placeholder="说说你的感想！">
@@ -310,6 +310,7 @@ window.onload = function(){
         $('.myword input' ).val('');
     });
     function loadScroll(){
+        var dep = {$depart};
             if(c==0){
                 var len =$(".regularmore .lists a").length;
             }
@@ -321,10 +322,11 @@ window.onload = function(){
             }
                 $.ajax({
                     type:"post",
-                    url: "{:Url('Activity/morelist')}",
+                    url: "{:Url('Branch/morelist')}",
                     data:{
                         length:len,
-                        type:c
+                        type:c,
+                        dep:dep
                     },
                     beforeSend: function(XMLHttpRequest){
                     },

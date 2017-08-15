@@ -57,6 +57,7 @@ class Branch extends Base
         $this->assign('list',$list);
         $this->assign('lists',$lists);
         $this->assign('report',$report);
+        $this->assign('depart',$dep);
         return $this ->fetch();
     }
     /*
@@ -68,6 +69,7 @@ class Branch extends Base
         $Wish = new BranchModel();
         $type = input('post.type');  // 0 活动列表 1 活动报道  2 投票
         $len = input('post.length');
+        $dep = input('post.dep');
         if ($type == 0 || $type == 1){
             if ($type == 0){
                 $con = 1;
@@ -75,7 +77,7 @@ class Branch extends Base
                 $con = 3;
             }
             // 活动  列表
-            $list = $Wish->where(['type' => $con,'status' => ['egt',0]])->order('id desc')->limit($len,5)->select();  // 活动列表
+            $list = $Wish->where(['department' => $dep,'type' => $con,'status' => ['egt',0]])->order('id desc')->limit($len,5)->select();  // 活动列表
             foreach($list as $value){
                 $Pic = Picture::where('id',$value['front_cover'])->find();
                 $value['front_cover'] = $Pic['path'];
@@ -83,7 +85,7 @@ class Branch extends Base
             }
         }else{
             // 投票
-            $list = $Wish->where(['type' => 2,'status' => 0])->order('id desc')->limit($len,5)->select();  // 投票
+            $list = $Wish->where(['department' => $dep,'type' => 2,'status' => 0])->order('id desc')->limit($len,5)->select();  // 投票
             foreach($list as $value){
                 $User = WechatUser::where('userid',$value['create_user'])->field('department,headimgurl')->find();
                 $Depart = WechatDepartment::where('id',$User['department'])->field('name')->find();
@@ -124,7 +126,7 @@ class Branch extends Base
         //获取jssdk
         $this ->jssdk();
         $id = input('id');
-        $this->assign('new',$this->content(6,$id));
+        $this->assign('new',$this->content(2,$id));
         return $this->fetch();
     }
     /* 活动发起   详情 */
@@ -134,7 +136,7 @@ class Branch extends Base
         $id = input('get.id/d');
         $list = BranchModel::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){
-            return $this->error('系统错误,数据不存在');
+            $this->error('系统错误,数据不存在');
         }
         // 认领权限
         $User = WechatUser::where('userid',$userId)->field('review,department')->find();
@@ -225,16 +227,18 @@ class Branch extends Base
     public function publish(){
         $this->checkAnonymous();
         $data = input('post.');
+        $dep = input('get.dep');
         $uid = session('userId');
         if(empty($data))
         {
             return $this ->fetch();
         }else{
-            $wishModel = new wishModel();
+            $wishModel = new BranchModel();
             $data['type'] = 2;
             $data['images'] = json_encode($data['images']);
             $data['publisher'] = get_name($uid);
             $data['create_time'] = time();
+            $data['department'] = $dep;
             $data['create_user'] = $uid;
             $data['status'] = 0;
             $wishModel ->data($data) ->save();
