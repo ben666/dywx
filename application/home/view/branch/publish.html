@@ -20,6 +20,7 @@
 			+
 		</div>
 		<input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
+		<input type="hidden" name="dep" value="{$dep}"/>
 	</div>
 </div>
 <div class="bottom">
@@ -49,7 +50,8 @@ $(function(){
 			}
 			data ={
 				content:content,
-				images:images
+				images:images,
+				department:$("input[name='dep']").val()
 			};
 		}
 		if(n == 0 || n >400){
@@ -77,6 +79,7 @@ $(function(){
 						beforeSend: function(XMLHttpRequest){
 						},
 						success:function(e){
+							console.log(e)
 							if(e.code == 1){
 								swal({
 									title: '上传成功',

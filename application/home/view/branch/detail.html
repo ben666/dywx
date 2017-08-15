@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>活动发起</title>
+<title>支部建设</title>
 <link rel="stylesheet" href="/home/css/common/detail.css">
 <style>
 	.mui-pull-bottom-pocket {
@@ -28,9 +28,9 @@
 				<span class="read">{$new.views}</span>
 				{eq name="visit" value="0"}
 				{eq name="new.is_like" value="1"}
-				<span class="isgood good_ notvisitor"  data-type="6" data-id="{$new.id}">{$new.likes}</span>
+				<span class="isgood good_ notvisitor"  data-type="2" data-id="{$new.id}">{$new.likes}</span>
 				{else/}
-				<span class="isgood good notvisitor"  data-type="6" data-id="{$new.id}">{$new.likes}</span>
+				<span class="isgood good notvisitor"  data-type="2" data-id="{$new.id}">{$new.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$new.likes}</span>
@@ -71,7 +71,7 @@
 	<div class="myword fl">
 		<input type="text" placeholder="说说你的感想！">
 	</div>
-	<div class="send fr" onclick="send(this,6,{$new['id']})">发送</div>
+	<div class="send fr" onclick="send(this,2,{$new['id']})">发送</div>
 </div>
 {/eq}
 
@@ -191,7 +191,7 @@ function loadScroll(){
 				type:"post",
 				url:"{:Url('Base/morecomment')}",
 				data:{
-					type:6,
+					type:2,
 					aid:id,
 					length:len
 				},

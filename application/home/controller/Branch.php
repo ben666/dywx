@@ -51,7 +51,7 @@ class Branch extends Base
             $value['is_like'] = $like;  //  0 未投票    1  赞成  2 反对
             // 获取评论
             $commentModel = new Comment();
-            $comment = $commentModel->getComment(6,$value['id'],$userId);
+            $comment = $commentModel->getComment(2,$value['id'],$userId);
             $value['comment'] = $comment;
         }
         $this->assign('list',$list);
@@ -108,7 +108,7 @@ class Branch extends Base
                 $value['is_like'] = $like;  //  0 未投票    1  赞成  2 反对
                 // 获取评论
                 $commentModel = new Comment();
-                $comment = $commentModel->getComment(6,$value['id'],$userId);
+                $comment = $commentModel->getComment(2,$value['id'],$userId);
                 $value['comment'] = $comment;
             }
         }
@@ -138,9 +138,6 @@ class Branch extends Base
         if (empty($list)){
             $this->error('系统错误,数据不存在');
         }
-        // 认领权限
-        $User = WechatUser::where('userid',$userId)->field('review,department')->find();
-        $list['review'] = $User['review'];
         // 已认领名单
         $Receive = db('branch_receive')->where(['rid' => $id,'status' => 0])->select();
         foreach($Receive as $key => $value){
@@ -150,20 +147,20 @@ class Branch extends Base
             $Receive[$key]['department'] = WechatDepartment::where('id',$User['department'])->value('name');
         }
         $list['receive'] = $Receive;
-        // 判断自己所在部门     是否已经认领
-        $department = WechatUser::where('userid',$userId)->field('department')->find();
-        $info = db('wish_receive')->where(['rid' => $id,'department' => $department['department'],'status' => 0])->find();
-        if ($info){
-            $list['is_receive'] = 1;  //   同部门 其他管理员  已经认领
+        // 认领权限  本支部党员
+        $User = WechatUser::where(['userid' => $userId , 'department' => $list['department'] ,'party' => 1])->find();
+        $list['review'] = 1;
+        if (empty($User)){
+            // 没有认领权限
+            $list['review'] = 0;
+        }
+        // 有认领权限  再判断是否已经认领
+        $infoes = db('branch_receive')->where(['rid' => $id,'userid' => $userId,'status' => 0])->find();
+        if ($infoes){
+            // 自己已经认领
+            $list['is_receive'] = 1;
         }else{
-            //  判断自己是否 认领
-            $infoes = db('wish_receive')->where(['rid' => $id,'userid' => $userId,'status' => 0])->find();
-            if ($infoes){
-                // 自己已经认领
-                $list['is_receive'] = 1;
-            }else{
-                $list['is_receive'] = 0;  // 未认领
-            }
+            $list['is_receive'] = 0;  // 未认领
         }
         //活动基本信息
         $list['user'] = $userId;
@@ -181,18 +178,18 @@ class Branch extends Base
     public function enroll(){
         $this->checkAnonymous();
         $id = input('post.id/d');
-        $list = Wish::where(['id' => $id,'status' => 0])->find();
+        $list = BranchModel::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){
-            return $this->error('系统错误,数据不存在');
+            $this->error('系统错误,数据不存在');
         }
         $userId = session('userId');
         $department = WechatUser::where('userid',$userId)->value('department');
-        $res = db('wish_receive')->insert(['rid' => $id,'userid' => $userId,'department' => $department,'create_time' => time(),'status' => 0]);
+        $res = db('branch_receive')->insert(['rid' => $id,'userid' => $userId,'department' => $department,'create_time' => time(),'status' => 0]);
         if ($res){
             // 返回 用户数据
             $User = WechatUser::where('userid',$userId)->field('name,department,headimgurl')->find();
             $User['department'] = WechatDepartment::where('id',$User['department'])->value('name');
-            $User['time'] = date('Y-m-d',db('wish_receive')->where(['rid' => $id,'userid' => $userId])->value('create_time'));
+            $User['time'] = date('Y-m-d',db('branch_receive')->where(['rid' => $id,'userid' => $userId])->value('create_time'));
             return $this->success('认领成功','',$User);
         }else{
             $this->error('认领失败');
@@ -206,15 +203,15 @@ class Branch extends Base
         $userId = session('userId');
         $id = input('post.id');
         $status = input('post.status');
-        $Vote = new  WishVote();
+        $Vote = new  BranchVote();
         $res = $Vote->save(['userid' => $userId,'vote_id' => $id,'status' => $status]);
         if ($res){
             if ($status == 2){
                 // 反对
-                wishModel::where(['id' => $id,'status' => 0])->setInc('likes_no');
+                BranchModel::where(['id' => $id,'status' => 0])->setInc('likes_no');
             }else{
                 // 赞成
-                wishModel::where(['id' => $id,'status' => 0])->setInc('likes_yes');
+                BranchModel::where(['id' => $id,'status' => 0])->setInc('likes_yes');
             }
             return $this->success('成功');
         }else{
@@ -231,6 +228,7 @@ class Branch extends Base
         $uid = session('userId');
         if(empty($data))
         {
+            $this->assign('dep',$dep);
             return $this ->fetch();
         }else{
             $wishModel = new BranchModel();
@@ -238,7 +236,6 @@ class Branch extends Base
             $data['images'] = json_encode($data['images']);
             $data['publisher'] = get_name($uid);
             $data['create_time'] = time();
-            $data['department'] = $dep;
             $data['create_user'] = $uid;
             $data['status'] = 0;
             $wishModel ->data($data) ->save();

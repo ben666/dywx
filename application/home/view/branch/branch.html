@@ -360,7 +360,7 @@ window.onload = function(){
             var list = lists[i];
             if (type == 0) {
                 html +=
-                    '<a class="clear" href="/home/activity/activitydetails/id/'+list.id+'">'+
+                    '<a class="clear" href="/home/branch/activitydetails/id/'+list.id+'">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.description+'</span>'+
                     '<span class="lists time">'+list.time+'</span>'+
@@ -368,7 +368,7 @@ window.onload = function(){
                     '</a>';
             } else if(type==1) {
                 html +=
-                        '<a class="list clear" href="/home/activity/detail/id/'+list.id+'">' +
+                        '<a class="list clear" href="/home/branch/detail/id/'+list.id+'">' +
                         '<div class="fl">' +
                         '<img src="'+list.front_cover+'" alt="图片">' +
                         '</div>' +
@@ -466,7 +466,7 @@ window.onload = function(){
                 type:"post",
                 url:"{:Url('Base/comment')}",
                 data:{
-                    type : 6,
+                    type : 2,
                     aid:$('.send' ).attr('data-tab'),
                     content:it.val()
                 },
@@ -508,7 +508,7 @@ window.onload = function(){
         $(e ).next('span').text(n);
         $.ajax({
             type:"post",
-            url:"{:Url('Activity/vote')}",
+            url:"{:Url('Branch/vote')}",
             data:{
                 id:id,
                 status:status
@@ -529,7 +529,7 @@ window.onload = function(){
         $(e ).next('span').text(n);
         $.ajax({
             type:"post",
-            url:"{:Url('Activity/vote')}",
+            url:"{:Url('Branch/vote')}",
             data:{
                 id:id,
                 status:status
