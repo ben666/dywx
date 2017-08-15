@@ -199,18 +199,24 @@
 window.onload = function(){
     var previewImage = mui.previewImage();
  if(c==0){
+     $("#publish").hide();
+     $(".bottom").hide();
      if($(".regularmore .lists a").length<7){
          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
      }else{
          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
      }
  }else if(c==1){
+     $("#publish").hide();
+     $(".bottom").hide();
      if($(".reported .lists a").length<7){
          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
      }else{
          mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
      }
  }else if(c==2){
+     $("#publish").show();
+     $(".bottom").show();
      if($(".votes>ul>li").length<5){
          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
      }else{
