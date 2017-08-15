@@ -23,7 +23,7 @@ class Branch extends Base
      */
     public function index(){
         // 去掉 协会
-        $depart = WechatDepartment::where(['status' =>1 ,'id' => ['neq',1]])->order('id desc')->select();
+        $depart = WechatDepartment::where(['status' =>1 ,'id' => ['neq',1]])->select();
         $this->assign('depart',$depart);
         return $this->fetch();
     }
