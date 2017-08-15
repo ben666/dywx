@@ -88,7 +88,7 @@ class Branch extends  Admin
         }else{
             // 添加页面
             $this->assign('msg', $wish->get_content(input('get.id')));
-            $Department = WechatDepartment::where(['status' => 1])->field('id,name')->select();
+            $Department = WechatDepartment::where(['status' => 1 ,'id' => ['neq',1]])->field('id,name')->select();
             $this->assign('info',$Department);
             return $this->fetch();
         }
@@ -119,7 +119,7 @@ class Branch extends  Admin
                     }
                 }
             }else {
-                $Department = WechatDepartment::where(['status' => 1])->field('id,name')->select();
+                $Department = WechatDepartment::where(['status' => 1 ,'id' => ['neq',1]])->field('id,name')->select();
                 $this->assign('info',$Department);
                 $id = input('id');
                 $msg = BranchModel::get($id);
@@ -148,7 +148,7 @@ class Branch extends  Admin
                     }
                 }
             }else {
-                $Department = WechatDepartment::where(['status' => 1])->field('id,name')->select();
+                $Department = WechatDepartment::where(['status' => 1 ,'id' => ['neq',1]])->field('id,name')->select();
                 $this->assign('info',$Department);
                 $this->assign('msg',null);
                 return $this->fetch('edit');

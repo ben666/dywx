@@ -198,6 +198,8 @@ class Wechat extends Admin{
             // 是否 党员
             if($v[9] == '是' || $v[9] == '党员' || $v[9] == '1'){
                 $v[9] = 1;
+            }else{
+                $v[9] = 0;
             }
             //入党时间
             if ($v[10]) {
@@ -219,7 +221,6 @@ class Wechat extends Admin{
             );
             array_push($all, $info);
         }
-
         //转换部门
         foreach ($all as $k =>$v) {
             //数据转化
