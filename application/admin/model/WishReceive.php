@@ -22,4 +22,10 @@ class WishReceive extends Model {
     public function order() {
         return $this->hasOne('Wish','id','rid');
     }
+    /**
+     * 获取 部门
+     */
+    public function depart(){
+        return $this->hasOne('WechatDepartment','id','department');
+    }
 }
