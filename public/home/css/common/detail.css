@@ -214,10 +214,10 @@ p{
   border-bottom: 1px solid #f1f1f1;
 }
 .comment .lists .list .fl img {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 8vw;
+  height: 8vw;
   margin-top: 0.3rem;
-  margin-right:0.28rem;
+  margin-right: 0.28rem;
   overflow: hidden;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -235,8 +235,8 @@ p{
   width: 100%;
   word-break: break-all;
   font-size: 0.28rem;
-  margin-top: 0.15rem;
-  margin-bottom: 0.15rem;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
 }
 .comment .lists .list .mid .time {
   font-size: 0.24rem;
