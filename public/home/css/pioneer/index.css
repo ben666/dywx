@@ -35,20 +35,20 @@ a:active{
     background: none;
 }
 
-.lists>ul>a{
+.lists>ul>li{
     padding: 0.3rem 0.24rem;
     border-bottom: 1px solid #f7f7f7;
     overflow: hidden;
     display: block;
 }
-.lists>ul>a img{
+.lists>ul>li img{
     float: left;
     width: 1.2rem;
     height: 1.2rem;
     border-radius: 50%;
     margin-right: 0.2rem;
 }
-.lists>ul>a span{
+.lists>ul>li span{
     display: block;
     font-size: 0.24rem;
     color: #999;
@@ -66,7 +66,7 @@ a:active{
     margin-top: 0.4rem;
     left: 1.6rem;
 }
-.lists>ul>a span:nth-child(2){
+.lists>ul>li span:nth-child(2){
     display: block;
     font-size: 0.28rem;
     color: #333;
@@ -75,13 +75,13 @@ a:active{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.lists>ul>a span:last-child{
+.lists>ul>li span:last-child{
     position: absolute;
     right: 0.5rem;
     color: #ccc;
 
 }
-.lists>ul>a span:last-child.like i{
+.lists>ul>li span:last-child.like i{
     position: relative;
     margin-right: 1.2vw;
     top:0.06rem;
@@ -181,7 +181,7 @@ a:active{
 .liked{
     color:#ffa52f!important;
 }
-.lists>ul>a span:last-child.liked i{
+.lists>ul>li span:last-child.liked i{
     position: relative;
     margin-right: 1.2vw;
     top:0.06rem;

@@ -70,7 +70,7 @@
                     <div class="lists tutor">
                         <ul>
                             {volist name="list1" id="vo"}
-                            <a href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}">
+                            <li data-href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}" onclick="url(this)">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 <span class="position">{$vo.position}</span>
@@ -83,7 +83,7 @@
                                 {else/}
                                 <span class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
-                            </a>
+                            </li>
                             {/volist}
                         </ul>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="lists tutor">
                         <ul>
                             {volist name="list2" id="vo"}
-                            <a href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}">
+                            <li data-href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}" onclick="url(this)">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 {eq name="visit" value="0"}
@@ -113,7 +113,7 @@
                                 {else/}
                                 <span class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
-                            </a>
+                            </li>
                             {/volist}
                         </ul>
                     </div>
@@ -131,7 +131,7 @@
                     <div class="lists tutor">
                         <ul>
                             {volist name="list3" id="vo"}
-                            <a href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}">
+                            <li data-href="{:Url('pioneer/deeds?id='.$vo.id.'&c=0')}" onclick="url(this)">
                                 <img src="{$vo.front_cover|get_cover='path'}">
                                 <span>{$vo.name}</span>
                                 {eq name="visit" value="0"}
@@ -143,7 +143,7 @@
                                 {else/}
                                 <span class="like"><i></i><em>{$vo.likes+2000}</em></span>
                                 {/eq}
-                            </a>
+                            </li>
                             {/volist}
                         </ul>
                     </div>
@@ -188,9 +188,8 @@
 
     //点赞
    var like = function(e,id,type){
-       $("a").css("pointer-events","none");
        event.stopPropagation();
-       event.preventDefault()
+       event.preventDefault();
        var n = parseInt($(e).children("em").text());
        if($(e).hasClass('liked')){
            return false;
@@ -214,9 +213,13 @@
                        confirmButtonText:'确定'
                    });
                }
-               $("a").css("pointer-events","auto");
            }
        })
    }
+
+    function url(e){
+        var url  = e.getAttribute("data-href");
+            window.location.href = url;
+    }
 </script>
 {/block}
