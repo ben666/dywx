@@ -243,6 +243,8 @@ votes ul > li .comments .comment {
     font-size: 0.24rem;
     color: #999;
     padding-left: 1vw;
+    position: relative;
+    top: 0.14rem;
 }
 
 .bottom {

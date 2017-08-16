@@ -269,6 +269,7 @@
                 url:"{:Url('Constitution/commit')}",
                 data:{'data':data},
                 success:function(data){
+                    $(".modal").unbind("click");
                     $('.score').html(data.url.score);
                     $('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]+'，4.'+data.url.right[4]+'，5.'+data.url.right[5]);
                     var link='{$request}/home/constitution/scan';

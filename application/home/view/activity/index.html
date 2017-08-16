@@ -133,7 +133,7 @@
                                 <div class="imgs">
                                     {volist name="los.images" id="img"}
                                     <div class="img">
-                                        <img src="{$img|get_cover='path'}" alt="评论图"  data-preview-src="" data-preview-group="1">
+                                        <img src="{$img|get_cover='path'}" alt="评论图"  data-preview-src="" data-preview-group="{$los.id}">
                                     </div>
                                     {/volist}
                                 </div>
@@ -407,7 +407,7 @@ window.onload = function(){
                 var imglen = list.images.length;
                 for(var j = 0 ;j<imglen ;j++){
                     html+='	<div class="img">' +
-                            '		<img src="'+list.images[j]+'" alt="评论图" data-preview-src="" data-preview-group="1">' +
+                            '		<img src="'+list.images[j]+'" alt="评论图" data-preview-src="" data-preview-group="'+list.id+'">' +
                             '	</div>' ;
                 }
                    html+= '</div>' +

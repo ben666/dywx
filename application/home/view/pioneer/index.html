@@ -188,8 +188,8 @@
 
     //点赞
    var like = function(e,id,type){
-       event.preventDefault()
        event.stopPropagation();
+       event.preventDefault()
        var n = parseInt($(e).children("em").text());
        if($(e).hasClass('liked')){
            return false;
