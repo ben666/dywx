@@ -36,17 +36,16 @@ a:active{
 }
 
 .lists>ul>li{
-    padding: 0.3rem 0.24rem;
+    padding: 4vw 3vw;
     border-bottom: 1px solid #f7f7f7;
     overflow: hidden;
     display: block;
 }
 .lists>ul>li img{
     float: left;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 16vw;
+    height: 16vw;
     border-radius: 50%;
-    margin-right: 0.2rem;
 }
 .lists>ul>li span{
     display: block;
@@ -63,8 +62,8 @@ a:active{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     position: absolute;
-    margin-top: 0.4rem;
-    left: 1.6rem;
+    left: 19vw;
+    padding-left: 4vw;
 }
 .lists>ul>li span:nth-child(2){
     display: block;
@@ -74,12 +73,19 @@ a:active{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-left: 4vw;
+    height: 10vw;
+}
+@media only screen and (min-width: 1024px) {
+    .lists>ul>li span:nth-child(2) {
+        height: 12vw;
+    }
 }
 .lists>ul>li span:last-child{
     position: absolute;
     right: 0.5rem;
     color: #ccc;
-
+    margin-top: -8vw;
 }
 .lists>ul>li span:last-child.like i{
     position: relative;

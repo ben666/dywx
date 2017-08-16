@@ -57,17 +57,18 @@
     color: #666;
 }
 .mui-slider-item .notices .notice .list .fl img {
-    width: 1.6rem;
-    height:1.2rem;
-    margin-top:0.3rem;
+    width: 21.4vw;
+    height: 16vw;
+    margin-top: 4vw;
 }
 .mui-slider-item .notices .notice .list .right {
-    width: calc(100% - 2rem);
+    width: calc(100% - 24vw);
     height: 1.2rem;
-    margin-top: 0.3rem;
-    margin-left:0.3rem;
-    margin-bottom: 0.3rem;
+    margin-top: 4vw;
+    margin-left: 2vw;
+    margin-bottom: 4vw;
     position: relative;
+    height: 16vw;
 }
 .mui-slider-item .notices .notice .list .right .title {
     float: left;

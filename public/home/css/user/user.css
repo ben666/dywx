@@ -19,8 +19,8 @@ body {
 }
 .banner .up {
   display: inline-block;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 16vw;
+  height: 16vw;
   overflow: hidden;
   margin-top: 12vw;
   border: 2px solid #ffffff;
@@ -44,7 +44,7 @@ body {
   width: 100%;
   padding-left: 0.3rem;
   padding-right:0.3rem;
-  height: 1rem;
+  height: 16vw;
   background: #ffffff;
   border-top: 1px solid #f1f1f1;
   font-size:0.3rem;
@@ -54,38 +54,38 @@ body {
   padding-left: 0.7rem;
   background-size: 7.5vw 7.5vw;
   color: #333333;
-  line-height: 1rem;
+  line-height: 16vw;
 }
 .lists .list i {
   color: #999999;
   font-size: 0.4rem;
-  line-height: 1rem;
+  line-height: 16vw;
 }
 .lists .list:nth-child(1) span {
-  background: url("/home/images/user/message.png")0 0.22rem no-repeat;
+  background: url("/home/images/user/message.png")0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }
 .lists .list:nth-child(2) span {
-  background: url("/home/images/user/collect.png") 0 0.22rem no-repeat;
+  background: url("/home/images/user/collect.png") 0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }
 .lists .list:nth-child(3) span {
-  background: url("/home/images/user/join.png") 0 0.22rem no-repeat;
+  background: url("/home/images/user/join.png") 0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }
 .lists .list:nth-child(4) span {
-  background: url("/home/images/user/score.jpg") 0 0.22rem no-repeat;
+  background: url("/home/images/user/score.jpg") 0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }
 .lists .list:nth-child(5) span {
-  background: url("/home/images/user/feedback.png") 0 0.22rem no-repeat;
+  background: url("/home/images/user/feedback.png") 0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }
 .lists .list:nth-child(6) span {
-  background: url("/home/images/user/notes.png") 0 0.22rem no-repeat;
+  background: url("/home/images/user/notes.png") 0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }
 .lists .list:nth-child(7) span {
-  background: url("/home/images/user/publish.png") 0 0.22rem no-repeat;
+  background: url("/home/images/user/publish.png") 0 4vw no-repeat;
   background-size: 0.56rem 0.56rem;
 }

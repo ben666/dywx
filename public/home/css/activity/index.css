@@ -85,7 +85,7 @@ p{
 .lists>ul>a>p{
     font-size: 0.28rem;
     color: #333;
-    margin-bottom: 0.2rem;
+    margin-bottom: 3vw;
 }
 .lists>ul>a>span{
     font-size: 0.26rem;
@@ -94,7 +94,7 @@ p{
 }
 .lists.time{
     display: block;
-    margin-top: 0.3rem;
+    margin-top: 3vw;
 }
 .lists>ul>a>i{
     font-style: inherit;
@@ -124,7 +124,7 @@ p{
     float: left;
 }
 .votes>ul>li>p{
-    margin-left: 3vw;
+    margin-left: 0.3rem;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -134,9 +134,9 @@ p{
 .votes>ul>li>span{
     font-size: 0.28rem;
     color: #333;
-    width: 80vw;
+    width: 75vw;
     display: inline-block;
-    padding-left: 3vw;
+    padding-left: 0.3rem;
     margin-top: 0.2rem;
 }
 .lists ul > li .imgs .img {
@@ -154,7 +154,7 @@ p{
 
 }
 .votes ul > li .imgs{
-    margin-left: 13vw;
+    margin-left: 1rem;
 }
 .votes .votes-time{
     font-size: 0.24rem;
