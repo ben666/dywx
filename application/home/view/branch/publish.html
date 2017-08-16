@@ -36,13 +36,15 @@ $(function(){
 	//上传
 	$('.sure' ).on('click',function(){
 		var content = $("textarea[name='content']").val();
+		var department = $("input[name='dep']").val();
 		var n = content.length;
 		var img = $('.img img' );
 		var images = [];
 		var imglen = img.length;
 		var data ={
 			content:content,
-			images:''
+			images:'',
+			department:department
 		};
 		if(imglen > 0){
 			for(var i =0 ;i< imglen ;i++){
@@ -51,7 +53,7 @@ $(function(){
 			data ={
 				content:content,
 				images:images,
-				department:$("input[name='dep']").val()
+				department:department
 			};
 		}
 		if(n == 0 || n >400){
