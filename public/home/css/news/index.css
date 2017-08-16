@@ -99,3 +99,8 @@
     position: absolute;
     bottom: 0;
 }
+.history .title{
+    text-align: center;
+    font-size: 0.28rem;
+    padding: 0.3rem 0;
+}
