@@ -3,6 +3,8 @@
 }
 img{
     vertical-align: inherit;
+    height: 100%;
+    overflow: hidden;
 }
 /*样式reset*/
 .list-block .item-content{
