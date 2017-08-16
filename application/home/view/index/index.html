@@ -88,7 +88,7 @@
             {volist name="list2" id="loo"}
             <a href="
             {switch name='$loo.class'}
-            {case value='1'}{:Url('News/index?id='.$loo['id'])}{/case}
+            {case value='1'}{:Url('News/detail?id='.$loo['id'])}{/case}
             {case value='2'}
                 {eq name='$loo.type' value='1'}
                 {:Url('Learn/video?id='.$loo['id'])}
