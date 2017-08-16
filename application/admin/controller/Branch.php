@@ -63,7 +63,7 @@ class Branch extends  Admin
         $list = $this->lists('Branch',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
-            'recommend' => [0 => "否" , 1 => "是"],
+//            'recommend' => [0 => "否" , 1 => "是"],
             'push' => [0 => '否' , 1 => '是']
         ));
         $this->assign('list',$list);

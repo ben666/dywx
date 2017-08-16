@@ -88,7 +88,7 @@
             {volist name="list2" id="loo"}
             <a href="
             {switch name='$loo.class'}
-            {case value='1'}{:Url('News/index?id='.$loo['id'])}{/case}
+            {case value='1'}{:Url('News/detail?id='.$loo['id'])}{/case}
             {case value='2'}
                 {eq name='$loo.type' value='1'}
                 {:Url('Learn/video?id='.$loo['id'])}
@@ -258,7 +258,7 @@
                     link = '/home/learn/video/id/'+list.id;
                 }
             }else if(list.class == 3){
-                class_name = '心息驿站';
+                class_name = '信息驿站';
                 link = '/home/college/forumnotice/id/'+list.id;
             }else if(list.class == 4){
                 class_name = '先锋引领';

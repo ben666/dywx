@@ -44,21 +44,21 @@ class Index extends Base {
         $count1 = $len['news'];   // 红色足迹
         $count2 = $len['learn'];  // 两学一做
         $count3 = $len['notice'];  // 信息驿站
-        $count4 = $len['pioneer_story']; // 先锋引领   事迹
-        $count5 = $len['wish'];  // 活动发起
-        $count6 = $len['branch'];  // 支部建设
+//        $count4 = $len['pioneer_story']; // 先锋引领   事迹
+//        $count5 = $len['wish'];  // 活动发起
+//        $count6 = $len['branch'];  // 支部建设
         $news = new News();
         $learn = new Learn();
         $notice = new Notice();
-        $pioneer = new PioneerStory();
-        $wish = new Wish();
-        $branch = new Branch();
+//        $pioneer = new PioneerStory();
+//        $wish = new Wish();
+//        $branch = new Branch();
         $news_check = false; //新闻数据状态 true为取空
         $learn_check = false;
         $notice_check = false;
-        $pioneer_check = false;
-        $wish_check = false;
-        $branch_check = false;
+//        $pioneer_check = false;
+//        $wish_check = false;
+//        $branch_check = false;
         $all_list = array();
         //获取数据  取满6条 或者取不出数据退出循环
         while(true)
@@ -100,36 +100,36 @@ class Index extends Base {
                 }
             }
             // 先锋引领
-            if (!$pioneer_check && count($all_list) < 6){
-                $res4 = $pioneer->getDataList($count4);
-                if (empty($res4)){
-                    $pioneer_check = true;
-                }else{
-                    $count4 ++;
-                    $all_list = $this->changeTpye($all_list,$res4,4);
-                }
-            }
+//            if (!$pioneer_check && count($all_list) < 6){
+//                $res4 = $pioneer->getDataList($count4);
+//                if (empty($res4)){
+//                    $pioneer_check = true;
+//                }else{
+//                    $count4 ++;
+//                    $all_list = $this->changeTpye($all_list,$res4,4);
+//                }
+//            }
             // 活动发起
-            if (!$wish_check && count($all_list) < 6){
-                $res5 = $wish->getDataList($count5);
-                if (empty($res5)){
-                    $wish_check = true;
-                }else{
-                    $count5++;
-                    $all_list = $this->changeTpye($all_list,$res5,5);
-                }
-            }
+//            if (!$wish_check && count($all_list) < 6){
+//                $res5 = $wish->getDataList($count5);
+//                if (empty($res5)){
+//                    $wish_check = true;
+//                }else{
+//                    $count5++;
+//                    $all_list = $this->changeTpye($all_list,$res5,5);
+//                }
+//            }
             // 支部建设
-            if (!$branch_check && count($all_list) < 6){
-                $res6 = $branch->getDataList($count6);
-                if (empty($res6)){
-                    $branch_check = true;
-                }else{
-                    $count6 ++;
-                    $all_list = $this->changeTpye($all_list,$res6,6);
-                }
-            }
-            if(count($all_list) >= 6 || ($news_check && $notice_check && $learn_check && $wish_check && $branch_check && $pioneer_check))
+//            if (!$branch_check && count($all_list) < 6){
+//                $res6 = $branch->getDataList($count6);
+//                if (empty($res6)){
+//                    $branch_check = true;
+//                }else{
+//                    $count6 ++;
+//                    $all_list = $this->changeTpye($all_list,$res6,6);
+//                }
+//            }
+            if(count($all_list) >= 6 || ($news_check && $notice_check && $learn_check))
             {
                 break;
             }

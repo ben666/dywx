@@ -43,6 +43,7 @@
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <td>订单名称</td>
                                 <th>领取人</th>
+                                <th>领取人部门</th>
                                 <th>领取时间</th>
                             </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                 <td><input type="checkbox" class="i-checks" name="input[]"></td>
                                 <td>{$vo->order->title}</td>
                                 <td>{$vo->user->name}</td>
+                                <td>{$vo->depart->name}</td>
                                 <td>{$vo.create_time|time_format='Y-m-d H:i'}</td>
                             </tr>
                             {/volist}
