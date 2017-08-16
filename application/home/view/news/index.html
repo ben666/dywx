@@ -3,6 +3,15 @@
     <title>红色足迹</title>
     <link rel="stylesheet" href="/home/css/news/index.css">
     <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<style>
+    .party .title{
+        margin: 0.2rem 0;
+        text-align: center;
+    }
+    .party .title{
+        font-size: 0.28rem;
+    }
+</style>
 {/block}
 {block name="body"}
         {notempty name="list1"}
@@ -29,7 +38,7 @@
     <a class="mui-control-item" href="#item2mobile" data-index="1">
        活动情况
     </a>
-    <a class="mui-control-item" href="#item3mobile" data-index=2">
+    <a class="mui-control-item" href="#item3mobile" data-index="2">
         发展历程
     </a>
 </div>
@@ -87,16 +96,13 @@
         </div>
         </div>
         <div id="item3mobile" class="mui-slider-item mui-control-content">
+            <!--党史学习-->
             <div class="notices">
-                <div class="lists">
-                    <a href="" class="list">
-                        <div class="title limit_">ffffffggggggggggggggggggggggggg</div>
-                        <div class="note clear">
-                            <span class="fl depart">工委宣传部</span>
-                            <span class="time fr">2017-8-8</span>
-                        </div>
+                <div class="notice party">
+                    <div class="title">点击进入党史学习</div>
+                    <a href="{:Url('News/history')}">
+                        <img src="/home/images/learn/learn.png" alt="" width="100%">
                     </a>
-
                 </div>
             </div>
         </div>
@@ -146,6 +152,8 @@
           }else{
               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
+      }else if(c==2){
+          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
       }
 
   }
@@ -224,6 +232,7 @@
 
   //tab点击事件
   mui('#tab').on('tap', 'a', function(e) {
+      alert(c)
       $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
       c = this.getAttribute("data-index");
       mui('#refreshContainer').pullRefresh().refresh(true);
@@ -239,6 +248,8 @@
           }else{
               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
           }
+      }else if(c==2){
+          mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
       }
       setCookie('type',c);
   });
