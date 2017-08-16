@@ -232,7 +232,6 @@
 
   //tab点击事件
   mui('#tab').on('tap', 'a', function(e) {
-      alert(c)
       $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
       c = this.getAttribute("data-index");
       mui('#refreshContainer').pullRefresh().refresh(true);
@@ -264,6 +263,10 @@
       window.location.href = url;
   });
     mui('#item2mobile').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+    mui('#item3mobile').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
     });
