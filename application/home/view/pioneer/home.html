@@ -16,25 +16,25 @@
     .title:nth-child(even):after{
         content: '';
         display: block;
-        height: 1.6rem;
-        width: 0.1rem;
+        height: 21.6vw;
+        width: 2vw;
         background: #fff;
         position: absolute;
         margin-left: 0.6rem;
         z-index: 99;
-        top: 0.6rem;
-        right: 2.7rem;
+        top: 8vw;
+        right: 36vw;
     }
     .title:nth-child(odd):after{
         content: '';
         display: block;
-        height: 1.6rem;
-        width: 0.1rem;
+        height: 21.3vw;
+        width: 2vw;
         background: #fff;
         position: absolute;
-        margin-left: 2.75rem;
+        margin-left: 36vw;
         z-index: 99;
-        top: 0.6rem;
+        top: 8vw;
     }
     .title:nth-child(odd) img{
         clear: both;
@@ -46,32 +46,36 @@
         display: block;
     }
     .title img{
-        width:3.44rem;
-        height:2.34rem;
+        width: 45.9vw;
+        height: 31.2vw;
         z-index:2;
         position: absolute;
     }
 
     /*序号*/
     .title span{
-        font-size: 0.8rem;
+        font-size: 10vw;
         position: absolute;
         color: #fff;
         z-index: 9;
+        height: 21.3vw;
+        line-height: 21.3vw;
+        height: 21.3vw;
     }
     .title:nth-child(odd) span{
-        margin-left: 1rem;
-        margin-top: 0.5rem;
+        top: 7.2vw;
+        left: 13vw;
+
     }
     .title:nth-child(even) span{
-        right: 1rem;
-        top:0.8rem;
+        right: 14vw;
+        top: 7.2vw;
     }
 
     /*文字背景*/
     .title .writing{
-        width: calc(100% - 3.1rem);
-        height: 1.6rem;
+        width: calc(100% - 45vw);
+        height: 21.3vw;
         background: #fff;
         position: absolute;
         border-radius: 0.1rem;
@@ -81,42 +85,48 @@
         box-shadow: 0px 10px 8px #f1f1f1;
     }
     .title:nth-child(even) .writing{
-        right: 2.7rem;
-        margin-top: 0.3rem;
+        left: 7vw;
+        margin-top: 5vw;
     }
     .title:nth-child(odd) .writing{
-        left: 2.7rem;
-        margin-top: 0.3rem;
+        left: 37vw;
+        margin-top: 5vw;
     }
 
     /*文字内容*/
     .title p{
         position: absolute;
         z-index: 999;
+        font-size: 7vw;
     }
     .title:nth-child(even) p{
-        margin-top: 0.7rem;
-        right: 3.5rem;
+        height: 21.3vw;
+        line-height: 21.3vw;
+        left:9vw;
+        margin-top: 5vw;
     }
     .title:nth-child(odd) p{
-        margin-left: 3.5rem;
-        margin-top: 0.7rem;
+        height: 21.3vw;
+        line-height: 21.3vw;
+        margin-top: 3vw;
+        left: 45vw;
     }
     .title:nth-child(1) p{
         color: #ffb549;
-        font-size: 0.6rem;
+        font-size: 7vw;
     }
     .title:nth-child(2) p{
         color: #ff6472;
         font-size: 0.56rem;
+        font-size: 7vw;
     }
     .title:nth-child(3) p{
         color: #4997fc;
-        font-size: 0.56rem;
+        font-size: 7vw;
     }
     .title:nth-child(4) p{
         color: #c95fff;
-        font-size: 0.6rem;
+        font-size: 7vw;
     }
     @media screen and (device-width: 320px){
        html{
