@@ -188,10 +188,10 @@
 
     //点赞
    var like = function(e,id,type){
+       $("a").css("pointer-events","none");
        event.stopPropagation();
        event.preventDefault()
        var n = parseInt($(e).children("em").text());
-       $("a").css("pointer-events","none");
        if($(e).hasClass('liked')){
            return false;
        }
@@ -214,6 +214,7 @@
                        confirmButtonText:'确定'
                    });
                }
+               $("a").css("pointer-events","auto");
            }
        })
    }
