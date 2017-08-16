@@ -81,11 +81,10 @@ $(function(){
 						beforeSend: function(XMLHttpRequest){
 						},
 						success:function(e){
-							console.log(e)
 							if(e.code == 1){
 								swal({
 									title: '上传成功',
-									text: '即将返回活动发起首页',
+									text: '即将返回发起投票首页',
 									type: 'success',
 									showConfirmButton:false
 								});
