@@ -10,23 +10,16 @@ body {
   /*margin-top: 10px;*/
 }
 .lists .list {
-  height: 1rem;
+  height: 13.4vw;
   width: 100%;
   padding-left: 13px;
   padding-right: 13px;
   background: #ffffff;
   border-top: 1px solid #f1f1f1;
-  line-height: 1rem;
+  line-height: 13.4vw;
 }
 .lists .list img {
-  /*width: 40px;*/
-  /*height: 40px;*/
-  /*margin-top: 4px;*/
-  /*border: 2px solid #ffffff;*/
-  /*box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);*/
-  /*-webkit-border-radius: 50%;*/
-  /*border-radius: 50%;*/
-  /*overflow: hidden;*/
+
 }
 .lists .list .fl {
   color: #333;
@@ -42,9 +35,8 @@ body {
 .er{
   width: 0.2rem;
   height: 0.2rem;
-  margin-top: 0.4rem;
   margin-right: 0.18rem;
-
+  margin-top: 6vw;
 }
 .modal-content{
   position: absolute;
