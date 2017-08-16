@@ -28,7 +28,7 @@ img{
 /*.swiper*/
 .swiper-container{
     background:#fff;
-    height:180px;
+    height:3rem;
 }
 .swiper-slide>div{
     position:absolute;
@@ -48,10 +48,11 @@ img{
     padding-left:3%;display:none;position:absolute;top:0;left:0;
 }
 .list-block .item-title{
-    white-space:normal;text-indent:2em;color:#666;font-size:14px;line-height:25px;
+    white-space:normal;text-indent:2em;color:#666;font-size: 0.28rem;  line-height: 0.5rem;
+padding-top: 0.8rem;
 }
 .item-title>span:nth-child(1){
-    color:#D10E15;font-size:16px;
+    color:#D10E15;font-size:0.32rem;
 }
 .item-title>span:nth-child(2){
     color:#D10E15;
@@ -72,16 +73,16 @@ img{
     z-index:99;
 }
 .swiper-slide>div>span{
-    color:#fff;
-    height:20px;
-    line-height: 20px;
-    width:95%;
+    color: #fff;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    width: 95%;
     display: block;
-    float:left;
+    float: left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding-left:15px;
-    z-index:100;
-    font-size:14px;
+    padding-left: 15px;
+    z-index: 100;
+    font-size: 0.28rem;
 }

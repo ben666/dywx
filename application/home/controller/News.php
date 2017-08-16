@@ -72,5 +72,7 @@ class News extends Base {
         $this->assign('new',$this->content(1,$id));
         return $this->fetch();
     }
-
+    public function history(){
+        return $this->fetch();
+    }
 }
