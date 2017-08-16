@@ -111,10 +111,10 @@
                                 <p>{$los.publisher}</p>
                                 <div class="opinion">
                                     {switch name="los.is_like"}{case value="0"}
-                                    <i class="agree agreeclick"  data-id="{$los.id}" data-type="1"></i>
-                                    <span>{$los.likes_yes}</span>
                                     <i class="disagree disagreeclick"  data-id="{$los.id}" data-type="2"></i>
-                                    <span>{$los.likes_no}</span>{/case}{case value="1"}
+                                    <span>{$los.likes_no}</span>
+                                    <i class="agree agreeclick"  data-id="{$los.id}" data-type="1"></i>
+                                    <span>{$los.likes_yes}</span>{/case}{case value="1"}
                                     <i class="agree_" ></i>
                                     <span>{$los.likes_yes}</span>
                                     <i class="disagree"></i>

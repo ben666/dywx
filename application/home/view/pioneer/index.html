@@ -191,6 +191,7 @@
        event.stopPropagation();
        event.preventDefault()
        var n = parseInt($(e).children("em").text());
+       $("a").css("pointer-events","none");
        if($(e).hasClass('liked')){
            return false;
        }
