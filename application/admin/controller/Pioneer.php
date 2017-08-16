@@ -106,7 +106,7 @@ class Pioneer extends Admin{
         $list = $this->lists('PioneerStory',$map);
         int_to_string($list,array(
             'status' => array(0 =>"已发布",1=>"已发布"),
-            'recommend' => array( 1=>"是" , 0=>"否"),
+//            'recommend' => array( 1=>"是" , 0=>"否"),
             'push' => array( 1=>"是" , 0=>"否"),
         ));
         $this->assign('type',input('type'));
