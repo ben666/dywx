@@ -49,7 +49,7 @@ a:active{
 }
 .lists>ul>li span{
     display: block;
-    font-size: 0.32rem;
+    font-size: 0.28rem;
     color: #999;
 
 }
@@ -67,7 +67,7 @@ a:active{
 }
 .lists>ul>li span:nth-child(2){
     display: block;
-    font-size: 0.4rem;
+    font-size: 0.3rem;
     color: #333;
     width: 55%;
     white-space: nowrap;
