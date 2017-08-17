@@ -96,8 +96,8 @@
         if(uid==''||uid==null){
             return "请输入您的手机号码";
         }else{
-            var myreg = / ^1(3|4|5|7|8)[0-9]\d{8}$ /;
-            if(!myreg.test(uid)||uid.length<11)
+//            var myreg = / ^1(3|4|5|7|8)[0-9]\d{8}$ /;
+            if(uid.length<11)
             {
                 return '请输入有效的手机号码！';
             }else{
