@@ -226,7 +226,7 @@ class Branch extends  Admin
       */
     public function votedel(){
         $id = input('id/d');
-        $opinion = new Wish();
+        $opinion = new BranchModel();
         $res = $opinion->where(['id' => $id,'type' => 2])->update(['status' => '-1']);
         if ($res){
             return $this->success('删除成功');

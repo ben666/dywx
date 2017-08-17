@@ -73,7 +73,7 @@
                                 <td style="vertical-align: middle">{$vo.likes_no}</td>
                                 <td style="vertical-align: middle">{$vo.create_time|time_format='Y-m-d H:i'}</td>
                                 <td style="vertical-align: middle">
-                                    <a href="{:Url('Activity/votedel?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
+                                    <a href="{:Url('Branch/votedel?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>
                             </tr>
                             {/volist}
