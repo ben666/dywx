@@ -215,7 +215,7 @@ class Branch extends  Admin
                 $value['name'] = $value['publisher'];  // 获取发布人 姓名
             }
             $Department = WechatDepartment::where('id',$User['department'])->field('name')->find();
-            $value['department'] = $Department['name'];  // 获取发布人 组别
+            $value['dep'] = $Department['name'];  // 获取发布人 组别
             $value['images'] = json_decode($value['images']);
         }
         $this->assign('list',$list);

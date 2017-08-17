@@ -47,8 +47,9 @@
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <th width="500px">内容</th>
                                 <th>图片</th>
+                                <th>所属支部</th>
                                 <th>发布人</th>
-                                <th>所属组</th>
+                                <th>发布人部门</th>
                                 <th>赞成数</th>
                                 <th>反对数</th>
                                 <th>创建时间</th>
@@ -65,8 +66,9 @@
                                     <img src="{$vi|get_cover='path'}" width="80px" height="80px"/>
                                     {/volist}
                                 </td >
+                                <td style="vertical-align: middle">{$vo->depart->name}</td>
                                 <td style="vertical-align: middle">{$vo.name}</td>
-                                <td style="vertical-align: middle">{$vo.department}</td>
+                                <td style="vertical-align: middle">{$vo.dep}</td>
                                 <td style="vertical-align: middle">{$vo.likes_yes}</td>
                                 <td style="vertical-align: middle">{$vo.likes_no}</td>
                                 <td style="vertical-align: middle">{$vo.create_time|time_format='Y-m-d H:i'}</td>
