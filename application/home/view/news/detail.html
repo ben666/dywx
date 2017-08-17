@@ -69,9 +69,8 @@
 {eq name="visit" value="0"}
 <div class="bottom clear">
 	<div class="myword fl">
-		<input type="text" placeholder="说说你的感想！">
+		<input type="text" placeholder="说说你的感想！"  onclick="send(this,1,{$new['id']})" id="send">
 	</div>
-	<div class="send fr" onclick="send(this,1,{$new['id']})">发送</div>
 </div>
 {/eq}
 
@@ -86,12 +85,6 @@ window.onload = function(){
 	}else{
 		mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
 	}
-	$("input").one("focus",function(){
-		$(".bottom").css("bottom","1rem");
-		setTimeout(function(){
-			$(".bottom").css("bottom","0");
-		},0)
-	})
 };
 
 
@@ -124,60 +117,84 @@ var isGood = function(e,type,id){
 };
 //发送评论
 var send = function(e,type,id){
-	var it = $(e ).prev().find('input');
-	if(it.val() != '' && it.val().length > 4){
-		$.ajax({
-			type:"post",
-			url:"{:Url('Base/comment')}",
-			data:{
-				type:type,
-				aid:id,
-				content:it.val()
-			},
-			beforeSend:function(){
-				swal({
-					title: ' ',
-					text: '评论提交中...',
-					showConfirmButton:false
-				});
-			},
-			success:function(msg){
-				var data = msg.data;
-				var userid = "'"+data.create_user+"'";
-				var html = '';
-				html += '<div class="list clear">'+
-						'<div class="fl">'+
-						'<img src="'+data.header+'" alt="用户头像" class="user">'+
-						'</div>'+
-						'<div class="fl mid">'+
-						'<div class="name limit">'+data.nickname+'</div>'+
-						'<div class="content" >'+it.val()+'</div>'+
-						'<div class="time">'+data.time+'</div>'+
-						'</div>'+
-						'<div class="fr isgood good notvisitor" data-type="0" data-id='+data.id+'>'+data.likes+'</div>'+
-						'</div>';
-				$('.lists' ).prepend(html);
-				it.val('');
-				var sum = $('.sum span' );
-				sum.text(parseInt(sum.text())+1);
-				swal({
-					title: ' ',
-					text: '评论成功',
-					type: 'success',
-					confirmButtonText:'确定',
-					timer:3000
-				});
-			}
-		});
-	}else{
-		swal({
-			title: ' ',
-			text: '您评论字数少于5个字!',
-			type: 'error',
-			confirmButtonText:'确定',
-			timer:3000
-		});
-	}
+	$(".bottom").hide();
+	setTimeout(function(){
+		$("input").focus();
+	},0)
+	swal({
+		title: "",
+		text: "请输入评论内容！",
+		type: "input",
+		showCancelButton: true,
+		animation: "slide-from-top",
+		inputPlaceholder: "请在此输入评论内容（300字以内）",
+		confirmButtonText: "确定",
+		cancelButtonText: "取消",
+		closeOnConfirm: false
+	},
+	function(inputValue){
+		if (inputValue === false) {
+			$(".bottom").show();
+			setTimeout(function(){
+				$("input").blur();
+			},0)
+			return false
+		}else if (inputValue === ""|| inputValue.length<5)
+		{
+			swal.showInputError("评论不少于5个字");
+			return false
+		}else if(inputValue.length>300){
+			swal.showInputError("评论不得多于300字");
+		}else{
+			$.ajax({
+				type:"post",
+				url:"{:Url('Base/comment')}",
+				data:{
+					type:type,
+					aid:id,
+					content:inputValue
+				},
+				beforeSend:function(){
+					swal({
+						title: ' ',
+						text: '评论提交中...',
+						showConfirmButton:false
+					});
+				},
+				success:function(msg){
+					var data = msg.data;
+					var userid = "'"+data.create_user+"'";
+					var html = '';
+					html += '<div class="list clear">'+
+							'<div class="fl">'+
+							'<img src="'+data.header+'" alt="用户头像" class="user">'+
+							'</div>'+
+							'<div class="fl mid">'+
+							'<div class="name limit">'+data.nickname+'</div>'+
+							'<div class="content" >'+inputValue+'</div>'+
+							'<div class="time">'+data.time+'</div>'+
+							'</div>'+
+							'<div class="fr isgood good notvisitor" data-type="0" data-id='+data.id+'>'+data.likes+'</div>'+
+							'</div>';
+					$('.lists' ).prepend(html);
+					inputValue="";
+					var sum = $('.sum span' );
+					sum.text(parseInt(sum.text())+1);
+					swal({
+						title: ' ',
+						text: '评论成功',
+						type: 'success',
+						confirmButtonText:'确定',
+						timer:3000
+					});
+				}
+			});
+		}
+		$(".bottom").show();
+		setTimeout(function(){
+			$("input").blur();
+		},0)
+	});
 };
 
 //初始化下拉加载

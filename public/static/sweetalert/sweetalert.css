@@ -1032,3 +1032,11 @@ body.stop-scrolling {
     margin-left:-40%;
   }
 }
+.sweet-alert .sa-input-error{
+  top: 0.4rem;
+}
+.sweet-alert input{
+  height: 0.8rem;
+  font-size: 0.28rem;
+  line-height: 0.8rem;
+}

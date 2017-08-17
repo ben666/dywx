@@ -137,7 +137,7 @@ html,body{
 }
 .content .notices .notice .list .right {
     width: calc(100% - 26vw);
-    height:15vw;
+    height:18vw;
     margin-top: 0.24rem;
     margin-left: 0.24rem;
     position: relative;
@@ -192,4 +192,14 @@ html,body{
     position: absolute;
     right:4.3vw;
     top:3.7vw;
+}
+@media screen and (min-width: 768px){
+    .content .notices .notice .list .right {
+        height:15vw;
+    }
+}
+@media screen and (device-width: 320px) and (-webkit-device-pixel-ratio: 2){
+    .content .notices .notice .list .right {
+        height:18vw;
+    }
 }
