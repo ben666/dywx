@@ -14,11 +14,13 @@
 <div class="content">
     <span class="text">{$info.content}</span>
     {eq name="$info.review" value="1"}
-    {eq name="$info.is_receive" value="1"}
-    <div class="get" style="background: #e0e0e0">已&ensp;认&nbsp;领</div>
+        {eq name="$info.is_receive" value="1"}
+        <div class="get" style="background: #e0e0e0">已&ensp;认&nbsp;领</div>
+        {else/}
+        <div class="get yes">马&ensp;上&ensp;认&nbsp;领</div>
+        {/eq}
     {else/}
-    <div class="get yes">马&ensp;上&ensp;认&nbsp;领</div>
-    {/eq}
+    <div class="get" style="background: #e0e0e0">暂&ensp;无&ensp;权&nbsp;限</div>
     {/eq}
 </div>
 <div class="gray"></div>
