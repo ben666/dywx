@@ -5,6 +5,9 @@
     html,body{
         background: #fcfcfc;
     }
+    .images{
+        display: inline-block;
+    }
     .content{
         height: 100vh;
         padding: 0.5rem 0;
@@ -13,28 +16,24 @@
     .title:nth-child(even) img{
         right: 0;
     }
-    .title:nth-child(even):after{
-        content: '';
-        display: block;
-        height: 21.3vw;
-        width: 2vw;
-        background: #fff;
-        position: absolute;
-        margin-left: 0.6rem;
-        z-index: 99;
-        top: 6vw;
-        right: 36vw;
+   .title:nth-child(even) .writing:after{
+       content: '';
+       display: block;
+       height: 21.3vw;
+       width: 2vw;
+       background: #fff;
+       position: absolute;
+       margin-left: 58vw;
+       z-index: 99;
     }
-    .title:nth-child(odd):after{
+    .title:nth-child(odd) .writing:after{
         content: '';
         display: block;
         height: 21.3vw;
         width: 2vw;
         background: #fff;
         position: absolute;
-        margin-left: 36vw;
-        z-index: 99;
-        top: 6vw;
+        margin-left: -5vw;
     }
     .title:nth-child(odd) img{
         clear: both;
@@ -79,17 +78,17 @@
         background: #fff;
         position: absolute;
         border-radius: 0.1rem;
-        z-index: 1;
+        z-index: 99;
         -moz-box-shadow: 0px 10px 8px #f1f1f1;
         -webkit-box-shadow: 0px 10px 8px #f1f1f1;
         box-shadow: 0px 10px 8px #f1f1f1;
     }
     .title:nth-child(even) .writing{
-        left: 7vw;
+        left: 4vw;
         margin-top: 4vw;
     }
     .title:nth-child(odd) .writing{
-        left: 37vw;
+        left: 41vw;
         margin-top: 4vw;
     }
 
@@ -101,14 +100,12 @@
     }
     .title:nth-child(even) p{
         height: 21.3vw;
-        line-height: 21.3vw;
         right: 45vw;
-        margin-top: 5vw;
+        margin-top: 8.5vw;
     }
     .title:nth-child(odd) p{
         height: 21.3vw;
-        line-height: 21.3vw;
-        margin-top: 3vw;
+        margin-top: 8.5vw;
         left: 45vw;
     }
     .title:nth-child(1) p{
@@ -154,7 +151,7 @@
     </a>
     <a class="title" href="{:Url('pioneer/index?type=2')}">
         <div class="title_box">
-        <img src="/home/images/pioneer/2.png">
+        <img src="/home/images/pioneer/2.png"  class="images">
         <span>02</span>
         <div class="writing"></div>
         <p>国防科技先锋</p>
@@ -162,7 +159,7 @@
     </a>
     <a class="title" href="{:Url('pioneer/index?type=3')}">
         <div class="title_box">
-        <img src="/home/images/pioneer/3.png">
+        <img src="/home/images/pioneer/3.png"  class="images">
         <span>03</span>
         <div class="writing"></div>
         <p>中国遥感先锋</p>
@@ -170,7 +167,7 @@
     </a>
     <a class="title" href="{:Url('pioneer/index?type=4')}">
         <div class="title_box">
-        <img src="/home/images/pioneer/4.png">
+        <img src="/home/images/pioneer/4.png"  class="images">
         <span>04</span>
         <div class="writing"></div>
         <p>协会先锋</p>

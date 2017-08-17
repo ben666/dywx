@@ -65,12 +65,12 @@ body{
 }
 .btn{
     width: 61.6vw;
-    height: 10.67vw;
+    height: 0.8rem;
     background: url(/home/images/verify/loginbtn.png) no-repeat;
     background-size: 100% 100%;
     margin: 0 auto;
     text-align: center;
-    line-height: 10.67vw;
+    line-height: 0.8rem;
     font-size: 0.4rem;
     text-align: center;
     color: #ffffff;
@@ -84,11 +84,11 @@ body{
     padding-top: 4vw;
 }
 .login img{
-    height: 3.3vw;
-    margin-left: 2.66vw;
+    height: 0.2rem;
+    margin-left: 0.3rem;
     vertical-align: middle;
     position: relative;
-    top:-0.5vw;
+    top: -0.03rem;
 }
 footer{
     width:100%;

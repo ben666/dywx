@@ -79,7 +79,7 @@ function tabRecord(a,b){
 	pushHistory();
 	window.addEventListener( "popstate", function( e ){
 		delCookie( 'tab' );
-		window.history.go( -1 );
+		//window.history.go( -1 );
 	}, false );
 }
 function pushHistory(){

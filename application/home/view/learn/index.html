@@ -293,6 +293,12 @@
             it.siblings('label').removeClass('checked');
         });
     });
+
+    window.onpageshow = function (e) {
+            if (e.persisted) {
+                window.location.reload(true);
+            }
+    }
 </script>
 {/eq}
 {/block}
