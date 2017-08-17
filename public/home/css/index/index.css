@@ -165,7 +165,7 @@ html,body{
     position: absolute;
     font-size: 0.24rem;
     bottom: 0;
-    line-height: 0.5rem;
+    line-height: 0.25rem;
 }
 .content .notices .notice.activity .list .right {
     width: 100%;
