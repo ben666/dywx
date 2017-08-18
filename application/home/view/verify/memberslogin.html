@@ -29,6 +29,7 @@
 {block name="script"}
 <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
+    var win_height = $(window).height();
     $(function(){
         $('.btn').on("click",function(){
             login()
@@ -43,6 +44,15 @@
             'margin-top': vh
         });
     });
+
+    $(window).resize(function(){
+        var height = $(window).height();
+        if(height<win_height){
+            $("footer").hide();
+        }else{
+            $("footer").show();
+        }
+    })
     /**登陆**/
     function login(){
         var re=reg();

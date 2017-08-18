@@ -6,14 +6,17 @@
  * Time: 13:21
  */
 namespace app\home\controller;
-use app\home\model\WechatTest;
 use app\home\model\WechatUser;
-
+use app\home\model\WechatDepartment;
 class Structure extends Base{
     /*
      * 组织架构主页
      */
     public function index(){
+        $Depart = WechatDepartment::where(['id' => 1,'status' => 1])->find();
+        $Dep = WechatDepartment::where(['id' => ['neq',1],'status' => 1])->order('id asc')->select();
+        $this->assign('top',$Depart);
+        $this->assign('list',$Dep);
         return $this->fetch();
     }
     /*
