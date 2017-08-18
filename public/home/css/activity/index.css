@@ -121,6 +121,9 @@ p{
     border-radius: 4px;
     float: left;
 }
+.votes>ul>li:first-child{
+    padding-top: 6vw;
+}
 .votes>ul>li>p{
     margin-left: 0.3rem;
     display: inline-block;
