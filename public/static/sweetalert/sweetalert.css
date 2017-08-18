@@ -19,14 +19,14 @@ body.stop-scrolling {
 .sweet-alert {
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width:9.56rem;
+  width: 80vw;
   padding: 17px;
   border-radius: 5px;
   text-align: center;
   position: fixed;
   left: 50%;
   top: 50%;
-  margin-left: -4.78rem;
+  margin-left: -40vw;
   margin-top: -200px;
   overflow: hidden;
   display: none;
