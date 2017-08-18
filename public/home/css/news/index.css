@@ -98,7 +98,7 @@
     font-size: 0.24rem;
     color: #999;
     position: absolute;
-    bottom: 0;
+    bottom: -8px;
 }
 .history .title{
     text-align: center;

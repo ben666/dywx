@@ -160,12 +160,6 @@
     </div>
 <!--线上活动发布-->
 <a id="publish" href="{:Url('Branch/publish?dep='.$depart)}"></a>
-<div class="bottom clear">
-    <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！">
-    </div>
-    <div class="send fr" onclick="send(this)">发送</div>
-</div>
 {/block}
 {block name="script"}
 <script src="/home/js/reset.js"></script>
@@ -443,58 +437,70 @@ window.onload = function(){
         imgresize();
     }
 
-
-
+    //发送评论
     var tosend = function(e,id){
         var index = $(e).parents('.votes ul li' ).index();
-        $('.banner,.lists' ).off('click');
-        $('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
-            $('.tabs,.lists' ).off('click').one('click',function(){
-                $('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
-                $('.myword input' ).val('');
-            })
-        }).attr('data-tab',index);
-       $('.send' ).attr('data-tab',id);
-    };
-
-    //发送评论
-    var send = function(e){
-        var it = $(e ).prev().find('input');
-        var index = $('.bottom' ).attr('data-tab');
-        if(it.val() != ''){
-            $.ajax({
-                type:"post",
-                url:"{:Url('Base/comment')}",
-                data:{
-                    type : 2,
-                    aid:$('.send' ).attr('data-tab'),
-                    content:it.val()
+        setTimeout(function(){
+            $("input").focus();
+        },0)
+        swal({
+                    title: "",
+                    text: "请输入评论内容！",
+                    type: "input",
+                    showCancelButton: true,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "请在此输入评论内容（300字以内）",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
                 },
-                success:function(msg){
-                    var data = msg.data;
-                    var html = '';
-                    html +=
-                        '<li>'+
-                        '<span class="name">'+data.nickname+'：</span>'+
-                        '<span class="comment">'+data.content+'</span>'+
-                        '</li>';
+                function(inputValue){
+                    if (inputValue === false) {
+                        $(".bottom").show();
+                        setTimeout(function(){
+                            $("input").blur();
+                        },0)
+                        return false
+                    }else if (inputValue === "")
+                    {
+                        swal.showInputError("请输入评论");
+                        return false
+                    }else if(inputValue.length>300){
+                        swal.showInputError("评论不得多于300字");
+                    }else{
+                        $.ajax({
+                            type:"post",
+                            url:"{:Url('Base/comment')}",
+                            data:{
+                                type : 6,
+                                aid:id,
+                                content:inputValue
+                            },
+                            success:function(msg){
+                                var data = msg.data;
+                                var html = '';
+                                html +=
+                                        '<li>'+
+                                        '<span class="name">'+data.nickname+'：</span>'+
+                                        '<span class="comment">'+data.content+'</span>'+
+                                        '</li>';
 
-                    $('.votes>ul').children("li").eq(index).find('.comments').removeClass('hide').prepend(html);
-                    $('.tabs,.votes' ).click();
-                }
-            });
-        }else{
-            var not = $('.not');
-            not.fadeIn();
-            document.body.style.overflow='hidden';
-            $('.confirm,.not .bg' ).on('click',function(){
-                not.fadeOut();
-                document.body.style.overflow='scroll';
-                $('.banner,.lists' ).click();
-//			$('.bottom' ).animate({'bottom':'-45px'},500,'swing');
-//			$('.myword input' ).val('');
-            })
-        }
+                                $('.votes>ul').children("li").eq(index).find('.comments').removeClass('hide').prepend(html);
+                                $('.tabs,.votes' ).click();
+                                swal({
+                                    title: ' ',
+                                    text: '评论成功',
+                                    type: 'success',
+                                    confirmButtonText:'确定',
+                                    timer:3000
+                                });
+                            }
+                        });
+                    }
+                    setTimeout(function(){
+                        $("input").blur();
+                    },0)
+                });
     };
 
     //同意
