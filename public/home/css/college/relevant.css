@@ -118,8 +118,12 @@
   max-width: 100%!important;
   font-size: 0.28rem;
   color: #333;
+  width: 100%;
 }
-/*评论*/
+.content .article p img{
+  text-align: center;
+}
+  /*评论*/
 .comment {
   padding-bottom: 50px;
 }

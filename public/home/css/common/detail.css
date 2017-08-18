@@ -130,6 +130,7 @@
 .article .content img {
   display: block;
   max-width: 100%!important;
+  width: 100%;
 }
 .article .content .video {
   position: relative;
