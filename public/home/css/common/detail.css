@@ -126,6 +126,7 @@
 }
 .article .content * {
   max-width: 100%!important;
+  line-height: 0.5rem!important;
 }
 .article .content img {
   display: block;
