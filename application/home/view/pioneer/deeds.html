@@ -230,6 +230,11 @@
 <script>
     var c =  parseInt(window.location.href.split("/c/")[1]);
 $(function(){
+    $("#item1mobile p span").each(function(){
+        var size = parseInt($(this).css("font-size"));
+        $(this).css("font-size",size*1.6+"px");
+    })
+
     //tab初始化和数据存储
     var co = getCookie("type");
     if(co == 0 || co == 1 || co == 2){
