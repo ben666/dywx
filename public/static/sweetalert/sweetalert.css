@@ -19,14 +19,14 @@ body.stop-scrolling {
 .sweet-alert {
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 80vw;
+  width: 70vw;
   padding: 17px;
   border-radius: 5px;
   text-align: center;
   position: fixed;
   left: 50%;
   top: 50%;
-  margin-left: -40vw;
+  margin-left: -35vw;
   margin-top: -200px;
   overflow: hidden;
   display: none;
@@ -79,14 +79,15 @@ body.stop-scrolling {
       transition: padding 0.25s, max-height 0.25s; }
     .sweet-alert .sa-error-container .icon {
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 0.24rem;
+      height: 0.24rem;
       border-radius: 50%;
       background-color: #ea7d7d;
       color: white;
-      line-height: 24px;
+      line-height: 0.28rem;
       text-align: center;
-      margin-right: 3px; }
+      margin-right: 3px;
+      font-size: 0.24rem; }
     .sweet-alert .sa-error-container p {
       display: inline-block; }
   .sweet-alert .sa-input-error {
@@ -1039,4 +1040,12 @@ body.stop-scrolling {
   height: 0.8rem;
   font-size: 0.28rem;
   line-height: 0.8rem;
+}
+.sweet-alert input::-webkit-input-placeholder{
+  height: 0.8rem;
+  font-size: 0.28rem;
+  line-height: 0.8rem;
+}
+.sweet-alert .sa-input-error.show{
+  display: none!important;
 }

@@ -179,7 +179,7 @@
         if(co == 0 || co == 1 || co == 2){
             c = co;
         }else{
-            c =  parseInt(window.location.href.split("index/c/")[1]);
+            c =  parseInt(window.location.href.split("/c/")[1]);
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');

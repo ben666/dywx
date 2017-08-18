@@ -29,15 +29,6 @@
         background: url(/home/images/feedback/note.png) no-repeat;
         background-size: 100% 100%;
     }
-    .scrollDiy{
-        position: absolute;
-        top:0;
-        bottom:0;
-        overflow-y: scroll;
-        /* 增加该属性，可以增加弹性 */
-        -webkit-overflow-scrolling: touch;
-        width:100%;
-    }
     .triangle-up {
         border-left: 2.66vw solid transparent;
         border-right: 2.66vw solid transparent;
@@ -50,7 +41,6 @@
 {/block}
 {block name="body"}
 <!--tab-->
-<div class="scrollDiy">
     <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
         <a class="mui-control-item" href="#item1mobile" data-index="0">
             个人
@@ -157,7 +147,6 @@
                 </div>
             </div>
         </div>
-    </div>
 {/block}
 {block name="script"}
     <script src="/home/js/reset.js"></script>

@@ -34,7 +34,7 @@
 					<!--第二层-->
                     {volist name="depart" id="de"}
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Branch/branch?c=0&dep='.$de['id'])}">{$de.name}<span class="rt sj"></span></a>
+						<a class="name2 limit" href="{:Url('Branch/branch?dep='.$de['id'].'&c=0')}">{$de.name}<span class="rt sj"></span></a>
 					</div>
                     {/volist}
 					<!--/第二层-->
