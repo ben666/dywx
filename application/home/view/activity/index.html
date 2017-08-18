@@ -480,7 +480,7 @@ window.onload = function(){
                                 html +=
                                         '<li>'+
                                         '<span class="name">'+data.nickname+'：</span>'+
-                                        '<span class="comment">'+data.content+'</span>'+
+                                        '<span class="comment">&nbsp;'+data.content+'</span>'+
                                         '</li>';
 
                                 $('.votes>ul').children("li").eq(index).find('.comments').removeClass('hide').prepend(html);
