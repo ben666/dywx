@@ -51,7 +51,7 @@ class Branch extends Base
             $value['is_like'] = $like;  //  0 未投票    1  赞成  2 反对
             // 获取评论
             $commentModel = new Comment();
-            $comment = $commentModel->getComment(2,$value['id'],$userId);
+            $comment = $commentModel->getComment(6,$value['id'],$userId);
             $value['comment'] = $comment;
         }
         $this->assign('list',$list);
@@ -108,7 +108,7 @@ class Branch extends Base
                 $value['is_like'] = $like;  //  0 未投票    1  赞成  2 反对
                 // 获取评论
                 $commentModel = new Comment();
-                $comment = $commentModel->getComment(2,$value['id'],$userId);
+                $comment = $commentModel->getComment(6,$value['id'],$userId);
                 $value['comment'] = $comment;
             }
         }
