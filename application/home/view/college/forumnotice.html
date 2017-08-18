@@ -99,6 +99,12 @@
 <script src="/home/js/reset.js"></script>
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
+	$(function(){
+		$(".content .article p span").each(function(){
+			var size = parseInt($(this).css("font-size"));
+			$(this).css({"font-size":size*1.6+"px","line-height":size*2.5+"px"});
+		})
+	})
 	window.onload=function(){
 		if($(".message").children().length==0){
 			$(".message").css("border-top","none");
