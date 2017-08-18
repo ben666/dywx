@@ -118,7 +118,9 @@
   max-width: 100%!important;
   font-size: 0.28rem;
   color: #333;
-  width: 100%;
+}
+.content .article p img{
+  width:100%;
 }
 .content .article p img{
   text-align: center;
