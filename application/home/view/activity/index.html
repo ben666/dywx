@@ -459,9 +459,9 @@ window.onload = function(){
                             $("input").blur();
                         },0)
                         return false
-                    }else if (inputValue === "")
+                    }else if (inputValue === "" || inputValue.length<5)
                     {
-                        swal.showInputError("请输入评论");
+                        swal.showInputError("评论不少于5个字");
                         return false
                     }else if(inputValue.length>300){
                         swal.showInputError("评论不得多于300字");
