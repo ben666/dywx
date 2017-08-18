@@ -24,8 +24,9 @@ class Structure extends Base{
      */
     public function detail(){
         $this ->checkAnonymous();
-        $party = input('party');
-        $this->assign('party',$party);
+        $pid = input('pid');
+        $list = WechatUser::where(['department' => $pid,'state' => 1])->order('id desc')->select();
+        $this->assign('list',$list);
         return $this->fetch();
     }
 }
