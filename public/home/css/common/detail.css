@@ -133,10 +133,11 @@
   line-height: 0.5rem!important;
 }
 .article .content img {
-  display: block;
+  display: inline-block;
   max-width: 100%!important;
   width: 100%;
   margin: 0 auto;
+  text-align: center;
 }
 .article .content .video {
   position: relative;

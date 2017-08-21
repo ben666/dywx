@@ -4,13 +4,20 @@
     /*height:18.8vw;*/
     padding: 2vw;
 }
-.header .title {
+.header .title ,.header .title p{
     width: 100%;
     color: #333;
     font-size: 0.34rem;
     line-height:0.52rem;
     font-weight: 600;
+    text-align: center;
 }
+.header .title p{
+    width:auto;
+    display: inline-block;
+    text-align: left;
+}
+
 .header .time,.header .name {
     display: inline-block;
     color: #999;
