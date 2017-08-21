@@ -49,8 +49,13 @@
   box-sizing: content-box;
 }
 .content .add span{
-   line-height: 15.8vw;
-   font-size: 28vw;
+  display: inline-block;
+  font-size: 20vw;
+  position: absolute;
+  left:3vw;
+  width: 20vw;
+  height: 20.8vw;
+  font-size: 20vw;
  }
 .bottom {
   z-index: 0;

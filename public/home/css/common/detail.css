@@ -96,11 +96,15 @@
   color: #333333;
   font-size: 0.36rem;
   font-weight: 600;
+  text-align: center;
 }
 .article .title p{
+  color: #333;
+  font-size: 0.34rem;
+  line-height: 0.52rem;
+  font-weight: 600;
   display: inline-block;
   text-align: left;
-  font-size: 0.32rem;
 }
 .article .note {
   color: #999999;
