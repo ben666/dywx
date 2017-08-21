@@ -16,24 +16,25 @@
     .title:nth-child(even) img{
         right: 0;
     }
-   .title:nth-child(even) .writing:after{
+   .title:nth-child(even) .title_box:after{
        content: '';
        display: block;
-       height: 21.3vw;
+       height: 25.3vw;
        width: 2vw;
        background: #fff;
        position: absolute;
-       margin-left: 58vw;
+       margin-left: 59vw;
        z-index: 99;
     }
-    .title:nth-child(odd) .writing:after{
+    .title:nth-child(odd) .title_box:after{
         content: '';
         display: block;
-        height: 21.3vw;
+        height: 25.3vw;
         width: 2vw;
         background: #fff;
         position: absolute;
-        margin-left: -5vw;
+        left: 39vw;
+        z-index: 102;
     }
     .title:nth-child(odd) img{
         clear: both;
@@ -46,8 +47,8 @@
     }
     .title img{
         width: 45.9vw;
-        height: 31.2vw;
-        z-index:2;
+        /*height: 31.2vw;*/
+        z-index:99;
         position: absolute;
     }
 
@@ -56,40 +57,36 @@
         font-size: 10vw;
         position: absolute;
         color: #fff;
-        z-index: 9;
+        z-index: 100;
         height: 21.3vw;
-        line-height: 31.2vw;
-        height: 31.2vw;
+        line-height: 25.3vw;
+        height: 25.3vw;
     }
     .title:nth-child(odd) span{
-        top: 1.4vw;
         left: 13vw;
 
     }
     .title:nth-child(even) span{
         right: 14vw;
-        top: 1.4vw;
     }
 
     /*文字背景*/
     .title .writing{
         width: calc(100% - 45vw);
-        height: 21.3vw;
+        height: 25.3vw;
         background: #fff;
         position: absolute;
         border-radius: 0.1rem;
-        z-index: 99;
+        z-index: 98;
         -moz-box-shadow: 0px 10px 8px #f1f1f1;
         -webkit-box-shadow: 0px 10px 8px #f1f1f1;
         box-shadow: 0px 10px 8px #f1f1f1;
     }
     .title:nth-child(even) .writing{
         left: 4vw;
-        margin-top: 4vw;
     }
     .title:nth-child(odd) .writing{
         left: 41vw;
-        margin-top: 4vw;
     }
 
     /*文字内容*/
@@ -99,13 +96,13 @@
         font-size: 7vw;
     }
     .title:nth-child(even) p{
-        height: 21.3vw;
+        height: 25.3vw;
         right: 45vw;
-        margin-top: 8.5vw;
+        line-height: 25.3vw;
     }
     .title:nth-child(odd) p{
-        height: 21.3vw;
-        margin-top: 8.5vw;
+        height: 25.3vw;
+        line-height: 25.3vw;
         left: 45vw;
     }
     .title:nth-child(1) p{
