@@ -100,7 +100,7 @@
 .article .title p{
   display: inline-block;
   text-align: left;
-  font-size: 0.28rem;
+  font-size: 0.32rem;
 }
 .article .note {
   color: #999999;
@@ -132,6 +132,7 @@
   display: block;
   max-width: 100%!important;
   width: 100%;
+  margin: 0 auto;
 }
 .article .content .video {
   position: relative;
@@ -162,8 +163,12 @@
   font-size: 0.28rem;
 }
 p{
-  font-size: 0.28rem;
+  /*font-size: 0.28rem;*/
   color: #333;
+}
+.article-content p,.article-content p span{
+  font-size: 0.3rem!important;
+  line-height: 0.5rem!important;
 }
 .article .content .note span {
   height: 0.6rem;

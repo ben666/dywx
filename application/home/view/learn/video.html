@@ -25,7 +25,7 @@
 				<iframe class="videocon" frameborder="0" src="{$video.net_path}" allowfullscreen></iframe>
 				{/neq}
 			</div>
-			{$video.content}
+			<div class="article-content">{$video.content}</div>
 			<div class="note">
 				<span class="read">{$video.views}</span>
 				{eq name="visit" value="0"}
@@ -81,7 +81,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-$(function(){
+	$(function(){
 	//播放视频
 	hideplay();
 	videoPlay();

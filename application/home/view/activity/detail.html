@@ -11,6 +11,10 @@
 	.comment{
 		padding-bottom: 1rem;
 	}
+	.article-content p,.article-content p span{
+		font-size: 0.3rem!important;
+		line-height: 0.5rem!important;
+	}
 </style>
 {/block}
 {block name="body"}
@@ -23,7 +27,7 @@
 			<span class="fr">{$new.create_time|time_format="Y-m-d"}</span>
 		</div>
 		<div class="content">
-			{$new.content}
+			<div class="article-content">{$new.content}</div>
 			<div class="note">
 				<span class="read">{$new.views}</span>
 				{eq name="visit" value="0"}

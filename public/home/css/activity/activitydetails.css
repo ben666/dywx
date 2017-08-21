@@ -42,6 +42,10 @@ p{
     font-size: 1.3rem;
     color: #4f4f4f;
 }
+.article-content p,.article-content p span{
+    font-size: 0.3rem!important;
+    line-height: 0.5rem!important;
+}
 .content .get {
     width: 87.2vw;
     height: 0.7rem;

@@ -16,7 +16,7 @@
 		</div>
 		<div class="content">
 			<div class="uecontent">
-				{$article.content}
+				<div class="article-content">{$article.content}</div>
 			</div>
 			<div class="note">
 				<span class="read">{$article.views}</span>
@@ -73,10 +73,6 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-$(function(){
-    $(".uecontent p span").css("font-size","0.28rem");
-	//reset
-});
 window.onload = function(){
 	var len = $(".list" ).length;
 	if($(".lists .list").length<7){

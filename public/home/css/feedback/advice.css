@@ -45,11 +45,13 @@
   margin-bottom: 2.6vw;
   border: 2px solid #d9d9d9;
   text-align: center;
-  line-height: 15vw;
-  font-size: 28vw;
   color: #d9d9d9;
   box-sizing: content-box;
 }
+.content .add span{
+   line-height: 15.8vw;
+   font-size: 28vw;
+ }
 .bottom {
   z-index: 0;
   position: fixed;

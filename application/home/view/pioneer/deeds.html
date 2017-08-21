@@ -155,6 +155,10 @@
 .default img {
     top: 30%;
 }
+.article-content p,.article-content p span{
+    font-size: 0.3rem!important;
+    line-height: 0.5rem!important;
+}
 </style>
 {/block}
 {block name="body"}
@@ -193,7 +197,7 @@
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--新闻发布-->
-                {$list.content}
+                <div class="article-content">{$list.content}</div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--先进事迹-->
@@ -230,11 +234,6 @@
 <script>
     var c =  parseInt(window.location.href.split("/c/")[1]);
 $(function(){
-    $("#item1mobile p span").each(function(){
-        var size = parseInt($(this).css("font-size"));
-        $(this).css("font-size",size*1.6+"px");
-    })
-
     //tab初始化和数据存储
     var co = getCookie("type");
     if(co == 0 || co == 1 || co == 2){

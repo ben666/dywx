@@ -11,6 +11,10 @@
 	.title span{
 	display: inline-block;text-align: left;
 	}
+	.article-content p,.article-content p span{
+		font-size: 0.3rem!important;
+		line-height: 0.5rem!important;
+	}
 </style>
 {/block}
 
@@ -41,7 +45,7 @@
 			<div class="time"><a href="tel:{$info.telephone}">{$info.telephone}</a></div>
 			{/notempty}
 		</div>
-		<div class="article">{$info.content}</div>
+		<div class="article article-content">{$info.content}</div>
 		<div class="article">
 			<div class="note">
 				{eq name="visit" value="0"}
@@ -99,12 +103,6 @@
 <script src="/home/js/reset.js"></script>
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
-	$(function(){
-		$(".content .article p span").each(function(){
-			var size = parseInt($(this).css("font-size"));
-			$(this).css({"font-size":size*2+"px","line-height":size*2.5+"px"});
-		})
-	})
 	window.onload=function(){
 		if($(".message").children().length==0){
 			$(".message").css("border-top","none");
