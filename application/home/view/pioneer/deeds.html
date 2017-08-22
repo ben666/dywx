@@ -2,10 +2,14 @@
 {block name="style"}
 <title>先锋引领</title>
 <style>
+    .banners{
+        height:40vw;
+    }
 .banners img{
     width:100%;
     position: relative;
     z-index: 9;
+    height: 40vw;
 }
 .round{
     position: relative;
@@ -159,6 +163,9 @@
     font-size: 0.3rem!important;
     line-height: 0.5rem!important;
 }
+    #refreshContainer{
+        top:calc(40vw + 1.8rem + 1rem);
+    }
 </style>
 {/block}
 {block name="body"}
@@ -260,10 +267,6 @@ $(function(){
     });
 
 window.onload = function(){
-    setTimeout(function(){
-        var height = $("#tab").height()+$(".banners").height()+$(".person").height();;
-        $("#refreshContainer").css("top",height);
-    },0)
     if(c==0){
         mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
     }else if(c==1){

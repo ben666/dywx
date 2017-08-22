@@ -10,6 +10,9 @@
     .party .title{
         font-size: 0.28rem;
     }
+    #refreshContainer{
+        top:calc(50vw + 0.88rem);
+    }
 </style>
 {/block}
 {block name="body"}
@@ -116,11 +119,6 @@
     var type = 0;
     var c =  parseInt(window.location.href.split("index/c/")[1]);
   $(function(){
-      setTimeout(function(){
-          var height1 = $(".banners").height();
-          var height2 = $("#tab").height();
-          $("#refreshContainer").css("top",height1+height2+20);
-      },0)
       //tab初始化和数据存储
       var co = getCookie("type");
       if(co == 0 || co == 1 || co == 2){
