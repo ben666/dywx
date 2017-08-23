@@ -32,8 +32,13 @@ class News extends Base {
             'type' => 2,  // 活动情况
             'status' => ['egt',0]
         );
+        if (empty($News->get_list($map))){
+            $list1 = $News->get_list($map1);
+        }else{
+            $list1 = $News->get_list($map);
+        }
         //数据列表
-        $this ->assign('list1',$News->get_list($map)); // 新闻发布 轮播
+        $this ->assign('list1',$list1); // 新闻发布 轮播
         $this ->assign('list',$News->get_list($map1)); //  新闻发布  列表
         $this ->assign('lists',$News->get_list($maps));
         return $this ->fetch();
