@@ -280,9 +280,11 @@ $(function(){
 
     //tab点击事件
     mui('#tab').on('tap', 'a', function(e) {
-        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
-        c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
+        var scrollApi = mui('.mui-scroll-wrapper').scroll();
+        scrollApi.refresh();//刷新
+        scrollApi.scrollTo(0,0);//滚动至顶部
+        c = this.getAttribute("data-index");
         if(c==0){
             if($(".notice .lists .list").length<10){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
