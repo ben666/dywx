@@ -32,9 +32,9 @@ return [
     'party' => array(
         'login' =>'http://zgyg.0571ztnet.com/home/verify/index',
         'token' =>'zgygdj',
-        'encodingaeskey' =>'',
-        'appid' =>'',
-        'appsecret' =>'',
+        'encodingaeskey' =>'HLuOAy9LuW5jTVNWU16iPt8bprkfTxovdX8lIUaA9B5',
+        'appid' =>'wx1cd7378ed4b9b684',
+        'appsecret' =>'eb600ca0e0d5ea28245d17a7a7e217d3',
     ),
     
 
