@@ -32,6 +32,9 @@
 <script src="/home/js/reset.js"></script>
 <script>
 $(function(){
+	if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+		$(".content .add").css("padding-bottom","0.4rem")
+	}
 	//上传
 	$('.sure' ).on('click',function(){
 		var content = $("textarea[name='content']").val();

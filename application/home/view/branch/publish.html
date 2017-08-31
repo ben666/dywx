@@ -16,9 +16,9 @@
 		<div class="img fl hide"></div>
 		<div class="img fl hide"></div>
 		<div class="img fl hide"></div>
-		<div class="add fl">
+		<span class="add fl">
 			+
-		</div>
+		</span>
 		<input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
 		<input type="hidden" name="dep" value="{$dep}"/>
 	</div>
@@ -33,6 +33,9 @@
 <script src="/home/js/reset.js"></script>
 <script>
 $(function(){
+	if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+		$(".content .add").css("padding-bottom","0.4rem")
+	}
 	//上传
 	$('.sure' ).on('click',function(){
 		var content = $("textarea[name='content']").val();
