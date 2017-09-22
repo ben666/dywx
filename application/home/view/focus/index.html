@@ -1,0 +1,120 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/list/graphic-list.css">
+<title>第一聚焦</title>
+<style>
+    .banner,.banner img{
+        width:100vw;
+        height:50vw;
+    }
+</style>
+{/block}
+{block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <!--轮播图-->
+        <div class="swiper-container banner">
+            <div class="swiper-wrapper">
+                {volist name="list.images" id="li"}
+                <div class="swiper-slide">
+                    <!--支持循环，需要重复图片节点-->
+                    <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="list">
+            {empty name="$list"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
+            <ul>
+                {volist name="list" id="vo"}
+                <a href="{:Url('Focus/detail?id='.$vo['id'])}">
+                        <img src="{$vo.front_cover|get_cover='path'}">
+                        <p>{$vo.title}</p>
+                        <span>{$vo.create_time|time_format='Y-m-d'}</span>
+                        <span>详情</span>
+                    </a>
+                    {/volist}
+            </ul>
+            {/empty}
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    window.onload = function() {
+        if ($(".list ul a").length < 10) {
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        } else {
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        var len  = $(".list ul a").length;
+        $.ajax({
+            type:"post",
+            url: "{:Url('Focus/index')}",
+            data:{
+                length:len
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 10){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    //加载更多列表
+    function addLists(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a href="/home/focus/detail2/id/'+list.id+'.html">'+
+                    '<img src="'+list.path+'">'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.time+'</span>'+
+                    '<span>详情</span>'+
+                    '</a>'
+        }
+        $('.list ul').append(html);
+    }
+
+    //触发点击事件
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+</script>
+{/block}

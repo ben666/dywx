@@ -1,0 +1,129 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>党建动态</title>
+<link rel="stylesheet" href="/home/css/details-template/detail.css">
+<style>
+	.mui-pull-bottom-pocket {
+		height: 0.8rem;
+		bottom: 0.8rem;
+	}
+	.comment{
+		padding-bottom: 1rem;
+	}
+</style>
+{/block}
+{block name="body"}
+		<div class="article">
+			<div class="title"><p>{$detail.title}</p></div>
+			<div class="note clear">
+				<span class="publish">{$detail.publisher}</span>
+				<span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
+			</div>
+			<div class="content">
+				{volist name="detail.images" id="li"}
+				<img src="{$li|get_cover='path'}">
+				{/volist}
+				<div class="article-content">{$detail.content}</div>
+				<div class="like">
+					<span class="read">{$detail.views}</span>
+					{eq name="visit" value="0"}
+					{eq name="detail.is_like" value="1"}
+					<span class="isgood good_ notvisitor"  data-type="4" data-id="{$detail.id}">{$detail.likes}</span>
+					{else/}
+					<span class="isgood good notvisitor"  data-type="4" data-id="{$detail.id}">{$detail.likes}</span>
+					{/eq}
+					{else/}
+					<span class="isgood good">{$detail.likes}</span>
+					{/eq}
+				</div>
+			</div>
+		</div>
+{/block}
+
+{block name="script"}
+<script>
+	//tab点击事件
+	mui('#refreshContainer').on('tap', '.notvisitor', function(e) {
+		var type = this.getAttribute("data-type");
+		var id = this.getAttribute("data-id");
+		isGood(this,type,id);
+	});
+
+	//点赞
+	var isGood = function(e,type,id){
+		//样式变化，移到suc
+		var n = $(e ).text();
+		$(e).toggleClass('good' ).toggleClass('good_');
+		$(e ).hasClass('good')?n--:n++;
+		$(e ).text(n);
+		//type：1文章，2评论
+//	var type = $(e ).hasClass('fr')?2:1;
+		$.ajax({
+			type:"post",
+			url:"{:Url('Base/like')}",
+			data:{
+				type:type,
+				aid:id,
+			},
+			success:function(data){
+			}
+		})
+	};
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+	//---微信接口JS-SDK的调用
+	wx.config({
+		debug: false,
+		appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
+		timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+		nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
+		signature: '{$jsSign.signature}', // 必填，签名，见附录1
+		jsApiList: [
+			'checkJsApi',
+			'chooseImage',
+			'previewImage',
+			'uploadImage',
+			'downloadImage',
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage',
+		]
+	});
+
+	wx.ready(function () {
+		//分享到朋友圈
+		wx.onMenuShareTimeline({
+			title: '{$detail.title}',
+			link: '{$detail.link}',
+			imgUrl: '{$detail.share_image}',
+			success: function () {
+				// 用户确认分享后执行的回调函数
+			},
+			cancel: function () {
+				// 用户取消分享后执行的回调函数
+			}
+		});
+		//分享给朋友
+		wx.onMenuShareAppMessage({
+			title: '{$detail.title}', // 分享标题
+			desc: '{$detail.desc}', // 分享描述
+			link: '{$detail.link}', // 分享链接
+			imgUrl: '{$detail.share_image}', // 分享图标
+			type: '', // 分享类型,music、video或link，不填默认为link
+			dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			success: function () {
+				// 用户确认分享后执行的回调函数
+			},
+			cancel: function () {
+				// 用户取消分享后执行的回调函数
+			}
+		});
+
+	});
+	//	wx.error(function (res) {
+	//		alert('wx.error: '+JSON.stringify(res));
+	//	});
+
+</script>
+{/block}
