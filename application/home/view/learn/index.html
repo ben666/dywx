@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/home/css/learn/index.css">
     <link rel="stylesheet" href="/home/css/learn/course.css">
     <link rel="stylesheet" href="/home/css/learn/learn.css">
+    <link rel="stylesheet" href="/home/css/list/graphic-list.css">
 <style>
         .notice>.title{
             width: 100vw;
@@ -16,245 +17,285 @@
             width: 600px;
              margin: 0;!important;
         }
-        .default img {
-            top: 62%;
+        /*nomessage*/
+        .default{
+            text-align: center;
+            position: absolute;
+            height: 100vh;
+            width: 100%;
         }
+        .default img{
+            width: 18vw;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-top:-1.2rem;
+            border-radius: 5px;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            transform:translate(-50%,-50%);
+        }
+        #refreshContainer{
+            top:50vw;
+        }
+
     </style>
 {/block}
 {block name="body"}
     <!--banner-->
-    <div class="banner">
-        <img src="/home/images/common/1.jpg" alt="建言献策banner图">
-    </div>
+<div class="banner">
+    <img src="/home/images/common/1.jpg" alt="建言献策banner图">
+</div>
     <!--tab-->
-    <div class="tabs clear">
-        <div class="tab"><span>手机党校</span></div>
-        <div class="tab"><span>练练身手</span></div>
-        <!--<div class="tab"><span>党史学习</span></div>-->
-    </div>
-    <!--切换列表-->
-    <div class="content">
-        <!--两学一做-->
-        <div class="notices hidden">
-            <div class="notice regularmore">
-                {empty name="list2"}
-                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                {else/}
-                <!--课程列表-->
-                <div class="lists">
-                    <!--图文课程-->
-                    {volist name="list2" id="vo"}
-                    {eq name="vo.type" value="2"}
-                    <a href="{:Url('Learn/article?id='.$vo['id'])}" class="list">
-                        <div class="tab">图文</div>
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        <span>手机党校</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+        <span> 党员先锋</span>
+    </a>
+    <a class="mui-control-item" href="#item3mobile" data-index="2">
+        <span> 练练身手</span>
+    </a>
+</div>
+
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <div class="notices partyschool">
+                    <div class="notice regularmore">
+                        {empty name="list2"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Learn/video?id='.$vo['id'])}" class="list">
-                            <div class="tab">视频</div>
-                            {/eq}
-                            <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
-                            <div class="title limit">{$vo.title}</div>
-                            <span class="study">{$vo.views}人阅读过</span>
-                        </a>
-                        {/volist}
-                </div>
-                {/empty}
-            </div>
-        </div>
-        <!--每日一课-->
-        <div class="notices hidden">
-            {eq name = "check" value = "0"}
-            <div class="notice activity">
-                <div class="lists">
-                    {volist name="question" id="vo" key="n"}
-                    <div class="list" data-tab="{$vo.id}">
-                        <div class="title">{$vo.title}</div>
-                        {volist name="vo->Option" id="value" key="k"}
-                        <label>{if condition="($k eq 1) AND ($value neq ' ') AND ($value neq '-')"}A{elseif condition="($k eq 2) AND ($value neq ' ') AND ($value neq '-')"}B{elseif condition="($k eq 3 )AND ($value neq ' ') AND ($value neq '-')"}C{elseif condition="($k eq 4 ) AND ($value neq ' ') AND ($value neq '-')"/}D{/if}.{$value|substr=###,'2'}</label>
-                        {/volist}
-                        <div class="number">{$n} / 5</div>
-                    </div>
-                    {/volist}
-                </div>
-                {eq name='visit' value="0"}
-                <div class="submit" data-toggle="modal" data-target="#modal">确认提交</div>
-                {/eq}
-                <!--模态框-->
-                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div>正确答案 : <span id="true1"></span></div>
-                                <div class="text-center">本次得分：<span class="score"></span> 分</div>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="" id="link">查看详情</a>
-                            </div>
+                        <!--课程列表-->
+                        <div class="lists">
+                            <!--图文课程-->
+                            {volist name="list2" id="vo"}
+                            {eq name="vo.type" value="2"}
+                            <a href="{:Url('Learn/article?id='.$vo['id'])}" class="list">
+                                <div class="tab">图文</div>
+                                {else/}
+                                <a href="{:Url('Learn/video?id='.$vo['id'])}" class="list">
+                                    <div class="tab">视频</div>
+                                    {/eq}
+                                    <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                                    <div class="title limit">{$vo.title}</div>
+                                    <span class="study">{$vo.views}人阅读过</span>
+                                </a>
+                                {/volist}
                         </div>
+                        {/empty}
                     </div>
                 </div>
             </div>
-            {else/}
-            <div class="notice activity">
-                    <div class="lists">
-                        {volist name="question" id="vo" key="n"}
-                        <div class="list" data-tab="题号">
-                            <div class="title" >{$vo.title}</div>
-                            {volist name="vo->Option" id="value" key="k"}
-                            <label {eq name="vo.right" value="$k" }class="checked" {/eq}>{$value}</label>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <div class="list pioneer">
+                    <ul>
+                            <a href="#">
+                                <img src="">
+                                <p>标题标题标题标题标题</p>
+                                <span>发布人</span>
+                                <span>2017-09-21</span>
+                            </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item3mobile" class="mui-slider-item mui-control-content">
+                <div class="notices answer">
+                    {eq name = "check" value = "0"}
+                    <div class="notice activity">
+                        <div class="lists">
+                            {volist name="question" id="vo" key="n"}
+                            <div class="list" data-tab="{$vo.id}">
+                                <div class="title">{$vo.title}</div>
+                                {volist name="vo->Option" id="value" key="k"}
+                                <label>{if condition="($k eq 1) AND ($value neq ' ') AND ($value neq '-')"}A{elseif condition="($k eq 2) AND ($value neq ' ') AND ($value neq '-')"}B{elseif condition="($k eq 3 )AND ($value neq ' ') AND ($value neq '-')"}C{elseif condition="($k eq 4 ) AND ($value neq ' ') AND ($value neq '-')"/}D{/if}.{$value|substr=###,'2'}</label>
+                                {/volist}
+                                <div class="number">{$n} / 5</div>
+                            </div>
                             {/volist}
-                            <div class="note">
-                                <span class="true">正确答案：<i>{$vo->Right}</i></span>
-                                <span class="number">{$n} / 5</span>
+                        </div>
+                        {eq name='visit' value="0"}
+                        <div class="submit" data-toggle="modal" data-target="#modal">确认提交</div>
+                        {/eq}
+                        <!--模态框-->
+                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div>正确答案 : <span id="true1"></span></div>
+                                        <div class="text-center">本次得分：<span class="score"></span> 分</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="" id="link">查看详情</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        {/volist}
                     </div>
-            </div>
-            {/eq}
-        </div>
-        <!--党史学习-->
-        <div class="notices hidden">
-            <div class="notice party">
-                <div class="title">点击进入党史学习</div>
-                <a href="{:Url('Learn/dangshi')}">
-                    <img src="/home/images/learn/learn.png" alt="" width="100%">
-                </a>
+                    {else/}
+                    <div class="notice activity">
+                        <div class="lists">
+                            {volist name="question" id="vo" key="n"}
+                            <div class="list" data-tab="题号">
+                                <div class="title" >{$vo.title}</div>
+                                {volist name="vo->Option" id="value" key="k"}
+                                <label {eq name="vo.right" value="$k" }class="checked" {/eq}>{$value}</label>
+                                {/volist}
+                                <div class="note">
+                                    <span class="true">正确答案：<i>{$vo->Right}</i></span>
+                                    <span class="number">{$n} / 5</span>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+                    </div>
+                    {/eq}
+                </div>
             </div>
         </div>
     </div>
-    <!--加载更多-->
-    <div class="tip"></div>
-    <div class="loading hidden">
-        <div class="typing_loader"></div>
-    </div>
+</div>
 {/block}
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    var c = 0;
     $(function(){
-        setTimeout(function(){
-            var height = $(".banner").height();
-            $(".content").css("margin-top",height+40);
-        },0)
         //tab初始化和数据存储
-        var ntc = $('.notices');
         var co = getCookie("type");
-        if(co == 11 || co == 12 || co == 13){
-            c = co - 10;
-        }
-        $('.tabs>.tab').eq(c-1).find('span').addClass('active');
-        ntc.eq(c-1).removeClass('hidden');
-       //两学一做上拉加载
-        if(c == 1){
-            var len = ntc.eq(c-1 ).find('.notice:last .list').length;
-            if(len >= 5){
-                $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
-            }
+        if(co == 0 || co == 1 || co == 2){
+            c = co;
         }else{
-            $('.tip' ).hide();
+            c =  0;
         }
-        //tab切换
-        $('.tabs>.tab ').on('click',function(){
-            var ntc = $('.notices' );
-            var eq = $(this ).index();
-            $(this ).siblings('.tab' ).find('span' ).removeClass('active');
-            $(this ).find('span' ).addClass('active');
-            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
-            ntc.eq(eq).removeClass('hidden');
-            if(eq == 0){
-                var len = ntc.eq(eq ).find('.notice:last .list').length;
-                if(len >= 5){
-                    $('.tip' ).text('上拉加载更多');
-                    loadScroll(eq+1);
-                }
-            }else{
-                $('.tip' ).hide();
-                $(window ).off("scroll" );
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    });
+
+    window.onload = function() {
+        if(c==0){
+            if ($(".partyschool ul a").length < 7) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
-            //使用示例
-            setCookie("type",eq+11);
-        });
-        //安卓4.4tab兼容
-        var u = navigator.userAgent;
-        var isAnd = !u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-        if(isAnd){
-            var num = u.substr(u.indexOf('Android') + 8, 3);
-            if(num <= 4.4){
-                var tabw = $('.tabs').width()/3 -2;
-                $('.tabs>.tab').width(tabw);
+        }else if(c==1){
+            if ($(".pionner ul a").length < 7) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==2){
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        }
+    }
+
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
             }
         }
     });
+
     function loadScroll(type){
-        $(window ).off("scroll" ).on("scroll",function(){
-            var ntc = $('.notices');
-            var dh = $(document).height();
-            var end = $(window).height() + $(window ).scrollTop();
-            var len = ntc.eq(type-1).find('.notice:last .list').length;
-            var tip = $(".tip");
-            var loading = $('.loading');
-            var url;
-            if(type == 1){
-                url = "{:Url('Learn/indexmore')}";
+           if(c==0){
+               var len = $(".partyschool .lists a").length;
+           }else if(c==1){
+               var len = $(".pionner .lists a").length;
+           }
+            if(c == 0){
+               var url = "{:Url('Learn/indexmore')}";
             }
-            if(dh == end && scrollNow){
-                scrollNow = false;//请求执行中
                 $.ajax({
                     type:"post",
                     url: url,
                     data:{
-                        length:len
+                        length:len,
+                        type:c
                     },
                     beforeSend: function(XMLHttpRequest){
-                        tip.hide();
-                        loading.toggleClass('hidden');
                     },
                     success:function(data){
-                        console.log(data);
-                        loading.toggleClass('hidden');
-                        tip.show();
                         if(data.code == 1){
-                            addCourse(data,type);
+                            addCourse(data,c);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
-                                tip.text('上拉加载更多');
+                            if(data.data.length == 7){
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                            }else{
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                             }
                         }else{
-                            tip.text('没有更多数据了');
-                            $(window ).off("scroll");
+                            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                         }
-                        scrollNow = true;//请求结束
                     }
                 })
-            }
-        })
     }
-    function addCourse(data){
+    function addCourse(data,c){
         var html = '';
         var lists = data.data;
         var len = lists.length;
-        for(var i = 0; i< len;i++){
+        for(var i = 0; i< len;i++) {
             var list = lists[i];
-            if(list.type == 1){
-                html+=
-                        '<a href="/home/learn/video/id/'+list.id+'.html" class="list">'+
-                        '<div class="tab">视频</div>'
-            }else{
-                html+=
-                        '<a href="/home/learn/article/id/'+list.id+'.html" class="list">'+
-                        '<div class="tab">图文</div>'
+            if (c == 0) {
+                if (list.type == 1) {
+                    html +=
+                            '<a href="/home/learn/video/id/' + list.id + '.html" class="list">' +
+                            '<div class="tab">视频</div>'
+                } else {
+                    html +=
+                            '<a href="/home/learn/article/id/' + list.id + '.html" class="list">' +
+                            '<div class="tab">图文</div>'
+                }
+                html +=
+                        '<img src="' + list.path + '" alt="图片" class="img">' +
+                        '<div class="title limit">' + list.title + '</div>' +
+                        '<span class="study">' + list.views + '人阅读过</span>' +
+                        '</a>'
             }
-            html +=
-                    '<img src="'+list.path+'" alt="图片" class="img">'+
-                    '<div class="title limit">'+ list.title+'</div>'+
-                    '<span class="study">'+ list.views+'人阅读过</span>'+
-                    '</a>'
         }
-        $(".regularmore .lists" ).append(html);
+        if(c==0){
+            $(".regularmore .lists" ).append(html);
+        }
+
     }
+
+
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
+        c = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        if(c==0){
+            if($(".partyschool ul a").length< 7 ){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".pioneer ul a").length< 7 ){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==2){
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        }
+        setCookie('type',c);
+    });
+
+    mui('#item1mobile').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+
+
 
 </script>
 <script>
@@ -263,7 +304,7 @@
      */
     //提交
     $(function(){
-        $('.submit').on('click',function(e){
+        $('body').on('tap',".submit",function(e){
             var data = [];
             $('.activity .list').each(function(){
                 var id = $(this ).attr('data-tab');
@@ -294,7 +335,7 @@
 <script>
     //选中样式变化
     $(function() {
-        $('label').on('click', function (e) {
+        $('#item3mobile').on('tap',"label",function (e) {
             var it = $(this);
             it.addClass('checked');
             it.siblings('label').removeClass('checked');

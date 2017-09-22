@@ -48,7 +48,7 @@
 				<div class="fl">
 					<img src="{$co.header}" alt="用户" class="user">
 				</div>
-				<div class="fl mid">
+				<div class="mid">
 					<div class="name limit">{$co.nickname}</div>
 					<div class="content" >{$co.content}</div>
 					<div class="time">{$co.create_time|time_format="Y-m-d"}</div>
@@ -69,9 +69,9 @@
 		</div>
 	</div>
 	{eq name="visit" value="0"}
-	<div class="bottom clear">
+	<div class="bottom clear" onclick="send(this,3,{$video['id']})">
 		<div class="myword fl">
-			<input type="text" placeholder="说说你的感想！"  onclick="send(this,3,{$video['id']})">
+			<input type="text" placeholder="说说你的感想" disabled>
 		</div>
 	</div>
 	{/eq}
@@ -151,10 +151,6 @@ var isGood = function(e,type,id){
 
 //发送评论
 var send = function(e,type,id){
-	$(".bottom").hide();
-	setTimeout(function(){
-		$("input").focus();
-	},0)
 	swal({
 				title: "",
 				text: "请输入评论内容！",
@@ -168,10 +164,6 @@ var send = function(e,type,id){
 			},
 			function(inputValue){
 				if (inputValue === false) {
-					$(".bottom").show();
-					setTimeout(function(){
-						$("input").blur();
-					},0)
 					return false
 				}else if (inputValue === ""|| inputValue.length<5)
 				{
@@ -203,7 +195,7 @@ var send = function(e,type,id){
 									'<div class="fl">'+
 									'<img src="'+data.header+'" alt="用户头像" class="user">'+
 									'</div>'+
-									'<div class="fl mid">'+
+									'<div class="mid">'+
 									'<div class="name limit">'+data.nickname+'</div>'+
 									'<div class="content" >'+inputValue+'</div>'+
 									'<div class="time">'+data.time+'</div>'+
@@ -224,15 +216,11 @@ var send = function(e,type,id){
 								text: '评论成功',
 								type: 'success',
 								confirmButtonText:'确定',
-								timer:3000
+								timer:1500
 							});
 						}
 					});
 				}
-				$(".bottom").show();
-				setTimeout(function(){
-					$("input").blur();
-				},0)
 			});
 };
 

@@ -94,13 +94,13 @@
 }
 .article .title {
   color: #333333;
-  font-size: 0.36rem;
+  font-size: 0.46rem;
   font-weight: 600;
   text-align: center;
 }
 .article .title p{
   color: #333;
-  font-size: 0.34rem;
+  font-size: 0.44rem;
   line-height: 0.52rem;
   font-weight: 600;
   display: inline-block;
@@ -108,7 +108,7 @@
 }
 .article .note {
   color: #999999;
-  font-size: 0.24rem;
+  font-size: 0.34rem;
   line-height: 8vw;
 }
 .note .fl{
@@ -130,7 +130,6 @@
 }
 .article .content * {
   max-width: 100%!important;
-  line-height: 0.5rem!important;
 }
 .article .content img {
   display: inline-block;
@@ -172,12 +171,16 @@ p{
   /*font-size: 0.28rem;*/
   color: #333;
 }
-.article-content p,.article-content p span{
-  font-size: 0.3rem!important;
-  line-height: 0.5rem!important;
+/*like*/
+.article .content .note {
+  color: #999;
+  font-size: 0.36rem;
+  float: right;
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
 }
 .article .content .note span {
-  height: 0.6rem;
+  height: 0.5rem;
   display: inline-block;
   margin-right: 0.3rem;
   line-height:0.6rem;
@@ -190,75 +193,84 @@ p{
 }
 .article .content .note .read {
   background: url('/home/images/detail/scan_.png') 0 center no-repeat;
-  background-size: 0.3rem 0.3rem;
-  padding-left: 0.36rem;
+  background-size: 0.36rem 0.36rem;
+  padding-left: 0.53rem;
 }
 .article .content .note .good {
   background: url('/home/images/detail/good.png') 0 center no-repeat;
-  background-size: 0.3rem 0.3rem;
-  padding-left: 0.36rem;
+  background-size: 0.36rem 0.36rem;
+  padding-left:  0.53rem;
 }
 .article .content .note .good_ {
   animation: shake 300ms ease;
   -webkit-animation: shake 300ms ease;
   background: url('/home/images/detail/good_.png') 0 center no-repeat;
-  background-size: 0.3rem 0.3rem;
-  padding-left: 0.36rem;
+  background-size: 0.36rem 0.36rem;
+  padding-left: 0.53rem;
 }
 
-
-/*评论*/
+/*comment*/
+.comment{
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
 .comment .sum {
   height: 0.6rem;
   padding-left: 0.3rem;
   background: #fcfcfc;
   border-top: 1px solid #f1f1f1;
   border-bottom: 1px solid #f1f1f1;
-  font-size: 0.24rem;
+  font-size: 0.32rem;
   line-height: 0.6rem;
 }
 .comment .lists .list {
   width: 100%;
-  padding-left: 0.3rem;
-  padding-right:0.3rem;
-  min-height: 100px;
+  min-height: 80px;
   border-bottom: 1px solid #f1f1f1;
+  position: relative;
+  overflow: hidden;
 }
 .comment .lists .list .fl img {
-  width: 8vw;
-  height: 8vw;
+  float: left;
+  height: 12vw;
+  width: 12vw;
   margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
   margin-right: 0.28rem;
   overflow: hidden;
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
 .comment .lists .list .mid {
-  width: 73%;
+  width: 85%;
   margin-top: 0.28rem;
 }
 .comment .lists .list .mid .name {
-  width: 100%;
   color: #999;
-  font-size: 0.28rem;
+  font-size: 0.38rem;
+  margin-left: 15vw;
+  width:80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .comment .lists .list .mid .content {
   width: 100%;
   word-break: break-all;
-  font-size: 0.28rem;
+  font-size: 0.38rem;
   margin-top: 1vw;
   margin-bottom: 1vw;
+  padding-left: 15vw;
 }
 .comment .lists .list .mid .time {
-  font-size: 0.24rem;
+  font-size: 0.32rem;
   line-height: 5.3vw;
   color: #999;
+  margin-left:15vw;
 }
 .comment .lists .list .fr {
-  margin-top: 0.3rem;
   color: #999999;
-  line-height: 0.3rem;
-  font-size: 0.24rem;
+  font-size: 0.32rem;
 }
 .comment .lists .list .good {
   background: url('/home/images/detail/good.png') 0 center no-repeat;
@@ -269,15 +281,11 @@ p{
   background: url('/home/images/detail/good_.png') 0 center no-repeat;
 }
 .comment .lists .list .isgood {
-  background-size: 0.26rem 0.26rem;
-  padding-left: 0.36rem;
-}
-.comment .tip {
-  height: 10.6vw;
-  text-align: center;
-  line-height: 10.6vw;
-  color: #c1c1c1;
-  font-size: 1.5rem;
+  background-size: 0.36rem 0.36rem;
+  padding-left: 0.53rem;
+  position: absolute;
+  top:0.28rem;
+  right:0;
 }
 /*底部*/
 .bottom {
@@ -309,16 +317,16 @@ p{
 }
 .bottom .myword input {
   vertical-align: middle;
-  height: 0.6rem;
+  height: 0.8rem;
   width: 94vw;
-  margin: 3vw 0;
-  padding-left: 0.24rem;
+  margin: 0.5vw 0;
+  padding-left: 0.34rem;
   background: #fafafa;
   border: 1px solid #d8d8d8;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  font-size: 0.26rem;
-  line-height: 0.6rem;
+  font-size: 0.36rem;
+  line-height: 0.8rem;
 }
 .bottom .send {
   width: 20.5vw;

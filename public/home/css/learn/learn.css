@@ -32,8 +32,8 @@
   }
 }
 
-.notices{
-  margin-top: 0.5rem;
+.notices,.pioneer{
+  margin-top: 7vw;
 }
 /*课程列表*/
 .regularmore  .lists {
@@ -52,16 +52,16 @@
 }
 .regularmore .lists .list .tab {
   position: absolute;
-  top: 5.53vw;
+  top: 5.2vw;
   left: 1.13vw;
-  width: 0.9rem;
-  height: 0.6rem;
-  background: url("/home/images/learn/bg_blue.png") no-repeat;
-  background-size: 0.9rem 0.6rem;
+  width: 1.2rem;
+  height: 0.8rem;
+  background: url(/home/images/learn/bg_blue.png) no-repeat;
+  background-size: 1.2rem 0.8rem;
   color: #ffffff;
-  font-size: 0.24rem;
+  font-size: 0.34rem;
   text-align: center;
-  line-height: 0.4rem;
+  line-height: 0.55rem;
 }
 .regularmore .lists .list .img {
   width: 100%;
@@ -71,16 +71,16 @@
 }
 .regularmore .lists .list .title {
   color: #333333;
-  font-size: 0.28rem;
+  font-size: 0.38rem;
   line-height: 0.7rem;
 }
 .regularmore .lists .list .study {
   display: inline-block;
-  background: url("/home/images/learn/people.png") 0 0 no-repeat;
-  background-size: 0.3rem 0.3rem;
-  padding-left: 0.36rem;
+  background: url(/home/images/learn/people.png) 0 0 no-repeat;
+  background-size: 0.4rem 0.4rem;
+  padding-left: 0.46rem;
   color: #999;
-  font-size: 0.24rem;
+  font-size: 0.34rem;
   text-align: center;
 }
 /*提示*/
@@ -90,7 +90,7 @@
   line-height: 10.67vw;
   color: #c1c1c1;
   background: #ffffff;
-  font-size: 0.28rem;
+  font-size: 0.38rem;
 }
 .loading {
   width: 100%;
