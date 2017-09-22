@@ -13,11 +13,11 @@ use think\Url;
 
 /**
  * Class Notice
- * @package 支部活动
+ * @package 组织活动
  */
 class Notice extends Admin {
     /**
-     * 相关通知
+     * 活动通知
      */
     public function index(){
         $map = array(
@@ -31,13 +31,12 @@ class Notice extends Admin {
         $list = $this->lists('Notice',$map);
         int_to_string($list,array(
             'recommend' => array(0=>"否",1=>"是"),
-            'push' => array(0=>"否",1=>"是")
         ));
         $this->assign('list',$list);
         return $this->fetch();
     }
     /**
-     * 学习资料
+     * 活动展示
      */
     public function learn(){
         $map = array(
@@ -51,13 +50,12 @@ class Notice extends Admin {
         $list = $this->lists('Notice',$map);
         int_to_string($list,array(
             'recommend' => array(0=>"否",1=>"是"),
-            'push' => array(0=>"否",1=>"是")
         ));
         $this->assign('list',$list);
         return $this->fetch();
     }
     /**
-     * 学习资料 添加修改
+     * 活动展示  添加修改
      */
     public function add(){
         $id = input('id/d');
@@ -109,7 +107,7 @@ class Notice extends Admin {
         }
     }
     /**
-     * 相关通知 添加
+     * 活动通知 添加
      */
     public function indexadd(){
         if(IS_POST) {
@@ -142,7 +140,7 @@ class Notice extends Admin {
         }
     }
     /**
-     * 相关通知 修改
+     * 活动通知 修改
      */
     public function indexedit(){
         if(IS_POST) {

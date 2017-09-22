@@ -19,7 +19,7 @@ use think\Config;
  */
 class Learn extends Admin {
     /**
-     * 主页
+     * 手机党校  主页
      */
     public function index(){
         $map = array(
@@ -41,9 +41,59 @@ class Learn extends Admin {
 
         return $this->fetch();
     }
-
     /**
-     * 添加
+     *  党员先锋  主页
+     */
+    public function pioneer(){
+        $map = array(
+            'status' => array('egt',0),
+            'type'=> 3
+        );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
+        $list = $this->lists('Learn',$map);
+        int_to_string($list,array(
+            'status' => array(0=>"已发布",1=>"已发布"),
+            'recommend' => array(0=>"否",1=>"是"),
+            'push' => array(0=>"否",1=>"是"),
+            'type' => array(3=>"党员先锋")
+        ));
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+    /**
+     * 党员先锋  添加 修改
+     */
+    public function plus(){
+        $Learn = new LearnModel();
+        if (IS_POST){
+            $data = input('post.');
+            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
+            if (empty($data['id'])){
+                // 添加
+                unset($data['id']);
+                $res = $Learn->validate('Learn')->save($data);
+            }else{
+                // 修改
+                $res = $Learn->validate('Learn')->save($data,['id' => $data['id']]);
+            }
+            if($res){
+                return $this->success('操作成功!',Url("Learn/pioneer"));
+            }else{
+                return $this->error($Learn->getError());
+            }
+        }else{
+            input('get.id') ? $id = input('get.id') : $id = 0;
+            $msg = $Learn->where(['id' => $id])->find();
+            $this->assign('msg',$msg);
+            return $this->fetch();
+        }
+    }
+    /**
+     * 手机党校  添加
      */
     public function add(){
         if(IS_POST){
@@ -72,7 +122,7 @@ class Learn extends Admin {
     }
 
     /**
-     * 修改
+     * 手机党校  修改
      */
     public function edit(){
         if(IS_POST){

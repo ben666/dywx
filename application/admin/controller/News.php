@@ -13,7 +13,7 @@ use app\admin\model\News as NewsModel;
 use think\Config;
 /**
  * Class News
- * @package 新闻动态 控制器
+ * @package 第一聚焦  控制器
  */
 class News extends Admin {
 
@@ -22,7 +22,6 @@ class News extends Admin {
      */
     public function index(){
         $map = array(
-            'type' => 1 , // 新闻发布
             'status' => array('egt',0),
         );
         $search = input('search');
@@ -39,28 +38,7 @@ class News extends Admin {
         return $this->fetch();
     }
     /**
-     * 活动情况  主页
-     */
-    public function activity(){
-        $map = array(
-            'type' => 2 , // 活动情况
-            'status' => array('egt',0),
-        );
-        $search = input('search');
-        if ($search != '') {
-            $map['title'] = ['like','%'.$search.'%'];
-        }
-        $list = $this->lists('News',$map);
-        int_to_string($list,[
-            'status' => array(0=>"已发布",1=>"已发布"),
-            'recommend' => [0 => "否" , 1 => "是"],
-            'push' => [0 => '否' , 1 => '是']
-        ]);
-        $this->assign('list',$list);
-        return $this->fetch();
-    }
-    /**
-     * 新闻发布  活动情况   添加  修改
+     * 新闻发布 添加  修改
      */
     public function edit(){
         $News = new NewsModel();
@@ -68,18 +46,13 @@ class News extends Admin {
             $data = input('post.');
             $result = $News->get_save($data);
             if($result) {
-                if ($data['type'] == 1){
-                    return $this->success('操作成功', Url('News/index'));
-                }else{
-                    return $this->success('操作成功', Url('News/activity'));
-                }
+                return $this->success('操作成功', Url('News/index'));
             }else{
                 $this->error($News->getError());
             }
         }else{
             // 添加页面
             $this->assign('msg', $News->get_content(input('get.id')));
-            $this->assign('type',input('type'));
             return $this->fetch();
         }
     }
