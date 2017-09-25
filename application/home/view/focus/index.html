@@ -10,7 +10,7 @@
         height:50vw;
     }
     .swiper-slide p{
-        z-index: 999;
+        z-index: 99;
         position: absolute;
         bottom: 0;
         background: #000;
@@ -20,6 +20,19 @@
         height:8vw;
         line-height: 8vw;
         font-size: 0.38rem;
+    }
+    .swiper-slide span{
+        position: absolute;
+        bottom: 0;
+        font-size: 0.38rem;
+        color: #fff;
+        z-index: 999;
+        line-height: 8vw;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 80%;
+        padding-left: 0.2rem;
     }
 </style>
 {/block}
@@ -34,11 +47,12 @@
                 <a class="swiper-slide" href="{:Url('Focus/detail?id='.$li['id'])}">
                     <!--支持循环，需要重复图片节点-->
                     <div class="mui-slider-item"><img src="{$li.front_cover}"></div>
-                    <p>{$li.title}</p>
+                    <p></p>
+                    <span>{$li.title}</span>
                 </a>
                 {/volist}
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination" style="text-align: right;"></div>
         </div>
         {/notempty}
         <div class="list">
@@ -76,7 +90,8 @@
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: 3000,
         loop:true,
-        autoplayDisableOnInteraction : false
+        autoplayDisableOnInteraction : false,
+        pagination : '.swiper-pagination'
     });
 
 

@@ -10,6 +10,7 @@
     .comment{
         padding-bottom: 1rem;
     }
+
 </style>
 {/block}
 {block name="body"}
@@ -210,7 +211,6 @@
             beforeSend: function(XMLHttpRequest){
             },
             success:function(data){
-                console.log(data)
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;
