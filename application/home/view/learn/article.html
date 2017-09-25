@@ -22,9 +22,9 @@
 				<span class="read">{$detail.views}</span>
 				{eq name="visit" value="0"}
 				{eq name="$detail.is_like" value="1"}
-				<span class="isgood good_ notvisitor" data-type="3" data-id="{$article.id}">{$detail.likes}</span>
+				<span class="isgood good_ notvisitor" data-type="3" data-id="{$detail.id}">{$detail.likes}</span>
 				{else/}
-				<span class="isgood good notvisitor" data-type="3" data-id="{$article.id}">{$detail.likes}</span>
+				<span class="isgood good notvisitor" data-type="3" data-id="{$detail.id}">{$detail.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$detail.likes}</span>
@@ -219,7 +219,7 @@ var send = function(e,type,id){
 };
 function loadScroll(){
 		var len = $(".list" ).length;
-		var id = {$article['id']};
+		var id = {$detail['id']};
 			$.ajax({
 				type:"post",
 				url:"{:Url('Base/morecomment')}",
@@ -307,9 +307,9 @@ function addComment(data){
 	wx.ready(function () {
 		//分享到朋友圈
 		wx.onMenuShareTimeline({
-			title: '{$article.title}',
-			link: "{$article.link}",
-			imgUrl: '{$article.share_image}',
+			title: '{$detail.title}',
+			link: "{$detail.link}",
+			imgUrl: '{$detail.share_image}',
 			success: function () {
 				// 用户确认分享后执行的回调函数
 			},
@@ -319,10 +319,10 @@ function addComment(data){
 		});
 		//分享给朋友
 		wx.onMenuShareAppMessage({
-			title: '{$article.title}', // 分享标题
-			desc: '{$article.desc}', // 分享描述
-			link: '{$article.link}', // 分享链接
-			imgUrl: '{$article.share_image}', // 分享图标
+			title: '{$detail.title}', // 分享标题
+			desc: '{$detail.desc}', // 分享描述
+			link: '{$detail.link}', // 分享链接
+			imgUrl: '{$detail.share_image}', // 分享图标
 			type: '', // 分享类型,music、video或link，不填默认为link
 			dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 			success: function () {

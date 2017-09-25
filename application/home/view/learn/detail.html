@@ -22,9 +22,6 @@
                 <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
             </div>
             <div class="content">
-                {volist name="detail.images" id="li"}
-                <img src="{$li|get_cover='path'}">
-                {/volist}
                 <div class="article-content">{$detail.content}</div>
                 <div class="like">
                     <span class="read">{$detail.views}</span>
@@ -43,7 +40,7 @@
         <div class="comment">
             <div class="sum">共<span>{$detail.comments}</span>条评论</div>
             <div class="lists">
-                {volist name="comment" id="co"}
+                {volist name="$detail.comment" id="co"}
                 <div class="list clear">
                     <div class="fl">
                         <img src="{$co.header}" alt="用户" class="user">

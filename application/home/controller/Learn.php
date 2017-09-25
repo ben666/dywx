@@ -225,4 +225,17 @@ class Learn extends Base{
         $this->assign('detail',$this->content(3,$id));
         return $this->fetch();
     }
+    /**
+     * 党员先锋   详情
+     */
+    public function detail(){
+        $this->anonymous();        //判断是否是游客
+        $this->jssdk();
+        $id = input('id');
+        if (empty($id)){
+            $this ->error('参数错误!');
+        }
+        $this->assign('detail',$this->content(3,$id));
+        return $this->fetch();
+    }
 }
