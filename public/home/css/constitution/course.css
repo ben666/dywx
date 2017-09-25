@@ -11,17 +11,18 @@
 }
 .banner .tag {
   position: relative;
-  top: -0.26rem;
-  left: 36vw;
+  top: -0.44rem;
+  left: 50%;
   display: inline-block;
-  width: 2.1rem;
-  height: 0.52rem;
+  width: 4rem;
+  height: 0.88rem;
   background: #ffffff;
   color: #fc4f42;
-  font-size: 0.32rem;
-  line-height: 0.52rem;
+  font-size: 0.42rem;
+  line-height: 0.88rem;
   text-align: center;
   box-shadow: 1px 3px 8px rgba(153, 153, 153, 0.48);
+  margin-left: -2rem;
 }
 .lists {
   margin: 5vw auto;
@@ -58,7 +59,7 @@
 .lists .list .title {
   width: 100%;
   color: #333;
-  font-size: 0.32rem;
+  font-size: 0.42rem;
   line-height: 6vw;
   margin-bottom: 2.1vw;
 }
@@ -66,7 +67,7 @@
   display: block;
   width: 100%;
   color: #333;
-  font-size: 0.3rem;
+  font-size: 0.4rem;
   line-height: 7vw;
   font-weight: normal;
 }
@@ -79,7 +80,7 @@
 .lists .list .note span {
   display: inline-block;
   width: 49%;
-  font-size: 0.28rem;
+  font-size: 0.38rem;
 }
 .lists .list .note .true i {
   color: #fc4f42;
@@ -89,7 +90,7 @@
   margin: 0 auto;
   text-align: right;
   color: #999;
-  font-size: 0.24rem;
+  font-size: 0.34rem;
   line-height: 3.7vw;
 }
 .submit {
@@ -121,6 +122,6 @@
 }
 #modal .modal-content .modal-footer a {
   color: #fc4f42;
-  font-size:0.32rem;
+  font-size:0.42rem;
   line-height: 8vw;
 }

@@ -157,7 +157,7 @@ var send = function(e,type,id){
 				type: "input",
 				showCancelButton: true,
 				animation: "slide-from-top",
-				inputPlaceholder: "请在此输入评论内容（300字以内）",
+				inputPlaceholder: "（300字以内）",
 				confirmButtonText: "确定",
 				cancelButtonText: "取消",
 				closeOnConfirm: false
@@ -165,9 +165,9 @@ var send = function(e,type,id){
 			function(inputValue){
 				if (inputValue === false) {
 					return false
-				}else if (inputValue === ""|| inputValue.length<5)
+				}else if (inputValue === "")
 				{
-					swal.showInputError("评论不少于5个字");
+					swal.showInputError("请输入评论");
 					return false
 				}else if(inputValue.length>300){
 					swal.showInputError("评论不得多于300字");
@@ -310,7 +310,7 @@ function addComment(data){
 				'<div class="fl">'+
 				'<img src="'+list.header+'" alt="用户" class="user">'+
 				'</div>'+
-				'<div class="fl mid">'+
+				'<div class="mid">'+
 				'<div class="name limit">'+ list.nickname+'</div>'+
 				'<div class="content" >'+ list.content+'</div>'+
 				'<div class="time">'+ list.time+'</div>'+
