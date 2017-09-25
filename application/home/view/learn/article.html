@@ -9,33 +9,33 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 	<div class="mui-scroll">
 	<div class="article">
-		<div class="title limit_">{$article.title}</div>
+		<div class="title limit_">{$detail.title}</div>
 		<div class="note clear">
-			<span class="fl">{$article.publisher}</span>
-			<span class="fr">{$article.create_time|time_format="Y-m-d"}</span>
+			<span class="fl">{$detail.publisher}</span>
+			<span class="fr">{$detail.create_time|time_format="Y-m-d"}</span>
 		</div>
 		<div class="content">
 			<div class="uecontent">
-				<div class="article-content">{$article.content}</div>
+				<div class="article-content">{$detail.content}</div>
 			</div>
 			<div class="note">
-				<span class="read">{$article.views}</span>
+				<span class="read">{$detail.views}</span>
 				{eq name="visit" value="0"}
-				{eq name="article.is_like" value="1"}
-				<span class="isgood good_ notvisitor" data-type="3" data-id="{$article.id}">{$article.likes}</span>
+				{eq name="$detail.is_like" value="1"}
+				<span class="isgood good_ notvisitor" data-type="3" data-id="{$article.id}">{$detail.likes}</span>
 				{else/}
-				<span class="isgood good notvisitor" data-type="3" data-id="{$article.id}">{$article.likes}</span>
+				<span class="isgood good notvisitor" data-type="3" data-id="{$article.id}">{$detail.likes}</span>
 				{/eq}
 				{else/}
-				<span class="isgood good">{$article.likes}</span>
+				<span class="isgood good">{$detail.likes}</span>
 				{/eq}
 			</div>
 		</div>
 	</div>
 	<div class="comment">
-		<div class="sum">共<span>{$article.comments}</span>条评论</div>
+		<div class="sum">共<span>{$detail.comments}</span>条评论</div>
 		<div class="lists">
-			{volist name="comment" id="co"}
+			{volist name="$detail.comment" id="co"}
 			<div class="list clear">
 				<div class="fl">
 					<img src="{$co.header}" alt="用户" class="user">
@@ -63,7 +63,7 @@
 	{eq name="visit" value="0"}
 	<div class="bottom clear">
 		<div class="myword fl">
-			<input type="text" placeholder="说说你的感想！" onclick="send(this,3,{$article['id']})">
+			<input type="text" placeholder="说说你的感想！" onclick="send(this,3,{$detail['id']})">
 		</div>
 	</div>
 	{/eq}

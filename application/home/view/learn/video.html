@@ -9,41 +9,41 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 	<div class="mui-scroll">
 	<div class="article">
-		<div class="title"><p>{$video.title}</p></div>
+		<div class="title"><p>{$detail.title}</p></div>
 		<div class="note clear">
-			<span class="fl">{$video.publisher}</span>
-			<span class="fr">{$video.create_time|time_format='Y-m-d'}</span>
+			<span class="fl">{$detail.publisher}</span>
+			<span class="fr">{$detail.create_time|time_format='Y-m-d'}</span>
 		</div>
 		<div class="content">
 			<div class="video">
 				<!--本地视频-->
-				{neq name="$video.video_path" value=""}
+				{neq name="$detail.video_path" value=""}
 				<video class="videocon" src="{$video.video_path}"></video>
 				<img src="/home/images/learn/video.png" class="play" alt="播放">
 				{else/}
 				<!--链接视频-->
-				<iframe class="videocon" frameborder="0" src="{$video.net_path}" allowfullscreen></iframe>
+				<iframe class="videocon" frameborder="0" src="{$detail.net_path}" allowfullscreen></iframe>
 				{/neq}
 			</div>
-			<div class="article-content">{$video.content}</div>
+			<div class="article-content">{$detail.content}</div>
 			<div class="note">
-				<span class="read">{$video.views}</span>
+				<span class="read">{$detail.views}</span>
 				{eq name="visit" value="0"}
-				{eq name="video.is_like" value="1"}
-				<span class="isgood good_ notvisitor" data-type="3" data-id="{$video.id}">{$video.likes}</span>
+				{eq name="$detail.is_like" value="1"}
+				<span class="isgood good_ notvisitor" data-type="3" data-id="{$video.id}">{$detail.likes}</span>
 				{else/}
-				<span class="isgood good notvisitor" data-type="3" data-id="{$video.id}">{$video.likes}</span>
+				<span class="isgood good notvisitor" data-type="3" data-id="{$video.id}">{$detail.likes}</span>
 				{/eq}
 				{else/}
-				<span class="isgood good">{$video.likes}</span>
+				<span class="isgood good">{$detail.likes}</span>
 				{/eq}
 			</div>
 		</div>
 	</div>
 	<div class="comment">
-		<div class="sum">共<span>{$video.comments}</span>条评论</div>
+		<div class="sum">共<span>{$detail.comments}</span>条评论</div>
 		<div class="lists">
-			{volist name="comment" id="co"}
+			{volist name="$detail.comment" id="co"}
 			<div class="list clear">
 				<div class="fl">
 					<img src="{$co.header}" alt="用户" class="user">
@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	{eq name="visit" value="0"}
-	<div class="bottom clear" onclick="send(this,3,{$video['id']})">
+	<div class="bottom clear" onclick="send(this,3,{$detail['id']})">
 		<div class="myword fl">
 			<input type="text" placeholder="说说你的感想" disabled>
 		</div>

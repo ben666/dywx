@@ -94,14 +94,20 @@
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <div class="list pioneer">
+                    {empty name="list3" }
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
+                        {volist name="list3" id="ll"}
                             <a href="#">
-                                <img src="">
-                                <p>标题标题标题标题标题</p>
-                                <span>发布人</span>
-                                <span>2017-09-21</span>
+                                <img src="{$ll.front_cover|get_cover='path'}">
+                                <p>{$ll.title}</p>
+                                <span>{$ll.publisher}</span>
+                                <span>{$ll.create_time|time_format='Y-m-d'}</span>
                             </a>
+                        {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item3mobile" class="mui-slider-item mui-control-content">
@@ -185,7 +191,7 @@
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if ($(".pionner ul a").length < 7) {
+            if ($(".pionner ul a").length < 10) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -212,12 +218,9 @@
            }else if(c==1){
                var len = $(".pionner .lists a").length;
            }
-            if(c == 0){
-               var url = "{:Url('Learn/indexmore')}";
-            }
                 $.ajax({
                     type:"post",
-                    url: url,
+                    url: "{:Url('Learn/indexmore')}",
                     data:{
                         length:len,
                         type:c
@@ -292,7 +295,7 @@
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if($(".pioneer ul a").length< 7 ){
+            if($(".pioneer ul a").length< 10 ){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();

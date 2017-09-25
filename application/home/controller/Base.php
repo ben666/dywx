@@ -133,6 +133,7 @@ class Base extends Controller {
      * 0 评论点赞
      * 1 news  第一聚焦
      * 2 affiche 通知公告
+     * 3 learn 两学一做
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -265,6 +266,7 @@ class Base extends Controller {
      * type值：
      * 1 news 第一聚焦
      * 2 affiche 通知公告
+     * 3 learn 两学一做
      *
      */
     public function comment(){
@@ -451,6 +453,7 @@ class Base extends Controller {
      * type值：
      * 1 news 第一聚焦
      * 2 affiche 通知公告
+     * 3 learn 两学一做
      */
     public function content($type,$id){
         $userId = session('userId');

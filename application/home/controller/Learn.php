@@ -34,12 +34,19 @@ class Learn extends Base{
         $Answers = Answers::where($map)->whereTime('create_time','d')->find();
         $this->assign('check',0);//1为答过题
         //两学一做数据
-        //数据列表
+        //党员先锋  列表
+        $map3 = array(
+            'type' => 3,
+            'status' => array('egt',0),
+        );
+        $list3 = LearnModel::where($map3)->limit(10)->order('id desc')->select();
+        $this->assign('list3',$list3);
+        //手机党校  列表
         $map2 = array(
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list2 = LearnModel::where($map2)->limit(5)->order('id desc')->select();
+        $list2 = LearnModel::where($map2)->limit(7)->order('id desc')->select();
         $this->assign('list2',$list2);
         if(empty($Answers)){   // 没有数据
             //取单选
@@ -78,12 +85,6 @@ class Learn extends Base{
             $this->assign('check',1);//1为答过题
             return $this->fetch();
         }
-    }
-    /**
-     * 党史学习
-     */
-    public function dangshi(){
-        return $this ->fetch();
     }
     /*
    * 每日一课 提交
@@ -173,11 +174,19 @@ class Learn extends Base{
      */
     public function indexmore(){
         $len = input('length');
-        $map = array(
-            'type' => array('in',[1,2]),
-            'status' => array('egt',0),
-        );
-        $list = LearnModel::where($map)->order('id desc')->limit($len,5)->select();
+        $type = input('type');
+        if ($type == 0){
+            $map = array(
+                'type' => array('in',[1,2]),
+                'status' => array('egt',0),
+            );
+        }else{
+            $map = array(
+                'type' => 3,
+                'status' => array('egt',0),
+            );
+        }
+        $list = LearnModel::where($map)->order('id desc')->limit($len,7)->select();
         foreach($list as $value){
             $img = Picture::get($value['front_cover']);
             $value['path'] = $img['path'];
@@ -195,47 +204,11 @@ class Learn extends Base{
     public function video(){
         $this->anonymous();        //判断是否是游客
         $this->jssdk();
-
-        $userId = session('userId');
         $id = input('id');
-        $learnModel = new LearnModel();
-        //浏览加一
-        $info['views'] = array('exp','`views`+1');
-        $learnModel::where('id',$id)->update($info);
-        if($userId != "visitor"){
-            //浏览不存在则存入pb_browse表
-            $con = array(
-                'user_id' => $userId,
-                'learn_id' => $id,
-            );
-            $history = Browse::get($con);
-            if(!$history && $id != 0){
-                $s['score'] = array('exp','`score`+1');
-                if ($this->score_up()){
-                    // 未满 15分
-                    Browse::create($con);
-                    WechatUser::where('userid',$userId)->update($s);
-                }
-            }
+        if (empty($id)){
+            $this ->error('参数错误!');
         }
-        $video = $learnModel::get($id);
-        $video['user'] = session('userId');
-        //分享图片及链接及描述
-        $image = Picture::where('id',$video['front_cover'])->find();
-        $video['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
-        $video['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
-        $video['desc'] = str_replace('&nbsp;','',strip_tags($video['content']));
-
-        //获取 文章点赞
-        $likeModel = new Like;
-        $like = $likeModel->getLike(3,$id,$userId);
-        $video['is_like'] = $like;
-        $this->assign('video',$video);
-
-        //获取 评论
-        $commentModel = new Comment();
-        $comment = $commentModel->getComment(3,$id,$userId);
-        $this->assign('comment',$comment);
+        $this->assign('detail',$this->content(3,$id));
         return $this->fetch();
     }
 
@@ -245,48 +218,11 @@ class Learn extends Base{
     public function article(){
         $this->anonymous();        //判断是否是游客
         $this->jssdk();
-
-        $userId = session('userId');
         $id = input('id');
-        $learnModel = new LearnModel();
-        //浏览加一
-        $info['views'] = array('exp','`views`+1');
-        $learnModel::where('id',$id)->update($info);
-        if($userId != "visitor"){
-            //浏览不存在则存入pb_browse表
-            $con = array(
-                'user_id' => $userId,
-                'learn_id' => $id,
-            );
-            $history = Browse::get($con);
-            if(!$history && $id != 0){
-                $s['score'] = array('exp','`score`+1');
-                if ($this->score_up()){
-                    // 未满 15 分
-                    Browse::create($con);
-                    WechatUser::where('userid',$userId)->update($s);
-                }
-            }
+        if (empty($id)){
+            $this ->error('参数错误!');
         }
-        $article = $learnModel::get($id);
-        $article['user'] = session('userId');
-        //分享图片及链接及描述
-        $image = Picture::where('id',$article['front_cover'])->find();
-        $article['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
-        $article['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
-        $article['desc'] = str_replace('&nbsp;','',strip_tags($article['content']));
-
-        //获取 文章点赞
-        $likeModel = new Like;
-        $like = $likeModel->getLike(3,$id,$userId);
-        $article['is_like'] = $like;
-        $this->assign('article',$article);
-
-        //获取 评论
-        $commentModel = new Comment();
-        $comment = $commentModel->getComment(3,$id,$userId);
-        $this->assign('comment',$comment);
-
+        $this->assign('detail',$this->content(3,$id));
         return $this->fetch();
     }
 }
