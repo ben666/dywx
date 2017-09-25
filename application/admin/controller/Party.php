@@ -22,6 +22,10 @@ class Party extends Admin
             'type' => 1,
             'status' => array('egt',0),
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Party',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
@@ -40,6 +44,10 @@ class Party extends Admin
             'type' => 2,
             'status' => array('egt',0),
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Party',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
@@ -60,6 +68,10 @@ class Party extends Admin
             'type' => 3,
             'status' => array('egt',0),
         );
+        $search = input('search');
+        if ($search != '') {
+            $map['title'] = ['like','%'.$search.'%'];
+        }
         $list = $this->lists('Party',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
@@ -126,6 +138,82 @@ class Party extends Admin
             $msg = PartyModel::get($id);
             $this->assign('msg',$msg);
             return $this->fetch();
+        }
+    }
+    /**
+     * 会议情况 党课情况 添加
+     */
+    public function add(){
+        if(IS_POST) {
+            $data = input('post.');
+            $partyModel = new PartyModel();
+            if(empty($data['id'])) {
+                unset($data['id']);
+            }
+            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
+            $model = $partyModel->validate('Party.another')->save($data);
+            if($model){
+                if ($data['type'] == 3){
+                    return $this->success('新增党课情况成功',Url('Party/lecture'));
+                }else{
+                    return $this->success('新增会议情况成功',Url('Party/meet'));
+                }
+            }else{
+                return $this->error($partyModel->getError());
+            }
+        }else{
+            $msg = array();
+            $msg['type'] = input('type');
+            $msg['class'] = 1; // 1为添加 ，2为修改
+            $this->assign('msg',$msg);
+            return $this->fetch('edit');
+        }
+    }
+    /**
+     * 会议情况 党课情况 修改
+     */
+    public function edit(){
+        if(IS_POST) {
+            $partyModel = new PartyModel();
+            $data = input('post.');
+            if(empty($data['id'])) {
+                unset($data['id']);
+            }
+            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
+            $model = $partyModel->validate('Notice.other')->save($data,['id'=> $data['id']]);
+            if($model){
+                if ($data['type'] == 3){
+                    return $this->success('修改党课情况成功',Url('Party/lecture'));
+                }else{
+                    return $this->success('修改会议情况成功',Url('Party/meet'));
+                }
+            }else{
+                return $this->get_update_error_msg($partyModel->getError());
+            }
+        }else{
+            $id = input('id');
+            $msg = PartyModel::get($id);
+            $msg['class'] = 2;
+            $this->assign('msg',$msg);
+
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 删除
+     */
+    public function del(){
+        $id = input('id');
+        if (empty($id)){
+            return $this->error('系统参数错误');
+        }
+        $map['status'] = "-1";
+        $info = PartyModel::where('id',$id)->update($map);
+        if($info) {
+            return $this->success("删除成功");
+        }else{
+            return $this->error("删除失败");
         }
     }
 }
