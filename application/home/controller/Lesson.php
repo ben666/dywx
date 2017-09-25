@@ -15,4 +15,14 @@ class Lesson extends Base
 
         return $this ->fetch();
     }
+
+    public function noticemore(){
+
+        return $this ->fetch();
+    }
+
+    public function meetingmore(){
+
+        return $this ->fetch();
+    }
 }

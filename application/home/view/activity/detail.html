@@ -54,9 +54,9 @@
 				<div class="like">
 					{eq name="visit" value="0"}
 					{eq name="detail.is_like" value="1"}
-					<span class="isgood good_ notvisitor"  data-type="4" data-id="{$detail.id}">{$detail.likes}</span>
+					<span class="isgood good_ notvisitor"  data-type="4" data-id="{$detail.id}" onclick="isGood(this,4,{$detail.id})">{$detail.likes}</span>
 					{else/}
-					<span class="isgood good notvisitor"  data-type="4" data-id="{$detail.id}">{$detail.likes}</span>
+					<span class="isgood good notvisitor"  data-type="4" data-id="{$detail.id}" onclick="isGood(this,4,{$detail.id})">{$detail.likes}</span>
 					{/eq}
 					{else/}
 					<span class="isgood good">{$detail.likes}</span>
@@ -77,14 +77,6 @@
 		autoplay: 3000,
 		loop:true,
 		autoplayDisableOnInteraction : false
-	});
-
-
-	//tab点击事件
-	mui('#refreshContainer').on('tap', '.notvisitor', function(e) {
-		var type = this.getAttribute("data-type");
-		var id = this.getAttribute("data-id");
-		isGood(this,type,id);
 	});
 
 	//点赞

@@ -1,10 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{extend name="public/common"}
+{block name="style"}
+<link rel="stylesheet" href="/home/css/list/graphic-list.css">
+<title>组织活动</title>
+<style>
+    .list a p:nth-child(1){
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        margin-bottom: 0.1rem;
+        color: #000;
+        font-weight: bold;
+    }
+    .list a p:nth-child(2){
+        margin-bottom: 1rem;
+        color: #666;
+    }
+    .list a span:nth-child(4){
+        position: inherit;
+        float: right;
+    }
+</style>
 
-</body>
-</html>
+{/block}
+
+{block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+            <!--活动通知-->
+            <div class="list">
+                <ul>
+                    <a href="">
+                        <p>的点点滴滴多多多多多多多多多多</p>
+                        <p>的方法是发达的服务而访问功夫兔让哥哥防守打法啊大 </p>
+                        <span style="color: #090;">进行中</span>
+                        <span>2017-09-25</span>
+                    </a>
+                </ul>
+            </div>
+        </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    window.onload = function() {
+            if ($(".list ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+            var len = $(".list ul a").length;
+        $.ajax({
+            type:"post",
+            url: "{:Url('Volunteer/index')}",
+            data:{
+                length:len
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 10){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+                html +=
+                    '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'+
+                    '<img src="'+list.path+'">'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.publisher+'</span>'+
+                    '<span>'+list.time+'</span>'+
+                    '</a>'
+        }
+            $('.list ul').append(html);
+    }
+</script>
+{/block}
