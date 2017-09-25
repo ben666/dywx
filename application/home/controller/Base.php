@@ -131,13 +131,7 @@ class Base extends Controller {
      * 点赞，$type,$aid
      * type值：
      * 0 评论点赞
-     * 1 news  红色足迹
-     * 2 branch 支部建设
-     * 3 learn 两学一做
-     * 4 notice  信息驿站
-     * 5 pioneer_story 先锋引领 事迹
-     * 6 wish 活动发起
-     * 7 pioneer 先锋引领
+     * 1 news  第一聚焦
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -268,12 +262,8 @@ class Base extends Controller {
     /**
      * 评论，$type,$aid,$content
      * type值：
-     * 1 news 红色足迹
-     * 2 branch  支部建设
-     * 3 learn  两学一做
-     * 4 notice  信息驿站
-     * 5 pioneer_story 先锋引领 事迹
-     * 6 wish 活动发起
+     * 1 news 第一聚焦
+     *
      */
     public function comment(){
         if(IS_POST){
@@ -457,12 +447,7 @@ class Base extends Controller {
     /**
      * 获取数据详情 ，$type,$id
      * type值：
-     * 1 news 红色足迹
-     * 2 branch 支部建设
-     * 3 learn  两学一做
-     * 4 notice  信息驿站
-     * 5 pioneer_story  先锋引领 事迹
-     * 6 wish  活动发起
+     * 1 news 第一聚焦
      */
     public function content($type,$id){
         $userId = session('userId');
