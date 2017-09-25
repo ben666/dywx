@@ -31,6 +31,22 @@ class Focus extends Base{
         return $this->fetch();
     }
     /**
+     * 列表加载更多
+     */
+    public function more(){
+        $len = input('length');
+        $map = array(
+            'status' => array('egt',0),
+        );
+        $News = new News();
+        $list = $News->get_list($map,$len);
+        if($list){
+            return $this->success("加载成功",'',$list);
+        }else{
+            $this->error("加载失败");
+        }
+    }
+    /**
      * 详情页面
      */
     public function detail(){
