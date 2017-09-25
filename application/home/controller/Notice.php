@@ -21,7 +21,7 @@ use think\Db;
  * Class Notice
  * @package 信息驿站
  */
-class College extends Base {
+class Notice extends Base {
     /**
      * 主页
      */

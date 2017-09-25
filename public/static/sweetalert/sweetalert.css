@@ -140,6 +140,10 @@ body.stop-scrolling {
     line-height: 25px;
     padding-top: 10px;
   }
+.sweet-alert input{
+  display: none;
+}
+
     .sweet-alert input:focus {
       outline: none;
       box-shadow: 0px 0px 3px #c4e6f5;

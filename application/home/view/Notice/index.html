@@ -14,7 +14,7 @@
             {else/}
             <ul>
                 {volist name="list" id="vo"}
-                    <a href="{:Url('Notice/forumntice?id='.$vo['id'])}">
+                    <a href="{:Url('Notice/forumnotice?id='.$vo['id'])}">
                         <p>{$vo.title}</p>
                         <span>{$vo.publisher}</span>
                         <span>{$vo.create_time|time_format='Y-m-d'}</span>
@@ -53,7 +53,7 @@
         var len  = $(".list ul a").length;
         $.ajax({
             type:"post",
-            url: "{:Url('Learn/listmore')}",
+            url: "{:Url('Notice/leadlistmore')}",
             data:{
                 length:len
 
@@ -85,7 +85,7 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
                 html +=
-                    '<a href="/home/Learn/detail/id/'+list.id+'.html">'+
+                    '<a href="/home/Notice/forumnotice/id/'+list.id+'.html">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+

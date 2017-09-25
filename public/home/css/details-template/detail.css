@@ -18,6 +18,7 @@
 
 .article .title {
     text-align: center;
+    margin-bottom: 0.3rem;
 }
 .article .title p{
     color: #333;

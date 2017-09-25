@@ -1,0 +1,120 @@
+{extend name="public/common"}
+{block name="style"}
+<link rel="stylesheet" href="/home/css/list/graphic-list.css">
+<title>组织活动</title>
+<style>
+    .banner{
+        height:50vw;
+    }
+    .banner img{
+        position: relative;
+        z-index: 99;
+        width: 100%;
+        height:50vw;
+    }
+    .notice a p:nth-child(1){
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        margin-bottom: 0.1rem;
+        color: #000;
+    }
+    .notice a p:nth-child(2){
+        margin-bottom: 1rem;
+        color: #666;
+    }
+    .notice a span:nth-child(4){
+        position: inherit;
+        float: right;
+    }
+    .list ul a{
+        clear: both;
+    }
+    .more{
+        display: block;
+        width:100%;
+        font-size: 0.32rem;
+        color: #f00;
+        padding:3vw;
+    }
+    .meeting .more{
+        color: #090;
+    }
+    .party .more{
+        color: #e49643;
+    }
+    .more span:last-child{
+        float: right;
+    }
+</style>
+
+{/block}
+
+{block name="body"}
+<div class="banner">
+    <img src="/home/images/common/1.jpg">
+</div>
+
+    <!--相关通知-->
+<div class="notice">
+    <a class="more">
+        <span>相关通知</span>
+        <span>更多</span>
+    </a>
+        <div class="list">
+            <ul>
+                <a href="">
+                    <p>少时诵诗书所所所所所所所所所所所所所所所所所所所所所所所所所所</p>
+                    <p>的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多若若若若若若若若若若若若若若若若若若</p>
+                    <span style="color: #090;">进行中</span>
+                    <span>2017-09-25</span>
+                </a>
+            </ul>
+        </div>
+</div>
+
+    <!--会议情况-->
+<div class="meeting">
+    <a class="more">
+        <span>会议情况</span>
+        <span>更多</span>
+    </a>
+    <div class="list">
+        <ul>
+            <a href="">
+                <img src="">
+                <p>地方地方个人股风格的风格大厦而非大是大非阿斯蒂芬</p>
+                <span>大打发打发打发的发给多个安全</span>
+                <span>2017-09-25</span>
+            </a>
+
+        </ul>
+    </div>
+</div>
+
+    <!--党课情况-->
+<div class="party">
+    <a class="more">
+        <span>党课情况</span>
+        <span>更多</span>
+    </a>
+    <div class="list">
+        <ul>
+            <a href="">
+                <img src="">
+                <p>地方地方个人股风格的风格大厦而非大是大非阿斯蒂芬</p>
+                <span>大打发打发打发的发给多个安全</span>
+                <span>2017-09-25</span>
+            </a>
+
+        </ul>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+</script>
+{/block}
