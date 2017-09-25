@@ -116,15 +116,6 @@
                                 <input type="text" placeholder="学历" class="form-control form_title" name="education" value="{$info.education|default=''}">
                             </div>
                         </div>
-                        <!--名族-->
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>民族:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <input type="text" placeholder="民族" class="form-control form_title" name="nation" value="{$info.nation|default=''}">
-                            </div>
-                        </div>
                         <!--党员-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
@@ -148,16 +139,6 @@
                                 <input type="text" class="form-control datetimepicker " placeholder="入党时间" name="partytime"  value="{$info.partytime?date('Y-m-d',$info.partytime):''}"/>
                             </div>
                         </div>
-                        <!--籍贯-->
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>籍贯:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <input type="text" placeholder="籍贯" class="form-control form_title" name="address" value="{$info.address|default=''}">
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>权限:</label>
@@ -213,9 +194,7 @@
         data.position = $("input[name='position']").val().trim(); //职位
         data.birthday = $("input[name='birthday']").val(); //出生年月
         data.education = $("input[name='education']").val().trim(); //学历
-        data.nation = $("input[name='nation']").val().trim(); //学历
         data.partytime = $("input[name='partytime']").val(); //入党时间
-        data.address = $("input[name='address']").val().trim(); //籍贯
         data.check = "{$info.id|default=''}"; //判断是否新增还是修改
         data.review = $("input[name='review']:checked").val();
         data.party = $("input[name='party']:checked").val();

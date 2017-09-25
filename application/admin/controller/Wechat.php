@@ -183,6 +183,7 @@ class Wechat extends Admin{
         foreach($data as $k => $v){
             if (empty($v[0]) && empty($v[1]) && empty($v[2]) && empty($v[3])){
                 // 无数据  不做处理
+                return ['code' => 0, 'msg' => '必填字段没有填写'];
             }else{
                 //前4个字字段为必填字段 名称 性别 手机号码 所属部门
                 if (empty($v[0]) || empty($v[1]) || empty($v[2]) || empty($v[3])) {
@@ -199,14 +200,14 @@ class Wechat extends Admin{
                     $v[5] = strtotime($v[5]);
                 }
                 // 是否 党员
-                if($v[9] == '是' || $v[9] == '党员' || $v[9] == '1'){
-                    $v[9] = 1;
+                if($v[7] == '是' || $v[7] == '党员' || $v[7] == '1'){
+                    $v[7] = 1;
                 }else{
-                    $v[9] = 0;
+                    $v[7] = 0;
                 }
                 //入党时间
-                if ($v[10]) {
-                    $v[10] = strtotime($v[10]);
+                if ($v[8]) {
+                    $v[8] = strtotime($v[8]);
                 }
                 //整理数据
                 $info = array(
@@ -217,10 +218,8 @@ class Wechat extends Admin{
                     'position' => $v[4], //职位
                     'birthday' => $v[5],   //出生年月
                     'education' => $v[6],  //学历
-                    'nation' => $v[7], //民族
-                    'address' => $v[8] , //籍贯
-                    'party' => $v[9], // 是否党员
-                    'partytime' => $v[10],  //入党时间
+                    'party' => $v[7], // 是否党员
+                    'partytime' => $v[8],  //入党时间
                 );
                 array_push($all, $info);
             }
