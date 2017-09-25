@@ -25,7 +25,7 @@ class Focus extends Base{
             'recommend' => 1
         );
         $list = $News->get_list($map);  // 列表
-        $top = $News->get_list($maps); // 推荐
+        $top = $News->get_list($maps,0,true); // 推荐
         $this->assign('list',$list);
         $this->assign('top',$top);
         return $this->fetch();
