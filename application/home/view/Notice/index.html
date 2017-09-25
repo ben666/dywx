@@ -3,6 +3,11 @@
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/title-pos-time.css">
 <title>通知公告</title>
+<style>
+    .list{
+        padding-bottom: 0.8rem;
+    }
+</style>
 {/block}
 
 {block name="body"}
@@ -79,6 +84,7 @@
 
     //加载更多列表
     function addLists(data){
+        console.log(data)
         var html = '';
         var lists = data.data;
         var len = lists.length;
@@ -88,7 +94,7 @@
                     '<a href="/home/Notice/forumnotice/id/'+list.id+'.html">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
+                    '<span>'+list.create_time+'</span>'+
                     '</a>'
         }
         $('.list ul').append(html);
