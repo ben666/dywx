@@ -41,7 +41,9 @@
   /*padding-left: 18vw;*/
 /*}*/
 
-
+.fl{
+  float: left;
+}
 #addnum{
   display: none;
 }

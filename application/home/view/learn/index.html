@@ -41,6 +41,12 @@
         #refreshContainer{
             top:50vw;
         }
+        .mui-slider-group{
+            padding-bottom: 0.5rem;
+        }
+        .mui-pull-bottom-pocket{
+            bottom: 0;
+        }
 
     </style>
 {/block}
@@ -99,7 +105,7 @@
                     {else/}
                     <ul>
                         {volist name="list3" id="ll"}
-                            <a href="#">
+                            <a href="{:Url('Learn/detail?id='.$ll['id'])}">
                                 <img src="{$ll.front_cover|get_cover='path'}">
                                 <p>{$ll.title}</p>
                                 <span>{$ll.publisher}</span>
@@ -126,7 +132,7 @@
                             {/volist}
                         </div>
                         {eq name='visit' value="0"}
-                        <div class="submit" data-toggle="modal" data-target="#modal">确认提交</div>
+                        <div class="submit">确认提交</div>
                         {/eq}
                         <!--模态框-->
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -185,13 +191,13 @@
 
     window.onload = function() {
         if(c==0){
-            if ($(".partyschool ul a").length < 7) {
+            if ($(".partyschool .lists a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if ($(".pionner ul a").length < 10) {
+            if ($(".pioneer ul a").length < 10) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -212,11 +218,11 @@
         }
     });
 
-    function loadScroll(type){
+    function loadScroll(){
            if(c==0){
                var len = $(".partyschool .lists a").length;
            }else if(c==1){
-               var len = $(".pionner .lists a").length;
+               var len = $(".pioneer ul a").length;
            }
                 $.ajax({
                     type:"post",
@@ -265,7 +271,7 @@
                         '</a>'
             }else if(c==1){
                 html +=
-                        '<a href="#">'+
+                        '<a href="/home/learn/detail/id/' + list.id + '.html">'+
                         '<img src="'+list.path+'">'+
                         '<p>'+list.title+'</p>'+
                         '<span>'+list.publisher+'</span>'+
@@ -289,7 +295,7 @@
         c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(c==0){
-            if($(".partyschool ul a").length< 7 ){
+            if($(".partyschool .lists a").length< 7 ){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -307,6 +313,10 @@
     });
 
     mui('#item1mobile').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+    mui('#item2mobile').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
     })
@@ -333,13 +343,16 @@
                 url:"{:Url('Constitution/commit')}",
                 data:{'data':data},
                 success:function(data){
-                    $(".modal").unbind("click");
                     $('.score').html(data.url.score);
                     $('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]+'，4.'+data.url.right[4]+'，5.'+data.url.right[5]);
+                    $(".modal").show();
+                    $(".modal").unbind("click");
                     var link='{$request}/home/constitution/scan';
                     $('#link').attr('href',link+'/id/'+data.url.id);
-
-
+                    mui('#item3mobile').on('tap', '.link', function(e) {
+                        var url = this.getAttribute("href");
+                        window.location.href = url;
+                    })
                 }
             });
         });
