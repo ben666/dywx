@@ -9,6 +9,18 @@
         width:100vw;
         height:50vw;
     }
+    .swiper-slide p{
+        z-index: 999;
+        position: absolute;
+        bottom: 0;
+        background: #000;
+        opacity: 0.3;
+        width: 100%;
+        text-align: center;
+        height:8vw;
+        line-height: 8vw;
+        font-size: 0.38rem;
+    }
 </style>
 {/block}
 {block name="body"}
@@ -19,12 +31,14 @@
         <div class="swiper-container banner">
             <div class="swiper-wrapper">
                 {volist name="$top" id="li"}
-                <div class="swiper-slide">
+                <a class="swiper-slide" href="{:Url('Focus/detail?id='.$li['id'])}">
                     <!--支持循环，需要重复图片节点-->
                     <div class="mui-slider-item"><img src="{$li.front_cover}"></div>
-                </div>
+                    <p>{$li.title}</p>
+                </a>
                 {/volist}
             </div>
+            <div class="swiper-pagination"></div>
         </div>
         {/notempty}
         <div class="list">
@@ -57,7 +71,14 @@
         } else {
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
         }
-    }
+    };
+
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop:true,
+        autoplayDisableOnInteraction : false
+    });
+
 
     //初始化下拉加载
     mui.init({
