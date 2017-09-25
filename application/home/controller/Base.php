@@ -134,6 +134,7 @@ class Base extends Controller {
      * 1 news  第一聚焦
      * 2 affiche 通知公告
      * 3 learn 两学一做
+     * 4 notice 组织活动
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -157,12 +158,6 @@ class Base extends Controller {
                 break;
             case 5:
                 $table = "pioneer_story";
-                break;
-            case 6:
-                $table = "wish";
-                break;
-            case 7:
-                $table = "pioneer";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -267,7 +262,7 @@ class Base extends Controller {
      * 1 news 第一聚焦
      * 2 affiche 通知公告
      * 3 learn 两学一做
-     *
+     * 4 notice  组织活动
      */
     public function comment(){
         if(IS_POST){
@@ -289,9 +284,6 @@ class Base extends Controller {
                     break;
                 case 5:
                     $table = "pioneer_story";
-                    break;
-                case 6:
-                    $table = "wish";
                     break;
                 default:
                     return $this->error("无该数据表");
@@ -454,6 +446,7 @@ class Base extends Controller {
      * 1 news 第一聚焦
      * 2 affiche 通知公告
      * 3 learn 两学一做
+     * 4 notice 组织活动
      */
     public function content($type,$id){
         $userId = session('userId');
@@ -472,9 +465,6 @@ class Base extends Controller {
                 break;
             case 5:
                 $table = "pioneer_story";
-                break;
-            case 6:
-                $table = "wish";
                 break;
             default:
                 return $this->error("无该数据表");

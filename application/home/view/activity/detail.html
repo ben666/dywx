@@ -12,22 +12,26 @@
 	.comment{
 		padding-bottom: 1rem;
 	}
+	.article .message div {
+		width: 100%;
+		padding-left: 1rem;
+		font-size: 0.32rem;
+		height:auto;
+		line-height: 0.5rem;
+		padding-top: 0.2rem;
+		overflow: auto!important;
+		display: flex;
+		align-items: center;
+		padding-bottom: 0.2rem;
+	}
 </style>
 {/block}
 {block name="body"}
-		<!--轮播图-->
-		<div class="swiper-container banner">
-			<div class="swiper-wrapper">
-				{volist name="detail.images" id="li"}
-				<div class="swiper-slide">
-					<!--支持循环，需要重复图片节点-->
-					<div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
-				</div>
-				{/volist}
-			</div>
-		</div>
+	<div class="banner">
+		<div class="mui-slider-item"><img src="{$detail.front_cover|get_cover='path'}"></div>
+	</div>
 		<div class="view">
-			<span class="read">{$detail.views}</span>
+			<span class="read">{$detail.views + 1}</span>
 		</div>
 		<div class="article">
 			<div class="title"><p>{$detail.title}</p></div>
@@ -36,14 +40,14 @@
 				<span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
 			</div>
 			<div class="message">
-				{notempty name="detail.time"}
-				<div class="name limit">{$detail.time|time_format='Y/m/d H:i'}</div>
+				{notempty name="detail.start_time"}
+				<div class="name limit">{$detail.start_time|time_format='Y/m/d H:i'}--{$detail.end_time|time_format='Y/m/d H:i'}</div>
 				{/notempty}
 				{notempty name="detail.address"}
-				<div class="content" >{$detail.address}</div>
+				<div class="address" >{$detail.address}</div>
 				{/notempty}
-				{notempty name="detail.phone"}
-				<div class="content" >{$detail.phone}</div>
+				{notempty name="detail.telephone"}
+				<div class="telephone" >{$detail.telephone}</div>
 				{/notempty}
 			</div>
 			<div class="content">
@@ -70,12 +74,6 @@
 	if($(".message div").length==0){
 		$(".article .message").css("border","none");
 	}
-	var mySwiper = new Swiper('.swiper-container', {
-		autoplay: 3000,
-		loop:true,
-		autoplayDisableOnInteraction : false
-	});
-
 	//点赞
 	var isGood = function(e,type,id){
 		//样式变化，移到suc

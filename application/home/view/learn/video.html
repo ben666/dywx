@@ -27,7 +27,7 @@
 			</div>
 			<div class="article-content">{$detail.content}</div>
 			<div class="note">
-				<span class="read">{$detail.views}</span>
+				<span class="read">{$detail.views + 1}</span>
 				{eq name="visit" value="0"}
 				{eq name="$detail.is_like" value="1"}
 				<span class="isgood good_ notvisitor" data-type="3" data-id="{$detail.id}">{$detail.likes}</span>

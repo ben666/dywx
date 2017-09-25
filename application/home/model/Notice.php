@@ -14,7 +14,6 @@ class Notice extends Model {
     public function getDataList($length,$push=0){
         $map = array(
             'status' => ['egt',0],
-//            'end_time' => ['gt',time()],
             'recommend' => 1,
             'push' => ['egt',$push]
         );
@@ -30,7 +29,7 @@ class Notice extends Model {
     }
     // 获取列表数据
     public function get_list($where,$len=0){
-        $list = $this->where($where)->order('id desc')->limit($len,10)->field('id,front_cover,title,publisher,create_time,end_time')->select();
+        $list = $this->where($where)->order('id desc')->limit($len,10)->field('id,type,front_cover,title,publisher,create_time,end_time')->select();
         foreach($list as $value){
             $value['create_time'] = date("Y-m-d",$value['create_time']);
             $Pic = Picture::where('id',$value['front_cover'])->field('path')->find();

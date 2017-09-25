@@ -23,7 +23,7 @@
 			<div class="content">
 				<div class="article-content">{$info.content}</div>
 				<div class="like">
-					<span class="read">{$info.views}</span>
+					<span class="read">{$info.views + 1}</span>
 					{eq name="visit" value="0"}
 					{eq name="info.is_like" value="1"}
 					<span class="isgood good_ notvisitor"  data-type="2" data-id="{$info.id}" onclick="isGood(this,2,{$info.id})">{$info.likes}</span>
