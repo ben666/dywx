@@ -260,10 +260,20 @@
                         '<div class="title limit">' + list.title + '</div>' +
                         '<span class="study">' + list.views + '人阅读过</span>' +
                         '</a>'
+            }else if(c==1){
+                html +=
+                        '<a href="#">'+
+                        '<img src="'+list.path+'">'+
+                        '<p>'+list.title+'</p>'+
+                        '<span>'+list.publisher+'</span>'+
+                        '<span>'+list.time+'</span>'+
+                        '</a>'
             }
         }
         if(c==0){
             $(".regularmore .lists" ).append(html);
+        }else if(c==1){
+            $(".pioneer ul" ).append(html);
         }
 
     }
