@@ -329,27 +329,61 @@
     //提交
     $(function(){
         $('body').on('tap',".submit",function(e){
+            $(".mui-scroll-wrapper").css("position","inherit");
+            $("#refreshContainer div").removeAttr("style");
+            $("#refreshContainer div").removeClass("mui-scroll");
             var data = [];
             $('.activity .list').each(function(){
                 var id = $(this ).attr('data-tab');
                 var answer = $(this ).find('.checked' ).index();
                 data.push([id,answer]);
             });
+            document.getElementById("refreshContainer").addEventListener('touchmove', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }, false);
 //            		console.log(data);
             $.ajax({
                 type:"post",
                 url:"{:Url('Constitution/commit')}",
                 data:{'data':data},
+                timeout : 30000,
+                beforeSend:function(){
+                    swal({
+                        title: ' ',
+                        text: '提交中...',
+                        showConfirmButton:false
+                    });
+                },
                 success:function(data){
+                    swal({
+                        title: ' ',
+                        text: '提交中...',
+                        showConfirmButton:false,
+                        timer:200
+                    });
                     $('.score').html(data.url.score);
                     $('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]+'，4.'+data.url.right[4]+'，5.'+data.url.right[5]);
-                    $(".modal").unbind("click");
+                    $(".modal").unbind("tap");
                     var link='{$request}/home/constitution/scan';
                     $('#link').attr('href',link+'/id/'+data.url.id);
-                    mui('#item3mobile').on('tap', '.link', function(e) {
+                    mui('#item3mobile').on('tap', '#link', function(e) {
+                        $(".mui-scroll-wrapper").css("position","absolute");
+                        $(".mui-scroll").css({"transform":"translateZ(0)","position":"absolute"});
                         var url = this.getAttribute("href");
                         window.location.href = url;
                     })
+                },
+                error:function(){
+                        swal({
+                            title: ' ',
+                            text: '提交失败，请重试',
+                            type: 'error',
+                            confirmButtonText:'确定',
+                            timer:1500
+                        },function(){
+                            window.location.reload();
+                        })
                 }
             });
         });
