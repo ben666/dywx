@@ -21,15 +21,14 @@
 				<span class="time">{$info.create_time|time_format="Y-m-d"}</span>
 			</div>
 			<div class="content">
-
 				<div class="article-content">{$info.content}</div>
 				<div class="like">
 					<span class="read">{$info.views}</span>
 					{eq name="visit" value="0"}
 					{eq name="info.is_like" value="1"}
-					<span class="isgood good_ notvisitor"  data-type="4" data-id="{$info.id}" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+					<span class="isgood good_ notvisitor"  data-type="2" data-id="{$info.id}" onclick="isGood(this,2,{$info.id})">{$info.likes}</span>
 					{else/}
-					<span class="isgood good notvisitor"  data-type="4" data-id="{$info.id}" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+					<span class="isgood good notvisitor"  data-type="2" data-id="{$info.id}" onclick="isGood(this,2,{$info.id})">{$info.likes}</span>
 					{/eq}
 					{else/}
 					<span class="isgood good">{$info.likes}</span>

@@ -17,7 +17,7 @@
                     <a href="{:Url('Notice/forumnotice?id='.$vo['id'])}">
                         <p>{$vo.title}</p>
                         <span>{$vo.publisher}</span>
-                        <span>{$vo.create_time|time_format='Y-m-d'}</span>
+                        <span>{$vo.create_time}</span>
                     </a>
                     {/volist}
             </ul>
@@ -53,7 +53,7 @@
         var len  = $(".list ul a").length;
         $.ajax({
             type:"post",
-            url: "{:Url('Notice/leadlistmore')}",
+            url: "{:Url('Notice/listmore')}",
             data:{
                 length:len
 

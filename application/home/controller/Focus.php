@@ -22,7 +22,7 @@ class Focus extends Base{
         );
         $maps = array(
             'status' => ['egt',0],
-            'recommend' => 0
+            'recommend' => 1
         );
         $list = $News->get_list($map);  // 列表
         $top = $News->get_list($maps); // 推荐

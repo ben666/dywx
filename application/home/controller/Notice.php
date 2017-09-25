@@ -7,19 +7,12 @@
  */
 
 namespace app\home\controller;
-use app\home\model\Browse;
-use app\home\model\Comment;
-use app\home\model\Like;
-use app\home\model\Picture;
-use app\home\model\WechatUser;
-use think\Controller;
-
-use app\home\model\Notice as NoticeModel;
+use app\home\model\Affiche;
 use think\Db;
 
 /**
  * Class Notice
- * @package 信息驿站
+ * @package 通知公告
  */
 class Notice extends Base {
     /**
@@ -29,31 +22,23 @@ class Notice extends Base {
         $this->anonymous(); //判断是否是游客
         //学习资料
         $map = array(
-            'type' => 1,
             'status' => array('egt',0)
         );
-        $maps = array(
-            'type' => 2,  // 通知
-            'status' => array('egt',0)
-        );
-        $Notice = new NoticeModel();
-        $this->assign('list',$Notice->get_list($map));
-        $this->assign('fnotice',$Notice->get_list($maps));
+        $Affiche = new Affiche();
+        $this->assign('list',$Affiche->get_list($map));
         return $this->fetch();
     }
 
     /**
      * 更多  通知
      */
-    public function leadlistmore(){
+    public function listmore(){
         $len = input('length');
-        $type = input('type');  // 0 学习资料 1 通知
         $map = array(
-            'type' => $type+1,
             'status' => array('egt',0),
         );
-        $Notice = new NoticeModel();
-        $list = $Notice->get_list($map,$len);
+        $Affiche = new Affiche();
+        $list = $Affiche->get_list($map,$len);
         if($list){
             return $this->success("加载成功",'',$list);
         }else{
@@ -68,7 +53,7 @@ class Notice extends Base {
         $this->anonymous();
         $this->jssdk();
         $id = input('id');
-        $this->assign('info',$this->content(4,$id));
+        $this->assign('info',$this->content(2,$id));
         return $this->fetch();
     }
 

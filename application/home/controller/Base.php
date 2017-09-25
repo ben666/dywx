@@ -132,6 +132,7 @@ class Base extends Controller {
      * type值：
      * 0 评论点赞
      * 1 news  第一聚焦
+     * 2 affiche 通知公告
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -145,7 +146,7 @@ class Base extends Controller {
                 $table = "news";
                 break;
             case 2:
-                $table = "branch";
+                $table = "affiche";
                 break;
             case 3:
                 $table = "learn";
@@ -263,6 +264,7 @@ class Base extends Controller {
      * 评论，$type,$aid,$content
      * type值：
      * 1 news 第一聚焦
+     * 2 affiche 通知公告
      *
      */
     public function comment(){
@@ -275,7 +277,7 @@ class Base extends Controller {
                     $table = "news";
                     break;
                 case 2:
-                    $table = "branch";
+                    $table = "affiche";
                     break;
                 case 3:
                     $table = "learn";
@@ -448,6 +450,7 @@ class Base extends Controller {
      * 获取数据详情 ，$type,$id
      * type值：
      * 1 news 第一聚焦
+     * 2 affiche 通知公告
      */
     public function content($type,$id){
         $userId = session('userId');
@@ -456,7 +459,7 @@ class Base extends Controller {
                 $table = "news";
                 break;
             case 2:
-                $table = "branch";
+                $table = "affiche";
                 break;
             case 3:
                 $table = "learn";

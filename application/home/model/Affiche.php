@@ -11,9 +11,9 @@ use  think\Model;
 
 /**
  * Class Branch
- * @package 支部建设 模型类
+ * @package 通知公告 模型类
  */
-class Branch extends Model
+class Affiche extends Model
 {
     /**
      * 首页获取推荐的数据
@@ -22,7 +22,6 @@ class Branch extends Model
      */
     public function getDataList($length,$push=0){
         $map = array(
-            'type' => 3,
             'status' => ['egt',0],
             'recommend' => 1,
             'push' => ['egt',$push]
@@ -36,5 +35,13 @@ class Branch extends Model
         }else{
             return $list;
         }
+    }
+    // 获取列表数据
+    public function get_list($where,$len=0){
+        $list = $this->where($where)->order('id desc')->limit($len,10)->field('id,title,publisher,create_time')->select();
+        foreach($list as $value){
+            $value['create_time'] = date("Y-m-d",$value['create_time']);
+        }
+        return $list;
     }
 }

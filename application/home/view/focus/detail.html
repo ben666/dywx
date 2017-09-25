@@ -46,7 +46,7 @@
                     <div class="fl">
                         <img src="{$co.header}" alt="用户" class="user">
                     </div>
-                    <div class="mid">
+                    <div class="fl mid">
                         <div class="name limit">{$co.nickname}</div>
                         <div class="content" >{$co.content}</div>
                         <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
@@ -80,7 +80,7 @@
 <script src="/home/js/reset.js"></script>
 <script>
     window.onload = function(){
-        if($(".list").length<7){
+        if($(".list").length<10){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -161,7 +161,7 @@
                                         '<div class="fl">'+
                                         '<img src="'+data.header+'" alt="用户头像" class="user">'+
                                         '</div>'+
-                                        '<div class="mid">'+
+                                        '<div class="fl mid">'+
                                         '<div class="name limit">'+data.nickname+'</div>'+
                                         '<div class="content" >'+inputValue+'</div>'+
                                         '<div class="time">'+data.time+'</div>'+
@@ -214,7 +214,7 @@
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 7){
+                    if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -238,7 +238,7 @@
                     '<div class="fl">'+
                     '<img src="'+list.header+'" alt="用户" class="user">'+
                     '</div>'+
-                    '<div class="mid">'+
+                    '<div class="fl mid">'+
                     '<div class="name limit">'+ list.nickname+'</div>'+
                     '<div class="content" >'+ list.content+'</div>'+
                     '<div class="time">'+ list.time+'</div>'+
