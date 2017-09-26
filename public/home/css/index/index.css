@@ -55,7 +55,7 @@ html,body{
 }
 .model>li{
     float: left;
-    width: 25%;
+    width: 33%;
     margin: 0.2rem 0;
     min-height: 10vw;
     margin-bottom: 0px;
@@ -78,7 +78,7 @@ html,body{
     margin-top: 0.1rem;
     color: #333;
     margin-bottom:0.1rem;
-    font-size: 0.24rem;
+    font-size: 0.34rem;
 }
 .fl {
     float: left;
@@ -108,7 +108,6 @@ html,body{
 /*列表修改*/
 .content{
     margin-top:0.2rem;
-    padding-bottom: 0.5rem;
 }
 .mui-pull-bottom-pocket {
      bottom: 0;
