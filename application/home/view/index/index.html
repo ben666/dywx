@@ -1,7 +1,7 @@
 {extend name="public/pure"}
 
 {block name="style"}
-<title>中国遥感应用协会</title>
+<title>金清镇党建</title>
 <link rel="stylesheet" href="/home/css/index/index.css">
 <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
 <style>
@@ -102,12 +102,6 @@
              {case value='4'}
                 {:Url('Pioneer/detail?id='.$loo['id'])}
             {/case}
-            {case value='5'}
-                {:Url('Activity/detail?id='.$loo['id'])}
-            {/case}
-            {case value='6'}
-                {:Url('Branch/detail?id='.$loo['id'])}
-            {/case}
             {default/}
             {/switch}"
                class="list clear" data-type="{$loo.class}">
@@ -115,12 +109,10 @@
                     <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
                     <span class="type">
                     {switch name='$loo.class'}
-                    {case value='1'}红色足迹{/case}
+                    {case value='1'}第一聚焦{/case}
                     {case value='2'}两学一做{/case}
-                    {case value='3'}信息驿站{/case}
-                    {case value='4'}先锋引领{/case}
-                    {case value='5'}活动发起{/case}
-                    {case value='6'}支部建设{/case}
+                    {case value='3'}组织活动{/case}
+                    {case value='4'}三会一课{/case}
                     {default/}
                     {/switch}
                    </span>
@@ -151,7 +143,7 @@
 //        paginationClickable :true
     });
     window.onload = function(){
-        if( $('.notice .list').length<6){
+        if( $('.notice .list').length<8){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -205,9 +197,7 @@
             var news_len = $('.notice .list[data-type=1]').length;
             var learn_len = $('.notice .list[data-type=2]').length;
             var notice_len = $('.notice .list[data-type=3]').length;
-            var pioneer_len = $('.notice .list[data-type=4]').length;
-            var wish_len = $('.notice .list[data-type=5]').length;
-            var branch_len = $('.notice .list[data-type=6]').length;
+            var party_len = $('.notice .list[data-type=4]').length;
                 $.ajax({
                     type:"get",
                     url: "{:Url('Index/moreDataList')}",
@@ -215,9 +205,7 @@
                         news: news_len,
                         learn: learn_len,
                         notice: notice_len,
-                        pioneer_story: pioneer_len,
-                        wish:wish_len,
-                        branch:branch_len
+                        party: party_len,
                     },
                     beforeSend: function(XMLHttpRequest){
                     },
@@ -247,7 +235,7 @@
             var link = '';
             var type_name ='';
             if(list.class == 1){
-                class_name = '红色足迹';
+                class_name = '第一聚焦';
                 link = '/home/news/index/id/'+list.id;
             }else if(list.class == 2){
                 class_name = '两学一做';
@@ -258,17 +246,11 @@
                     link = '/home/learn/video/id/'+list.id;
                 }
             }else if(list.class == 3){
-                class_name = '信息驿站';
+                class_name = '组织活动';
                 link = '/home/college/forumnotice/id/'+list.id;
             }else if(list.class == 4){
-                class_name = '先锋引领';
+                class_name = '三会一课';
                 link = '/home/pioneer/detail/id/'+list.id;
-            }else if(list.class == 5){
-                class_name = '活动发起';
-                link = '/home/activity/detail/id/'+list.id;
-            }else if(list.class == 6){
-                class_name = '支部建设';
-                link = '/home/branch/detail/id/'+list.id;
             }
             if(list.publisher.length >9){
                 list.publisher = list.publisher.substring(0,9)+'...';

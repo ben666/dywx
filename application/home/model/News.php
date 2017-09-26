@@ -25,7 +25,7 @@ class News extends Model{
             'push' => ['egt',$push]
         );
         $order = 'create_time desc';
-        $limit = "$length,1";
+        $limit = "$length,2";
         $list = $this ->where($map) ->order($order) ->limit($limit) ->select();
         if(!empty($list))
         {
