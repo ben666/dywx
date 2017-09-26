@@ -108,6 +108,10 @@ html,body{
 /*列表修改*/
 .content{
     margin-top:0.2rem;
+    padding-bottom: 0.5rem;
+}
+.mui-pull-bottom-pocket {
+     bottom: 0;
 }
 .content .notices .notice .list {
     display: block;
@@ -143,17 +147,15 @@ html,body{
     position: relative;
 }
 .content .notices .notice .list .right .title {
-    float: left;
-    color: #111;
-    text-overflow: -o-ellipsis-lastline;
+    font-size: 0.38rem;
+    color: #333;
+    margin-bottom: 0.6rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    width: 100%;
-    font-size: 0.3rem;
-    line-height: 0.4rem;
+    line-height: 0.6rem;
 }
 .content .notices .notice .list .title {
     color: #333333;
@@ -163,9 +165,8 @@ html,body{
     width: 100%;
     color: #999;
     position: absolute;
-    font-size: 0.24rem;
+    font-size: 0.34rem;
     bottom: 0;
-    line-height: 0.25rem;
 }
 .content .notices .notice.activity .list .right {
     width: 100%;

@@ -4,6 +4,7 @@
 <title>金清镇党建</title>
 <link rel="stylesheet" href="/home/css/index/index.css">
 <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="/home/css/list/graphic-list.css">
 <style>
     html,body{
         height:100%;
@@ -88,7 +89,7 @@
             {volist name="list2" id="loo"}
             <a href="
             {switch name='$loo.class'}
-            {case value='1'}{:Url('News/detail?id='.$loo['id'])}{/case}
+            {case value='1'}{:Url('Focus/detail?id='.$loo['id'])}{/case}
             {case value='2'}
                 {eq name='$loo.type' value='1'}
                 {:Url('Learn/video?id='.$loo['id'])}
@@ -97,10 +98,10 @@
                 {/eq}
             {/case}
             {case value='3'}
-                {:Url('College/forumnotice?id='.$loo['id'])}
+                {:Url('Notice/forumnotice?id='.$loo['id'])}
             {/case}
              {case value='4'}
-                {:Url('Pioneer/detail?id='.$loo['id'])}
+                {:Url('Lesson/detail?id='.$loo['id'])}
             {/case}
             {default/}
             {/switch}"
@@ -118,7 +119,7 @@
                    </span>
                 </div>
                 <div class="fr right">
-                    <div class="title limit_">{$loo.title}</div>
+                    <span class="title limit_">{$loo.title}</span>
                     <div class="clear time">
                         <span class="fl">{$loo.publisher|subtext=9}</span>
                         <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
@@ -236,7 +237,7 @@
             var type_name ='';
             if(list.class == 1){
                 class_name = '第一聚焦';
-                link = '/home/news/index/id/'+list.id;
+                link = '/home/focus/detail/id/'+list.id;
             }else if(list.class == 2){
                 class_name = '两学一做';
                 //1视频 2文字
@@ -247,10 +248,10 @@
                 }
             }else if(list.class == 3){
                 class_name = '组织活动';
-                link = '/home/college/forumnotice/id/'+list.id;
+                link = '/home/Notice/forumnotice/id/'+list.id;
             }else if(list.class == 4){
                 class_name = '三会一课';
-                link = '/home/pioneer/detail/id/'+list.id;
+                link = '/home/lesson/detail/id/'+list.id;
             }
             if(list.publisher.length >9){
                 list.publisher = list.publisher.substring(0,9)+'...';
