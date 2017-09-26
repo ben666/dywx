@@ -111,10 +111,16 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
                 html +=
-                    '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'+
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
+                      '<a href="/home/Lesson/noticedetail/id/'+list.id+'.html">'+
+                      '<p>'+list.tilte+'</p>'+
+                      '<p>'+list.description+'</p>'+
+                   if(list.is_over==1){
+                       html +=  '<span style="color:red">已结束</span>'
+                   }else{
+                       html += '<span style="color: #090;">进行中</span>'
+                   }
+                html +=
+                    '<span>'+list.create_time+'</span>'+
                     '</a>'
         }
             $('.list ul').append(html);
