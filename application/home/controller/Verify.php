@@ -59,16 +59,16 @@ class Verify extends Controller{
             $result = $user ->where($map) ->find();
             //账户密码正确
             if($result){
-                Cookie::clear('dypb');
+                Cookie::clear('jqzpb');
                 session('userId',null);
                 //第一次登陆 初始userId
                 if(empty($result['userid']))
                 {
                     $id = md5(uniqid());//不重复随机id
-                    Cookie::set('dypb',['user' =>$id]);
+                    Cookie::set('jqzpb',['user' =>$id]);
                     $user ->save( ['userid' => $id,'status' => 1] , ['mobile' => $vali['user'],'state' => 1]);
                 }else{
-                    Cookie::set('dypb',['user' =>$result['userid']]);
+                    Cookie::set('jqzpb',['user' =>$result['userid']]);
                 }
                 //登陆后跳转判断
                 if(Session::has('url'))
@@ -106,16 +106,16 @@ class Verify extends Controller{
      */
     public function logout(){
         //cookie初始化 session 初始化
-        Cookie::delete('dypb');
+        Cookie::delete('jqzpb');
         session('userId',null);
-        return $this ->fetch('memberslogin');
+        return $this ->fetch('loginindex');
     }
     /**
      * 游客登录
      */
     public function tourist(){
         //cookie初始化 session 初始化
-        Cookie::delete('dypb');
+        Cookie::delete('jqzpb');
         session('userId','visitor');
         session('url','/home/index/index');
         return $this ->redirect(session('url'));
@@ -125,10 +125,6 @@ class Verify extends Controller{
      * 带游客模式的登录页
      * @return mixed
      */
-    public function memberslogin(){
-        return $this ->fetch();
-    }
-
     public function loginindex(){
         return $this ->fetch();
     }

@@ -30,7 +30,7 @@ class Base extends Controller {
         //读取本地cookie
         if(empty($userId)){
             Cookie::init(Config::get('cookie'));
-            session('userId',Cookie::get('dypb')['user']);
+            session('userId',Cookie::get('jqzpb')['user']);
             $userId = session('userId');
         }
 
@@ -47,7 +47,7 @@ class Base extends Controller {
             $Wechat = new TPWechat(Config::get('party'));
             // 1用户认证是否登陆
             if(empty($userId)) {
-                $this->redirect('Verify/memberslogin');//跳转登录页
+                $this->redirect('Verify/loginindex');//跳转登录页
             }
 
             // 2获取jsapi_ticket
