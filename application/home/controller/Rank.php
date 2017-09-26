@@ -6,6 +6,7 @@
  * Time: 13:53
  */
 namespace app\home\controller;
+use app\home\model\WechatDepartment;
 use app\home\model\WechatUser;
 use app\home\model\Like;
 use app\home\model\Comment;
@@ -25,6 +26,7 @@ class Rank extends Base{
         $userId = session('userId');
         //个人信息
         $personal = $wechatModel::where('userid',$userId)->find();
+        $personal['department'] = WechatDepartment::where('id',$personal['department'])->value('name');
         //总榜
         $con['score'] = array('neq',0);
         $all  = $wechatModel->where($con)->order('score desc')->limit(60)->select();
