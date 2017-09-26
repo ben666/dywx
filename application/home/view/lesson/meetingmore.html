@@ -1,7 +1,7 @@
 {extend name="public/common"}
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/graphic-list.css">
-<title>组织活动</title>
+<title>三会一课</title>
 {/block}
 
 {block name="body"}
@@ -10,13 +10,14 @@
         <!--活动通知-->
         <div class="list">
             <ul>
-                <a href="">
-                    <img src="">
-                    <p>地方地方个人股风格的风格大厦而非大是大非阿斯蒂芬</p>
-                    <span>大打发打发打发的发给多个安全</span>
-                    <span>2017-09-25</span>
+                {volist name="list" id="lo"}
+                <a href="{:Url('Lesson/meetingdetail?id='.$lo['id'])}">
+                    <img src="{$lo.front_cover}">
+                    <p>{$lo.title}</p>
+                    <span>{$lo.publisher}</span>
+                    <span>{$lo.create_time}</span>
                 </a>
-
+                {/volist}
             </ul>
         </div>
     </div>
@@ -47,10 +48,12 @@
     //上拉加载更多
     function loadScroll(){
         var len = $(".list ul a").length;
+        var type = "{$type}";
         $.ajax({
             type:"post",
-            url: "{:Url('Volunteer/index')}",
+            url: "{:Url('Lesson/more')}",
             data:{
+                type:type,
                 length:len
             },
             beforeSend: function(XMLHttpRequest){

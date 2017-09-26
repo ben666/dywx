@@ -1,7 +1,7 @@
 {extend name="public/common"}
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/graphic-list.css">
-<title>组织活动</title>
+<title>三会一课</title>
 <style>
     .banner{
         height:50vw;
@@ -48,15 +48,35 @@
     .more span:last-child{
         float: right;
     }
+    .default{
+        text-align: center;
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+    }
+    .default img{
+        width: 18vw;
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-top:-1.2rem;
+        border-radius: 5px;
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        transform:translate(-50%,-50%);
+    }
 </style>
 
 {/block}
 
 {block name="body"}
 <div class="banner">
-    <img src="/home/images/common/1.jpg">
+    <img src="/home/images/feedback/feedback.jpg">
 </div>
-
+{if condition="$notice eq null && $meet eq null && $party eq null"}
+<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+{else/}
+{notempty name="notice"}
     <!--相关通知-->
 <div class="notice">
     <a class="more" href="{:Url('Lesson/noticemore')}">
@@ -65,53 +85,65 @@
     </a>
         <div class="list">
             <ul>
-                <a href="">
-                    <p>少时诵诗书所所所所所所所所所所所所所所所所所所所所所所所所所所</p>
-                    <p>的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多若若若若若若若若若若若若若若若若若若</p>
+                {volist name="notice" id="no"}
+                <a href="{:Url('Lesson/noticedetail?id='.$no['id'])}">
+                    <p>{$no.title}</p>
+                    <p>{$no.description}</p>
+                    {eq name="no.is_over" value="1"}
+                    <span style="color: red;">已结束</span>
+                    {else/}
                     <span style="color: #090;">进行中</span>
-                    <span>2017-09-25</span>
+                    {/eq}
+                    <span>{$no.create_time}</span>
                 </a>
+                {/volist}
             </ul>
         </div>
 </div>
-
+{/notempty}
+{notempty name="meet"}
     <!--会议情况-->
 <div class="meeting">
-    <a class="more" href="{:Url('Lesson/meetingmore')}">
+    <a class="more" href="{:Url('Lesson/meetingmore?type=2')}">
         <span>会议情况</span>
         <span>更多</span>
     </a>
     <div class="list">
         <ul>
-            <a href="">
-                <img src="">
-                <p>地方地方个人股风格的风格大厦而非大是大非阿斯蒂芬</p>
-                <span>大打发打发打发的发给多个安全</span>
-                <span>2017-09-25</span>
+            {volist name="meet" id="mee"}
+            <a href="{:Url('Lesson/meetingdetail?id='.$mee['id'])}">
+                <img src="{$mee.front_cover}">
+                <p>{$mee.title}</p>
+                <span>{$mee.publisher}</span>
+                <span>{$mee.create_time}</span>
             </a>
-
+            {/volist}
         </ul>
     </div>
 </div>
-
+{/notempty}
+{notempty name="party"}
     <!--党课情况-->
 <div class="party">
-    <a class="more" href="{:Url('Lesson/partymore')}">
+    <a class="more" href="{:Url('Lesson/meetingmore?type=3')}">
         <span>党课情况</span>
         <span>更多</span>
     </a>
     <div class="list">
         <ul>
-            <a href="">
-                <img src="">
-                <p>地方地方个人股风格的风格大厦而非大是大非阿斯蒂芬</p>
-                <span>大打发打发打发的发给多个安全</span>
-                <span>2017-09-25</span>
+            {volist name="party" id="pa"}
+            <a href="{:Url('Lesson/meetingdetail?id='.$pa['id'])}">
+                <img src="{$pa.front_cover}">
+                <p>{$pa.title}</p>
+                <span>{$pa.publisher}</span>
+                <span>{$pa.create_time}</span>
             </a>
-
+            {/volist}
         </ul>
     </div>
 </div>
+{/notempty}
+{/if}
 {/block}
 
 {block name="script"}

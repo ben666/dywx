@@ -1,7 +1,7 @@
 {extend name="public/common"}
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/graphic-list.css">
-<title>组织活动</title>
+<title>三会一课</title>
 <style>
     .list a p:nth-child(1){
         overflow: hidden;
@@ -30,12 +30,18 @@
             <!--活动通知-->
             <div class="list">
                 <ul>
-                    <a href="">
-                        <p>的点点滴滴多多多多多多多多多多</p>
-                        <p>的方法是发达的服务而访问功夫兔让哥哥防守打法啊大 </p>
+                    {volist name="list" id="lo"}
+                    <a href="{:Url('Lesson/noticedetail?id='.$lo['id'])}">
+                        <p>{$lo.title}</p>
+                        <p>{$lo.description} </p>
+                        {eq name="$lo.is_over" value="1"}
+                        <span style="color:red">已结束</span>
+                        {else/}
                         <span style="color: #090;">进行中</span>
-                        <span>2017-09-25</span>
+                        {/eq}
+                        <span>{$lo.create_time}</span>
                     </a>
+                    {/volist}
                 </ul>
             </div>
         </div>
@@ -68,8 +74,9 @@
             var len = $(".list ul a").length;
         $.ajax({
             type:"post",
-            url: "{:Url('Volunteer/index')}",
+            url: "{:Url('Lesson/more')}",
             data:{
+                type:1,
                 length:len
             },
             beforeSend: function(XMLHttpRequest){
