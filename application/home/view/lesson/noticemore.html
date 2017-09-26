@@ -20,6 +20,12 @@
         position: inherit;
         float: right;
     }
+    .list{
+        padding-bottom: 0.5rem;
+    }
+    .mui-pull-bottom-pocket{
+        bottom:0;
+    }
 </style>
 
 {/block}
@@ -106,7 +112,6 @@
             var list = lists[i];
                 html +=
                     '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'+
-                    '<img src="'+list.path+'">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+
