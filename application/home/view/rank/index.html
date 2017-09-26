@@ -20,9 +20,12 @@
             <div class="shadow"></div>
             <div class="userImgBox">
                 <img src="{$personal.userid|get_header}" alt="">
+                <input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
+                <input type="hidden" name="header"  value="" required="">
             </div>
         </div>
         <div class="topName">{$personal.name}</div>
+        <div class="depart">的点点滴滴多多多多多多多多多多多多多</div>
         <ul class="now">
             <li>当前积分 {$personal.score}</li>
             {eq name="$personal.score" value="0"}
@@ -43,9 +46,6 @@
         <div class="rule">
             <img src="/home/images/rank/help.png" alt="">
             <!--<span>积分规则</span>-->
-        </div>
-        <div class="other gr">
-            <a onclick="window.location.replace('/home/rank/department')"></a>
         </div>
     </div>
 
@@ -165,7 +165,7 @@
 
     //上传图片并获取信息
     $('#upload').off("change").on('change',function(){
-        var up = $('.userImg>img');
+        var up = $('.userImgBox>img');
         var size = ($(this)[0].files[0].size / 1024).toFixed(2);
         if(size <= 2048){
             var img = $(this)[0].files[0];

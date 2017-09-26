@@ -22,6 +22,9 @@
     <a  class="exit">
         <img src="/home/images/index/exit.png" alt="">
     </a>
+    <a  class="rank" href="{:Url('rank/index')}">
+        <img src="/home/images/index/rank.png" alt="">
+    </a>
 </div>
 <!--图标轮播-->
 <div class="swiper-container">
@@ -114,20 +117,19 @@
                class="list clear" data-type="{$loo.class}">
                 <div class="fl">
                     <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
-                    <span class="type">
-                    {switch name='$loo.class'}
-                    {case value='1'}第一聚焦{/case}
-                    {case value='2'}两学一做{/case}
-                    {case value='3'}组织活动{/case}
-                    {case value='4'}三会一课{/case}
-                    {default/}
-                    {/switch}
-                   </span>
                 </div>
                 <div class="fr right">
                     <span class="title limit_">{$loo.title}</span>
                     <div class="clear time">
-                        <span class="fl">{$loo.publisher|subtext=9}</span>
+                        <span class="fl">
+                            {switch name='$loo.class'}
+                                {case value='1'}【第一聚焦】{/case}
+                                {case value='2'}【两学一做】{/case}
+                                {case value='3'}【组织活动】{/case}
+                                {case value='4'}【三会一课】{/case}
+                                {default/}
+                            {/switch}
+                        </span>
                         <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
                     </div>
                 </div>
@@ -194,6 +196,12 @@
         var url = this.getAttribute("href");
         window.location.href = url;
     });
+
+    mui('#refreshContainer').on('tap', '.rank', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
     mui('.party').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
@@ -242,10 +250,10 @@
             var link = '';
             var type_name ='';
             if(list.class == 1){
-                class_name = '第一聚焦';
+                class_name = '【第一聚焦】';
                 link = '/home/focus/detail/id/'+list.id;
             }else if(list.class == 2){
-                class_name = '两学一做';
+                class_name = '【两学一做】';
                 //1视频 2文字
                 if(list.type == 2){
                     link = '/home/learn/article/id/'+list.id;
@@ -255,14 +263,14 @@
                     link = '/home/learn/detail/id/'+list.id;
                 }
             }else if(list.class == 3){
-                class_name = '组织活动';
+                class_name = '【组织活动】';
                 if(list.type == 2){
                     link = '/home/Activity/detail/id/'+list.id;
                 }else{
                     link = '/home/Activity/showdetails/id/'+list.id;
                 }
             }else if(list.class == 4){
-                class_name = '三会一课';
+                class_name = '【三会一课】';
                 if(list.type == 1){
                     link = '/home/lesson/noticedetail/id/'+list.id;
                 }else{
@@ -276,12 +284,11 @@
                     '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+
                     '<div class="fl">'+
                     '<img src="'+list.path+'" alt="图片">'+
-                    '<span class="type">'+class_name+'</span>'+
                     '</div>'+
                     '<div class="fr right">'+
                     '<div class="title limit_">'+list.title+'</div>'+
                     '<div class="clear time">'+
-                    '<span class="fl">'+list.publisher+'</span>'+
+                    '<span class="fl">'+class_name+'</span>'+
                     '<span class="fr">'+list.time+'</span>'+
                     '</div>'+
                     '</div>'+
