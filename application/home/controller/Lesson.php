@@ -44,7 +44,7 @@ class Lesson extends Base
         $type = input('post.type');
         $len = input('post.length');
         $Party = new  Party();
-        $list = $Party->get_list(['type' => $type,'status' => ['egt',0],$len]);
+        $list = $Party->get_list(['type' => $type,'status' => ['egt',0]],$len);
         if ($list){
             return $this->success('加载成功','',$list);
         }else{
@@ -61,5 +61,33 @@ class Lesson extends Base
         $this->assign('list',$list);
         $this->assign('type',$type);
         return $this ->fetch();
+    }
+    /**
+     * 相关通知  详情
+     */
+    public function noticedetail(){
+        //游客模式
+        $this ->anonymous();
+        $this ->jssdk();
+        $id = input('get.id');
+        if (empty($id)){
+            $this ->error('参数错误!');
+        }
+        $this->assign('detail',$this->content(5,$id));
+        return $this->fetch();
+    }
+    /**
+     * 会议 党课 详情
+     */
+    public function meetingdetail(){
+        //游客模式
+        $this ->anonymous();
+        $this ->jssdk();
+        $id = input('get.id');
+        if (empty($id)){
+            $this ->error('参数错误!');
+        }
+        $this->assign('detail',$this->content(5,$id));
+        return $this->fetch();
     }
 }

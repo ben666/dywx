@@ -112,8 +112,8 @@
             var list = lists[i];
                 html +=
                       '<a href="/home/Lesson/noticedetail/id/'+list.id+'.html">'+
-                      '<p>'+list.tilte+'</p>'+
-                      '<p>'+list.description+'</p>'+
+                      '<p>'+list.title+'</p>'+
+                      '<p>'+list.description+'</p>'
                    if(list.is_over==1){
                        html +=  '<span style="color:red">已结束</span>'
                    }else{
@@ -125,5 +125,10 @@
         }
             $('.list ul').append(html);
     }
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
 </script>
 {/block}

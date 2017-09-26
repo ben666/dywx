@@ -16,18 +16,11 @@
 {/block}
 {block name="body"}
 <!--轮播图-->
-<div class="swiper-container banner">
-    <div class="swiper-wrapper">
-        {volist name="detail.images" id="li"}
-        <div class="swiper-slide">
-            <!--支持循环，需要重复图片节点-->
-            <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
-        </div>
-        {/volist}
-    </div>
+<div class="banner">
+    <div class="mui-slider-item"><img src="{$detail.front_cover|get_cover='path'}"></div>
 </div>
 <div class="view">
-    <span class="read">{$detail.views}</span>
+    <span class="read">{$detail.views + 1}</span>
 </div>
 <div class="article">
     <div class="title"><p>{$detail.title}</p></div>
@@ -36,27 +29,18 @@
         <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
     </div>
     <div class="message">
-        {notempty name="detail.time"}
-        <div class="name limit">{$detail.time|time_format='Y/m/d H:i'}</div>
-        {/notempty}
-        {notempty name="detail.address"}
-        <div class="content" >{$detail.address}</div>
-        {/notempty}
-        {notempty name="detail.people"}
-        <div class="content" >{$detail.people}</div>
-        {/notempty}
-        {notempty name="detail.compere"}
-        <div class="content" >{$detail.compere}</div>
-        {/notempty}
+        <div class="name limit">{$detail.create_time|time_format='Y/m/d H:i'}--{$detail.end_time|time_format='Y/m/d H:i'}</div>
+        <div class="address" >{$detail.address}</div>
+        <div class="people" >{$detail.people}</div>
     </div>
     <div class="content">
         <div class="article-content">{$detail.content}</div>
         <div class="like">
             {eq name="visit" value="0"}
             {eq name="detail.is_like" value="1"}
-            <span class="isgood good_ notvisitor"  data-type="4" data-id="{$detail.id}" onclick="isGood(this,4,{$detail.id})">{$detail.likes}</span>
+            <span class="isgood good_ notvisitor"  data-type="5" data-id="{$detail.id}">{$detail.likes}</span>
             {else/}
-            <span class="isgood good notvisitor"  data-type="4" data-id="{$detail.id}" onclick="isGood(this,4,{$detail.id})">{$detail.likes}</span>
+            <span class="isgood good notvisitor"  data-type="5" data-id="{$detail.id}" >{$detail.likes}</span>
             {/eq}
             {else/}
             <span class="isgood good">{$detail.likes}</span>

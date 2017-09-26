@@ -117,6 +117,10 @@
     background: url(/home/images/detail/address.png) 0.3rem 0.2rem no-repeat;
     background-size: 0.4rem 0.4rem;
 }
+.article .message .people{
+    background: url(/home/images/detail/host.png) 0.3rem 0.2rem no-repeat;
+    background-size: 0.4rem 0.4rem;
+}
 
 /*article content */
 .article-content p,.article-content p span,.article-content{

@@ -90,14 +90,19 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
             html +=
-                    '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'+
-                    '<img src="'+list.path+'">'+
+                    '<a href="/home/Lesson/meetingdetail/id/'+list.id+'.html">'+
+                    '<img src="'+list.front_cover+'">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
+                    '<span>'+list.create_time+'</span>'+
                     '</a>'
         }
         $('.list ul').append(html);
     }
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
 </script>
 {/block}
