@@ -38,9 +38,9 @@
         <div class="like">
             {eq name="visit" value="0"}
             {eq name="detail.is_like" value="1"}
-            <span class="isgood good_ notvisitor"  data-type="5" data-id="{$detail.id}">{$detail.likes}</span>
+            <span class="isgood good_ notvisitor"  data-type="5" data-id="{$detail.id}" onclick="isGood(this,5,{$detail.id})">{$detail.likes}</span>
             {else/}
-            <span class="isgood good notvisitor"  data-type="5" data-id="{$detail.id}" >{$detail.likes}</span>
+            <span class="isgood good notvisitor"  data-type="5" data-id="{$detail.id}" onclick="isGood(this,5,{$detail.id})">{$detail.likes}</span>
             {/eq}
             {else/}
             <span class="isgood good">{$detail.likes}</span>
