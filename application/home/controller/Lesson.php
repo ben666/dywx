@@ -74,7 +74,7 @@ class Lesson extends Base
         //游客模式
         $this ->anonymous();
         $this ->jssdk();
-        $id = input('get.id');
+        $id = input('get.id/d');
         if (empty($id)){
             $this ->error('参数错误!');
         }
@@ -89,7 +89,7 @@ class Lesson extends Base
         //游客模式
         $this ->anonymous();
         $this ->jssdk();
-        $id = input('get.id');
+        $id = input('get.id/d');
         if (empty($id)){
             $this ->error('参数错误!');
         }
