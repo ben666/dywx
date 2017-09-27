@@ -78,10 +78,14 @@
                         {volist name="list" id="one"}
                         <a href="{:Url('Activity/detail?id='.$one['id'])}">
                             <p>{$one.title}</p>
+                            {eq name="one.is_over" value="2"}
+                            <span></span>
+                            {else/}
                             {eq name="one.is_over" value="1"}
                             <span style="color: red;">已结束</span>
                             {else/}
                             <span style="color: #090;">进行中</span>
+                            {/eq}
                             {/eq}
                             <span>{$one.create_time}</span>
                             </a>

@@ -35,8 +35,10 @@ class Notice extends Model {
             $value['front_cover'] = $Pic['path'];
             if ($value['type'] == 2){
                 // 通知
-                $value['is_over'] = 0;  // 未结束
-                if (!empty($value['end_time']) && $value['end_time'] < time()){
+                $value['is_over'] = 0;  // 进行中
+                if (empty($value['end_time'])){
+                    $value['is_over'] = 2;  //  无标签
+                }else if (!empty($value['end_time']) && $value['end_time'] < time()){
                     $value['is_over'] = 1;  // 已结束
                 }
             }
