@@ -1,7 +1,7 @@
 {extend name="public/common"}
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/graphic-list.css">
-<title>三会一课</title>
+<title>相关通知</title>
 <style>
     .list a p:nth-child(1){
         overflow: hidden;
@@ -39,7 +39,7 @@
                     {volist name="list" id="lo"}
                     <a href="{:Url('Lesson/noticedetail?id='.$lo['id'])}">
                         <p>{$lo.title}</p>
-                        <p>{$lo.description} </p>
+                        <p style="font-size: 0.36rem;">{$lo.description} </p>
                         {eq name="$lo.is_over" value="1"}
                         <span style="color:red">已结束</span>
                         {else/}

@@ -2,6 +2,7 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/details-template/detail.css">
+<title></title>
 <style>
     .mui-pull-bottom-pocket {
         height: 0.8rem;
@@ -78,6 +79,12 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var c =  parseInt(window.location.href.split("type/")[1]);
+    if(c==2){
+        $("title").text("会议情况");
+    }else if(c==3){
+        $("title").text("党课情况");
+    }
     window.onload = function(){
         if($(".list").length<7){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();

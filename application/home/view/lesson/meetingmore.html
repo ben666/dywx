@@ -1,7 +1,7 @@
 {extend name="public/common"}
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/graphic-list.css">
-<title>三会一课</title>
+<title></title>
 <style>
     .list{
         padding-bottom: 0.5rem;
@@ -35,6 +35,12 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var c =  parseInt(window.location.href.split("type/")[1]);
+    if(c==2){
+        $("title").text("会议情况");
+    }else if(c==3){
+        $("title").text("党课情况");
+    }
     window.onload = function() {
         if ($(".list ul a").length < 10) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -101,7 +107,7 @@
     }
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"/type/"+c;
         window.location.href = url;
     })
 </script>

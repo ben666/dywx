@@ -88,7 +88,7 @@
                 {volist name="notice" id="no"}
                 <a href="{:Url('Lesson/noticedetail?id='.$no['id'])}">
                     <p>{$no.title}</p>
-                    <p>{$no.description}</p>
+                    <p style="font-size: 0.36rem;">{$no.description}</p>
                     {eq name="no.is_over" value="1"}
                     <span style="color: red;">已结束</span>
                     {else/}
@@ -111,7 +111,7 @@
     <div class="list">
         <ul>
             {volist name="meet" id="mee"}
-            <a href="{:Url('Lesson/meetingdetail?id='.$mee['id'])}">
+            <a href="{:Url('Lesson/meetingdetail?type=2&id='.$mee['id'])}">
                 <img src="{$mee.front_cover}">
                 <p>{$mee.title}</p>
                 <span>{$mee.publisher}</span>
@@ -132,7 +132,7 @@
     <div class="list">
         <ul>
             {volist name="party" id="pa"}
-            <a href="{:Url('Lesson/meetingdetail?id='.$pa['id'])}">
+            <a href="{:Url('Lesson/meetingdetail?type=3&id='.$pa['id'])}">
                 <img src="{$pa.front_cover}">
                 <p>{$pa.title}</p>
                 <span>{$pa.publisher}</span>
