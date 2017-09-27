@@ -75,10 +75,10 @@ html,body{
 }
 .model>li>a>img{
     display: block;
-    width: 14.7vw;
-    height: 14.7vw;
+    width: 16vw;
+    height: 16vw;
     margin: 0 auto;
-    /*border-radius: 50%;*/
+    /* border-radius: 50%; */
     overflow: hidden;
 }
 .model>li>a>span{
@@ -135,7 +135,7 @@ html,body{
     width: 21.4vw;
     height: 16vw;
     margin-top: 0.24rem;
-    margin-bottom: 0.24rem;
+    /*margin-bottom: 0.24rem;*/
     border-radius: 0.1rem;
 }
 .content .notices .notice .list .fl .type {
@@ -174,7 +174,8 @@ html,body{
     color: #999;
     position: absolute;
     font-size: 0.34rem;
-    bottom: 0;
+    bottom: 0.1rem;
+    margin-left: -0.2rem;
 }
 .content .notices .notice.activity .list .right {
     width: 100%;
