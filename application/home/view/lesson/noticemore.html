@@ -38,7 +38,7 @@
                 <ul>
                     {volist name="list" id="lo"}
                     <a href="{:Url('Lesson/noticedetail?id='.$lo['id'])}">
-                        <p>{$lo.title}</p>
+                        <p style="font-size: 0.4rem;">{$lo.title}</p>
                         <p style="font-size: 0.36rem;">{$lo.description} </p>
                         {eq name="$lo.is_over" value="1"}
                         <span style="color:red">已结束</span>
