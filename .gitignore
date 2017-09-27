@@ -1,8 +1,8 @@
 .idea/
 application/database.php
 runtime/
-thinkphp/
-vendor/
+thinkphp
+vendor
 data/
 composer.lock
 public/ueditor/
