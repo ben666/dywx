@@ -168,10 +168,10 @@ body {
   line-height: 5vw;
 }
 .listbox .box.summary .box_:before {
-  content: '党委简介';
+  content: '组织简介';
 }
 .listbox .box.town .box_:before {
-  content: '支部信息';
+  content: '组织架构';
 }
 .listbox .box.summary .box_{
   padding: 11vw 3vw 6vw 3vw;
