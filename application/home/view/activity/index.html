@@ -199,8 +199,10 @@
                       '<p>'+list.title+'</p>'
               if (list.is_over == 1){
                   html +='<span style="color: red;">已结束</span>';
-              }else {
+              }else if (list.is_over == 0){
                   html +='<span style="color: #090;">进行中</span>';
+              }else{
+                  html +='<span ></span>';
               }
                       html+='<span>'+list.create_time+'</span>'+
                       '</a>'
