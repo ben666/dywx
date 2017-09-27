@@ -18,6 +18,7 @@ class Lesson extends Base
      * @return mixed  主页
      */
     public function index(){
+        $this->checkAnonymous();
         $Party = new Party();
         $notice = $Party->get_list(['type' => 1,'status' => ['egt',0]]);  // 相关通知
         $meet = $Party->get_list(['type' => 2,'status' => ['egt',0]]);  // 会议情况
@@ -32,6 +33,7 @@ class Lesson extends Base
      * @return mixed 更多通知
      */
     public function noticemore(){
+        $this->checkAnonymous();
         $Party = new Party();
         $list = $Party->get_list(['type' => 1,'status' => ['egt',0]],0,true);
         $this->assign('list',$list);
@@ -41,6 +43,7 @@ class Lesson extends Base
      * 加载更多   type : 1 相关通知 2  会议情况  3 党课情况
      */
     public function more(){
+        $this->checkAnonymous();
         $type = input('post.type');
         $len = input('post.length');
         $Party = new  Party();
@@ -55,6 +58,7 @@ class Lesson extends Base
      * @return mixed 更多  会议情况 2  党课情况 3
      */
     public function meetingmore(){
+        $this->checkAnonymous();
         $type = input('get.type');
         $Party = new Party();
         $list = $Party->get_list(['type' => $type,'status' => ['egt',0]],0,true);
@@ -66,6 +70,7 @@ class Lesson extends Base
      * 相关通知  详情
      */
     public function noticedetail(){
+        $this->checkAnonymous();
         //游客模式
         $this ->anonymous();
         $this ->jssdk();
@@ -80,6 +85,7 @@ class Lesson extends Base
      * 会议 党课 详情
      */
     public function meetingdetail(){
+        $this->checkAnonymous();
         //游客模式
         $this ->anonymous();
         $this ->jssdk();

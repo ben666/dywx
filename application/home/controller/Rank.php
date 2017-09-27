@@ -22,6 +22,7 @@ class Rank extends Base{
     public function index(){
         //判断游客登陆
         $this ->anonymous();
+        $this->checkAnonymous();
         $wechatModel = new WechatUser();
         $userId = session('userId');
         //个人信息
@@ -338,6 +339,7 @@ class Rank extends Base{
      * 部门积分排行
      */
     public function department(){
+        $this->checkAnonymous();
         //判断游客登陆
         $this ->anonymous();
         $userId = session('userId');
