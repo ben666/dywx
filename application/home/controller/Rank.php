@@ -774,6 +774,7 @@ class Rank extends Base{
      */
     public function setHeader(){
         $userId = session('userId');
+        ini_set ('memory_limit', '128M');
         $header = input('header');
         $map = array(
             'headimgurl' => $header,
