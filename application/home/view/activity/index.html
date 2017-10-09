@@ -72,6 +72,9 @@
 
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
+                {empty name="$list"}
+                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                {else/}
                 <!--活动通知-->
                 <div class="list notice">
                     <ul>
@@ -92,10 +95,14 @@
                         {/volist}
                     </ul>
                 </div>
+                {/empty}
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--活动展示-->
                 <div class="list show">
+                    {empty name="$lists"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="lists" id="two"}
                         <a href="{:Url('Activity/showdetails?id='.$two['id'])}">
@@ -106,6 +113,7 @@
                             </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
         </div>

@@ -18,6 +18,7 @@ class Activity extends Base{
      * 活动通知  主页
      */
     public function index(){
+        $this->checkAnonymous();
         $Notice = new Notice();
         $map = array(
             'type' => 2,
@@ -37,6 +38,7 @@ class Activity extends Base{
      * 活动  列表 更多
      */
     public function morelist(){
+        $this->checkAnonymous();
         $Notice = new Notice();
         $type = input('post.type');  // 0 活动通知 1 活动展示
         $len = input('post.length');
@@ -60,6 +62,7 @@ class Activity extends Base{
     public function detail(){
         //判断是否是游客
         $this ->anonymous();
+        $this->checkAnonymous();
         //获取jssdk
         $this ->jssdk();
         $id = input('id');
@@ -70,6 +73,7 @@ class Activity extends Base{
     public function showdetails(){
         //判断是否是游客
         $this ->anonymous();
+        $this->checkAnonymous();
         //获取jssdk
         $this ->jssdk();
         $id = input('id');

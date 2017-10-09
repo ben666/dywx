@@ -38,7 +38,7 @@ class Service extends Controller
 //                            ),
 //                        );
 //                        $Wechat->news($newsData)->reply();
-                        $Wechat->text("您好！欢迎关注 中国遥感应用协会党建平台 ！")->reply();
+                        $Wechat->text("您好！欢迎关注 金清党员之家 党建平台 ！")->reply();
                         break;
                 }
                 break;
@@ -61,18 +61,8 @@ class Service extends Controller
         $menu["button"] = array(
             array(
                 "type"=>"view",
-                "name"=>"登台纵览",
-                "url"=>"http://zgyg.0571ztnet.com/home/index/index"
-            ),
-            array(
-                "type"=>"view",
-                "name"=>"党的感召",
-                "url"=>"http://zgyg.0571ztnet.com/home/index/index"
-            ),
-            array(
-                "type"=>"view",
-                "name"=>"习总思想",
-                "url"=>"http://zgyg.0571ztnet.com/home/index/index"
+                "name"=>"党员之家",
+                "url"=>"http://jqz.0571ztnet.com/home/index/index"
             ),
         );
         $Wechat = new TPWechat(Config::get('party'));
