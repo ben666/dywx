@@ -25,13 +25,13 @@ class Push extends Controller{
         $request = 'http://jqz.0571ztnet.com';//域名
         $answer = '/home/constitution/course';//每日一课路径
         //每日一课的图片ID
-        $image_id = "65s5Dd8jcGNvhC9izswZtFKnYGIP_Wp9OT1-3zUmyuQ";
-        $openid = 'ome1gxJkdYt9Ji1LZjvl4d2d-6Fk';//王志超
+        $image_id = "5czIjxiKRKjqmJLoacUL7y9INcGlu5l0OTdFFHoYbO8";
+        $openid = 'oOPb1ws8T9Q1xoy7sAVS8FumHCwg';//王志超
         //获取需要推送的数据
         $list = $this ->pushList();
         //没有需要推送的消息,就只推每日一课
         if(empty($list)){
-//            $info['media_id'] = '65s5Dd8jcGNvhC9izswZtFEHs-SRAE-JxAqQCoP7g_g';
+            $info['media_id'] = '5czIjxiKRKjqmJLoacUL79QaVRYnJHkNsURVZpxET_U';
         }else{
 //            //先上传素材 media_id
             foreach($list as $k => $v){
@@ -116,7 +116,7 @@ class Push extends Controller{
                 return  $this->success('推送成功');
             }
         }
-        //预览图文通知
+//        //预览图文通知
 //        $notice = array(
 //            "touser" => $openid,
 //            "mpnews" =>[
@@ -125,18 +125,8 @@ class Push extends Controller{
 //            "msgtype" => "mpnews"
 //        );
 //        $info = $Wechat ->previewMassMessage($notice);
-//        dump( $info);
-//        //上传图片获得缩略图片的media_id
-//        $file_path = './home/images/constitution/3.png';
-//        $data = array(
-//            "media" => '@'.$file_path
-//        );
-//        $info = $Wechat ->uploadForeverMedia($data,'thumb');
-        
-
-//        $info = $Wechat ->getUserInfo("ome1gxJkdYt9Ji1LZjvl4d2d-6Fk");
-//        dump($info);
-//        //上传图文消息素材
+//        dump( $Wechat->errMsg);
+        //上传图文消息素材
 //        $article = array(
 //            "articles" => [
 //                [
@@ -151,18 +141,6 @@ class Push extends Controller{
 //            ]
 //        );
 //        $info = $Wechat ->uploadForeverArticles($article);
-//
-//        $answer_id = '65s5Dd8jcGNvhC9izswZtFEHs-SRAE-JxAqQCoP7g_g';//每日一课素材id
-////        //预览图文通知
-//        $notice = array(
-//            "touser" => $openid,
-//            "mpnews" =>[
-//                "media_id" => $answer_id
-//            ],
-//            "msgtype" => "mpnews"
-//        );
-//        $info = $Wechat ->previewMassMessage($notice);
-//        dump($info);
     }
     /**
      * 获取待推送的8条数据
