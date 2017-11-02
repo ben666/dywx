@@ -197,7 +197,8 @@ class Wechat extends Admin{
                 }
                 //出生年月
                 if ($v[5]) {
-                    $v[5] = strtotime($v[5]);
+                    $temp = mb_ereg_replace('[^0-9]', '/', $v[5]);
+                    $v[5] = strtotime(substr($temp,0,-1));
                 }
                 // 是否 党员
                 if($v[7] == '是' || $v[7] == '党员' || $v[7] == '1'){
@@ -207,9 +208,9 @@ class Wechat extends Admin{
                 }
                 //入党时间
                 if ($v[8]) {
-                    $v[8] = strtotime($v[8]);
+                    $temp = mb_ereg_replace('[^0-9]', '/', $v[8]);
+                    $v[8] = strtotime(substr($temp,0,-1));
                 }
-                //整理数据
                 $info = array(
                     'name' => $v[0],   //名称
                     'gender' => $v[1], //性别
