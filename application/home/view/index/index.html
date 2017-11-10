@@ -296,5 +296,14 @@
         }
         $('.notice').append(html);
     }
+
+    mui(".party").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
+
+
+
 </script>
 {/block}
