@@ -2,12 +2,13 @@
     display: block;
     border-bottom: 1px solid #f1f1f1;
     padding: 0.26rem 0.4rem;
+    position: relative;
+    height: 20vw;
 
 }
 .list ul a p{
     font-size: 0.38rem;
     color: #333;
-    margin-bottom: 6vw;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -24,9 +25,13 @@
     overflow: hidden;
     white-space:nowrap;
     width:70%;
+    position: absolute;
+    bottom: 2vw;
 }
 .list ul a span:nth-child(3){
-    float: right;
+    right:3vw;
+    position: absolute;
+    bottom: 2vw;
 }
 
 

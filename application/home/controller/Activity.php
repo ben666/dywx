@@ -80,4 +80,9 @@ class Activity extends Base{
         $this->assign('detail',$this->content(4,$id));
         return $this->fetch();
     }
+
+    public function publish(){
+
+        return $this->fetch();
+    }
 }

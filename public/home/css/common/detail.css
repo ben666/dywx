@@ -107,6 +107,7 @@
   font-weight: 600;
   display: inline-block;
   text-align: left;
+  font-family: "微软雅黑,Microsoft YaHei";
 }
 .article .note {
   color: #999999;
@@ -132,6 +133,17 @@
 }
 .article .content * {
   max-width: 100%!important;
+}
+.content .article-content p,.content .article-content p span,.content .article-content{
+  font-size: 0.4rem!important;
+  line-height:1.8!important;
+  color: #333;
+}
+
+.article .content * {
+  max-width: 100%!important;
+  font-size: 0.4rem!important;
+  line-height:1.8!important;
 }
 .article .content img {
   display: inline-block;

@@ -28,7 +28,6 @@
     .notice a p:nth-child(1){
         font-size: 0.38rem;
         color: #333;
-        margin-bottom: 0.6rem;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -39,10 +38,14 @@
         margin-bottom: 1rem;
         color: #666;
     }
+    .notice a span:nth-child(2){
+        position: absolute;
+        bottom:2vw;
+    }
     .notice a span:nth-child(3){
-        position: inherit!important;
-        float: right;
-        bottom:0!important;
+        position: absolute;
+        right: 3vw;
+        bottom:2vw;
         width:auto!important;
     }
     .mui-slider-group{
@@ -56,6 +59,7 @@
 {/block}
 
 {block name="body"}
+<div class="main">
 <div class="banner">
     <img src="/home/images/feedback/1.jpg">
 </div>
@@ -119,6 +123,9 @@
         </div>
     </div>
 </div>
+<span href="{:Url('Activity/publish')}" class="after manager" id="publish"></span>
+</div>
+
 {/block}
 
 {block name="script"}
@@ -126,6 +133,7 @@
 <script>
     var c = 0;
     $(function(){
+        moveanyway()
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1){
@@ -255,6 +263,11 @@
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+    mui('.main').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+c;
         window.location.href = url;
     });
 
