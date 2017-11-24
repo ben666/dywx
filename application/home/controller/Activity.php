@@ -6,9 +6,7 @@
  * Time: 17:40
  */
 namespace app\home\controller;
-use app\home\model\WechatDepartment;
-use app\home\model\Comment;
-use app\home\model\Picture;
+use app\home\model\WechatUser;
 use app\home\model\Notice;
 /**
  *  组织活动  控制器
@@ -19,19 +17,26 @@ class Activity extends Base{
      */
     public function index(){
         $this->checkAnonymous();
+        $userid = session('userId');
+        $departmentid = WechatUser::where('userid',$userid)->value('department');  // 本部门
+        // 发布权限
+        $review = WechatUser::where('userid',$userid)->value('review');
         $Notice = new Notice();
         $map = array(
             'type' => 2,
-            'status' => ['egt',0]
+            'status' => ['egt',0],
+            'department' => ['in',[0,$departmentid]]
         );
         $list = $Notice->get_list($map);  // 活动通知
         $maps = array(
             'type' => 1,
-            'status' => ['egt',0]
+            'status' => ['egt',0],
+            'department' => ['in',[0,$departmentid]]
         );
         $lists = $Notice->get_list($maps); // 活动展示
         $this->assign('list',$list);
         $this->assign('lists',$lists);
+        $this->assign('review',$review);
         return $this ->fetch();
     }
     /*
@@ -39,6 +44,8 @@ class Activity extends Base{
      */
     public function morelist(){
         $this->checkAnonymous();
+        $userid = session('userId');
+        $departmentid = WechatUser::where('userid',$userid)->value('department');  // 本部门
         $Notice = new Notice();
         $type = input('post.type');  // 0 活动通知 1 活动展示
         $len = input('post.length');
@@ -49,7 +56,8 @@ class Activity extends Base{
         }
         $maps = array(
             'type' => $con,
-            'status' => ['egt',0]
+            'status' => ['egt',0],
+            'department' => ['in',[0,$departmentid]]
         );
         $list = $Notice->get_list($maps,$len);
         if ($list){
@@ -80,9 +88,34 @@ class Activity extends Base{
         $this->assign('detail',$this->content(4,$id));
         return $this->fetch();
     }
-
+    /**
+     * 手机端 发布
+     */
     public function publish(){
-
-        return $this->fetch();
+        if (IS_POST){
+            $data = input('post.');
+            $userid = session('userId');
+            $data['department'] = WechatUser::where('userid',$userid)->value('department');  // 本部门
+            $data['publisher'] = WechatUser::where('userid',$userid)->value('name');
+            $data['front_cover'] = $this->default_pic();
+            $data['create_time'] = time();
+            if ($data['start_time']){
+                $data['start_time'] = strtotime($data['start_time']);
+            }
+            if ($data['end_time']){
+                $data['end_time'] = strtotime($data['end_time']);
+            }
+            if ($data['images']){
+                $data['images'] = json_encode($data['images']);
+            }
+            $res = Notice::create($data);
+            if ($res){
+                return $this->success('添加成功');
+            }else{
+                return $this->error('添加失败');
+            }
+        }else{
+            return $this->fetch();
+        }
     }
 }

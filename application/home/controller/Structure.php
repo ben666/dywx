@@ -13,9 +13,16 @@ class Structure extends Base{
      * 组织架构主页
      */
     public function index(){
-        $Dep = WechatDepartment::where(['id' => ['neq',106],'status' => 1])->order('id asc')->select();
-        $this->assign('list
-        ',$Dep);
+        $userid = session('userId');
+        $departmentid = WechatUser::where('userid',$userid)->value('department');
+        if ($departmentid == 107){
+            // 全部权限
+            $Dep = WechatDepartment::where(['id' => ['neq',106],'status' => 1])->order('id asc')->select();
+        }else{
+            // 局部权限
+            $Dep = WechatDepartment::where('id' ,$departmentid)->order('id asc')->select();
+        }
+        $this->assign('list',$Dep);
         return $this->fetch();
     }
     /*

@@ -66,8 +66,12 @@
                                 <td>{$vo.create_time|time_format='Y-m-d'}</td>
                                 <td>{$vo.recommend_text}</td>
                                 <td>
+                                    {eq name="$vo.department" value="0"}
                                     <a href="{:Url('Notice/add?id='.$vo['id'])}">修改</a>
-                                    <a href="{:Url('Notice/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
+                                    {else/}
+                                    <span>修改</span>
+                                    {/eq}
+                                    &emsp;<a href="{:Url('Notice/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>
                             </tr>
                             {/volist}
