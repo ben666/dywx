@@ -143,7 +143,6 @@
 .article .content * {
   max-width: 100%!important;
   font-size: 0.4rem!important;
-  line-height:1.8!important;
 }
 .article .content img {
   display: inline-block;
@@ -207,20 +206,20 @@ p{
 }
 .article .content .note .read {
   background: url('/home/images/detail/scan_.png') 0 center no-repeat;
-  background-size: 0.36rem 0.36rem;
-  padding-left: 0.53rem;
+  background-size: 0.38rem 0.38rem;
+  padding-left: 0.58rem;
 }
 .article .content .note .good {
   background: url('/home/images/detail/good.png') 0 center no-repeat;
-  background-size: 0.36rem 0.36rem;
-  padding-left:  0.53rem;
+  background-size: 0.38rem 0.38rem;
+  padding-left:  0.58rem;
 }
 .article .content .note .good_ {
   animation: shake 300ms ease;
   -webkit-animation: shake 300ms ease;
   background: url('/home/images/detail/good_.png') 0 center no-repeat;
-  background-size: 0.36rem 0.36rem;
-  padding-left: 0.53rem;
+  background-size: 0.38rem 0.38rem;
+  padding-left: 0.58rem;
 }
 
 /*comment*/
