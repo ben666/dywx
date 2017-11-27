@@ -258,28 +258,30 @@
             var openPopover = $("#openPopover").text();
             if(openPopover=="活动通知"){
                 var data = {
-                    type:3,
+                    type:2,
                     title: $("input[name='title']").val(),
                     start_time: $("input[name='start_time']").val(),
                     end_time: $("input[name='end_time']").val(),
                     address: $("input[name='address']").val(),
-                    tel: $("input[name='tel']").val(),
+                    telephone: $("input[name='tel']").val(),
                     content: $("textarea[name='content']").val(),
-                    images:Imgarr
                 };
             }else{
                 var data = {
-                    type:3,
+                    type:1,
                     title: $("input[name='title']").val(),
                     content: $("textarea[name='content']").val(),
-                    images:Imgarr
                 };
+            }
+            if(Imgarr.length!==0){
+                data["images"] = Imgarr;
             }
             $.ajax({
                 type:"post",
                 url: "{:Url('Activity/publish')}",
                 data:data,
                 success:function(data){
+                    console.log(data);
                     if(data.code == 1){
                         swal({
                             title: "发布成功",

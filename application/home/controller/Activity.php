@@ -99,14 +99,21 @@ class Activity extends Base{
             $data['publisher'] = WechatUser::where('userid',$userid)->value('name');
             $data['front_cover'] = $this->default_pic();
             $data['create_time'] = time();
-            if ($data['start_time']){
-                $data['start_time'] = strtotime($data['start_time']);
-            }
-            if ($data['end_time']){
-                $data['end_time'] = strtotime($data['end_time']);
-            }
-            if ($data['images']){
+            if (isset($data['images'])){
                 $data['images'] = json_encode($data['images']);
+            }
+            if ($data['type'] == 2){
+                // 活动通知
+                if ($data['start_time']){
+                    $data['start_time'] = strtotime($data['start_time']);
+                }else{
+                  unset($data['start_time']);
+                }
+                if ($data['end_time']){
+                    $data['end_time'] = strtotime($data['end_time']);
+                }else{
+                    unset($data['end_time']);
+                }
             }
             $res = Notice::create($data);
             if ($res){

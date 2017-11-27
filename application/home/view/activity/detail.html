@@ -51,6 +51,9 @@
 				{/notempty}
 			</div>
 			<div class="content">
+				{volist name="$detail.images" id="im"}
+				<img src="{$im|get_cover='path'}">
+				{/volist}
 				<div class="article-content">{$detail.content}</div>
 				<div class="like">
 					{eq name="visit" value="0"}

@@ -23,6 +23,9 @@
                 <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
             </div>
             <div class="content">
+                {volist name="$detail.images" id="images"}
+                <img src="{$images|get_cover='path'}">
+                {/volist}
                 <div class="article-content">{$detail.content}</div>
                 <div class="like">
                     <span class="read">{$detail.views +1 }</span>
