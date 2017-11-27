@@ -212,6 +212,8 @@ body {
   font-size:0.32rem;
   padding-left: 15px;
   line-height: 30px;
+  display: flex;
+  align-items: center;
 }
 .listbox .box .box_ .lists .party1 .tri {
   position: absolute;
@@ -224,7 +226,6 @@ body {
   background-size: 0.2rem 0.2rem;
 }
 .listbox .box .box_ .lists .party1 .tri-left{
-  position: absolute;
   left: 0;
   content: '';
   height: 0.5rem;
