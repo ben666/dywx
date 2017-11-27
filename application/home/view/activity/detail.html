@@ -47,7 +47,7 @@
 				<div class="address" >{$detail.address}</div>
 				{/notempty}
 				{notempty name="detail.telephone"}
-				<div class="telephone" >{$detail.telephone}</div>
+				<a class="telephone" href="tel:{$detail.telephone}">{$detail.telephone}</a>
 				{/notempty}
 			</div>
 			<div class="content">
