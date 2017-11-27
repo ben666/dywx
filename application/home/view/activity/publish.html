@@ -257,20 +257,42 @@
         if(single){
             var openPopover = $("#openPopover").text();
             if(openPopover=="活动通知"){
+                var start_time = $("input[name='start_time']").val();
+                var end_time = $("input[name='end_time']").val();
+                if(start_time==''&&end_time!==''){
+                    swal({
+                        title: ' ',
+                        text: '请输入开始时间',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return false;
+                }
+                if(start_time==!''&&end_time==''){
+                    swal({
+                        title: ' ',
+                        text: '请输入结束时间',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return false;
+                }
                 var data = {
                     type:2,
                     title: $("input[name='title']").val(),
-                    start_time: $("input[name='start_time']").val(),
-                    end_time: $("input[name='end_time']").val(),
+                    start_time:start_time ,
+                    end_time:end_time,
                     address: $("input[name='address']").val(),
                     telephone: $("input[name='tel']").val(),
-                    content: $("textarea[name='content']").val(),
+                    content: $("textarea[name='content']").val()
                 };
             }else{
                 var data = {
                     type:1,
                     title: $("input[name='title']").val(),
-                    content: $("textarea[name='content']").val(),
+                    content: $("textarea[name='content']").val()
                 };
             }
             if(Imgarr.length!==0){
@@ -281,7 +303,6 @@
                 url: "{:Url('Activity/publish')}",
                 data:data,
                 success:function(data){
-                    console.log(data);
                     if(data.code == 1){
                         swal({
                             title: "发布成功",
