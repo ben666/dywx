@@ -36,10 +36,13 @@ class User extends Admin
         }
 
         $list = $this->lists("Member", $map);
-//        foreach ($list as $key => $value) {
-//            $msg = UcenterMember::get($value['id']);
-//            $value['email'] = $msg['email'];
-//        }
+        foreach ($list as $key => $value) {
+            $msg = UcenterMember::get($value['id']);
+            $value['email'] = $msg['email'];
+        }
+        int_to_string($list,[
+            'status' => [0=>'禁用',1=>'启用']
+        ]);
         $this->assign('list',$list);
 
         $info['status'] = array('egt', 0);
