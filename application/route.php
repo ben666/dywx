@@ -11,15 +11,5 @@
 // $Id$
 
 return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '__rest__'=>[
-        'wp-admin'=>'admin/index',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
 
 ];
